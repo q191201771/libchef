@@ -1,8 +1,8 @@
 # linux c++自用脚手架
 
-## 持续更新中
+## 代码正在火热更新中
 
-## 拷贝自第三方库的代码
+## 部分拷贝自第三方工程的代码
 
 ```
 src/base/md5.hpp
@@ -12,10 +12,10 @@ https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
 ## 代码结构
 
 ```
-build/              ......编译后的中间文件，可执行文件
+build/              ......编译后生成的中间文件，可执行文件
 src/                ......代码根目录
     base/           ......基础库
-    base_test/      ......基础库测试
+    base_test/      ......基础库相应测试
 .gitignore          ......
 clean.sh            ......清理脚本
 LINCENSE            ......
