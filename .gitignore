@@ -1,0 +1,54 @@
+deploy.sh
+*.log.chef
+
+##### c/c++/golang #####
+*.o
+*.obj
+*.gch
+*.pch
+# *.so
+# *.so.*
+# *.dylib
+# *.dll
+# *.la
+# *.a
+# *.lib
+*.exe
+*.out
+_obj
+_test
+_testmain.go
+*.test
+*.prof
+
+##### scons #####
+.sconsign.dblite
+
+##### cmake #####
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Makefile
+cmake_install.cmake
+install_manifest.txt
+CTestTestfile.cmake
+
+##### sass #####
+.sass-cache/
+*.css.map
+
+##### sublime text #####
+*.sublime-workspace
+*.sublime-project
+
+##### vim #####
+.*.swp
+tags
+.ycm_extra_conf.py
+
+##### JS #####
+node_modules
+npm-debug.log
+
+##### MAC #####
+._Store

@@ -1,0 +1,25 @@
+import os, sys, commands
+
+Import('env')
+Import('platform_libs')
+Import('boost_path')
+
+all_libs = []
+all_libs += [platform_libs]
+all_libs += [File(os.path.join(boost_path, 'libboost_log_setup.a'))]
+all_libs += [File(os.path.join(boost_path, 'libboost_log.a'))]
+all_libs += [File(os.path.join(boost_path, 'libboost_thread.a'))]
+all_libs += [File(os.path.join(boost_path, 'libboost_system.a'))]
+all_libs += [File(os.path.join(boost_path, 'libboost_filesystem.a'))]
+
+os_exec_op_sources = ['../base/os_exec_op.o', 'os_exec_op_test.cc']
+crypto_md5_sources = ['crypto_md5_test.cc']
+log_sources = ['../base/log.o', 'log_test.cc']
+
+prgs = []
+prgs += env.Program('os_exec_op_test', os_exec_op_sources, LIBS = platform_libs)
+prgs += env.Program('crypto_md5_test', crypto_md5_sources, LIBS = platform_libs)
+
+prgs += env.Program('log_test', log_sources, LIBS = all_libs)
+
+Return('prgs')

@@ -1,0 +1,7 @@
+Import('env')
+
+objs = []
+objs += env.Object('os_exec_op', ['os_exec_op.cc'])
+objs += env.Object('log', ['log.cc'])
+
+Return('objs')
