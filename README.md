@@ -20,10 +20,11 @@ src/                ......代码根目录
     base/           ......基础库
     base_test/      ......基础库相应测试
 .gitignore          ......
-clean.sh            ......清理脚本
+clean.sh            ......清理编译生成文件的脚本
 LINCENSE            ......
 README              ......
 SConstruct          ......SCons文件
+unit_test.sh        ......运行单元测试的脚本
 ```
 
 ## 我的环境
