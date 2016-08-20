@@ -1,5 +1,4 @@
 #include "../base/crypto_md5.hpp"
-
 #include <map>
 #include <string>
 #include <assert.h>

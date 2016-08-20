@@ -15,10 +15,12 @@ all_libs += [File(os.path.join(boost_path, 'libboost_filesystem.a'))]
 os_exec_op_sources = ['../base/os_exec_op.o', 'os_exec_op_test.cc']
 crypto_md5_sources = ['crypto_md5_test.cc']
 log_sources = ['../base/log.o', 'log_test.cc']
+encoding_base64_sources = ['encoding_base64_test.cc']
 
 prgs = []
 prgs += env.Program('os_exec_op_test', os_exec_op_sources, LIBS = platform_libs)
 prgs += env.Program('crypto_md5_test', crypto_md5_sources, LIBS = platform_libs)
+prgs += env.Program('encoding_base64_test', encoding_base64_sources, LIBS = platform_libs)
 
 prgs += env.Program('log_test', log_sources, LIBS = all_libs)
 
