@@ -6,4 +6,4 @@ cd build/base_test
 ./log_test
 ./encoding_base64_test
 ./json_config_test
-
+#./daemon_test
