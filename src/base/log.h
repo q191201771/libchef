@@ -1,12 +1,7 @@
 /**
  * @author chef <191201771@qq.com>
  * @deps   boost
- */
-
-#ifndef _CHEF_BASE_LOG_H_
-#define _CHEF_BASE_LOG_H_
-
-/**
+ *
  * @建议源码包含入项目中使用，如有需要，直接修改源码。
  *
  * @一共两个接口，使用方法
@@ -37,6 +32,9 @@
  * @是线程安全的。
  * @不支持跨平台。
  */
+
+#ifndef _CHEF_BASE_LOG_H_
+#define _CHEF_BASE_LOG_H_
 
 #include "boost/log/common.hpp"
 #include "boost/log/core.hpp"

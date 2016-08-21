@@ -1,11 +1,10 @@
-#include "../base/crypto_md5.hpp"
+#include "../base/crypto_md5_op.hpp"
 #include <map>
 #include <string>
 #include <assert.h>
 
 int main() {
-  using namespace chef::md5;
-
+  printf("Check crypto_md5.\n");
   std::map<std::string, std::string> mapping;
   mapping["d41d8cd98f00b204e9800998ecf8427e"] = "";
   mapping["0cc175b9c0f1b6a831c399e269772661"] = "a";
@@ -15,7 +14,7 @@ int main() {
 
   auto iter = mapping.begin();
   for (; iter != mapping.end(); iter++) {
-    assert(md5_hash_hex(iter->second) == iter->first);
+    assert(chef::md5_hash_hex(iter->second) == iter->first);
   }
 
   printf("Check crypto_md5 done.\n");

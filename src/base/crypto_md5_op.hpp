@@ -5,8 +5,8 @@
  * copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
  */
 
-#ifndef _CHEF_BASE_CRYPTO_MD5_HPP_
-#define _CHEF_BASE_CRYPTO_MD5_HPP_
+#ifndef _CHEF_BASE_CRYPTO_MD5_OP_HPP_
+#define _CHEF_BASE_CRYPTO_MD5_OP_HPP_
 
 /*
  * This package supports both compile-time and run-time determination of CPU
@@ -24,7 +24,6 @@
 
 namespace chef {
 /// Provides MD5 hashing functionality
-namespace md5 {
 
 typedef unsigned char md5_byte_t; /* 8-bit byte */
 typedef unsigned int md5_word_t; /* 32-bit word */
@@ -393,7 +392,6 @@ inline std::string md5_hash_hex(std::string const & input) {
     return hex;
 }
 
-} // namespace md5
 } // namespace chef
 
-#endif // _CHEF_BASE_CRYPTO_MD5_HPP_
+#endif // _CHEF_BASE_CRYPTO_MD5_OP_HPP_

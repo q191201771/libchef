@@ -1,8 +1,9 @@
-#include "../base/encoding_base64.hpp"
+#include "../base/encoding_base64_op.hpp"
 #include <map>
 #include <assert.h>
 
 int main() {
+  printf("Check encoding_base64.\n");
   std::map<std::string, std::string> mapping;
   mapping["\x14\xfb\x9c\x03\xd9\x7e"] = "FPucA9l+";
   mapping["\x14\xfb\x9c\x03\xd9"] = "FPucA9k=";

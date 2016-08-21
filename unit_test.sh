@@ -7,3 +7,4 @@ cd build/base_test
 ./encoding_base64_test
 ./json_config_test
 #./daemon_test
+./chunk_head_op_test

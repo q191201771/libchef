@@ -16,6 +16,7 @@ std::string printableResult(const std::vector<std::string> vec) {
 }
 
 int main() {
+  printf("Check os_exec_op.\n");
   std::time_t time = std::time(0);
   std::string filename = "/tmp/os_op_test." + std::to_string(time);
   std::string touch = "echo \"hello\nworld\" >> " + filename;
