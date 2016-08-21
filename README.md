@@ -35,4 +35,6 @@ Ubuntu 14.04.4 LTS (GNU/Linux 4.2.0-27-generic x86_64)
 gcc version 4.8.4
 
 boost 1.54.0 静态库
+
+libjsoncpp.a
 ```
