@@ -25,6 +25,7 @@ namespace chef {
 
       /**
        * 将当前pid写入文件
+       *
        * @return 成功返回进程id，失败返回-1
        */
       static int write(const char *pidfile);

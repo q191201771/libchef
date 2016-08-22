@@ -19,11 +19,18 @@
  *  #内容格式稍有区别，mode_debug会打印日志所在源码文件名和行号，mode_release不会。
  *   @release_mode举例
  *   时间 线程号 级别 | 内容
-2015-04-15 16:05:53.244440 27945    info | engine by boost::log,i'm info-severity
-2015-04-15 16:05:53.245521 27945   fatal | engine by boost::log,i'm fatal-severity
+2016-08-20 19:09:51.030432 18712    info | engine by boost::log,i'm info-severity
+2016-08-20 19:09:51.030529 18712 warning | engine by boost::log,i'm warning-severity
+2016-08-20 19:09:51.030546 18712   error | engine by boost::log,i'm error-severity
+2016-08-20 19:09:51.030555 18712   fatal | engine by boost::log,i'm fatal-severity
  *   @debug_mode举例
-[2015-04-15 16:14:36.931730] [28053] [trace] [/home/chef/sss/sf/git_q191201771/boost_stuff/log/chef_log.cc:80] | engine by boost::log,i'm trace-severity
-[2015-04-15 16:14:36.932498] [28053] [fatal] [...->/home/chef/sss/sf/git_q191201771/boost_stuff/log/chef_log.cc:85] | engine by boost::log,i'm fatal-severity
+ *   [时间] [线程] [级别] [源码文件:源码行号] | 内容
+[2016-08-20 19:12:35.428516] [18868] [trace] [src/base/log.cc:76] | engine by boost::log,i'm trace-severity
+[2016-08-20 19:12:35.428634] [18868] [debug] [...->src/base/log.cc:77] | engine by boost::log,i'm debug-severity
+[2016-08-20 19:12:35.428646] [18868] [info] [...->src/base/log.cc:78] | engine by boost::log,i'm info-severity
+[2016-08-20 19:12:35.428652] [18868] [warning] [...->src/base/log.cc:79] | engine by boost::log,i'm warning-severity
+[2016-08-20 19:12:35.428657] [18868] [error] [...->src/base/log.cc:80] | engine by boost::log,i'm error-severity
+[2016-08-20 19:12:35.428662] [18868] [fatal] [...->src/base/log.cc:81] | engine by boost::log,i'm fatal-severity
  *
  * @日志文件名由 执行文件名+日志文件生成时间+翻滚编号+机器名+进程号+扩展后缀组成，例如
  * test_chef_log.20150415T160553.0.chef-VirtualBox.27945.log.chef

@@ -18,14 +18,12 @@ namespace chef {
     if (ret == -1) {
       return -1;
     }
-    printf("buf: %s\n", buf);
     close(fp);
     char *p = strchr(buf, '\n');
     if (p != NULL) {
       *p = '\0';
     }
     int pid = atoi(buf);
-    printf("pid: %d\n", pid);
     if (pid <= 0 || kill(pid, 0) == -1) {
       return -1;
     }
@@ -55,16 +53,13 @@ namespace chef {
   int daemon_op::start(const char *pidfile) {
     int pid = exist(pidfile);
     if (pid > 0) {
-      printf("1\n");
       exit(1);
     }
     if (::daemon(1, 0) == -1) {
-      printf("2\n");
       exit(1);
     }
     pid = daemon_op::write(pidfile);
     if (pid == -1) {
-      printf("3\n");
       exit(1);
     }
     return pid;
