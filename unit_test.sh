@@ -8,3 +8,4 @@ cd build/base_test
 ./json_config_test
 #./daemon_test
 ./chunk_head_op_test
+./filepath_op_test
