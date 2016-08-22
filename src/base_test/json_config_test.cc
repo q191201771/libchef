@@ -33,7 +33,7 @@ int main() {
   printf("Check json_config.\n");
   json_config_impl jci;
   assert(jci.load_file("config.json") == 0);
-  printf("%s\n", jci.styled_string().c_str());
+  //printf("%s\n", jci.styled_string().c_str());
   assert(jci.unmarshal() == 0);
   assert(jci.name() == "chef");
   assert(jci.nums().size() == 3);
