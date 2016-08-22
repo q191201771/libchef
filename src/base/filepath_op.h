@@ -39,7 +39,6 @@ namespace chef {
        * @return
        * 0  成功(删除成功，或删除前就不存在)
        * -1 失败(删除失败，或[name]是文件夹)
-       * 如果删除前就不存在，也返回0
        */
       static int rm_file(const char *name);
 
@@ -51,7 +50,6 @@ namespace chef {
        * @return
        * 0  成功(删除成功，或删除前就不存在)
        * -1 失败(删除失败，或[name]不是文件夹)
-       * 如果删除前就不存在，也返回0
        */
       static int rm_dir(const char *pathname);
 
