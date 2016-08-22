@@ -6,5 +6,6 @@ objs += env.Object('log', ['log.cc'])
 objs += env.Object('json_config', ['json_config.cc'])
 objs += env.Object('daemon_op', ['daemon_op.cc'])
 objs += env.Object('chunk_head_op', ['chunk_head_op.cc'])
+objs += env.Object('filepath_op', ['filepath_op.cc'])
 
 Return('objs')
