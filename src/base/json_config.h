@@ -6,12 +6,13 @@
 #ifndef _CHEF_BASE_JSON_CONFIG_H_
 #define _CHEF_BASE_JSON_CONFIG_H_
 
+#include "noncopyable.hpp"
 #include <json/json.h>
 #include <string>
 
 namespace chef {
 
-  class json_config {
+  class json_config : chef::noncopyable {
     public:
       json_config();
       virtual ~json_config();

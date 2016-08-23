@@ -6,11 +6,12 @@
 #ifndef _CHEF_BASE_BUFFER_H_
 #define _CHEF_BASE_BUFFER_H_
 
+#include "noncopyable.hpp"
 #include <stdint.h>
 
 namespace chef {
 
-  class buffer {
+  class buffer : public chef::copyable {
     public:
       /**
        * @param

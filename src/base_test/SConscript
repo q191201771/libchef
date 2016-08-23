@@ -14,6 +14,10 @@ daemon_op_sources = ['../base/daemon_op.o', 'daemon_op_test.cc']
 chunk_head_op_sources = ['../base/chunk_head_op.o', 'chunk_head_op_test.cc']
 buffer_sources = ['../base/buffer.o', 'buffer_test.cc']
 filepath_op_sources = ['../base/filepath_op.o', 'filepath_op_test.cc']
+noncopyable_sources = ['noncopyable_test.cc']
+wait_event_sources = ['../base/wait_event.o', 'wait_event_test.cc']
+this_thread_op_sources = ['../base/this_thread_op.o', 'this_thread_op_test.cc']
+task_thread_sources = ['../base/wait_event.o', '../base/task_thread.o', 'task_thread_test.cc']
 
 prgs += env.Program('os_exec_op_test', os_exec_op_sources, LIBS = platform_libs)
 prgs += env.Program('crypto_md5_op_test', crypto_md5_op_sources, LIBS = platform_libs)
@@ -22,6 +26,10 @@ prgs += env.Program('daemon_op_test', daemon_op_sources, LIBS = platform_libs)
 prgs += env.Program('chunk_head_op_test', chunk_head_op_sources, LIBS = platform_libs)
 prgs += env.Program('buffer_test', buffer_sources, LIBS = platform_libs)
 prgs += env.Program('filepath_op_test', filepath_op_sources, LIBS = platform_libs)
+prgs += env.Program('noncopyable_test', noncopyable_sources, LIBS = platform_libs)
+prgs += env.Program('wait_event_test', wait_event_sources, LIBS = platform_libs)
+prgs += env.Program('this_thread_op_test', this_thread_op_sources, LIBS = platform_libs)
+prgs += env.Program('task_thread_test', task_thread_sources, LIBS = platform_libs)
 
 log_sources = ['../base/log.o', 'log_test.cc']
 with_boost_libs = [platform_libs]

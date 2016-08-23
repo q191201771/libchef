@@ -9,8 +9,8 @@ jsoncpp_lib_path     = '/usr/lib/x86_64-linux-gnu'
 env = Environment()
 
 env.Append(TOOLSET   = ['g++'])
-env.Append(CXXFLAGS  = ['-std=c++11', '-g', '-O2', '-Wall', '-Werror', '-Wcast-align', '-Wshadow', '-Wunused-parameter'])
-env.Append(LINKFLAGS = ['-static-libstdc++'])
+env.Append(CXXFLAGS  = ['-pthread', '-std=c++11', '-g', '-O2', '-Wall', '-Werror', '-Wcast-align', '-Wshadow', '-Wunused-parameter'])
+env.Append(LINKFLAGS = ['-pthread', '-static-libstdc++'])
 env.Append(CPPPATH   = [jsoncpp_include_path])
 
 Export('env')

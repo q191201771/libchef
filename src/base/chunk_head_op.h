@@ -14,7 +14,7 @@ namespace chef {
 
   /**
    * +--------+------+-----------+----------+----------+
-   * |   id   | type | magic num | reserved | body len |
+   * |   id   | type | magic num | reserved | body len | ...body...
    * 0        8     12          16         20         23
    * ---------------------------------------------------
    */
