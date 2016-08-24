@@ -13,3 +13,4 @@ cd build/base_test
 ./wait_event_test
 ./this_thread_op_test
 ./task_thread_test
+#./redis_backend_test

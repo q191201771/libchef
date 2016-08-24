@@ -4,6 +4,7 @@ Import('env')
 Import('platform_libs')
 Import('boost_lib_path')
 Import('jsoncpp_lib_path')
+Import('hiredis_lib_path')
 
 prgs = []
 
@@ -44,5 +45,10 @@ json_config_sources = ['../base/json_config.o', 'json_config_test.cc']
 with_jsoncpp_libs = [platform_libs]
 with_jsoncpp_libs += [File(os.path.join(jsoncpp_lib_path, 'libjsoncpp.a'))]
 prgs += env.Program('json_config_test', json_config_sources, LIBS = with_jsoncpp_libs)
+
+redis_backend_sources = ['../base/wait_event.o', '../base/task_thread.o', '../base/redis_backend.o', 'redis_backend_test.cc']
+with_hiredis_libs = [platform_libs]
+with_hiredis_libs += [File(os.path.join(hiredis_lib_path, 'libhiredis.a'))]
+prgs += env.Program('redis_backend_test', redis_backend_sources, LIBS = with_hiredis_libs)
 
 Return('prgs')

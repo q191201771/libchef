@@ -5,6 +5,7 @@ platform_libs = ['pthread', 'rt', 'dl']
 boost_lib_path = '/usr/lib/x86_64-linux-gnu'
 jsoncpp_include_path = '/usr/include/jsoncpp'
 jsoncpp_lib_path     = '/usr/lib/x86_64-linux-gnu'
+hiredis_lib_path     = '/usr/lib/x86_64-linux-gnu'
 
 env = Environment()
 
@@ -17,6 +18,7 @@ Export('env')
 Export('platform_libs')
 Export('boost_lib_path')
 Export('jsoncpp_lib_path')
+Export('hiredis_lib_path')
 
 base = SConscript("#/src/base/SConscript", variant_dir=build_dir+'/base', duplicate=0)
 
