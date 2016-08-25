@@ -7,6 +7,7 @@
 #define _CHEF_BASE_REDIS_BACKEND_H_
 
 #include "task_thread.h"
+#include "noncopyable.hpp"
 #include <hiredis/hiredis.h>
 #include <string>
 #include <vector>
@@ -29,7 +30,7 @@ namespace chef {
    * @TODO
    * 增加redis长链接/堆积任务状态回调，或状态检查接口给上层使用者
    */
-  class redis_backend {
+  class redis_backend : chef::noncopyable {
     public:
       /**
        * @param ip                  redis ip
