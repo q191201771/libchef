@@ -1,6 +1,17 @@
 /**
- * @author chef <191201771@qq.com>
+ * @file   thread_pool.h/thread_pool.cc
  * @deps   nope
+ *
+ * @author
+ *   chef <191201771@qq.com>
+ *     -initial release xxxx-xx-xx
+ *
+ * @brief
+ *   线程池，池中的线程抢占式执行丢入其中的任务。
+ *
+ *   同chef::task_thread的使用场景一样，thread_pool对象的生命周期一般持续到程序结束。
+ *   如果调用析构函数，应该尽快清理退出，不保证所有剩余任务执行完再退出。
+ *
  */
 
 #ifndef _CHEF_BASE_THREAD_POOL_H_
@@ -17,12 +28,6 @@
 
 namespace chef {
 
-  /**
-   * 线程池，池中的线程抢占式执行丢入其中的任务。
-   *
-   * 同chef::task_thread的使用场景一样，thread_pool对象的生命周期一般持续到程序结束。
-   * 如果调用析构函数，应该尽快清理退出，不保证所有剩余任务执行完再退出。
-   */
   class thread_pool : public chef::noncopyable {
     public:
       typedef std::function<void()> task;
@@ -30,10 +35,13 @@ namespace chef {
       explicit thread_pool(int num_of_thread, const std::string &name = std::string("thread_pool"));
       ~thread_pool();
 
+      ///
       void start();
 
+      ///
       void add(const task &t);
-      
+
+      ///
       int num_of_undone_task();
 
     private:

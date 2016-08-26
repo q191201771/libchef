@@ -1,6 +1,13 @@
 /**
- * @author chef <191201771@qq.com>
- * @deps   nope
+ * @file   noncopyable.hpp
+ * @deps   jsoncpp
+ *
+ * @author
+ *   chef <191201771@qq.com>
+ *     -initial release xxxx-xx-xx
+ *
+ * @brief  读取json类型配置文件，映射到类中。
+ *
  */
 
 #ifndef _CHEF_BASE_NONCOPYABLE_H_
@@ -20,6 +27,7 @@ namespace chef {
 
   /**
    * 空接口,可起强调作用.
+   *
    */
   class copyable {};
 

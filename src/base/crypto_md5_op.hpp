@@ -1,8 +1,14 @@
 /**
- * @author chef <191201771@qq.com>
+ * @file   crypto_md5_op.hpp
  * @deps   nope
- * @NOTICE
- * copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
+ *
+ * @author
+ *   chef <191201771@qq.com>
+ *     -initial release xxxx-xx-xx
+ *
+ * @brief
+ *   copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
+ *
  */
 
 #ifndef _CHEF_BASE_CRYPTO_MD5_OP_HPP_

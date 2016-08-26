@@ -1,8 +1,16 @@
 /**
- * @author chef <191201771@qq.com>
+ * @file   encoding_base64_op.hpp
  * @deps   nope
- * @NOTICE
- * copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
+ *
+ * @author
+ *   chef <191201771@qq.com>
+ *     -initial release xxxx-xx-xx
+ *
+ * @brief
+ *   base64编码、解码
+ *
+ *   copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
+ *
  */
 
 /*

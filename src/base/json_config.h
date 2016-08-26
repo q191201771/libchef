@@ -1,6 +1,13 @@
 /**
- * @author chef <191201771@qq.com>
+ * @file   json_config.h/json_config.cc
  * @deps   jsoncpp
+ *
+ * @author
+ *   chef <191201771@qq.com>
+ *     -initial release xxxx-xx-xx
+ *
+ * @brief  读取json类型配置文件，映射到类中。
+ *
  */
 
 #ifndef _CHEF_BASE_JSON_CONFIG_H_
@@ -20,7 +27,10 @@ namespace chef {
       /**
        * 加载配置文件
        *
-       * @return 0 成功 -1 失败(打开文件失败 || 文件内容不是json格式)
+       * @return
+       *   0  成功
+       *   -1 失败(打开文件失败 || 文件内容不是json格式)
+       *
        */
       int load_file(const std::string &filename);
 
@@ -29,11 +39,13 @@ namespace chef {
        * 实现中请使用try catch捕获错误
        *
        * @return 0 成功 -1 失败
+       *
        */
       virtual int unmarshal() = 0;
 
       /**
        * @return 完整配置文件内容(如果未加载或加载配置失败，则返回空)
+       *
        */
       std::string styled_string() const { return styled_string_; }
 

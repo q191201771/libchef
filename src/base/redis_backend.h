@@ -1,6 +1,22 @@
 /**
- * @author chef <191201771@qq.com>
- * @deps   hiredis
+ * @file   redis_backend.h/redis_backend.cc
+ * @deps   hirdis
+ *
+ * @author
+ *   chef <191201771@qq.com>
+ *     -initial release xxxx-xx-xx
+ *
+ * @brief
+ *   场景：将程序中某些数据以kv的形式在redis中做镜像，程序重启后能一次性全部load回来。
+ *   value可以是普通字符串，也可以是json序列化后的字符串。基本满足需求～
+ *
+ *   hset hdel做成异步是方便在各业务线程中直接调用，避免io等原因阻塞业务线程。
+ *   后台长链接断开后，会缓存住后续添加的异步任务，重连上一次性执行完。
+ *   调用其他接口前，需先调用start。其他所有接口都是线程安全的。
+ *
+ * @TODO
+ *   增加redis长链接/堆积任务状态回调，或状态检查接口给上层使用者
+ *
  */
 
 #ifndef _CHEF_BASE_REDIS_BACKEND_H_
@@ -18,18 +34,6 @@
 
 namespace chef {
 
-  /**
-   * 场景：将程序中某些数据以kv的形式在redis中做镜像，程序重启后能一次性全部load回来。
-   * value可以是普通字符串，也可以是json序列化后的字符串。基本满足需求～
-   *
-   * @NOTICE
-   * hset hdel做成异步是方便在各业务线程中直接调用，避免io等原因阻塞业务线程。
-   * 后台长链接断开后，会缓存住后续添加的异步任务，重连上一次性执行完。
-   * 调用其他接口前，需先调用start。其他所有接口都是线程安全的。
-   *
-   * @TODO
-   * 增加redis长链接/堆积任务状态回调，或状态检查接口给上层使用者
-   */
   class redis_backend : chef::noncopyable {
     public:
       /**
@@ -38,6 +42,7 @@ namespace chef {
        * @param container_name      容器名
        * @param connect_timeout_sec 连接redis超时时间，单位秒
        * @param ping_interval_sec   ping间隔时间，单位秒
+       *
        */
       redis_backend(const std::string &ip,
         int port,
@@ -50,6 +55,7 @@ namespace chef {
        * 开启后台线程，建立redis长链接
        *
        * @return 0 成功 -1 失败
+       *
        */
       int start();
 
@@ -61,16 +67,19 @@ namespace chef {
        * key，value通过下标一一对应
        *
        * @return 0 成功 -1 失败
+       *
        */
       int hgetall(std::vector<std::string> &keys, std::vector<std::string> &values);
 
       /**
        * 异步设置，失败后内部会自动重试
+       *
        */
       void async_hset(const std::string &key, const std::string &value);
 
       /**
        * 异步删除，失败后内部会自动重试
+       *
        */
       void async_hdel(const std::string &key);
 
@@ -79,6 +88,7 @@ namespace chef {
        * 每次调用都新建一条链接，ping完后关闭
        *
        * @return 0 成功 -1 失败
+       *
        */
       int ping();
 
@@ -86,12 +96,14 @@ namespace chef {
       /**
        * 简易封装redisConnectWithTimeout
        *
-       * @param 成功返回redisContext，失败返回NULL
+       * @param 成功返回redisContext指针，失败返回NULL
+       *
        */
       redisContext *connect();
 
       /**
        * 以下函数只能在backend_thread_中调用
+       *
        */
       void connect_in_thread();
       void ping_in_thread();

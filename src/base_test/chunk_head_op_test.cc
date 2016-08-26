@@ -3,8 +3,17 @@
 #include <string.h>
 #include <stdio.h>
 
+void decode_fail_test() {
+  chef::chunk_head ch;
+  char buf[128] = {0};
+  assert(chef::chunk_head_op::decode(buf, &ch) == -1);
+}
+
 int main() {
   printf("Check chunk_head_op.\n");
+
+  decode_fail_test();
+
   char buf[32] = "hello world";
   char raw[64];
   memcpy(raw + 24, buf, strlen(buf) + 1);

@@ -1,6 +1,13 @@
 /**
- * @author chef <191201771@qq.com>
+ * @file   os_exec_op.h/os_exec_op.cc
  * @deps   nope
+ *
+ * @author
+ *   chef <191201771@qq.com>
+ *     -initial release xxxx-xx-xx
+ *
+ * @brief  nope
+ *
  */
 
 #ifndef _CHEF_BASE_OS_EXEC_OP_H_
@@ -13,7 +20,10 @@ namespace chef {
 
   class os_exec_op {
     public:
-      /// 执行shell命令，返回包含每行执行结果的数组
+      /**
+       * 执行shell命令，返回包含每行执行结果的数组
+       *
+       */
       static std::vector<std::string> run_command(const std::string &cmd);
   };
 
