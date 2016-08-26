@@ -1,4 +1,3 @@
-deploy.sh
 *.log.chef
 
 ##### c/c++/golang #####
