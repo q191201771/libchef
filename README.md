@@ -32,17 +32,23 @@ libhiredis.a
 
 ### c++11以及boost已经能很好hold住，不需要自己实现或过度封装的模块
 
-```
-atomic
-condition_variable
-mutex
-rwlock
-random
+#### STL
 
-spinlock
-uuid
-object_pool
-```
+* atomic
+* condition_variable
+* mutex
+* rwlock
+* random
+
+#### boost
+
+* spinlock
+* uuid
+* object_pool
+
+#### [mysql++](http://tangentsoft.net/mysql++/)
+
+#### [http client](https://github.com/whoshuu/cpr)
 
 ### 拷贝自第三方工程的代码
 
