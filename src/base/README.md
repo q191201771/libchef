@@ -1,21 +1,26 @@
-## base
 
-#### c++11以及boost已经能很好hold住，不需要自己实现或过度封装的模块
+### c++11以及boost已经能很好hold住，不需要自己实现或过度封装的模块
 
-```
-atomic
-condition_variable
-mutex
-rwlock
-random
+#### STL
 
-signal
-spinlock
-uuid
-object_pool
-```
+* atomic
+* condition_variable
+* mutex
+* rwlock
+* random
 
-#### 拷贝自第三方工程的代码
+#### boost
+
+* asio
+* spinlock
+* uuid
+* object_pool
+
+#### [mysql++](http://tangentsoft.net/mysql++/)
+
+#### [http client](https://github.com/whoshuu/cpr)
+
+### 拷贝自第三方工程的代码
 
 ```
 src/base/crypto_md5.hpp

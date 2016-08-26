@@ -42,6 +42,7 @@ libhiredis.a
 
 #### boost
 
+* asio
 * spinlock
 * uuid
 * object_pool
