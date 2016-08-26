@@ -13,5 +13,6 @@ objs += env.Object('this_thread_op', ['this_thread_op.cc'])
 objs += env.Object('task_thread', ['task_thread.cc'])
 objs += env.Object('redis_backend', ['redis_backend.cc'])
 objs += env.Object('thread_pool', ['thread_pool.cc'])
+objs += env.Object('stuff', ['stuff.cc'])
 
 Return('objs')

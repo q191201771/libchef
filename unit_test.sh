@@ -15,3 +15,4 @@ cd build/base_test
 ./task_thread_test
 #./redis_backend_test
 ./thread_pool_test
+./stuff_test
