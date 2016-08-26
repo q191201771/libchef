@@ -27,6 +27,7 @@ gcc version 4.8.4
 boost 1.54.0 静态库
 
 libjsoncpp.a
+libhiredis.a
 ```
 
 ### c++11以及boost已经能很好hold住，不需要自己实现或过度封装的模块
