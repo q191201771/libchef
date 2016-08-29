@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <dirent.h>
 
 #define IF_NULL_RETURN_MINUS_ONE(x) do { if ((x) == NULL) return -1; } while(0);
 
@@ -61,7 +62,7 @@ namespace chef {
     return 0;
   }
 
-  int filepath_op::rm_dir(const char *pathname) {
+  int filepath_op::rm_dir_recursive(const char *pathname) {
     IF_NULL_RETURN_MINUS_ONE(pathname);
     if (exist(pathname) == -1) {
       return 0;
@@ -69,7 +70,47 @@ namespace chef {
     if (is_dir(pathname) == -1) {
       return -1;
     }
-    return ::rmdir(pathname);
+
+    DIR *open_ret = ::opendir(pathname);
+    IF_NULL_RETURN_MINUS_ONE(open_ret);
+
+    struct dirent entry;
+    struct dirent *result = NULL;
+    int ret = 0;
+    for (;;) {
+      if (::readdir_r(open_ret, &entry, &result) != 0) {
+        break;
+      }
+      if (result == NULL) {
+        break;
+      }
+      char *name = result->d_name;
+      if (strcmp(name, ".") == 0 ||
+        strcmp(name, "..") == 0
+      ) {
+        continue;
+      }
+      std::string file_with_path = filepath_op::join(pathname, name);
+      if (filepath_op::exist(file_with_path.c_str()) != 0) {
+        fprintf(stderr, "%s:%d %s\n", __FUNCTION__, __LINE__, file_with_path.c_str());
+        continue;
+      }
+      if (filepath_op::is_dir(file_with_path.c_str()) == 0) {
+        if (filepath_op::rm_dir_recursive(file_with_path.c_str()) != 0) {
+          ret = -1;
+        }
+      } else {
+        if (filepath_op::rm_file(file_with_path.c_str()) != 0) {
+          ret = -1;
+        }
+      }
+    }
+
+    if (open_ret) {
+      ::closedir(open_ret);
+    }
+
+    return ::rmdir(pathname) && ret;
   }
 
   int filepath_op::rename(const char *src, const char *dst) {
@@ -133,6 +174,30 @@ namespace chef {
     std::string content_string(content, size);
     delete []content;
     return content_string;
+  }
+
+  std::string filepath_op::join(const std::string &path, const std::string &filename) {
+    std::string ret;
+    int path_length = path.length();
+    int filename_length = filename.length();
+    if (path_length == 0) {
+      return filename;
+    }
+    if (filename_length == 0) {
+      return path;
+    }
+    if (path[path_length - 1] == '/') {
+      ret = path.substr(0, path_length - 1);
+    } else {
+      ret = path;
+    }
+    ret += "/";
+    if (filename[0] == '/') {
+      ret += filename.substr(1, filename_length - 1);
+    } else {
+      ret += filename;
+    }
+    return ret;
   }
 
 } // namespace chef

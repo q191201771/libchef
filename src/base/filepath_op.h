@@ -54,8 +54,6 @@ namespace chef {
       static int rm_file(const char *name);
 
       /**
-       * TODO 如果目录中有文件，删除会失败!
-       *
        * @param name 文件夹名
        *
        * @return
@@ -63,7 +61,7 @@ namespace chef {
        *   -1 删除失败，或[name]不是文件夹
        *
        */
-      static int rm_dir(const char *pathname);
+      static int rm_dir_recursive(const char *pathname);
 
       /**
        * @param
@@ -96,6 +94,15 @@ namespace chef {
        *
        */
       static std::string read_file(const std::string &filename);
+
+      /**
+       * @param path     目录
+       * @param filename 文件名
+       *
+       * 连接目录和文件名，解决[path]后面'/'和[filename]前面'/'是否存在，重复的问题
+       *
+       */
+      static std::string join(const std::string &path, const std::string &filename);
 
     private:
       /**
