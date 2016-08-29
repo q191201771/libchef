@@ -110,7 +110,7 @@ namespace chef {
       ::closedir(open_ret);
     }
 
-    return ::rmdir(pathname) && ret;
+    return (::rmdir(pathname) == 0 && ret == 0) ? 0 : -1;
   }
 
   int filepath_op::rename(const char *src, const char *dst) {
