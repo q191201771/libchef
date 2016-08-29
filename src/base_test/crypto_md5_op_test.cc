@@ -12,9 +12,8 @@ int main() {
   mapping["a925576942e94b2ef57a066101b48876"] = "abcdefghij";
   mapping["de3a4d2fd6c73ec2db2abad23b444281"] = "There is no reason for any individual to have a computer in their home. -Ken Olsen, 1977";
 
-  auto iter = mapping.begin();
-  for (; iter != mapping.end(); iter++) {
-    assert(chef::md5_hash_hex(iter->second) == iter->first);
+  for (auto &iter : mapping) {
+    assert(chef::md5_hash_hex(iter.second) == iter.first);
   }
 
   printf("Check crypto_md5 done.\n");

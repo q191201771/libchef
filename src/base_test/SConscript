@@ -24,6 +24,7 @@ this_thread_op_sources = ['../base/this_thread_op.o', 'this_thread_op_test.cc']
 task_thread_sources = ['../base/wait_event.o', '../base/task_thread.o', 'task_thread_test.cc']
 thread_pool_sources = ['../base/wait_event.o', '../base/thread_pool.o', 'thread_pool_test.cc']
 stuff_sources = ['../base/stuff.o', 'stuff_test.cc']
+dump_sources = ['../base/filepath_op.o', '../base/dump.o', 'dump_test.cc']
 
 prgs += env.Program('os_exec_op_test', os_exec_op_sources, LIBS = platform_libs)
 prgs += env.Program('crypto_md5_op_test', crypto_md5_op_sources, LIBS = platform_libs)
@@ -38,6 +39,7 @@ prgs += env.Program('this_thread_op_test', this_thread_op_sources, LIBS = platfo
 prgs += env.Program('task_thread_test', task_thread_sources, LIBS = platform_libs)
 prgs += env.Program('thread_pool_test', thread_pool_sources, LIBS = platform_libs)
 prgs += env.Program('stuff_test', stuff_sources, LIBS = platform_libs)
+prgs += env.Program('dump_test', dump_sources, LIBS = platform_libs)
 
 log_sources = ['../base/log.o', 'log_test.cc']
 with_boost_libs = [platform_libs]

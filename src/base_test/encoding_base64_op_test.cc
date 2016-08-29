@@ -15,10 +15,9 @@ int main() {
   mapping["leasure."] = "bGVhc3VyZS4=";
   mapping["asure."] = "YXN1cmUu";
 
-  auto iter = mapping.begin();
-  for (; iter != mapping.end(); iter++) {
-    assert(chef::base64_encode(iter->first) == iter->second);
-    assert(chef::base64_decode(iter->second) == iter->first);
+  for (auto &iter : mapping) {
+    assert(chef::base64_encode(iter.first) == iter.second);
+    assert(chef::base64_decode(iter.second) == iter.first);
   }
 
   printf("Check encoding_base64 done.\n");
