@@ -16,7 +16,7 @@ void exist_test() {
   assert(chef::filepath_op::exist("/tmp") == 0);
   std::string filename = std::string("/tmp/exist_test.") + rand_string();
   assert(chef::filepath_op::exist(filename.c_str()) == -1);
-  assert(chef::filepath_op::write_file(filename.c_str(), "hello\n", 6) == 0);
+  assert(chef::filepath_op::write_file(filename.c_str(), std::string("hello\n")) == 0);
   assert(chef::filepath_op::exist(filename.c_str()) == 0);
   gc_list.push_back(filename);
 }
@@ -44,7 +44,7 @@ void rm_file_test() {
   assert(chef::filepath_op::rm_file(filename.c_str()) == -1);
   filename += std::string("/") + rand_string();
   assert(chef::filepath_op::rm_file(filename.c_str()) == 0);
-  assert(chef::filepath_op::write_file(filename.c_str(), "hello\n", 6) == 0);
+  assert(chef::filepath_op::write_file(filename.c_str(), std::string("hello\n")) == 0);
   gc_list.push_back(filename);
   assert(chef::filepath_op::rm_file(filename.c_str()) == 0);
 }
@@ -58,10 +58,10 @@ void rm_dir_recursive_test() {
   std::string child_path_child1 = chef::filepath_op::join(child_path, rand_string());
   assert(chef::filepath_op::mkdir_recursive(child_path_child1.c_str()) == 0);
   std::string child_path_child2 = chef::filepath_op::join(child_path, rand_string());
-  assert(chef::filepath_op::write_file(child_path_child2.c_str(), "hello\n", 6) == 0);
+  assert(chef::filepath_op::write_file(child_path_child2.c_str(), std::string("hello\n")) == 0);
 
   std::string child_file = chef::filepath_op::join(root_path, rand_string());
-  assert(chef::filepath_op::write_file(child_file.c_str(), "hello\n", 6) == 0);
+  assert(chef::filepath_op::write_file(child_file.c_str(), std::string("hello\n")) == 0);
 
   assert(chef::filepath_op::rm_dir_recursive(root_path.c_str()) == 0);
 }
@@ -71,7 +71,7 @@ void rename_test() {
   assert(chef::filepath_op::rename(filename.c_str(), "/tmp/rename_test") == -1);
   filename += std::string("/") + rand_string();
   assert(chef::filepath_op::rename(filename.c_str(), "/tmp/rename_test") == -1);
-  assert(chef::filepath_op::write_file(filename.c_str(), "hello\n", 6) == 0);
+  assert(chef::filepath_op::write_file(filename.c_str(), std::string("hello\n")) == 0);
   assert(chef::filepath_op::rename(filename.c_str(), "/tmp/rename_test") == 0);
   gc_list.push_back("/tmp/rename_test");
 }
@@ -79,7 +79,7 @@ void rename_test() {
 void get_file_size_test() {
   std::string filename = std::string("/tmp/") + rand_string();
   assert(chef::filepath_op::get_file_size(filename.c_str()) == -1);
-  assert(chef::filepath_op::write_file(filename.c_str(), "hello\n", 6) == 0);
+  assert(chef::filepath_op::write_file(filename.c_str(), std::string("hello\n")) == 0);
   gc_list.push_back(filename);
   assert(chef::filepath_op::get_file_size(filename.c_str()) == 6);
 }
@@ -91,7 +91,7 @@ void write_file_test() {
 void read_file_test() {
   std::string filename = std::string("/tmp/read_file_test.") + rand_string();
   assert(chef::filepath_op::read_file(filename) == std::string());
-  assert(chef::filepath_op::write_file(filename.c_str(), "hello\n", 6) == 0);
+  assert(chef::filepath_op::write_file(filename.c_str(), std::string("hello\n")) == 0);
   gc_list.push_back(filename);
   assert(chef::filepath_op::read_file(filename) == std::string("hello\n"));
 }

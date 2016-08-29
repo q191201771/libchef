@@ -25,7 +25,7 @@ namespace chef {
        *   -1 不存在
        *
        */
-      static int exist(const char *name);
+      static int exist(const std::string &name);
 
       /**
        * @return
@@ -33,7 +33,7 @@ namespace chef {
        *   -1 不存在，或不是文件夹
        *
        */
-      static int is_dir(const char *pathname);
+      static int is_dir(const std::string &pathname);
 
       /**
        * @return
@@ -41,7 +41,7 @@ namespace chef {
        *   -1 失败
        *
        */
-      static int mkdir_recursive(const char *pathname);
+      static int mkdir_recursive(const std::string &pathname);
 
       /**
        * @param name 文件名
@@ -51,7 +51,7 @@ namespace chef {
        *   -1 删除失败，或[name]是文件夹
        *
        */
-      static int rm_file(const char *name);
+      static int rm_file(const std::string &name);
 
       /**
        * @param name 文件夹名
@@ -61,7 +61,7 @@ namespace chef {
        *   -1 删除失败，或[name]不是文件夹
        *
        */
-      static int rm_dir_recursive(const char *pathname);
+      static int rm_dir_recursive(const std::string &pathname);
 
       /**
        * @param
@@ -71,13 +71,13 @@ namespace chef {
        * @return 0 成功 -1 失败
        *
        */
-      static int rename(const char *src, const char *dst);
+      static int rename(const std::string &src, const std::string &dst);
 
       /**
        * @return 文件大小,失败则返回-1
        *
        */
-      static int get_file_size(const char *filename);
+      static int get_file_size(const std::string &filename);
 
       /**
        * 写文件
@@ -85,7 +85,7 @@ namespace chef {
        * @return 0 成功 -1 失败
        *
        */
-      static int write_file(const char *filename, const char *content, int len);
+      static int write_file(const std::string &filename, const std::string &content);
 
       /**
        * 读文件,对get_file_size+read_file的封装,更易于使用
