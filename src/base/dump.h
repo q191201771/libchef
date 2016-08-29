@@ -10,7 +10,7 @@
  *   每秒将加入其中的tag->num KV结构写入文件中。
  *   可通过
  *   $watch -n 1 'cat xxx.dump'
- *   监控服务器上一些数值变化。
+ *   监控服务器上一些数值变化(xxx.dump为文件名)。
  *
  */
 
@@ -38,17 +38,17 @@ namespace chef {
       void init(const std::string &filename);
 
       /**
-       * 初始化，开启dump线程，每DUMP_INTERVAL_MS刷新一次文件
+       * 初始化，开启dump线程，每[DUMP_INTERVAL_MS]刷新一次文件
        *
        * @param filename dump文件名
        * @param tags
-       *   可选，提前加入一些tag，这样即使tag没有在之后操作过，也会有一个num=0的记录
+       *   可选，提前初始化一些tag，即使这些tag后续没有操作，也会有一个num=0的记录
        *
        */
       void init(const std::string &filename, const std::vector<std::string> &tags);
 
       /**
-       * 如果[tag]不存在，则设置为[num]，如果[tag]已存在，则对应的num再加上[num]。
+       * 如果[tag]不存在，设置为[num]，如果[tag]已存在，则已有num再加上[num]。
        *
        */
       void add(const std::string &tag, int num);
@@ -94,7 +94,7 @@ namespace chef {
 
     private:
       enum {
-        DUMP_INTERVAL_MS     = 1000,
+        DUMP_INTERVAL_MS    = 1000,
         NUM_OF_TAG_PER_LINE = 5,
       };
 

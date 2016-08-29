@@ -87,7 +87,6 @@ namespace chef {
         } else {
           ss << " | ";
         }
-        //ss << ((count % NUM_OF_TAG_PER_LINE == 0) ? "\n" : " | ");
       }
       ss << "\n";
       filepath_op::write_file(filename_.c_str(), ss.str().c_str(), ss.str().length());
