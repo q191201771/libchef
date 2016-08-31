@@ -4,7 +4,7 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     -initial release 2016-08-31
  *
  * @brief
  *   线程池，池中的线程抢占式执行丢入其中的任务。

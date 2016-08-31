@@ -4,7 +4,7 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     -initial release 2016-08-31
  *
  * @brief
  *   一个简易的Type-Length-Value实现，可用于tcp流数据组包、拆包。

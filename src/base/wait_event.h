@@ -4,7 +4,7 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     -initial release 2016-08-31
  *
  * @brief
  *   对一次性的用于同步两个并行操作的condition_variable的封装，使用者不用关心cv，mutex的细节。

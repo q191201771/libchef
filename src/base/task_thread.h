@@ -4,7 +4,7 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     -initial release 2016-08-31
  *
  * @brief
  *   开启一个线程，可以往里面添加异步任务。

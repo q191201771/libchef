@@ -4,7 +4,7 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     -initial release 2016-08-31
  *
  * @brief
  *   场景：将程序中某些数据以kv的形式在redis中做镜像，程序重启后能一次性全部load回来。
