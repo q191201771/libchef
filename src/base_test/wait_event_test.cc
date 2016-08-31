@@ -30,19 +30,21 @@ void thd_fun() {
   gwe.notify();
 }
 
+void notify_after_wait_test() {
+  std::thread thd(thd_fun);
+  count = 2;
+  gwe.wait();
+  assert(count = 1);
+  thd.join();
+}
+
 int main() {
   printf("Check wait_event.\n");
 
   notify_before_wait_test();
   notify_before_wait_for_test();
   wait_for_timeout_test();
-
-
-  std::thread thd(thd_fun);
-  count = 2;
-  gwe.wait();
-  assert(count = 1);
-  thd.join();
+  notify_after_wait_test();
 
   printf("Check wait_event done.\n");
   return 0;

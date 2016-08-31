@@ -32,6 +32,7 @@ class json_config_impl : public chef::json_config {
 
 int main() {
   printf("Check json_config.\n");
+  
   json_config_impl jci;
   assert(jci.load_file("config.json") == 0);
   //printf("%s\n", jci.styled_string().c_str());

@@ -7,6 +7,7 @@ class B : public chef::copyable {};
 
 int main() {
   printf("Check noncopyable.\n");
+  
   A a1;
   A a2;
   //a2 = a1;

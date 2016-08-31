@@ -9,11 +9,7 @@ void decode_fail_test() {
   assert(chef::chunk_head_op::decode(buf, &ch) == -1);
 }
 
-int main() {
-  printf("Check chunk_head_op.\n");
-
-  decode_fail_test();
-
+void encode_decode_test() {
   char buf[32] = "hello world";
   char raw[64];
   memcpy(raw + 24, buf, strlen(buf) + 1);
@@ -31,6 +27,13 @@ int main() {
   assert(ch2.reserved_ == 26);
   assert(ch2.body_len_ == strlen(buf) + 1);
   assert(memcmp(raw + 24, buf, ch2.body_len_) == 0);
+}
+
+int main() {
+  printf("Check chunk_head_op.\n");
+
+  decode_fail_test();
+  encode_decode_test();
 
   printf("Check chunk_head_op done.\n");
   return 0;

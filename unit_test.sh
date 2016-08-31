@@ -6,7 +6,7 @@ cd build/base_test
 ./log_test
 ./encoding_base64_op_test
 ./json_config_test
-#./daemon_test
+./daemon_op_test
 ./chunk_head_op_test
 ./filepath_op_test
 ./noncopyable_test

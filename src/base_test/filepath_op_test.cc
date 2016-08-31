@@ -117,13 +117,13 @@ void gc() {
 
 int main(){
   printf("Check filepath_op.\n");
+
   std::srand(std::time(0));
   join_test();
   exist_test();
   is_dir_test();
   mkdir_recursive_test();
   rm_file_test();
-
   rm_dir_recursive_test();
   rename_test();
   get_file_size_test();

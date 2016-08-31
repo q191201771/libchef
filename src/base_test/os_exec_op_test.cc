@@ -17,6 +17,7 @@ std::string printableResult(const std::vector<std::string> vec) {
 
 int main() {
   printf("Check os_exec_op.\n");
+
   std::time_t time = std::time(0);
   std::string filename = "/tmp/os_op_test." + std::to_string(time);
   std::string touch = "echo \"hello\nworld\" >> " + filename;
@@ -30,20 +31,18 @@ int main() {
   std::string rm = "rm " + filename;
   chef::os_exec_op::run_command(rm);
 
+  // std::vector<std::string> commands = {
+  //   std::string("ps -ef"),
+  //   std::string("ls /tmp"),
+  //   std::string("ls -lrt")
+  // };
+  //
+  // int command_num = commands.size();
+  // for (int i = 0; i < command_num; i++) {
+  //   std::vector<std::string> result = chef::os_exec_op::run_command(commands[i]);
+  //   printf("-----\ncommand: %s\noutput:\n%s-----\n", commands[i].c_str(), printableResult(result).c_str());
+  // }
+
   printf("Check os_exec_op done.\n");
-  return 0;
-
-  std::vector<std::string> commands = {
-    std::string("ps -ef"),
-    std::string("ls /tmp"),
-    std::string("ls -lrt")
-  };
-
-  int command_num = commands.size();
-  for (int i = 0; i < command_num; i++) {
-    std::vector<std::string> result = chef::os_exec_op::run_command(commands[i]);
-    printf("-----\ncommand: %s\noutput:\n%s-----\n", commands[i].c_str(), printableResult(result).c_str());
-  }
-
   return 0;
 }

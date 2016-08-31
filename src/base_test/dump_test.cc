@@ -25,6 +25,7 @@ void thd_fun() {
 
 int main() {
   printf("Check dump.\n");
+
   d.init(std::string("dump_test.dump"), initial_tags);
   d.add("queen", 100);
   d.add("admin", 12345678);
@@ -33,11 +34,11 @@ int main() {
   d.add("nagetive", -100);
 
   std::thread t(std::bind(&thd_fun));
-
   //std::this_thread::sleep_for(std::chrono::seconds(60));
   std::this_thread::sleep_for(std::chrono::seconds(2));
   exit_flag = true;
   t.join();
+  
   printf("Check dump done.\n");
   return 0;
 }

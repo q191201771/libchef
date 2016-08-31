@@ -68,6 +68,7 @@ void redis_break_test() {
 
 int main() {
   printf("Check redis_backend.\n");
+  
   not_exist_redis_test();
   normal_test();
   redis_break_test();

@@ -35,13 +35,7 @@ void gfun() {
   }
 }
 
-int main() {
-  printf("Check task_thread.\n");
-
-  ctor_test();
-  start_and_add_test();
-  add_and_start_test();
-
+void parallel_test() {
   gtt.start();
   gtt.add(gfun, 200);
   gtt.add(gfun);
@@ -50,6 +44,15 @@ int main() {
   we.wait();
   assert(gtt.num_of_undone_task() == 0);
   assert(count == 4);
+}
+
+int main() {
+  printf("Check task_thread.\n");
+
+  ctor_test();
+  start_and_add_test();
+  add_and_start_test();
+  parallel_test();
 
   printf("Check task_thread done.\n");
   return 0;

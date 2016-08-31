@@ -52,6 +52,7 @@ void dctor_test() {
 
 int main() {
   printf("Check thread_pool.\n");
+  
   add_before_start_test();
   normal_test(1);
   normal_test(16);

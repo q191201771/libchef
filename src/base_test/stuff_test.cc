@@ -59,6 +59,7 @@ void get_host_by_name_test() {
 
 int main() {
   printf("Check stuff.\n");
+  
   get_cpu_num_test();
   exe_test();
   readable_bytes_test();

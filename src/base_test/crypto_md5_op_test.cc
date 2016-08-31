@@ -5,6 +5,7 @@
 
 int main() {
   printf("Check crypto_md5.\n");
+  
   std::map<std::string, std::string> mapping;
   mapping["d41d8cd98f00b204e9800998ecf8427e"] = "";
   mapping["0cc175b9c0f1b6a831c399e269772661"] = "a";

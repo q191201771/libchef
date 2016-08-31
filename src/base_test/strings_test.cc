@@ -303,6 +303,7 @@ void strings_trim_suffix_test() {
 
 int main() {
   printf("Check strings.\n");
+  
   strings_compare_test();
   strings_contains_test();
   strings_contains_any_test();
