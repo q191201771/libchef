@@ -6,7 +6,7 @@
  *   chef <191201771@qq.com>
  *     -initial release xxxx-xx-xx
  *
- * @brief  读取json类型配置文件，映射到类中。
+ * @brief  nope
  *
  */
 
