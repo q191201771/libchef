@@ -76,31 +76,4 @@ namespace chef {
     return std::string(result);
   }
 
-  std::vector<std::string> stuff::split(const std::string &raw, char delimiter) {
-    std::vector<std::string> ret;
-    std::stringstream ss(raw);
-    std::string item;
-    while(std::getline(ss, item, delimiter)) {
-      ret.push_back(item);
-    }
-    return ret;
-  }
-
-  std::string stuff::join(const std::vector<std::string> &array, const std::string &delimiter) {
-    if (array.empty()) {
-      return std::string();
-    } if (array.size() == 1) {
-      return array[0];
-    }
-
-    std::string ret;
-    int i = 0;
-    int size = array.size();
-    for (; i < size - 1; i++) {
-      ret += array[i] + delimiter;
-    }
-    ret += array[i];
-    return ret;
-  }
-
 } // namespace chef

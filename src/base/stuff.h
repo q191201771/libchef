@@ -67,18 +67,6 @@ namespace chef {
        */
       static std::string get_host_by_name(const std::string &domain);
 
-      /**
-       *  将字符串按分隔符分割后存入数组
-       *
-       */
-      static std::vector<std::string> split(const std::string &raw, char delimiter);
-
-      /**
-       * 将数组中的字符串按连接符连接后返回
-       *
-       */
-      static std::string join(const std::vector<std::string> &array, const std::string &delimiter);
-
       //static int getpid();
       //static int getpagesize();
 

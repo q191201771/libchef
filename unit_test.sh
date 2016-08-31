@@ -17,3 +17,4 @@ cd build/base_test
 ./thread_pool_test
 ./stuff_test
 ./dump_test
+./strings_test

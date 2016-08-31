@@ -42,14 +42,15 @@ libhiredis.a
 
 #### boost
 
-* asio
 * spinlock
 * uuid
 * object_pool
 
-#### [mysql++](http://tangentsoft.net/mysql++/)
+#### boost asio [自己写的demo](https://github.com/q191201771/asio-tutorial)
 
-#### [http client](https://github.com/whoshuu/cpr)
+#### mysql++ [官方地址](http://tangentsoft.net/mysql++/)
+
+#### http client [cpr github地址](https://github.com/whoshuu/cpr)
 
 ### 拷贝自第三方工程的代码
 
