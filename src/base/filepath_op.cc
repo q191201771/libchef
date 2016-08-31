@@ -7,27 +7,28 @@
 #include <dirent.h>
 
 #define IF_NULL_RETURN_MINUS_ONE(x) do { if ((x) == NULL) return -1; } while(0);
+#define IF_STRING_EMPTY_MINUS_ONE(x) do { if (x.length() == 0) return -1; } while(0);
 
 namespace chef {
 
-  int filepath_op::exist(const char *name) {
-    IF_NULL_RETURN_MINUS_ONE(name);
+  int filepath_op::exist(const std::string &name) {
+    IF_STRING_EMPTY_MINUS_ONE(name);
     struct stat st;
-    return stat(name, &st);
+    return stat(name.c_str(), &st);
   }
 
-  int filepath_op::is_dir(const char *pathname) {
-    IF_NULL_RETURN_MINUS_ONE(pathname);
+  int filepath_op::is_dir(const std::string &pathname) {
+    IF_STRING_EMPTY_MINUS_ONE(pathname);
     struct stat st;
-    if (stat(pathname, &st) == -1) {
+    if (stat(pathname.c_str(), &st) == -1) {
       return -1;
     }
     return S_ISDIR(st.st_mode) ? 0 : -1;
   }
 
-  int filepath_op::mkdir_recursive(const char *pathname) {
-    IF_NULL_RETURN_MINUS_ONE(pathname);
-    char *path_dup = strdup(pathname);
+  int filepath_op::mkdir_recursive(const std::string &pathname) {
+    IF_STRING_EMPTY_MINUS_ONE(pathname);
+    char *path_dup = strdup(pathname.c_str());
     int len = strlen(path_dup);
     if (len == 0) {
         return -1;
@@ -48,22 +49,22 @@ namespace chef {
     return 0;
   }
 
-  int filepath_op::rm_file(const char *name) {
-    IF_NULL_RETURN_MINUS_ONE(name);
+  int filepath_op::rm_file(const std::string &name) {
+    IF_STRING_EMPTY_MINUS_ONE(name);
     if (exist(name) == -1) {
       return 0;
     }
     if (is_dir(name) == 0) {
       return -1;
     }
-    if (::unlink(name) == -1) {
+    if (::unlink(name.c_str()) == -1) {
       return -1;
     }
     return 0;
   }
 
-  int filepath_op::rm_dir_recursive(const char *pathname) {
-    IF_NULL_RETURN_MINUS_ONE(pathname);
+  int filepath_op::rm_dir_recursive(const std::string &pathname) {
+    IF_STRING_EMPTY_MINUS_ONE(pathname);
     if (exist(pathname) == -1) {
       return 0;
     }
@@ -71,7 +72,7 @@ namespace chef {
       return -1;
     }
 
-    DIR *open_ret = ::opendir(pathname);
+    DIR *open_ret = ::opendir(pathname.c_str());
     IF_NULL_RETURN_MINUS_ONE(open_ret);
 
     struct dirent entry;
@@ -110,38 +111,37 @@ namespace chef {
       ::closedir(open_ret);
     }
 
-    return (::rmdir(pathname) == 0 && ret == 0) ? 0 : -1;
+    return (::rmdir(pathname.c_str()) == 0 && ret == 0) ? 0 : -1;
   }
 
-  int filepath_op::rename(const char *src, const char *dst) {
-    IF_NULL_RETURN_MINUS_ONE(src);
-    IF_NULL_RETURN_MINUS_ONE(dst);
-    return ::rename(src, dst);
+  int filepath_op::rename(const std::string &src, const std::string &dst) {
+    IF_STRING_EMPTY_MINUS_ONE(src);
+    IF_STRING_EMPTY_MINUS_ONE(dst);
+    return ::rename(src.c_str(), dst.c_str());
   }
 
-  int filepath_op::get_file_size(const char *filename) {
-    IF_NULL_RETURN_MINUS_ONE(filename);
+  int filepath_op::get_file_size(const std::string &filename) {
+    IF_STRING_EMPTY_MINUS_ONE(filename);
     if (exist(filename) == -1 || is_dir(filename) == 0) {
       return -1;
     }
     struct stat st;
-    if (::stat(filename, &st) == -1) {
+    if (::stat(filename.c_str(), &st) == -1) {
       return -1;
     }
     return (int)st.st_size;
   }
 
-  int filepath_op::write_file(const char *filename, const char *content, int len) {
-    if (filename == NULL || content == NULL || len <= 0) {
-      return -1;
-    }
-    FILE *fp = fopen(filename, "wb");
+  int filepath_op::write_file(const std::string &filename, const std::string &content) {
+    IF_STRING_EMPTY_MINUS_ONE(filename);
+    IF_STRING_EMPTY_MINUS_ONE(content);
+    FILE *fp = fopen(filename.c_str(), "wb");
     if (fp == NULL) {
       return -1;
     }
-    int written = fwrite((const void *)content, len, 1, fp);
+    int written = fwrite((const void *)content.c_str(), content.length(), 1, fp);
     fclose(fp);
-    return written == len;
+    return written == (int)content.length();
   }
 
   int filepath_op::read_file(const char *filename, char *content, int content_size) {

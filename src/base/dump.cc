@@ -89,7 +89,7 @@ namespace chef {
         }
       }
       ss << "\n";
-      filepath_op::write_file(filename_.c_str(), ss.str().c_str(), ss.str().length());
+      filepath_op::write_file(filename_.c_str(), ss.str());
 
       std::this_thread::sleep_for(std::chrono::microseconds(DUMP_INTERVAL_MS));
     }
