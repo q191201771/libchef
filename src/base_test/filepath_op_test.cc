@@ -1,6 +1,7 @@
 #include "../base/filepath_op.h"
 #include <assert.h>
 #include <stdio.h>
+#include <string.h>
 #include <cstdlib>
 #include <ctime>
 #include <vector>
@@ -89,10 +90,15 @@ void write_file_test() {
 }
 
 void read_file_test() {
+  const int bufsize = 128;
+  char buf[bufsize] = {0};
   std::string filename = std::string("/tmp/read_file_test.") + rand_string();
   assert(chef::filepath_op::read_file(filename) == std::string());
+  assert(chef::filepath_op::read_file(filename.c_str(), buf, bufsize) == -1);
   assert(chef::filepath_op::write_file(filename.c_str(), std::string("hello\n")) == 0);
   gc_list.push_back(filename);
+  assert(chef::filepath_op::read_file(filename.c_str(), buf, bufsize) == strlen("hello\n"));
+  assert(strcmp(buf, "hello\n") == 0);
   assert(chef::filepath_op::read_file(filename) == std::string("hello\n"));
 }
 

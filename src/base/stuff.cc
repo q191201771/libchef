@@ -10,39 +10,6 @@ namespace chef {
     return sysconf(_SC_NPROCESSORS_ONLN);
   }
 
-  std::string stuff::get_exe_filepath() {
-    char buf[512] = {0};
-    ssize_t length = readlink("/proc/self/exe", buf, sizeof buf);
-    if (length == -1) {
-      return std::string();
-    }
-    return std::string(buf, length);
-  }
-
-  std::string stuff::get_exe_path() {
-    std::string filepath = get_exe_filepath();
-    if (filepath == std::string()) {
-      return std::string();
-    }
-    std::size_t pos = filepath.find_last_of('/');
-    if (pos == std::string::npos) {
-      return std::string();
-    }
-    return std::string(filepath, 0, pos + 1);
-  }
-
-  std::string stuff::get_exe_name() {
-    std::string filepath = get_exe_filepath();
-    if (filepath == std::string()) {
-      return std::string();
-    }
-    std::size_t pos = filepath.find_last_of('/');
-    if (pos == std::string::npos) {
-      return std::string();
-    }
-    return std::string(filepath, pos + 1);
-  }
-
   std::string stuff::readable_bytes(uint64_t n) {
     char UNITS[] = {'B', 'K', 'M', 'G', 'T', 'P', 'E'}; // 'Z' 'Y'
     int index = 0;

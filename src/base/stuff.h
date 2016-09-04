@@ -27,15 +27,6 @@ namespace chef {
        */
       static int get_cpu_num();
 
-      /// @return e.g. /home/chef/starry-night/build/base_test/stuff_test
-      static std::string get_exe_filepath();
-
-      /// @return e.g. /home/chef/starry-night/build/base_test/
-      static std::string get_exe_path();
-
-      /// @return e.g. stuff_test
-      static std::string get_exe_name();
-
       /**
        * 将以字节为单位的数字转换为带大小单位的可读性字符串
        *

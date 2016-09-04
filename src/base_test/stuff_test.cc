@@ -8,15 +8,6 @@ void get_cpu_num_test() {
   (void)cpu;
 }
 
-void exe_test() {
-  std::string filepath = chef::stuff::get_exe_filepath();
-  std::string path = chef::stuff::get_exe_path();
-  std::string name = chef::stuff::get_exe_name();
-  assert(name == std::string("stuff_test"));
-  (void)filepath;
-  (void)path;
-}
-
 void readable_bytes_test() {
   assert(chef::stuff::readable_bytes(768) == "768.0B");
   assert(chef::stuff::readable_bytes(10000) == "9.8K");
@@ -59,9 +50,8 @@ void get_host_by_name_test() {
 
 int main() {
   printf("Check stuff.\n");
-  
+
   get_cpu_num_test();
-  exe_test();
   readable_bytes_test();
   get_host_by_name_test();
 

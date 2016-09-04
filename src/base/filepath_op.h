@@ -74,12 +74,6 @@ namespace chef {
       static int rename(const std::string &src, const std::string &dst);
 
       /**
-       * @return 文件大小,失败则返回-1
-       *
-       */
-      static int get_file_size(const std::string &filename);
-
-      /**
        * 写文件
        *
        * @return 0 成功 -1 失败
@@ -88,12 +82,36 @@ namespace chef {
       static int write_file(const std::string &filename, const std::string &content);
 
       /**
-       * 读文件,对get_file_size+read_file的封装,更易于使用
+       * @NOTICE
+       * For most files under the /proc directory, stat() does not return the file
+       * size in the st_size field; instead the field is returned with the value 0.
+       *
+       * @return 文件大小，失败则返回-1
+       *
+       */
+      static int get_file_size(const std::string &filename);
+
+      /**
+       * 读文件，对get_file_size()+read_file()的封装，更易于使用
        *
        * @return 成功返回文件内容，失败返回std::string()
        *
        */
       static std::string read_file(const std::string &filename);
+
+      /**
+       *
+       * @param filename     文件名
+       * @param content      传出参数，读取到的文件内容，内存由外部申请
+       * @param content_size 最大读入大小
+       *
+       * @return 成功返回实际读入大小，失败返回-1
+       *
+       */
+      static int read_file(const char *filename, char *content /*out*/, int content_size);
+
+      /// @TODO 能否统一成一个接口，内部判断是否是否为link
+      static std::string read_link(const std::string &filename, int content_size);
 
       /**
        * @param path     目录
@@ -103,19 +121,6 @@ namespace chef {
        *
        */
       static std::string join(const std::string &path, const std::string &filename);
-
-    private:
-      /**
-       * 读文件,使用前需调用get_file_size获取文件内容大小
-       *
-       * @param filename     文件名
-       * @param content      传出参数,读取到的文件内容,内存由外部申请
-       * @param content_size 文件内容大小
-       *
-       * @return 0 成功 -1 失败
-       *
-       */
-      static int read_file(const char *filename, char *content/* out */, int content_size);
   };
 
 } // namespace chef

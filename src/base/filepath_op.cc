@@ -120,18 +120,6 @@ namespace chef {
     return ::rename(src.c_str(), dst.c_str());
   }
 
-  int filepath_op::get_file_size(const std::string &filename) {
-    IF_STRING_EMPTY_MINUS_ONE(filename);
-    if (exist(filename) == -1 || is_dir(filename) == 0) {
-      return -1;
-    }
-    struct stat st;
-    if (::stat(filename.c_str(), &st) == -1) {
-      return -1;
-    }
-    return (int)st.st_size;
-  }
-
   int filepath_op::write_file(const std::string &filename, const std::string &content) {
     IF_STRING_EMPTY_MINUS_ONE(filename);
     IF_STRING_EMPTY_MINUS_ONE(content);
@@ -144,6 +132,18 @@ namespace chef {
     return written == (int)content.length();
   }
 
+  int filepath_op::get_file_size(const std::string &filename) {
+    IF_STRING_EMPTY_MINUS_ONE(filename);
+    if (exist(filename) == -1 || is_dir(filename) == 0) {
+      return -1;
+    }
+    struct stat st;
+    if (::stat(filename.c_str(), &st) == -1) {
+      return -1;
+    }
+    return (int)st.st_size;
+  }
+
   int filepath_op::read_file(const char *filename, char *content, int content_size) {
     if (filename == NULL || content == NULL || content_size <= 0) {
       return -1;
@@ -152,12 +152,9 @@ namespace chef {
     if (fp == NULL) {
       return -1;
     }
-    int ret = fread((void *)content, content_size, 1, fp);
+    int read_size = fread((void *)content, 1, content_size, fp);
     fclose(fp);
-    if (ret != 1) {
-      return -1;
-    }
-    return 0;
+    return read_size;
   }
 
   std::string filepath_op::read_file(const std::string &filename) {
@@ -166,14 +163,26 @@ namespace chef {
       return std::string();
     }
     char *content = new char[size];
-    int ret = read_file(filename.c_str(), content, size);
-    if (ret == -1) {
+    int read_size = read_file(filename.c_str(), content, size);
+    if (read_size == -1) {
       delete []content;
       return std::string();
     }
-    std::string content_string(content, size);
+    std::string content_string(content, read_size);
     delete []content;
     return content_string;
+  }
+
+  std::string filepath_op::read_link(const std::string &filename, int content_size) {
+    char *content = new char[content_size];
+    ssize_t length = ::readlink(filename.c_str(), content, content_size);
+    if (length == -1) {
+      delete []content;
+      return std::string();
+    }
+    std::string ret(content, length);
+    delete []content;
+    return ret;
   }
 
   std::string filepath_op::join(const std::string &path, const std::string &filename) {

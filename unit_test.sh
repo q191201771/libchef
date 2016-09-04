@@ -18,3 +18,4 @@ cd build/base_test
 ./stuff_test
 ./dump_test
 ./strings_test
+./this_proc_op_test
