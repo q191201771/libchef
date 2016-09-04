@@ -32,13 +32,13 @@ namespace chef {
       static int page_size();
 
       /**
-       * 进程当前虚拟内存大小，对应top中的VIRT列
+       * 进程当前虚拟内存大小，对应top中的VIRT列，单位KBytes
        *
        */
       static int virt_kb();
 
       /**
-       * 进程当前常驻内存大小，对应top中的RES列
+       * 进程当前常驻内存大小，对应top中的RES列，单位KBytes
        *
        */
       static int res_kb();
