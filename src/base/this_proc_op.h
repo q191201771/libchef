@@ -1,3 +1,16 @@
+/**
+ * @file   this_proc_op.h/this_proc_op.cc
+ * @deps   nope
+ *
+ * @author
+ *   chef <191201771@qq.com>
+ *     -initial release 2016-09-04
+ *
+ * @brief
+ *   获取当前进程相关的信息
+ *
+ */
+
 #ifndef _CHEF_BASE_THIS_PROC_OP_H_
 #define _CHEF_BASE_THIS_PROC_OP_H_
 
@@ -26,7 +39,7 @@ namespace chef {
       static int num_of_threads();
 
       /**
-       * 内存管理的最小单位：物理页面
+       * 内存管理的最小单位：物理页面的大小，单位字节
        *
        */
       static int page_size();
