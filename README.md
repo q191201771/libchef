@@ -1,20 +1,19 @@
 # linux c++脚手架
 
-### 代码添加中...
-
 ### 代码结构
 
 ```
-build/              ......编译后生成的中间文件，可执行文件
-src/                ......代码根目录
-    base/           ......基础库
-    base_test/      ......基础库相应测试
-.gitignore          ......
-clean.sh            ......清理编译生成文件的脚本
-LINCENSE            ......
-README.md           ......
-SConstruct          ......SCons文件
-unit_test.sh        ......运行单元测试的脚本
+build/                      ......编译后生成的中间文件，可执行文件
+src/                        ......代码根目录
+    base/                   ......基础库
+    base_test/              ......基础库相应测试
+.gitignore                  ......
+LINCENSE                    ......
+README.md                   ......
+SConstruct                  ......SCons文件
+clean.sh                    ......清理编译生成文件的脚本
+./deploy_virtual_box.sh     ......发布至本地ubuntu虚拟机编译跑单元测试
+unit_test.sh                ......运行单元测试的脚本
 ```
 
 ### 我的环境
@@ -61,3 +60,6 @@ https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
 src/base/encoding_base64.hpp
 https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
 ```
+
+### 代码还在持续添加中...
+
