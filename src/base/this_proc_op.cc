@@ -12,18 +12,6 @@ namespace inner {
 
   static const int BOOT_TIMESTAMP = (int)std::time(NULL);
 
-  static std::string read_file(const std::string &filename, int content_size = 65535) {
-    char *content = new char[content_size];
-    int read_size = chef::filepath_op::read_file(filename.c_str(), content, content_size);
-    if (read_size == -1) {
-      delete []content;
-      return std::string();
-    }
-    std::string ret(content, read_size);
-    delete []content;
-    return ret;
-  }
-
   class proc_stat {
     public:
       std::string string_dummy_;
@@ -130,11 +118,11 @@ namespace chef {
   }
 
   std::string this_proc_op::status() {
-    return inner::read_file("/proc/self/status", 65535);
+    return filepath_op::read_file("/proc/self/status", 65535);
   }
 
   std::string this_proc_op::stat() {
-    return inner::read_file("/proc/self/stat", 65535);
+    return filepath_op::read_file("/proc/self/stat", 65535);
   }
 
   int this_proc_op::page_size() {

@@ -6,10 +6,6 @@
 
 namespace chef {
 
-  int stuff::get_cpu_num() {
-    return sysconf(_SC_NPROCESSORS_ONLN);
-  }
-
   std::string stuff::readable_bytes(uint64_t n) {
     char UNITS[] = {'B', 'K', 'M', 'G', 'T', 'P', 'E'}; // 'Z' 'Y'
     int index = 0;

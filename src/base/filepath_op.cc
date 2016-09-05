@@ -162,8 +162,15 @@ namespace chef {
     if (size == -1) {
       return std::string();
     }
-    char *content = new char[size];
-    int read_size = read_file(filename.c_str(), content, size);
+    return read_file(filename, size);
+  }
+
+  std::string filepath_op::read_file(const std::string &filename, int content_size) {
+    if (content_size <= 0) {
+      return std::string();
+    }
+    char *content = new char[content_size];
+    int read_size = read_file(filename.c_str(), content, content_size);
     if (read_size == -1) {
       delete []content;
       return std::string();

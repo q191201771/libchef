@@ -100,6 +100,12 @@ namespace chef {
       static std::string read_file(const std::string &filename);
 
       /**
+       * 由于/proc下面的文件无法通过::stat()获取文件长度，所以提供参数让调用者填入一个fixed长度
+       *
+       */
+      static std::string read_file(const std::string &filename, int content_size);
+
+      /**
        *
        * @param filename     文件名
        * @param content      传出参数，读取到的文件内容，内存由外部申请

@@ -19,6 +19,7 @@ objs += env.Object('stuff', ['stuff.cc'])
 objs += env.Object('dump', ['dump.cc'])
 objs += env.Object('strings', ['strings.cc'])
 objs += env.Object('this_proc_op', ['this_proc_op.cc'])
+objs += env.Object('this_machine_op', ['this_machine_op.cc'])
 
 objs += env.Object('json_config', ['json_config.cc'], CPPPATH = jsoncpp_include_path)
 

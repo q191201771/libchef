@@ -4,7 +4,7 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release 2016-09-04
+ *     -initial release xxxx-xx-xx
  *
  * @brief
  *   获取当前进程相关的信息

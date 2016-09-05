@@ -3,11 +3,6 @@
 #include <stdio.h>
 #include <vector>
 
-void get_cpu_num_test() {
-  int cpu = chef::stuff::get_cpu_num();
-  (void)cpu;
-}
-
 void readable_bytes_test() {
   assert(chef::stuff::readable_bytes(768) == "768.0B");
   assert(chef::stuff::readable_bytes(10000) == "9.8K");
@@ -51,7 +46,6 @@ void get_host_by_name_test() {
 int main() {
   printf("Check stuff.\n");
 
-  get_cpu_num_test();
   readable_bytes_test();
   get_host_by_name_test();
 

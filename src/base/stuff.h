@@ -22,12 +22,6 @@ namespace chef {
   class stuff {
     public:
       /**
-       * returns the number of processors which are currently online (i.e., available).
-       *
-       */
-      static int get_cpu_num();
-
-      /**
        * 将以字节为单位的数字转换为带大小单位的可读性字符串
        *
        * @param n bytes
