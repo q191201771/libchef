@@ -10,7 +10,7 @@
 
 namespace inner {
 
-  static const int START_TIMESTAMP = (int)std::time(NULL);
+  static const int BOOT_TIMESTAMP = (int)std::time(NULL);
 
   static std::string read_file(const std::string &filename, int content_size = 65535) {
     char *content = new char[content_size];
@@ -84,12 +84,12 @@ namespace chef {
   }
 
   int this_proc_op::boot_timestamp() {
-    return inner::START_TIMESTAMP;
+    return inner::BOOT_TIMESTAMP;
   }
 
   int this_proc_op::up_duration_seconds() {
     int now = (int)std::time(NULL);
-    return now - inner::START_TIMESTAMP;
+    return now - inner::BOOT_TIMESTAMP;
   }
 
   int this_proc_op::num_of_threads() {
