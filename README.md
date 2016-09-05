@@ -20,10 +20,12 @@ unit_test.sh                ......运行单元测试的脚本
 
 ```
 Ubuntu 14.04.4 LTS (GNU/Linux 4.2.0-27-generic x86_64)
-
 gcc version 4.8.4
-
 boost 1.54.0 静态库
+或
+Ubuntu 16.04.1 LTS (GNU/Linux 4.4.0-34-generic x86_64)
+gcc version 5.4.0
+boost 1.58.0 静态库
 
 libjsoncpp.a
 libhiredis.a
