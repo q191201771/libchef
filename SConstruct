@@ -1,12 +1,22 @@
 import os, sys, commands
 
 build_dir     = 'build'
-platform_libs = ['pthread', 'rt', 'dl']
+platform_libs = ['pthread', 'rt']
 
-env = Environment()
+env = Environment(ENV = os.environ)
+
+mode = ARGUMENTS.get('mode', 'release')
+if mode == 'debug':
+    env.Append(CXXFLAGS = ['-O0'])
+elif mode == 'release':
+    env.Append(CXXFLAGS = ['-O2', '-DNDEBUG'])
+else:
+    print('Argument mode(%s) fatal.', mode)
+    exit()
 
 env.Append(TOOLSET   = ['g++'])
-env.Append(CXXFLAGS  = ['-pthread', '-std=c++11', '-g', '-O2', '-Wall', '-Werror', '-Wcast-align', '-Wshadow', '-Wunused-parameter'])
+# '-Wconversion',  '-Wold-style-cast'
+env.Append(CXXFLAGS  = ['-g', '-pthread', '-std=c++11', '-Wall', '-Wextra', '-Werror', '-Wunused-parameter', '-Woverloaded-virtual', '-Wpointer-arith', '-Wshadow', '-Wwrite-strings', '-Wcast-align'])
 env.Append(LINKFLAGS = ['-pthread', '-static-libstdc++'])
 env.Append(CPPPATH   = [])
 

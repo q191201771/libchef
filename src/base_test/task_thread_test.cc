@@ -1,6 +1,6 @@
 #include "../base/task_thread.h"
 #include <stdio.h>
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <atomic>
 
 void empty_fun() {}

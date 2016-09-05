@@ -1,5 +1,5 @@
 #include "../base/json_config.h"
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <iostream>
 
 class json_config_impl : public chef::json_config {

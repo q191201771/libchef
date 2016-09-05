@@ -1,5 +1,5 @@
 #include "../base/stuff.h"
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <stdio.h>
 #include <vector>
 

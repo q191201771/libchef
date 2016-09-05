@@ -1,6 +1,6 @@
 #include "../base/encoding_base64_op.hpp"
 #include <map>
-#include <assert.h>
+#include "assert_wrapper.h"
 
 int main() {
   printf("Check encoding_base64.\n");

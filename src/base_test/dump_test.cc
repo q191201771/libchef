@@ -1,6 +1,6 @@
 #include "../base/dump.h"
 #include <stdio.h>
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <thread>
 #include <chrono>
 
@@ -38,7 +38,7 @@ int main() {
   std::this_thread::sleep_for(std::chrono::seconds(2));
   exit_flag = true;
   t.join();
-  
+
   printf("Check dump done.\n");
   return 0;
 }

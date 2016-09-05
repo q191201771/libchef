@@ -1,7 +1,7 @@
 #include "../base/wait_event.h"
 #include <thread>
 #include <atomic>
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <unistd.h>
 
 void notify_before_wait_test() {

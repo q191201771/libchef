@@ -1,5 +1,5 @@
 #include "../base/chunk_head_op.h"
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <string.h>
 #include <stdio.h>
 

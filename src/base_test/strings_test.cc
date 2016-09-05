@@ -1,6 +1,6 @@
 #include "../base/strings.h"
 #include <stdio.h>
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <string>
 #include <map>
 #include <vector>

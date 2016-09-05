@@ -2,7 +2,7 @@
 #include <thread>
 #include <iostream>
 #include <stdio.h>
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <unistd.h>
 
 int main() {

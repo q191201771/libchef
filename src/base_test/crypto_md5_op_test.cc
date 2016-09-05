@@ -1,7 +1,7 @@
 #include "../base/crypto_md5_op.hpp"
 #include <map>
 #include <string>
-#include <assert.h>
+#include "assert_wrapper.h"
 
 int main() {
   printf("Check crypto_md5.\n");

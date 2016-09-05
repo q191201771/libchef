@@ -1,6 +1,6 @@
 #include "../base/thread_pool.h"
 #include <stdio.h>
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <unistd.h>
 #include <atomic>
 

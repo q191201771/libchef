@@ -1,6 +1,6 @@
 #include "../base/this_proc_op.h"
 #include <stdio.h>
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <string.h>
 #include <ctime>
 #include <thread>

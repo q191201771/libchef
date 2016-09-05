@@ -1,5 +1,5 @@
 #include "../base/filepath_op.h"
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <stdio.h>
 #include <string.h>
 #include <cstdlib>

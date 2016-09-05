@@ -2,7 +2,7 @@
 
 #include <ctime>
 #include <string>
-#include <assert.h>
+#include "assert_wrapper.h"
 
 std::string printableResult(const std::vector<std::string> vec) {
   std::string ret;

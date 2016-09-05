@@ -1,9 +1,10 @@
 #define CHEF_UNIT_TEST
 #include "../base/buffer.h"
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <stdio.h>
 #include <string.h>
 #include <string>
+
 
 int main() {
   printf("Check buffer.\n");

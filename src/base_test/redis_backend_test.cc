@@ -1,6 +1,6 @@
 #include "../base/redis_backend.h"
 #include <stdio.h>
-#include <assert.h>
+#include "assert_wrapper.h"
 #include <unistd.h>
 
 void not_exist_redis_test() {

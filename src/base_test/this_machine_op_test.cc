@@ -1,6 +1,6 @@
 #include "../base/this_machine_op.h"
 #include <stdio.h>
-#include <assert.h>
+#include "assert_wrapper.h"
 
 int main() {
   printf("Check this_machine_op.\n");
