@@ -83,11 +83,11 @@ namespace chef {
     return pwd.pw_name;
   }
 
-  int this_proc_op::start_timestamp() {
+  int this_proc_op::boot_timestamp() {
     return inner::START_TIMESTAMP;
   }
 
-  int this_proc_op::started_duration_seconds() {
+  int this_proc_op::up_duration_seconds() {
     int now = (int)std::time(NULL);
     return now - inner::START_TIMESTAMP;
   }

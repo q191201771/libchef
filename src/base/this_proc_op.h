@@ -24,13 +24,13 @@ namespace chef {
        * 进程启动时的linux时间戳，单位秒
        *
        */
-      static int start_timestamp();
+      static int boot_timestamp();
 
       /**
        * 进程至今运行时间，单位秒
        *
        */
-      static int started_duration_seconds();
+      static int up_duration_seconds();
 
       /**
        * @return 成功返回进程当前线程数，失败返回0
