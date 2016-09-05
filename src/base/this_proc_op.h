@@ -21,7 +21,7 @@ namespace chef {
   class this_proc_op {
     public:
       /**
-       * 进程启动时的linux时间戳，单位秒
+       * 进程启动时的unix时间戳，单位秒
        *
        */
       static int boot_timestamp();

@@ -29,6 +29,10 @@ namespace chef {
       static int mem_buffers_kb();
       static int mem_cached_kb();
       static int mem_used_kb();
+
+      static int boot_timestamp();
+
+      static int up_duration_seconds();
   };
 
 } // namespace chef

@@ -106,7 +106,6 @@ namespace chef {
       static std::string read_file(const std::string &filename, int content_size);
 
       /**
-       *
        * @param filename     文件名
        * @param content      传出参数，读取到的文件内容，内存由外部申请
        * @param content_size 最大读入大小

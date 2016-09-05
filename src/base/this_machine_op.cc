@@ -1,6 +1,7 @@
 #include "this_machine_op.h"
 #include "filepath_op.h"
 #include <sys/sysinfo.h>
+#include <ctime>
 #include <cstdlib>
 #include <cstring>
 
@@ -29,6 +30,22 @@ namespace inner {
           return 0;
         }
         return std::atoi(content.c_str() + pos + key.length());
+      }
+  };
+
+  class stat {
+    public:
+      stat() : btime_(0) {}
+
+      int btime_;
+
+      void parse() {
+        std::string content = chef::filepath_op::read_file("/proc/stat", 65535);
+        size_t pos = content.find("btime");
+        if (pos == std::string::npos) {
+          return;
+        }
+        btime_ = std::atoi(content.c_str() + pos + strlen("btime"));
       }
   };
 
@@ -68,6 +85,18 @@ namespace chef {
     inner::meminfo mi;
     mi.parse();
     return mi.mem_used_kb_;
+  }
+
+  int this_machine_op::boot_timestamp() {
+    inner::stat st;
+    st.parse();
+    return st.btime_;
+  }
+
+  int this_machine_op::up_duration_seconds() {
+    inner::stat st;
+    st.parse();
+    return (int)std::time(NULL) - st.btime_;
   }
 
 } // namespace chef
