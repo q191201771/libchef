@@ -7,7 +7,8 @@
  *     -initial release 2016-08-31
  *
  * @brief
- *   一个简易的Type-Length-Value实现，可用于tcp流数据组包、拆包。
+ *   Type-Length-Value实现，可用于流数据组包、拆包。
+ *   对包头长度敏感的场景应另行按需封装，这里只做简单演示。
  *   流格式为：chunk-head chunk-body chunk-head chunk-body ...
  *
  *   +--------+------+-----------+----------+----------+

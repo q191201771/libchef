@@ -21,7 +21,7 @@ namespace chef {
   class buffer : public chef::copyable {
     public:
       /**
-       * @param init_capacity   初始化大小，后续不够时内部会自动扩容
+       * @param init_capacity   初始化大小，后续不够时内部会自动扩容，两倍增长
        * @param shrink_capacity
        *   收缩阀值，当申请内存大于shrink_capacity且实际使用小于init_capacity时会释发多余内存，
        *   恢复成init_capacity

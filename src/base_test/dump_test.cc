@@ -19,7 +19,7 @@ void thd_fun() {
   while(!exit_flag) {
     index++;index = index % initial_tags.size();
     d.increment(initial_tags[index]);
-    std::this_thread::sleep_for(std::chrono::microseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
 }
 
