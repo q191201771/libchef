@@ -63,7 +63,7 @@ namespace chef {
     return 0;
   }
 
-  int filepath_op::rm_dir_recursive(const std::string &pathname) {
+  int filepath_op::rmdir_recursive(const std::string &pathname) {
     IF_STRING_EMPTY_MINUS_ONE(pathname);
     if (exist(pathname) == -1) {
       return 0;
@@ -97,7 +97,7 @@ namespace chef {
         continue;
       }
       if (filepath_op::is_dir(file_with_path.c_str()) == 0) {
-        if (filepath_op::rm_dir_recursive(file_with_path.c_str()) != 0) {
+        if (filepath_op::rmdir_recursive(file_with_path.c_str()) != 0) {
           ret = -1;
         }
       } else {

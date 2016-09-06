@@ -61,7 +61,7 @@ namespace chef {
        *   -1 删除失败，或[name]不是文件夹
        *
        */
-      static int rm_dir_recursive(const std::string &pathname);
+      static int rmdir_recursive(const std::string &pathname);
 
       /**
        * @param
