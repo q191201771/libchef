@@ -13,6 +13,10 @@ int main() {
   int mem_used_kb         = chef::this_machine_op::mem_used_kb();
   int boot_timestamp      = chef::this_machine_op::boot_timestamp();
   int up_duration_seconds = chef::this_machine_op::up_duration_seconds();
+  uint64_t in_bytes;
+  uint64_t out_bytes;
+  assert(chef::this_machine_op::io_bytes("notexist", &in_bytes, &out_bytes) == -1);
+  assert(chef::this_machine_op::io_bytes("enp0s3", &in_bytes, &out_bytes) == 0);
 
   printf("num_of_available_cpu_cores: %d\n", noacc);
   printf("mem_total_kb: %d\n", mem_total_kb);
@@ -22,6 +26,8 @@ int main() {
   printf("mem_used_kb: %d\n", mem_used_kb);
   printf("boot_timestamp: %d\n", boot_timestamp);
   printf("up_duration_seconds: %d\n", up_duration_seconds);
+  printf("in_bytes: %lu\n", in_bytes);
+  printf("out_bytes: %lu\n", out_bytes);
 
   assert(noacc > 0);
   assert(mem_total_kb > 0);
@@ -31,6 +37,8 @@ int main() {
   assert(mem_used_kb > 0);
   assert(boot_timestamp > 0);
   assert(up_duration_seconds > 0);
+  assert(in_bytes > 0);
+  assert(out_bytes > 0);
 
   printf("Check this_machine_op done.\n");
   return 0;

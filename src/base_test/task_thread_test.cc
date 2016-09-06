@@ -1,7 +1,7 @@
 #include "../base/task_thread.h"
 #include <stdio.h>
-#include "assert_wrapper.h"
 #include <atomic>
+#include "assert_wrapper.h"
 
 void empty_fun() {}
 

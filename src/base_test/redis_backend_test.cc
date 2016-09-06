@@ -1,7 +1,7 @@
 #include "../base/redis_backend.h"
 #include <stdio.h>
-#include "assert_wrapper.h"
 #include <unistd.h>
+#include "assert_wrapper.h"
 
 void not_exist_redis_test() {
   chef::redis_backend rb("8.8.8.8", 8888, "rbt.nert", 1, 1);
@@ -68,7 +68,7 @@ void redis_break_test() {
 
 int main() {
   printf("Check redis_backend.\n");
-  
+
   not_exist_redis_test();
   normal_test();
   redis_break_test();

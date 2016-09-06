@@ -1,7 +1,7 @@
 #include "../base/chunk_head_op.h"
-#include "assert_wrapper.h"
 #include <string.h>
 #include <stdio.h>
+#include "assert_wrapper.h"
 
 void decode_fail_test() {
   chef::chunk_head ch;

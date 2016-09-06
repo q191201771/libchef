@@ -1,8 +1,8 @@
 #include "../base/thread_pool.h"
 #include <stdio.h>
-#include "assert_wrapper.h"
 #include <unistd.h>
 #include <atomic>
+#include "assert_wrapper.h"
 
 std::atomic<int> count(0);
 
@@ -52,7 +52,7 @@ void dctor_test() {
 
 int main() {
   printf("Check thread_pool.\n");
-  
+
   add_before_start_test();
   normal_test(1);
   normal_test(16);

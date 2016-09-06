@@ -1,5 +1,4 @@
 #include "../base/os_exec_op.h"
-
 #include <ctime>
 #include <string>
 #include "assert_wrapper.h"

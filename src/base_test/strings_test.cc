@@ -1,9 +1,9 @@
 #include "../base/strings.h"
 #include <stdio.h>
-#include "assert_wrapper.h"
 #include <string>
 #include <map>
 #include <vector>
+#include "assert_wrapper.h"
 
 const std::string dots = "1....2....3....4";
 
@@ -303,7 +303,7 @@ void strings_trim_suffix_test() {
 
 int main() {
   printf("Check strings.\n");
-  
+
   strings_compare_test();
   strings_contains_test();
   strings_contains_any_test();

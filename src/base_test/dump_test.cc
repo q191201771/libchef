@@ -1,8 +1,8 @@
 #include "../base/dump.h"
 #include <stdio.h>
-#include "assert_wrapper.h"
 #include <thread>
 #include <chrono>
+#include "assert_wrapper.h"
 
 std::vector<std::string> initial_tags = {
   "queen",

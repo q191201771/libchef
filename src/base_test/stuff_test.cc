@@ -1,7 +1,7 @@
 #include "../base/stuff.h"
-#include "assert_wrapper.h"
 #include <stdio.h>
 #include <vector>
+#include "assert_wrapper.h"
 
 void readable_bytes_test() {
   assert(chef::stuff::readable_bytes(768) == "768.0B");

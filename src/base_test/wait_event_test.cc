@@ -1,8 +1,8 @@
 #include "../base/wait_event.h"
 #include <thread>
 #include <atomic>
-#include "assert_wrapper.h"
 #include <unistd.h>
+#include "assert_wrapper.h"
 
 void notify_before_wait_test() {
   chef::wait_event we;

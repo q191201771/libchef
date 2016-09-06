@@ -40,7 +40,7 @@ namespace chef {
     }
     char buf[64] = {0};
     int pid = (int)::getpid();
-    sprintf(buf, "%d\n", pid);
+    snprintf(buf, 64, "%d\n", pid);
     int len = strlen(buf);
     int written = ::write(fp, buf, len);
     close(fp);

@@ -2,8 +2,8 @@
 #include <thread>
 #include <iostream>
 #include <stdio.h>
-#include "assert_wrapper.h"
 #include <unistd.h>
+#include "assert_wrapper.h"
 
 int main() {
   printf("Check this_thread_op.\n");
