@@ -2,7 +2,8 @@
 #include <thread>
 #include <atomic>
 #include <unistd.h>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 void notify_before_wait_test() {
   chef::wait_event we;
@@ -39,13 +40,12 @@ void notify_after_wait_test() {
 }
 
 int main() {
-  printf("Check wait_event.\n");
+  ENTER_TEST;
 
   notify_before_wait_test();
   notify_before_wait_for_test();
   wait_for_timeout_test();
   notify_after_wait_test();
 
-  printf("Check wait_event done.\n");
   return 0;
 }

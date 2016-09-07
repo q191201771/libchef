@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <string>
-#include "assert_wrapper.h"
-
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 int main() {
-  printf("Check buffer.\n");
+  ENTER_TEST;
 
   using chef::buffer;
   buffer buf1;
@@ -171,6 +171,5 @@ int main() {
   assert(buf.readable() == 11);
   assert(memcmp(buf.read_pos(), "hello world", 11) == 0);
 
-  printf("Check buffer done.\n");
   return 0;
 }

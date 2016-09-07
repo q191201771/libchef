@@ -3,7 +3,8 @@
 #include <string>
 #include <map>
 #include <vector>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 const std::string dots = "1....2....3....4";
 
@@ -302,7 +303,7 @@ void strings_trim_suffix_test() {
 }
 
 int main() {
-  printf("Check strings.\n");
+  ENTER_TEST;
 
   strings_compare_test();
   strings_contains_test();
@@ -318,6 +319,5 @@ int main() {
   strings_trim_prefix_test();
   strings_trim_suffix_test();
 
-  printf("Check strings done.\n");
   return 0;
 }

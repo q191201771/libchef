@@ -1,7 +1,8 @@
 #include "../base/os_exec_op.h"
 #include <ctime>
 #include <string>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 std::string printableResult(const std::vector<std::string> vec) {
   std::string ret;
@@ -15,7 +16,7 @@ std::string printableResult(const std::vector<std::string> vec) {
 }
 
 int main() {
-  printf("Check os_exec_op.\n");
+  ENTER_TEST;
 
   std::time_t time = std::time(0);
   std::string filename = "/tmp/os_op_test." + std::to_string(time);
@@ -30,18 +31,17 @@ int main() {
   std::string rm = "rm " + filename;
   chef::os_exec_op::run_command(rm);
 
-  // std::vector<std::string> commands = {
-  //   std::string("ps -ef"),
-  //   std::string("ls /tmp"),
-  //   std::string("ls -lrt")
-  // };
-  //
-  // int command_num = commands.size();
-  // for (int i = 0; i < command_num; i++) {
-  //   std::vector<std::string> result = chef::os_exec_op::run_command(commands[i]);
-  //   printf("-----\ncommand: %s\noutput:\n%s-----\n", commands[i].c_str(), printableResult(result).c_str());
-  // }
+  std::vector<std::string> commands = {
+    std::string("ps -ef"),
+    std::string("ls /tmp"),
+    std::string("ls -lrt")
+  };
 
-  printf("Check os_exec_op done.\n");
+  int command_num = commands.size();
+  for (int i = 0; i < command_num; i++) {
+    std::vector<std::string> result = chef::os_exec_op::run_command(commands[i]);
+    printf("-----\ncommand: %s\noutput:\n%s-----\n", commands[i].c_str(), printableResult(result).c_str());
+  }
+
   return 0;
 }

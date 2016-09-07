@@ -4,7 +4,8 @@
 #include <ctime>
 #include <thread>
 #include <chrono>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 void boot_timestamp_test() {
   int sts = chef::this_proc_op::boot_timestamp();
@@ -33,7 +34,7 @@ void memory_test() {
 }
 
 int main() {
-  printf("Check this_proc_op.\n");
+  ENTER_TEST;
 
   boot_timestamp_test();
   num_of_threads_test();
@@ -56,22 +57,22 @@ int main() {
   int virt_kb                  = chef::this_proc_op::virt_kb();
   int res_kb                   = chef::this_proc_op::res_kb();
 
-  // printf("pid: %d\n", pid);
-  // printf("ppid: %d\n", ppid);
-  // printf("uid: %d\n", uid);
-  // printf("euid: %d\n", euid);
-  // printf("user_name: %s\n", user_name.c_str());
-  // printf("boot_timestamp: %d\n", boot_timestamp);
-  // printf("up_duration_seconds: %d\n", up_duration_seconds);
-  // printf("num_of_threads: %d\n", num_of_threads);
-  // printf("exe_filepath: %s\n", exe_filepath.c_str());
-  // printf("exe_path: %s\n", exe_path.c_str());
-  // printf("exe_name: %s\n", exe_name.c_str());
-  // printf("page_size: %d\n", page_size);
-  // printf("virt_kb: %d\n", virt_kb);
-  // printf("res_kb: %d\n", res_kb);
-  // printf("-----status-----\n%s\n----------", status.c_str());
-  // printf("-----stat-----\n%s\n----------", stat.c_str());
+  printf("pid: %d\n", pid);
+  printf("ppid: %d\n", ppid);
+  printf("uid: %d\n", uid);
+  printf("euid: %d\n", euid);
+  printf("user_name: %s\n", user_name.c_str());
+  printf("boot_timestamp: %d\n", boot_timestamp);
+  printf("up_duration_seconds: %d\n", up_duration_seconds);
+  printf("num_of_threads: %d\n", num_of_threads);
+  printf("exe_filepath: %s\n", exe_filepath.c_str());
+  printf("exe_path: %s\n", exe_path.c_str());
+  printf("exe_name: %s\n", exe_name.c_str());
+  printf("page_size: %d\n", page_size);
+  printf("virt_kb: %d\n", virt_kb);
+  printf("res_kb: %d\n", res_kb);
+  printf("-----status-----\n%s\n----------", status.c_str());
+  printf("-----stat-----\n%s\n----------", stat.c_str());
 
   assert(pid > 0);
   assert(ppid > 0);
@@ -92,6 +93,5 @@ int main() {
 
   //std::this_thread::sleep_for(std::chrono::seconds(10000));
 
-  printf("Check this_proc_op done.\n");
   return 0;
 }

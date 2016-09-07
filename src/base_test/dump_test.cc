@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <thread>
 #include <chrono>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 std::vector<std::string> initial_tags = {
   "queen",
@@ -24,7 +25,7 @@ void thd_fun() {
 }
 
 int main() {
-  printf("Check dump.\n");
+  ENTER_TEST;
 
   d.init(std::string("dump_test.dump"), initial_tags);
   d.add("queen", 100);
@@ -39,6 +40,5 @@ int main() {
   exit_flag = true;
   t.join();
 
-  printf("Check dump done.\n");
   return 0;
 }

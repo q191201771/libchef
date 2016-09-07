@@ -1,9 +1,10 @@
 #include "../base/this_machine_op.h"
 #include <stdio.h>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 int main() {
-  printf("Check this_machine_op.\n");
+  ENTER_TEST;
 
   int noacc               = chef::this_machine_op::num_of_available_cpu_cores();
   int mem_total_kb        = chef::this_machine_op::mem_total_kb();
@@ -40,6 +41,5 @@ int main() {
   assert(in_bytes > 0);
   assert(out_bytes > 0);
 
-  printf("Check this_machine_op done.\n");
   return 0;
 }

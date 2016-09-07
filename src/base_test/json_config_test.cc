@@ -1,6 +1,7 @@
 #include "../base/json_config.h"
 #include <iostream>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 class json_config_impl : public chef::json_config {
   public:
@@ -31,11 +32,11 @@ class json_config_impl : public chef::json_config {
 };
 
 int main() {
-  printf("Check json_config.\n");
+  ENTER_TEST;
 
   json_config_impl jci;
   assert(jci.load_file("config.json") == 0);
-  //printf("%s\n", jci.styled_string().c_str());
+  printf("%s\n", jci.styled_string().c_str());
   assert(jci.unmarshal() == 0);
   assert(jci.name() == "chef");
   assert(jci.nums().size() == 3);
@@ -43,6 +44,5 @@ int main() {
   assert(jci.nums()[1] == 2);
   assert(jci.nums()[2] == 3);
 
-  printf("Check json_config done.\n");
   return 0;
 }

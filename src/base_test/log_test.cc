@@ -1,11 +1,11 @@
 #include "../base/log.h"
+#include "./common/check_log.hpp"
 
 int main() {
-  printf("Check log.\n");
-  
+  ENTER_TEST;
+
   chef::log::init(chef::log::mode_debug);
   CHEF_LOG(info) << "log_test.";
 
-  printf("Check log done.\n");
   return 0;
 }

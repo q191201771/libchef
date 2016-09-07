@@ -5,7 +5,8 @@
 #include <ctime>
 #include <vector>
 #include <string>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 std::vector<std::string> gc_list;
 
@@ -124,7 +125,7 @@ void gc() {
 }
 
 int main(){
-  printf("Check filepath_op.\n");
+  ENTER_TEST;
 
   std::srand(std::time(0));
   join_test();
@@ -139,6 +140,5 @@ int main(){
   read_file_test();
   gc();
 
-  printf("Check filepath_op done.\n");
   return 0;
 }

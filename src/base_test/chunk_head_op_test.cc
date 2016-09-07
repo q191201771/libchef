@@ -1,7 +1,8 @@
 #include "../base/chunk_head_op.h"
 #include <string.h>
 #include <stdio.h>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 void decode_fail_test() {
   chef::chunk_head ch;
@@ -30,11 +31,10 @@ void encode_decode_test() {
 }
 
 int main() {
-  printf("Check chunk_head_op.\n");
+  ENTER_TEST;
 
   decode_fail_test();
   encode_decode_test();
 
-  printf("Check chunk_head_op done.\n");
   return 0;
 }

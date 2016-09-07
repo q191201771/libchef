@@ -1,7 +1,8 @@
 #include "../base/task_thread.h"
 #include <stdio.h>
 #include <atomic>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 void empty_fun() {}
 
@@ -47,13 +48,12 @@ void parallel_test() {
 }
 
 int main() {
-  printf("Check task_thread.\n");
+  ENTER_TEST;
 
   ctor_test();
   start_and_add_test();
   add_and_start_test();
   parallel_test();
 
-  printf("Check task_thread done.\n");
   return 0;
 }

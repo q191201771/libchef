@@ -1,7 +1,8 @@
 #include "../base/stuff.h"
 #include <stdio.h>
 #include <vector>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 void readable_bytes_test() {
   assert(chef::stuff::readable_bytes(768) == "768.0B");
@@ -39,16 +40,15 @@ void get_host_by_name_test() {
   for (auto iter : domains) {
     std::string ip = chef::stuff::get_host_by_name(iter);
     (void)ip;
-    //printf("%s: %s\n", iter.c_str(), ip.c_str());
+    printf("%s: %s\n", iter.c_str(), ip.c_str());
   }
 }
 
 int main() {
-  printf("Check stuff.\n");
+  ENTER_TEST;
 
   readable_bytes_test();
   get_host_by_name_test();
 
-  printf("Check stuff done.\n");
   return 0;
 }

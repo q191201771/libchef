@@ -1,13 +1,14 @@
 #include "../base/noncopyable.hpp"
 #include <stdio.h>
+#include "./common/check_log.hpp"
 
 class A : public chef::noncopyable {};
 
 class B : public chef::copyable {};
 
 int main() {
-  printf("Check noncopyable.\n");
-  
+  ENTER_TEST;
+
   A a1;
   A a2;
   //a2 = a1;
@@ -17,6 +18,5 @@ int main() {
   b2 = b1;
   B b3(b1);
 
-  printf("Check noncopyable done.\n");
   return 0;
 }

@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <atomic>
-#include "assert_wrapper.h"
+#include "./common/assert_wrapper.hpp"
+#include "./common/check_log.hpp"
 
 std::atomic<int> count(0);
 
@@ -51,13 +52,12 @@ void dctor_test() {
 }
 
 int main() {
-  printf("Check thread_pool.\n");
+  ENTER_TEST;
 
   add_before_start_test();
   normal_test(1);
   normal_test(16);
   dctor_test();
 
-  printf("Check thread_pool done.\n");
   return 0;
 }

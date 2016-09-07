@@ -5,6 +5,7 @@
 #include <memory>
 #include <cstdlib>
 #include <ctime>
+#include "./common/check_log.hpp"
 
 static int id = 0;
 
@@ -63,7 +64,7 @@ void print(const std::string &name, const code2count &cc) {
 }
 
 int main() {
-  printf("Check hash.\n");
+  ENTER_TEST;
 
   std::srand(std::time(0));
 
@@ -95,6 +96,5 @@ int main() {
   print("age", age_cc);
   print("student", student_cc);
 
-  printf("Check hash done.\n");
   return 0;
 }
