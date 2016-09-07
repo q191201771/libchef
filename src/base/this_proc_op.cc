@@ -10,7 +10,7 @@
 
 namespace inner {
 
-  static const int BOOT_TIMESTAMP = (int)std::time(NULL);
+  static const int64_t BOOT_TIMESTAMP = std::time(NULL);
 
   class proc_stat {
     public:
@@ -21,7 +21,7 @@ namespace inner {
       int32_t     virt_kb_;
       int32_t     res_kb_;
 
-      void parse(const char *content, int page_size) {
+      void parse(const char *content, int64_t page_size) {
         (void)content;
         int64_t vsize;
         int64_t res;
@@ -32,8 +32,8 @@ namespace inner {
             >> int64_dummy_ >> int64_dummy_ >> int64_dummy_ >> int64_dummy_
             >> int64_dummy_ >> int64_dummy_ >> int64_dummy_ >> int64_dummy_ >> int64_dummy_
             >> vsize >> res >> int64_dummy_;
-        virt_kb_ = vsize / 1024;
-        res_kb_ = res * (page_size / 1024);
+        virt_kb_ = static_cast<int32_t>(vsize / 1024);
+        res_kb_ = static_cast<int32_t>(res * (page_size / 1024));
       }
   };
 
@@ -41,24 +41,24 @@ namespace inner {
 
 namespace chef {
 
-  int this_proc_op::pid() {
-    return (int)::getpid();
+  int32_t this_proc_op::pid() {
+    return static_cast<int32_t>(::getpid());
   }
 
-  int this_proc_op::ppid() {
-    return (int)::getppid();
+  int32_t this_proc_op::ppid() {
+    return static_cast<int32_t>(::getppid());
   }
 
-  int this_proc_op::uid() {
-    return (int)::getuid();
+  int32_t this_proc_op::uid() {
+    return static_cast<int32_t>(::getuid());
   }
 
-  int this_proc_op::euid() {
-    return (int)::geteuid();
+  int32_t this_proc_op::euid() {
+    return static_cast<int32_t>(::geteuid());
   }
 
   std::string this_proc_op::user_name() {
-    int bufsize = ::sysconf(_SC_GETPW_R_SIZE_MAX);
+    int64_t bufsize = ::sysconf(_SC_GETPW_R_SIZE_MAX);
     if (bufsize == -1) {
       bufsize = 8192;
     }
@@ -71,16 +71,15 @@ namespace chef {
     return pwd.pw_name;
   }
 
-  int this_proc_op::boot_timestamp() {
+  int64_t this_proc_op::boot_timestamp() {
     return inner::BOOT_TIMESTAMP;
   }
 
-  int this_proc_op::up_duration_seconds() {
-    int now = (int)std::time(NULL);
-    return now - inner::BOOT_TIMESTAMP;
+  int64_t this_proc_op::up_duration_seconds() {
+    return std::time(NULL) - inner::BOOT_TIMESTAMP;
   }
 
-  int this_proc_op::num_of_threads() {
+  int32_t this_proc_op::num_of_threads() {
     std::string status = this_proc_op::status();
     size_t pos = status.find("Threads:");
     if (pos == std::string::npos) {
@@ -125,17 +124,17 @@ namespace chef {
     return filepath_op::read_file("/proc/self/stat", 65535);
   }
 
-  int this_proc_op::page_size() {
+  int64_t this_proc_op::page_size() {
     return ::sysconf(_SC_PAGE_SIZE);
   }
 
-  int this_proc_op::virt_kb() {
+  int32_t this_proc_op::virt_kb() {
     inner::proc_stat ps;
     ps.parse(stat().c_str(), page_size());
     return ps.virt_kb_;
   }
 
-  int this_proc_op::res_kb() {
+  int32_t this_proc_op::res_kb() {
     inner::proc_stat ps;
     ps.parse(stat().c_str(), page_size());
     return ps.res_kb_;

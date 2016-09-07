@@ -18,7 +18,7 @@ namespace chef {
     index = index > 0 ? index - 1 : index;
     char buf[128] = {0};
     snprintf(buf, 127, "%.1f%c",
-      float(n) / (index ? (1UL << (index*10)) : 1),
+      static_cast<float>(n) / static_cast<float>(index ? (1UL << (index*10)) : 1),
       UNITS[index]
     );
     return std::string(buf);
@@ -31,10 +31,10 @@ namespace chef {
     }
     char result[64] = {0};
     snprintf(result, 63, "%hhu.%hhu.%hhu.%hhu",
-      (uint8_t)ht->h_addr_list[0][0],
-      (uint8_t)ht->h_addr_list[0][1],
-      (uint8_t)ht->h_addr_list[0][2],
-      (uint8_t)ht->h_addr_list[0][3]
+      static_cast<uint8_t>(ht->h_addr_list[0][0]),
+      static_cast<uint8_t>(ht->h_addr_list[0][1]),
+      static_cast<uint8_t>(ht->h_addr_list[0][2]),
+      static_cast<uint8_t>(ht->h_addr_list[0][3])
     );
     return std::string(result);
   }

@@ -34,7 +34,7 @@ namespace chef {
     cond_.notify_one();
   }
 
-  int thread_pool::num_of_undone_task() {
+  uint64_t thread_pool::num_of_undone_task() {
     std::lock_guard<std::mutex> guard(mutex_);
     return tasks_.size();
   }

@@ -20,7 +20,7 @@ namespace chef {
 
   class this_machine_op {
     public:
-      static int num_of_available_cpu_cores();
+      static int32_t num_of_available_cpu_cores();
 
       /**
        * @function mem_total_kb，mem_free_kb，mem_buffers_kb，mem_cached_kb，mem_used_kb
@@ -32,11 +32,11 @@ namespace chef {
        * @return 失败返回0
        *
        */
-      static int mem_total_kb();
-      static int mem_free_kb();
-      static int mem_buffers_kb();
-      static int mem_cached_kb();
-      static int mem_used_kb();
+      static int32_t mem_total_kb();
+      static int32_t mem_free_kb();
+      static int32_t mem_buffers_kb();
+      static int32_t mem_cached_kb();
+      static int32_t mem_used_kb();
 
       /**
        * 获取当前时刻网卡收发数据量，可在两个时间点调用相减得到带宽
@@ -56,14 +56,14 @@ namespace chef {
        * @return 失败返回0
        *
        */
-      static int boot_timestamp();
+      static int64_t boot_timestamp();
 
       /**
        * 开机至今运行时间，单位秒
        *
        * @return 失败返回0
        */
-      static int up_duration_seconds();
+      static int64_t up_duration_seconds();
   };
 
 } // namespace chef

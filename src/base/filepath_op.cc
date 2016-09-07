@@ -29,11 +29,11 @@ namespace chef {
   int filepath_op::mkdir_recursive(const std::string &pathname) {
     IF_STRING_EMPTY_MINUS_ONE(pathname);
     char *path_dup = strdup(pathname.c_str());
-    int len = strlen(path_dup);
+    size_t len = strlen(path_dup);
     if (len == 0) {
         return -1;
     }
-    int i = path_dup[0] == '/' ? 1 : 0;
+    size_t i = path_dup[0] == '/' ? 1 : 0;
     for (; i <= len; ++i) {
         if (path_dup[i] == '/' || path_dup[i] == '\0') {
             char ch = path_dup[i];
@@ -127,12 +127,12 @@ namespace chef {
     if (fp == NULL) {
       return -1;
     }
-    int written = fwrite((const void *)content.c_str(), content.length(), 1, fp);
+    size_t written = fwrite(reinterpret_cast<const void *>(content.c_str()), content.length(), 1, fp);
     fclose(fp);
-    return written == (int)content.length();
+    return written == content.length();
   }
 
-  int filepath_op::get_file_size(const std::string &filename) {
+  int64_t filepath_op::get_file_size(const std::string &filename) {
     IF_STRING_EMPTY_MINUS_ONE(filename);
     if (exist(filename) == -1 || is_dir(filename) == 0) {
       return -1;
@@ -141,10 +141,10 @@ namespace chef {
     if (::stat(filename.c_str(), &st) == -1) {
       return -1;
     }
-    return (int)st.st_size;
+    return st.st_size;
   }
 
-  int filepath_op::read_file(const char *filename, char *content, int content_size) {
+  int64_t filepath_op::read_file(const char *filename, char *content, int64_t content_size) {
     if (filename == NULL || content == NULL || content_size <= 0) {
       return -1;
     }
@@ -152,25 +152,25 @@ namespace chef {
     if (fp == NULL) {
       return -1;
     }
-    int read_size = fread((void *)content, 1, content_size, fp);
+    size_t read_size = fread(reinterpret_cast<void *>(content), 1, content_size, fp);
     fclose(fp);
     return read_size;
   }
 
   std::string filepath_op::read_file(const std::string &filename) {
-    int size = get_file_size(filename.c_str());
+    int64_t size = get_file_size(filename.c_str());
     if (size == -1) {
       return std::string();
     }
     return read_file(filename, size);
   }
 
-  std::string filepath_op::read_file(const std::string &filename, int content_size) {
+  std::string filepath_op::read_file(const std::string &filename, int64_t content_size) {
     if (content_size <= 0) {
       return std::string();
     }
     char *content = new char[content_size];
-    int read_size = read_file(filename.c_str(), content, content_size);
+    int64_t read_size = read_file(filename.c_str(), content, content_size);
     if (read_size == -1) {
       delete []content;
       return std::string();
@@ -180,7 +180,7 @@ namespace chef {
     return content_string;
   }
 
-  std::string filepath_op::read_link(const std::string &filename, int content_size) {
+  std::string filepath_op::read_link(const std::string &filename, int64_t content_size) {
     char *content = new char[content_size];
     ssize_t length = ::readlink(filename.c_str(), content, content_size);
     if (length == -1) {
@@ -194,8 +194,8 @@ namespace chef {
 
   std::string filepath_op::join(const std::string &path, const std::string &filename) {
     std::string ret;
-    int path_length = path.length();
-    int filename_length = filename.length();
+    size_t path_length = path.length();
+    size_t filename_length = filename.length();
     if (path_length == 0) {
       return filename;
     }

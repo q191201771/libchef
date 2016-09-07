@@ -14,7 +14,7 @@ namespace chef {
       return -1;
     }
     char buf[64] = {0};
-    int ret = read(fp, buf, 64);
+    ssize_t ret = read(fp, buf, 64);
     if (ret == -1) {
       return -1;
     }
@@ -39,10 +39,10 @@ namespace chef {
       return -1;
     }
     char buf[64] = {0};
-    int pid = (int)::getpid();
+    pid_t pid = ::getpid();
     snprintf(buf, 64, "%d\n", pid);
-    int len = strlen(buf);
-    int written = ::write(fp, buf, len);
+    size_t len = strlen(buf);
+    size_t written = ::write(fp, buf, len);
     close(fp);
     if (len != written) {
       return -1;

@@ -127,7 +127,7 @@ void gc() {
 int main(){
   ENTER_TEST;
 
-  std::srand(std::time(0));
+  std::srand(static_cast<unsigned int>(std::time(0)));
   join_test();
   exist_test();
   is_dir_test();

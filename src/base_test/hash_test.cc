@@ -66,7 +66,7 @@ void print(const std::string &name, const code2count &cc) {
 int main() {
   ENTER_TEST;
 
-  std::srand(std::time(0));
+  std::srand(static_cast<unsigned int>(std::time(0)));
 
   const int NUM = 1000 * 1000;
 

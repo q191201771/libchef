@@ -43,13 +43,13 @@ namespace chef {
       return 0;
     }
     int count = 0;
-    int pos = 0;
+    size_t pos = 0;
     for (; ;) {
-      auto found = s.find(sep, pos);
+      size_t found = s.find(sep, pos);
       if (found != std::string::npos) {
         count++;
         pos = found + sep.length();
-        if (pos >= (int)s.length()) {
+        if (pos >= s.length()) {
           break;
         }
       } else {
@@ -63,7 +63,7 @@ namespace chef {
     std::string ret;
     for (auto &c : s) {
       if (c >= 'A' && c <= 'Z') {
-        ret += (c + 32);
+        ret += static_cast<char>((c + 32));
       } else {
         ret += c;
       }
@@ -75,7 +75,7 @@ namespace chef {
     std::string ret;
     for (auto &c : s) {
       if (c >= 'a' && c <= 'z') {
-        ret += (c - 32);
+        ret += static_cast<char>((c - 32));
       } else {
         ret += c;
       }
@@ -101,8 +101,8 @@ namespace chef {
     }
 
     std::string ret;
-    int i = 0;
-    int size = ss.size();
+    uint64_t i = 0;
+    uint64_t size = ss.size();
     for (; i < size - 1; i++) {
       ret += ss[i] + sep;
     }
@@ -114,8 +114,8 @@ namespace chef {
     if (s.length() == 0 || cutset.length() == 0) {
       return s;
     }
-    int pos = 0;
-    int sl = s.length();
+    uint64_t pos = 0;
+    uint64_t sl = s.length();
     for (; pos < sl; pos++) {
       if (cutset.find(s[pos]) == std::string::npos) {
         break;
@@ -128,7 +128,7 @@ namespace chef {
     if (s.length() == 0 || cutset.length() == 0) {
       return s;
     }
-    int pos = s.length() - 1;
+    int64_t pos = s.length() - 1;
     for (; pos >= 0; pos--) {
       if (cutset.find(s[pos]) == std::string::npos) {
         break;

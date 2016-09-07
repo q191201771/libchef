@@ -16,7 +16,7 @@ chef::dump d;
 bool exit_flag = false;
 
 void thd_fun() {
-  int index = 0;
+  uint64_t index = 0;
   while(!exit_flag) {
     index++;index = index % initial_tags.size();
     d.increment(initial_tags[index]);

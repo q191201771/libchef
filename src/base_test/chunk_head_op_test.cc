@@ -18,7 +18,7 @@ void encode_decode_test() {
   ch.id_ = 7;
   ch.type_ = 13;
   ch.reserved_ = 26;
-  ch.body_len_ = strlen(buf) + 1;
+  ch.body_len_ = static_cast<uint32_t>(strlen(buf) + 1);
   chef::chunk_head_op::encode(ch, raw);
   (void)ch;
   chef::chunk_head ch2;
@@ -26,7 +26,7 @@ void encode_decode_test() {
   assert(ch2.id_ == 7);
   assert(ch2.type_ == 13);
   assert(ch2.reserved_ == 26);
-  assert(ch2.body_len_ == strlen(buf) + 1);
+  assert(ch2.body_len_ == static_cast<uint32_t>(strlen(buf)) + 1);
   assert(memcmp(raw + 24, buf, ch2.body_len_) == 0);
 }
 

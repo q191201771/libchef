@@ -39,7 +39,7 @@ namespace chef {
     }
   }
 
-  int task_thread::num_of_undone_task() {
+  uint64_t task_thread::num_of_undone_task() {
     std::lock_guard<std::mutex> guard(mutex_);
     return tasks_.size() + defferred_tasks_.size();
   }

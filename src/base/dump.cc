@@ -77,11 +77,11 @@ namespace chef {
       ss << "dump - " << std::asctime(std::localtime(&now)) << "-----\n";
 
       auto iter = tag2num_.begin();
-      int count = 1;
+      uint32_t count = 1;
       for (; iter != tag2num_.end(); iter++, count++) {
         ss << iter->first << ": " << iter->second;
         if ((count % NUM_OF_TAG_PER_LINE == 0) ||
-          count == (int)tag2num_.size()
+          count == tag2num_.size()
         ) {
           ss << "\n";
         } else {

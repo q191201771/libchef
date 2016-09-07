@@ -111,8 +111,9 @@ namespace chef {
       if (readable() == 0) {
         return NULL;
       }
-      char *pos = std::search(read_pos(), write_pos(),
-      const_cast<char *>(key), const_cast<char *>(key) + len);
+      char *pos = std::search(read_pos(), write_pos(), const_cast<char *>(key),
+        const_cast<char *>(key) + len
+      );
       return pos == data_ + write_index_ ? NULL : pos;
     }
 
@@ -128,8 +129,9 @@ namespace chef {
       /// self-impl isspace,more info please man isspace
       for (; write_index_ != read_index_; ++read_index_) {
         char ch = *(data_ + read_index_);
-        if (ch != ' ' && ch != '\f' && ch != '\n' && ch != '\r' && ch != '\t'
-        && ch != '\v') {
+        if (ch != ' ' && ch != '\f' && ch != '\n' && ch != '\r' && ch != '\t' &&
+          ch != '\v'
+        ) {
           break;
         }
       }
@@ -139,8 +141,9 @@ namespace chef {
     char * buffer::trim_right() {
       for (; write_index_ != read_index_; --write_index_) {
         char ch = *(data_ + write_index_ - 1);
-        if (ch != ' ' && ch != '\f' && ch != '\n' && ch != '\r' && ch != '\t'
-        && ch != '\v') {
+        if (ch != ' ' && ch != '\f' && ch != '\n' && ch != '\r' && ch != '\t' &&
+          ch != '\v'
+        ) {
           break;
         }
       }

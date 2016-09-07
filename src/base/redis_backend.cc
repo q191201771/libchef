@@ -36,7 +36,7 @@ namespace chef {
     if (context == NULL) {
       return -1;
     }
-    redisReply *reply = (redisReply *)redisCommand(context, "PING");
+    redisReply *reply = reinterpret_cast<redisReply*>(redisCommand(context, "PING"));
     if (reply == NULL) {
       redisFree(context);
       return -1;
@@ -53,7 +53,7 @@ namespace chef {
     int ret = -1;
     redisReply *reply = NULL;
     do {
-      reply = (redisReply *)redisCommand(context, "HGETALL %s", container_name_.c_str());
+      reply = reinterpret_cast<redisReply*>(redisCommand(context, "HGETALL %s", container_name_.c_str()));
       if (reply == NULL || reply->type != REDIS_REPLY_ARRAY) {
         ret = -1;
         break;
@@ -100,13 +100,13 @@ namespace chef {
       undone_tasks_.push_back(std::make_shared<redis_task>(TASK_TYPE_HSET, key, value));
       return;
     }
-    redisReply *reply = (redisReply *)redisCommand(
+    redisReply *reply = reinterpret_cast<redisReply*>(redisCommand(
       backend_context_,
       "HSET %s %s %s",
       container_name_.c_str(),
       key.c_str(),
       value.c_str()
-    );
+    ));
     if (reply == NULL) {
       undone_tasks_.push_back(std::make_shared<redis_task>(TASK_TYPE_HSET, key, value));
       return;
@@ -119,12 +119,12 @@ namespace chef {
       undone_tasks_.push_back(std::make_shared<redis_task>(TASK_TYPE_HDEL, key));
       return;
     }
-    redisReply *reply = (redisReply *)redisCommand(
+    redisReply *reply = reinterpret_cast<redisReply*>(redisCommand(
       backend_context_,
       "HDEL %s %s",
       container_name_.c_str(),
       key.c_str()
-    );
+    ));
     if (reply == NULL) {
       undone_tasks_.push_back(std::make_shared<redis_task>(TASK_TYPE_HDEL, key));
       return;
@@ -167,7 +167,7 @@ namespace chef {
       return;
     }
 
-    redisReply *reply = (redisReply *)redisCommand(backend_context_, "PING");
+    redisReply *reply = reinterpret_cast<redisReply*>(redisCommand(backend_context_, "PING"));
     if (reply == NULL) {
       redisFree(backend_context_);
       backend_context_ = NULL;

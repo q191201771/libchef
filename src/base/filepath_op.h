@@ -89,7 +89,7 @@ namespace chef {
        * @return 文件大小，失败则返回-1
        *
        */
-      static int get_file_size(const std::string &filename);
+      static int64_t get_file_size(const std::string &filename);
 
       /**
        * 读文件，对get_file_size()+read_file()的封装，更易于使用
@@ -103,7 +103,7 @@ namespace chef {
        * 由于/proc下面的文件无法通过::stat()获取文件长度，所以提供参数让调用者填入一个fixed长度
        *
        */
-      static std::string read_file(const std::string &filename, int content_size);
+      static std::string read_file(const std::string &filename, int64_t content_size);
 
       /**
        * @param filename     文件名
@@ -113,10 +113,10 @@ namespace chef {
        * @return 成功返回实际读入大小，失败返回-1
        *
        */
-      static int read_file(const char *filename, char *content /*out*/, int content_size);
+      static int64_t read_file(const char *filename, char *content /*out*/, int64_t content_size);
 
       /// @TODO 能否统一成一个接口，内部判断是否是否为link
-      static std::string read_link(const std::string &filename, int content_size);
+      static std::string read_link(const std::string &filename, int64_t content_size);
 
       /**
        * @param path     目录

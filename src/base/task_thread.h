@@ -60,7 +60,7 @@ namespace chef {
        * 非阻塞函数
        *
        */
-      int num_of_undone_task();
+      uint64_t num_of_undone_task();
 
     private:
       /**

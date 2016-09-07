@@ -15,7 +15,7 @@ else:
     exit()
 
 env.Append(TOOLSET   = ['g++'])
-# '-Wconversion',  '-Wold-style-cast'
+#env.Append(CXXFLAGS  = ['-Wconversion',  '-Wold-style-cast'])
 env.Append(CXXFLAGS  = ['-g', '-pthread', '-std=c++11', '-Wall', '-Wextra', '-Werror', '-Wunused-parameter', '-Woverloaded-virtual', '-Wpointer-arith', '-Wshadow', '-Wwrite-strings', '-Wcast-align'])
 env.Append(LINKFLAGS = ['-pthread', '-static-libstdc++'])
 env.Append(CPPPATH   = [])
