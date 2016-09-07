@@ -20,3 +20,4 @@ cd build/base_test
 ./strings_test
 ./this_proc_op_test
 ./this_machine_op_test
+./hash_test
