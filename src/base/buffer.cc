@@ -3,8 +3,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include <assert.h>
+//#include <assert.h>
 #include <algorithm>
+#include <cctype>
 
 namespace chef {
 
@@ -77,8 +78,7 @@ namespace chef {
   }
 
   void buffer::erase(uint64_t len) {
-    assert(len <= readable());
-
+    //assert(len <= readable());
     read_index_ += len;
     if (write_index_ - read_index_ < init_capacity_ &&
       capacity_ > shrink_capacity_) {
@@ -102,12 +102,12 @@ namespace chef {
     }
 
     void buffer::seek_write(uint64_t len) {
-      assert(capacity_ - write_index_ >= len);
+      //assert(capacity_ - write_index_ >= len);
       write_index_ += len;
     }
 
     char *buffer::find(const char *key, int len) {
-      assert(read_index_ <= write_index_);
+      //assert(read_index_ <= write_index_);
       if (readable() == 0) {
         return NULL;
       }
@@ -118,7 +118,7 @@ namespace chef {
     }
 
     char *buffer::find(char c) {
-      assert(read_index_ <= write_index_);
+      //assert(read_index_ <= write_index_);
       if (readable() == 0) {
         return NULL;
       }
@@ -126,12 +126,9 @@ namespace chef {
     }
 
     char *buffer::trim_left() {
-      /// self-impl isspace,more info please man isspace
       for (; write_index_ != read_index_; ++read_index_) {
         char ch = *(data_ + read_index_);
-        if (ch != ' ' && ch != '\f' && ch != '\n' && ch != '\r' && ch != '\t' &&
-          ch != '\v'
-        ) {
+        if (!std::isspace(ch)) {
           break;
         }
       }
@@ -141,9 +138,7 @@ namespace chef {
     char * buffer::trim_right() {
       for (; write_index_ != read_index_; --write_index_) {
         char ch = *(data_ + write_index_ - 1);
-        if (ch != ' ' && ch != '\f' && ch != '\n' && ch != '\r' && ch != '\t' &&
-          ch != '\v'
-        ) {
+        if (!std::isspace(ch)) {
           break;
         }
       }

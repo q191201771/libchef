@@ -29,7 +29,7 @@ namespace chef {
 
       static bool contains(const std::string &s, const std::string &substr);
 
-      static bool contains_any(const std::string &s, const std::string &chars);
+      static bool contains_any(const std::string &s, const std::string &charlist);
 
       static bool has_prefix(const std::string &s, const std::string &prefix);
 
@@ -41,9 +41,9 @@ namespace chef {
 
       static std::string to_upper(const std::string &s);
 
-      static std::string trim_left(const std::string &s, const std::string &cutset);
+      static std::string trim_left(const std::string &s, const std::string &charlist);
 
-      static std::string trim_right(const std::string &s, const std::string &cutset);
+      static std::string trim_right(const std::string &s, const std::string &charlist);
 
       static std::string trim_prefix(const std::string &s, const std::string &prefix);
 

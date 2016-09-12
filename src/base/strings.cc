@@ -1,5 +1,6 @@
 #include "strings.h"
 #include <sstream>
+#include <cctype>
 
 namespace chef {
 
@@ -11,8 +12,8 @@ namespace chef {
     return s.find(substr) != std::string::npos;
   }
 
-  bool strings::contains_any(const std::string &s, const std::string &chars) {
-    for (auto &c : chars) {
+  bool strings::contains_any(const std::string &s, const std::string &charlist) {
+    for (auto &c : charlist) {
       for (auto &sc : s) {
         if (c == sc) {
           return true;
@@ -62,11 +63,7 @@ namespace chef {
   std::string strings::to_lower(const std::string &s) {
     std::string ret;
     for (auto &c : s) {
-      if (c >= 'A' && c <= 'Z') {
-        ret += static_cast<char>((c + 32));
-      } else {
-        ret += c;
-      }
+      ret += static_cast<char>(std::tolower(c));
     }
     return ret;
   }
@@ -74,11 +71,7 @@ namespace chef {
   std::string strings::to_upper(const std::string &s) {
     std::string ret;
     for (auto &c : s) {
-      if (c >= 'a' && c <= 'z') {
-        ret += static_cast<char>((c - 32));
-      } else {
-        ret += c;
-      }
+      ret += static_cast<char>(std::toupper(c));
     }
     return ret;
   }
@@ -110,27 +103,27 @@ namespace chef {
     return ret;
   }
 
-  std::string strings::trim_left(const std::string &s, const std::string &cutset) {
-    if (s.length() == 0 || cutset.length() == 0) {
+  std::string strings::trim_left(const std::string &s, const std::string &charlist) {
+    if (s.length() == 0 || charlist.length() == 0) {
       return s;
     }
     uint64_t pos = 0;
     uint64_t sl = s.length();
     for (; pos < sl; pos++) {
-      if (cutset.find(s[pos]) == std::string::npos) {
+      if (charlist.find(s[pos]) == std::string::npos) {
         break;
       }
     }
     return s.substr(pos);
   }
 
-  std::string strings::trim_right(const std::string &s, const std::string &cutset) {
-    if (s.length() == 0 || cutset.length() == 0) {
+  std::string strings::trim_right(const std::string &s, const std::string &charlist) {
+    if (s.length() == 0 || charlist.length() == 0) {
       return s;
     }
     int64_t pos = s.length() - 1;
     for (; pos >= 0; pos--) {
-      if (cutset.find(s[pos]) == std::string::npos) {
+      if (charlist.find(s[pos]) == std::string::npos) {
         break;
       }
     }

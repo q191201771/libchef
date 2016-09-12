@@ -1,5 +1,5 @@
 #include "redis_backend.h"
-#include <assert.h>
+// #include <assert.h>
 
 namespace chef {
 
@@ -86,12 +86,12 @@ namespace chef {
   }
 
   void redis_backend::async_hset(const std::string &key, const std::string &value) {
-    assert(started_);
+    // assert(started_);
     backend_thread_.add(std::bind(&redis_backend::hset_in_thread, this, key, value));
   }
 
   void redis_backend::async_hdel(const std::string &key) {
-    assert(started_);
+    // assert(started_);
     backend_thread_.add(std::bind(&redis_backend::hdel_in_thread, this, key));
   }
 

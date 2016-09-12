@@ -62,12 +62,14 @@ namespace chef {
     if (bufsize == -1) {
       bufsize = 8192;
     }
-    char buf[bufsize] = {0};
+    char *buf = new char[bufsize];
     struct passwd pwd;
     struct passwd *result = NULL;
     if (getpwuid_r(::getuid(), &pwd, buf, bufsize, &result) != 0 || result == NULL) {
+      delete []buf;
       return std::string();
     }
+    delete []buf;
     return pwd.pw_name;
   }
 

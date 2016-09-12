@@ -148,6 +148,7 @@ void strings_to_lower_test() {
   assert(chef::strings::to_lower("A") == "a");
   assert(chef::strings::to_lower("aA") == "aa");
   assert(chef::strings::to_lower("aAbbAc") == "aabbac");
+  assert(chef::strings::to_lower("!aAbbAc~") == "!aabbac~");
 }
 
 void strings_to_upper_test() {
@@ -158,6 +159,7 @@ void strings_to_upper_test() {
   assert(chef::strings::to_lower("A") == "A");
   assert(chef::strings::to_lower("aA") == "AA");
   assert(chef::strings::to_lower("aAbbAc") == "AABBAC");
+  assert(chef::strings::to_lower("!aAb&bAc~") == "!aab&bac~");
 }
 
 
