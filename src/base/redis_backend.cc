@@ -41,6 +41,7 @@ namespace chef {
       redisFree(context);
       return -1;
     }
+    redisFree(context);
     freeReplyObject(reply);
     return 0;
   }
