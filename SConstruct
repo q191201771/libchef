@@ -35,3 +35,5 @@ Export('hiredis_lib_path')
 base = SConscript("#/src/base/SConscript", variant_dir=build_dir+'/base', duplicate=0)
 
 base_test = SConscript("#/src/base_test/SConscript", variant_dir=build_dir+'/base_test', duplicate=0)
+
+recipe = SConscript("#/src/recipe/SConscript", variant_dir=build_dir+'/recipe', duplicate=0)

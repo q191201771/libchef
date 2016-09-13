@@ -1,0 +1,12 @@
+import os, sys, commands
+
+Import('env')
+Import('platform_libs')
+
+env = env.Clone()
+
+prgs = []
+
+prgs += env.Program('thread_id', ['thread_id.cc'], LIBS = platform_libs)
+
+Return('prgs')
