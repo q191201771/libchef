@@ -8,5 +8,6 @@ env = env.Clone()
 prgs = []
 
 prgs += env.Program('thread_id', ['thread_id.cc'], LIBS = platform_libs)
+prgs += env.Program('yield', ['yield.cc'], LIBS = platform_libs)
 
 Return('prgs')
