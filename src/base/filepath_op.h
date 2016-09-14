@@ -64,9 +64,8 @@ namespace chef {
       static int rmdir_recursive(const std::string &pathname);
 
       /**
-       * @param
-       *   src 源文件
-       *   dst 目标文件
+       * @param src 源文件
+       * @param dst 目标文件
        *
        * @return 0 成功 -1 失败
        *
