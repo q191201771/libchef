@@ -15,6 +15,7 @@
 #define _CHEF_BASE_THIS_MACHINE_OP_H_
 
 #include <string>
+#include <stdint.h>
 
 namespace chef {
 

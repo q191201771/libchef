@@ -1,8 +1,9 @@
 #include "stuff.h"
+#include <sstream>
+#include <netdb.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
-#include <netdb.h>
-#include <sstream>
 
 namespace chef {
 

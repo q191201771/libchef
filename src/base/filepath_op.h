@@ -14,6 +14,7 @@
 #define _CHEF_BASE_FILEPATH_OP_H_
 
 #include <string>
+#include <stdint.h>
 
 namespace chef {
 

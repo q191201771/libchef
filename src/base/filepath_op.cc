@@ -4,7 +4,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <dirent.h>
+#include <errno.h>
 
 #define IF_NULL_RETURN_MINUS_ONE(x) do { if ((x) == NULL) return -1; } while(0);
 #define IF_STRING_EMPTY_MINUS_ONE(x) do { if (x.length() == 0) return -1; } while(0);

@@ -1,6 +1,7 @@
 #include "strings.h"
 #include <sstream>
 #include <cctype>
+#include <stdint.h>
 
 namespace chef {
 
