@@ -42,7 +42,7 @@ CTestTestfile.cmake
 
 ##### vim #####
 .*.swp
-tags
+*tags*
 .ycm_extra_conf.py
 
 ##### JS #####

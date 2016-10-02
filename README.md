@@ -3,10 +3,11 @@
 ### 代码结构
 
 ```
-build/                      ......编译后生成的中间文件，可执行文件
 src/                        ......代码根目录
-    base/                   ......基础库
-    base_test/              ......基础库相应测试
+  base/                     ......基础库
+  base_test/                ......基础库相应测试
+  recipe/                   ......平时一些小demo
+build/                      ......编译后生成的中间文件，可执行文件
 .gitignore                  ......
 LINCENSE                    ......
 README.md                   ......
@@ -34,6 +35,14 @@ boost 1.58.0 静态库
 
 libjsoncpp.a
 libhiredis.a
+
+```
+
+### 编译
+
+```
+$sudo apt-get install scons g++ libjsoncpp-dev libboost-dev libboot-all-dev libhiredis-dev -y
+$scons
 ```
 
 ### c++11以及boost已经能很好hold住，不需要自己实现或过度封装的模块
@@ -69,4 +78,3 @@ https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
 ```
 
 ### 代码还在持续添加中...
-
