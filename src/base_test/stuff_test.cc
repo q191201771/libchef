@@ -48,7 +48,7 @@ int main() {
   ENTER_TEST;
 
   readable_bytes_test();
-  get_host_by_name_test();
+  // get_host_by_name_test();
 
   return 0;
 }

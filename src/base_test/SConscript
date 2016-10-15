@@ -11,24 +11,28 @@ env = env.Clone()
 
 prgs = []
 
-os_exec_op_sources = ['../base/os_exec_op.o', 'os_exec_op_test.cc']
-crypto_md5_op_sources = ['crypto_md5_op_test.cc']
+hash_sources               = ['hash_test.cc']
+noncopyable_sources        = ['noncopyable_test.cc']
+crypto_md5_op_sources      = ['crypto_md5_op_test.cc']
 encoding_base64_op_sources = ['encoding_base64_op_test.cc']
-daemon_op_sources = ['../base/daemon_op.o', 'daemon_op_test.cc']
-chunk_head_op_sources = ['../base/chunk_head_op.o', 'chunk_head_op_test.cc']
-buffer_sources = ['../base/buffer.o', 'buffer_test.cc']
-filepath_op_sources = ['../base/filepath_op.o', 'filepath_op_test.cc']
-noncopyable_sources = ['noncopyable_test.cc']
-wait_event_sources = ['../base/wait_event.o', 'wait_event_test.cc']
+
+stuff_sources          = ['../base/stuff.o', 'stuff_test.cc']
+buffer_sources         = ['../base/buffer.o', 'buffer_test.cc']
+strings_sources        = ['../base/strings.o', 'strings_test.cc']
+daemon_op_sources      = ['../base/daemon_op.o', 'daemon_op_test.cc']
+wait_event_sources     = ['../base/wait_event.o', 'wait_event_test.cc']
+os_exec_op_sources     = ['../base/os_exec_op.o', 'os_exec_op_test.cc']
+filepath_op_sources    = ['../base/filepath_op.o', 'filepath_op_test.cc']
+chunk_head_op_sources  = ['../base/chunk_head_op.o', 'chunk_head_op_test.cc']
 this_thread_op_sources = ['../base/this_thread_op.o', 'this_thread_op_test.cc']
+
 task_thread_sources = ['../base/wait_event.o', '../base/task_thread.o', 'task_thread_test.cc']
 thread_pool_sources = ['../base/wait_event.o', '../base/thread_pool.o', 'thread_pool_test.cc']
-stuff_sources = ['../base/stuff.o', 'stuff_test.cc']
-dump_sources = ['../base/filepath_op.o', '../base/dump.o', 'dump_test.cc']
-strings_sources = ['../base/strings.o', 'strings_test.cc']
-this_proc_op_sources = ['../base/filepath_op.o', '../base/this_proc_op.o', 'this_proc_op_test.cc']
+
+dump_sources            = ['../base/filepath_op.o', '../base/dump.o', 'dump_test.cc']
+logo_sources            = ['../base/filepath_op.o', '../base/logo.o', 'logo_test.cc']
+this_proc_op_sources    = ['../base/filepath_op.o', '../base/this_proc_op.o', 'this_proc_op_test.cc']
 this_machine_op_sources = ['../base/filepath_op.o', '../base/this_machine_op.o', 'this_machine_op_test.cc']
-hash_sources = ['hash_test.cc']
 
 prgs += env.Program('os_exec_op_test', os_exec_op_sources, LIBS = platform_libs)
 prgs += env.Program('crypto_md5_op_test', crypto_md5_op_sources, LIBS = platform_libs)
@@ -48,6 +52,7 @@ prgs += env.Program('strings_test', strings_sources, LIBS = platform_libs)
 prgs += env.Program('this_proc_op_test', this_proc_op_sources, LIBS = platform_libs)
 prgs += env.Program('this_machine_op_test', this_machine_op_sources, LIBS = platform_libs)
 prgs += env.Program('hash_test', hash_sources, LIBS = platform_libs)
+prgs += env.Program('logo_test', logo_sources, LIBS = platform_libs)
 
 log_sources = ['../base/log.o', 'log_test.cc']
 with_boost_libs = [platform_libs]

@@ -7,7 +7,7 @@
 void little_sleep(std::chrono::microseconds us)
 {
   auto count = 0;
-  auto max = -1;
+  long int max = -1;
   auto start = std::chrono::high_resolution_clock::now();
   auto end = start + us;
   do {
