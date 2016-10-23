@@ -1,4 +1,5 @@
 *.log.chef
+.DS_Store
 
 ##### c/c++/golang #####
 *.o

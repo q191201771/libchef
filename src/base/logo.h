@@ -6,7 +6,9 @@
  *   chef <191201771@qq.com>
  *     -initial release xxxx-xx-xx
  *
- * @brief  读取指定文件中的内容，打印到stdout
+ * @brief
+ *   读取指定文件中的内容，打印到stdout
+ *   chef.logo中的图抄自 https://github.com/channelcat/sanic/blob/master/sanic/config.py
  *
  */
 
