@@ -3,7 +3,8 @@
 #include <sys/types.h>
 #include <sys/syscall.h>
 
-BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(global_logger_src, boost::log::sources::severity_logger_mt<boost::log::trivial::severity_level>);
+BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(global_logger_src,
+                                       boost::log::sources::severity_logger_mt<boost::log::trivial::severity_level>);
 
 static long int gettid() {
   return syscall(SYS_gettid);
@@ -25,19 +26,20 @@ namespace chef {
 
     boost::log::formatter formatter;
     if (m == mode_debug) {
+      //boost::log::expressions::attr<pid_t>("ProcessID")
       formatter = boost::log::expressions::stream <<
-      "[" << boost::log::expressions::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%m-%d %H:%M:%S.%f") <<
-      "] [" << boost::log::expressions::attr<pid_t>("ThreadID") <<
-      //<< std::setw(5) << boost::log::expressions::attr<pid_t>("ProcessID") << "-"
-      "] [" << boost::log::expressions::attr<boost::log::trivial::severity_level>("Severity") <<
-      "] [" << boost::log::expressions::format_named_scope("Scope", boost::log::keywords::format = "%f:%l", boost::log::keywords::depth = 1) <<
-      "] | "<< boost::log::expressions::smessage;
+          "[" << boost::log::expressions::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%m-%d %H:%M:%S.%f") <<
+          "] [" << boost::log::expressions::attr<pid_t>("ThreadID") <<
+          "] [" << boost::log::expressions::attr<boost::log::trivial::severity_level>("Severity") <<
+          "] [" << boost::log::expressions::format_named_scope("Scope", boost::log::keywords::format = "%f:%l",
+                                                               boost::log::keywords::depth = 1) <<
+          "] | "<< boost::log::expressions::smessage;
     } else {
       formatter = boost::log::expressions::stream <<
-      boost::log::expressions::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%m-%d %H:%M:%S.%f") << " " <<
-      std::setw(5) << boost::log::expressions::attr<pid_t>("ThreadID") << " " <<
-      std::setw(7) << boost::log::expressions::attr<boost::log::trivial::severity_level>("Severity") << " | " <<
-      boost::log::expressions::smessage;
+          boost::log::expressions::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%m-%d %H:%M:%S.%f") << " " <<
+          std::setw(5) << boost::log::expressions::attr<pid_t>("ThreadID") << " " <<
+          std::setw(7) << boost::log::expressions::attr<boost::log::trivial::severity_level>("Severity") << " | " <<
+          boost::log::expressions::smessage;
     }
     char pc_name_buf[128] = {0};
     std::string pc_name = "unknown";
@@ -57,17 +59,14 @@ namespace chef {
     char pid_buf[16] = {0};
     snprintf(pid_buf, 15, "%d", getpid());
 
-    boost::shared_ptr<boost::log::sinks::text_file_backend> backend =
-    boost::make_shared<boost::log::sinks::text_file_backend>(
-      boost::log::keywords::file_name = bin_name+".%Y%m%dT%H%M%S.%N."+pc_name+"."+pid_buf+".log.chef",
-      boost::log::keywords::rotation_size = 1024ULL * 1024 * 1024,
-      boost::log::keywords::time_based_rotation = boost::log::sinks::file::rotation_at_time_point(0, 0, 0),
-      boost::log::keywords::open_mode = std::ios::app,
-      boost::log::keywords::auto_flush = true
-    );
+    boost::shared_ptr<boost::log::sinks::text_file_backend> backend = boost::make_shared<boost::log::sinks::text_file_backend>(
+        boost::log::keywords::file_name = bin_name+".%Y%m%dT%H%M%S.%N."+pc_name+"."+pid_buf+".log.chef",
+        boost::log::keywords::rotation_size = 1024ULL * 1024 * 1024,
+        boost::log::keywords::time_based_rotation = boost::log::sinks::file::rotation_at_time_point(0, 0, 0),
+        boost::log::keywords::open_mode = std::ios::app,
+        boost::log::keywords::auto_flush = true);
 
-    boost::log::trivial::severity_level base_level =
-    m == mode_debug ? boost::log::trivial::trace : boost::log::trivial::info;
+    boost::log::trivial::severity_level base_level = (m == mode_debug) ? boost::log::trivial::trace : boost::log::trivial::info;
     boost::shared_ptr<sync_sink_frontend> frontend(new sync_sink_frontend(backend));
     frontend->set_filter(boost::log::expressions::attr<boost::log::trivial::severity_level>("Severity") >= base_level);
     frontend->set_formatter(formatter);
@@ -82,8 +81,7 @@ namespace chef {
   }
 
   namespace internal {
-    boost::log::sources::severity_logger_mt<boost::log::trivial::severity_level> &get_logger()
-    {
+    boost::log::sources::severity_logger_mt<boost::log::trivial::severity_level> &get_logger() {
       return global_logger_src::get();
     }
   } // namespace internal
