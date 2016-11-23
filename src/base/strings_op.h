@@ -18,7 +18,7 @@
 
 namespace chef {
 
-  class strings {
+  class strings_op {
     public:
       /**
        * @function compare

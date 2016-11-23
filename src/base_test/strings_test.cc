@@ -1,4 +1,4 @@
-#include "../base/strings.h"
+#include "../base/strings_op.h"
 #include <stdio.h>
 #include <string>
 #include <map>
@@ -30,7 +30,7 @@ struct string_pair_2_bool {
 
 void strings_compare_test() {
   /// @NOTICE
-  /// std::string::compare返回值为 0 || > 0 || < 0，而不是 0 || 1 || -1
+  /// std::string_op::compare返回值为 0 || > 0 || < 0，而不是 0 || 1 || -1
   /// 所以比较的时候转换下
   const int POSITIVE_FLAG = 1;
   const int NEGITIVE_FLAG = -1;
@@ -52,13 +52,13 @@ void strings_compare_test() {
   for (auto &item : vec) {
     switch (item.result_) {
     case 0:
-      assert(chef::strings::compare(item.pair_[0], item.pair_[1]) == 0);
+      assert(chef::strings_op::compare(item.pair_[0], item.pair_[1]) == 0);
       break;
     case POSITIVE_FLAG:
-      assert(chef::strings::compare(item.pair_[0], item.pair_[1]) > 0);
+      assert(chef::strings_op::compare(item.pair_[0], item.pair_[1]) > 0);
       break;
     case NEGITIVE_FLAG:
-      assert(chef::strings::compare(item.pair_[0], item.pair_[1]) < 0);
+      assert(chef::strings_op::compare(item.pair_[0], item.pair_[1]) < 0);
       break;
     }
   }
@@ -71,7 +71,7 @@ void strings_contains_test() {
   vec.push_back(string_pair_2_bool("abc", "", true));
   vec.push_back(string_pair_2_bool("", "a", false));
   for (auto &item : vec) {
-    assert(chef::strings::contains(item.pair_[0], item.pair_[1]) == item.result_);
+    assert(chef::strings_op::contains(item.pair_[0], item.pair_[1]) == item.result_);
   }
 }
 
@@ -90,7 +90,7 @@ void strings_contains_any_test() {
   vec.push_back(string_pair_2_bool(dots+dots+dots, " ", false));
 
   for (auto &item : vec) {
-    assert(chef::strings::contains_any(item.pair_[0], item.pair_[1]) == item.result_);
+    assert(chef::strings_op::contains_any(item.pair_[0], item.pair_[1]) == item.result_);
   }
 }
 
@@ -104,7 +104,7 @@ void strings_has_prifex_test() {
   vec.push_back(string_pair_2_bool("abc", "", true));
 
   for (auto &item : vec) {
-    assert(chef::strings::has_prefix(item.pair_[0], item.pair_[1]) == item.result_);
+    assert(chef::strings_op::has_prefix(item.pair_[0], item.pair_[1]) == item.result_);
   }
 }
 
@@ -118,7 +118,7 @@ void strings_has_suffix_test() {
   vec.push_back(string_pair_2_bool("abc", "", true));
 
   for (auto &item : vec) {
-    assert(chef::strings::has_suffix(item.pair_[0], item.pair_[1]) == item.result_);
+    assert(chef::strings_op::has_suffix(item.pair_[0], item.pair_[1]) == item.result_);
   }
 }
 
@@ -136,71 +136,71 @@ void strings_count_test() {
   vec.push_back(string_pair_2_int("11111", "11", 2));
 
   for (auto &item : vec) {
-    assert(chef::strings::count(item.pair_[0], item.pair_[1]) == item.result_);
+    assert(chef::strings_op::count(item.pair_[0], item.pair_[1]) == item.result_);
   }
 }
 
 void strings_to_lower_test() {
-  assert(chef::strings::to_lower("") == "");
-  assert(chef::strings::to_lower("1") == "1");
-  assert(chef::strings::to_lower("a") == "a");
-  assert(chef::strings::to_lower("a1") == "a1");
-  assert(chef::strings::to_lower("A") == "a");
-  assert(chef::strings::to_lower("aA") == "aa");
-  assert(chef::strings::to_lower("aAbbAc") == "aabbac");
-  assert(chef::strings::to_lower("!aAbbAc~") == "!aabbac~");
+  assert(chef::strings_op::to_lower("") == "");
+  assert(chef::strings_op::to_lower("1") == "1");
+  assert(chef::strings_op::to_lower("a") == "a");
+  assert(chef::strings_op::to_lower("a1") == "a1");
+  assert(chef::strings_op::to_lower("A") == "a");
+  assert(chef::strings_op::to_lower("aA") == "aa");
+  assert(chef::strings_op::to_lower("aAbbAc") == "aabbac");
+  assert(chef::strings_op::to_lower("!aAbbAc~") == "!aabbac~");
 }
 
 void strings_to_upper_test() {
-  assert(chef::strings::to_lower("") == "");
-  assert(chef::strings::to_lower("1") == "1");
-  assert(chef::strings::to_lower("a") == "A");
-  assert(chef::strings::to_lower("a1") == "A1");
-  assert(chef::strings::to_lower("A") == "A");
-  assert(chef::strings::to_lower("aA") == "AA");
-  assert(chef::strings::to_lower("aAbbAc") == "AABBAC");
-  assert(chef::strings::to_lower("!aAb&bAc~") == "!aab&bac~");
+  assert(chef::strings_op::to_lower("") == "");
+  assert(chef::strings_op::to_lower("1") == "1");
+  assert(chef::strings_op::to_lower("a") == "A");
+  assert(chef::strings_op::to_lower("a1") == "A1");
+  assert(chef::strings_op::to_lower("A") == "A");
+  assert(chef::strings_op::to_lower("aA") == "AA");
+  assert(chef::strings_op::to_lower("aAbbAc") == "AABBAC");
+  assert(chef::strings_op::to_lower("!aAb&bAc~") == "!aab&bac~");
 }
 
 
 void strings_join_test() {
   std::string delimiter = "---";
   std::vector<std::string> array;
-  assert(chef::strings::join(array, delimiter) == std::string());
+  assert(chef::strings_op::join(array, delimiter) == std::string());
   array.push_back("test");
-  assert(chef::strings::join(array, delimiter) == std::string("test"));
+  assert(chef::strings_op::join(array, delimiter) == std::string("test"));
   array.push_back("hello");
-  assert(chef::strings::join(array, delimiter) == std::string("test---hello"));
+  assert(chef::strings_op::join(array, delimiter) == std::string("test---hello"));
   array.push_back("world");
-  assert(chef::strings::join(array, delimiter) == std::string("test---hello---world"));
+  assert(chef::strings_op::join(array, delimiter) == std::string("test---hello---world"));
 }
 
 void strings_split_test() {
-  assert(chef::strings::split(std::string(), '-').empty());
+  assert(chef::strings_op::split(std::string(), '-').empty());
   std::string str1 = "a";
-  std::vector<std::string> res1 = chef::strings::split(str1, '-');
+  std::vector<std::string> res1 = chef::strings_op::split(str1, '-');
   assert(res1.size() == 1);
   assert(res1[0] == "a");
 
   std::string str2 = "a-";
-  std::vector<std::string> res2 = chef::strings::split(str2, '-');
+  std::vector<std::string> res2 = chef::strings_op::split(str2, '-');
   assert(res2.size() == 1);
   assert(res2[0] == "a");
 
   std::string str3 = "-a";
-  std::vector<std::string> res3 = chef::strings::split(str3, '-');
+  std::vector<std::string> res3 = chef::strings_op::split(str3, '-');
   assert(res3.size() == 2);
   assert(res3[0] == "");
   assert(res3[1] == "a");
 
   std::string str4 = "a*bc";
-  std::vector<std::string> res4 = chef::strings::split(str4, '*');
+  std::vector<std::string> res4 = chef::strings_op::split(str4, '*');
   assert(res4.size() == 2);
   assert(res4[0] == "a");
   assert(res4[1] == "bc");
 
   std::string str5 = "--";
-  std::vector<std::string> res5 = chef::strings::split(str5, '-');
+  std::vector<std::string> res5 = chef::strings_op::split(str5, '-');
   assert(res5.size() == 2);
   assert(res5[0] == "");
   assert(res5[1] == "");
@@ -224,7 +224,7 @@ void strings_trim_left_test() {
     {"cbbbccacd", "bcd", "acd"},
   };
   for (auto &item : vec) {
-    assert(chef::strings::trim_left(item[0], item[1]) == item[2]);
+    assert(chef::strings_op::trim_left(item[0], item[1]) == item[2]);
   }
 }
 
@@ -246,7 +246,7 @@ void strings_trim_right_test() {
     {"cbbbccacd", "bcd", "cbbbcca"},
   };
   for (auto &item : vec) {
-    assert(chef::strings::trim_right(item[0], item[1]) == item[2]);
+    assert(chef::strings_op::trim_right(item[0], item[1]) == item[2]);
   }
 }
 
@@ -272,7 +272,7 @@ void strings_trim_prefix_test() {
     {"bca", "bcd", "bca"},
   };
   for (auto &item : vec) {
-    assert(chef::strings::trim_prefix(item[0], item[1]) == item[2]);
+    assert(chef::strings_op::trim_prefix(item[0], item[1]) == item[2]);
   }
 }
 
@@ -300,7 +300,7 @@ void strings_trim_suffix_test() {
   };
 
   for (auto &item : vec) {
-    assert(chef::strings::trim_suffix(item[0], item[1]) == item[2]);
+    assert(chef::strings_op::trim_suffix(item[0], item[1]) == item[2]);
   }
 }
 
