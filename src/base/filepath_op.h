@@ -22,7 +22,7 @@ namespace chef {
     public:
       /**
        * @return
-       *   0  存在，文件或文件夹都可
+       *    0 存在，文件或文件夹都可
        *   -1 不存在
        *
        */
@@ -30,7 +30,7 @@ namespace chef {
 
       /**
        * @return
-       *   0  存在，且为文件夹
+       *    0 存在，且为文件夹
        *   -1 不存在，或不是文件夹
        *
        */
@@ -38,7 +38,7 @@ namespace chef {
 
       /**
        * @return
-       *   0  创建成功，或创建前已经存在
+       *    0 创建成功，或创建前已经存在
        *   -1 失败
        *
        */
@@ -48,7 +48,7 @@ namespace chef {
        * @param name 文件名
        *
        * @return
-       *   0  删除成功，或删除前就不存在
+       *    0 删除成功，或删除前就不存在
        *   -1 删除失败，或[name]是文件夹
        *
        */
@@ -58,7 +58,7 @@ namespace chef {
        * @param name 文件夹名
        *
        * @return
-       *   0  删除成功，或删除前就不存在
+       *    0 删除成功，或删除前就不存在
        *   -1 删除失败，或[name]不是文件夹
        *
        */
@@ -82,6 +82,14 @@ namespace chef {
       static int write_file(const std::string &filename, const std::string &content);
 
       /**
+       * 写文件
+       *
+       * @return 0 成功 -1 失败
+       *
+       */
+      static int write_file(const std::string &filename, const char *content, size_t content_size);
+
+      /**
        * @NOTICE
        * For most files under the /proc directory, stat() does not return the file
        * size in the st_size field; instead the field is returned with the value 0.
@@ -103,7 +111,7 @@ namespace chef {
        * 由于/proc下面的文件无法通过::stat()获取文件长度，所以提供参数让调用者填入一个fixed长度
        *
        */
-      static std::string read_file(const std::string &filename, int64_t content_size);
+      static std::string read_file(const std::string &filename, size_t content_size);
 
       /**
        * @param filename     文件名
@@ -113,10 +121,10 @@ namespace chef {
        * @return 成功返回实际读入大小，失败返回-1
        *
        */
-      static int64_t read_file(const char *filename, char *content /*out*/, int64_t content_size);
+      static int64_t read_file(const std::string &filename, char *content /*out*/, size_t content_size);
 
       /// @TODO 能否统一成一个接口，内部判断是否是否为link
-      static std::string read_link(const std::string &filename, int64_t content_size);
+      static std::string read_link(const std::string &filename, size_t content_size);
 
       /**
        * @param path     目录
