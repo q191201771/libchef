@@ -10,6 +10,7 @@ prgs = []
 prgs += env.Program('thread_id', ['thread_id.cc'], LIBS = platform_libs)
 prgs += env.Program('yield', ['yield.cc'], LIBS = platform_libs)
 prgs += env.Program('sleep_for', ['sleep_for.cc'], LIBS = platform_libs)
+prgs += env.Program('volitale', ['volitale.cc'], LIBS = platform_libs)
 # prgs += env.Program('tmp', ['tmp.cc'], LIBS = platform_libs)
 
 Return('prgs')

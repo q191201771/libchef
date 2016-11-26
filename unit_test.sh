@@ -3,10 +3,10 @@
 cd build/base_test
 ./buffer_test
 ./chunk_head_op_test
-./crypto_md5_op_test
+# ./crypto_md5_op_test
 ./daemon_op_test
 ./dump_test
-./encoding_base64_op_test
+# ./encoding_base64_op_test
 ./filepath_op_test
 ./hash_test
 ./json_config_test
@@ -22,3 +22,4 @@ cd build/base_test
 ./this_thread_op_test
 ./thread_pool_test
 ./wait_event_test
+./wait_event_counter_test
