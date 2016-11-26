@@ -4,10 +4,10 @@
 namespace chef {
 
   redis_backend::redis_backend(const std::string &ip,
-    int port,
-    const std::string &container_name,
-    int connect_timeout_sec,
-    int ping_interval_sec
+                               int port,
+                               const std::string &container_name,
+                               int connect_timeout_sec,
+                               int ping_interval_sec
   )
     : ip_(ip)
     , port_(port)

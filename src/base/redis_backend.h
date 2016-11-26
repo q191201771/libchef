@@ -45,11 +45,10 @@ namespace chef {
        *
        */
       redis_backend(const std::string &ip,
-        int port,
-        const std::string &container_name,
-        int connect_timeout_sec = 3,
-        int ping_interval_sec = 1
-      );
+                    int port,
+                    const std::string &container_name,
+                    int connect_timeout_sec = 3,
+                    int ping_interval_sec = 1);
 
       /**
        * 开启后台线程，建立redis长链接
