@@ -7,11 +7,7 @@
  *     -initial release 2016-08-31
  *
  * @brief
- *   开启一个线程，可以往里面添加异步任务。
- *
- *   使用task_thread的场景一般是线程一直开着，作为任务的执行环境，生命周期与程序一致，
- *   如果析构task_thread，内部会尽快关闭线程，避免析构函数阻塞，
- *   所以不保证已添加但未执行的剩余任务全部执行完。
+ *   开启一个线程，可以往里面添加异步任务（支持延时任务）。
  *
  */
 
@@ -35,7 +31,16 @@ namespace chef {
     public:
       typedef std::function<void()> task;
 
-      explicit task_thread(const std::string &thread_name = std::string("task thread"));
+      /// @NOTICE 如果选择 RELEASE_MODE_DO_SHOULD_DONE 或 RELEASE_MODE_DO_ALL_DONE，
+      ///         内部依然会保证任务的执行线程体是task_thread内部开启的线程。
+      ///         析构函数会等待应该执行的异步任务执行完再返回。
+      enum release_mode {
+        RELEASE_MODE_ASAP,           /// 析构时，未执行的任务全部丢弃。
+        RELEASE_MODE_DO_SHOULD_DONE, /// 析构时，执行需要执行的任务——实时任务加已到定时时间的定时任务，未到定时时间的定时任务不执行。
+        RELEASE_MODE_DO_ALL_DONE,    /// 析构时，执行所有任务——实时任务加所有定时任务，未到定时时间的任务也会提前执行。
+      };
+
+      task_thread(const std::string &thread_name=std::string("task thread"), release_mode rm=RELEASE_MODE_ASAP);
 
       ~task_thread();
 
@@ -49,48 +54,67 @@ namespace chef {
       /**
        * 添加任务，任务按添加顺序执行。
        *
-       * @param t                 任务
+       * @param                 t 任务
        * @param defferred_time_ms 可指定延时多少毫秒后执行，如果为0，则尽快执行。
        *
        */
       void add(const task &t, int defferred_time_ms = 0);
 
       /**
-       * 未执行的任务
-       * 非阻塞函数
+       * @return 还未执行的任务数量
        *
        */
       uint64_t num_of_undone_task();
 
+      /**
+       * @return 线程名
+       */
+      std::string thread_name() const { return name_; }
+
     private:
       /**
-       * 新建线程的loop
+       * 新建线程的执行体loop
        *
        */
-      void run_in_thread(const std::string &name);
+      void run_in_thread_(const std::string &name);
 
       /**
-       * 收集已经到时间该执行延时任务
+       * 收集已经到时间该执的行延时任务
        *
-       * @param tasks 传出参数 将该执行的延时任务插入[tasks]尾部
+       * @param tasks 传出参数 将达到执行时间的延时任务插入[tasks]尾部
        *
        */
-      void append_expired_task(std::deque<task> &tasks);
+      void append_expired_tasks_(std::deque<task> &tasks);
 
       /**
        * 获取当前时间，单位毫秒
        *
        */
-      uint64_t now();
+      uint64_t now_();
 
       /**
        * 等待线程结束
        *
        */
-      void join();
+      void join_();
+
+      /**
+       * 执行[tasks]里的所有任务，并清空tasks
+       *
+       */
+      void execute_tasks_(std::deque<task> &tasks);
+
+      /**
+       * @overload
+       *
+       * 执行[tasks]里的所有任务，并清空tasks
+       *
+       */
+       void execute_tasks_(std::multimap<uint64_t, task> &tasks);
 
     private:
       std::string                   name_;
+      release_mode                  release_mode_;
       bool                          exit_flag_;
       std::shared_ptr<std::thread>  thread_;
       std::deque<task>              tasks_;

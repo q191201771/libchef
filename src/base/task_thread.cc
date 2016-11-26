@@ -3,8 +3,9 @@
 
 namespace chef {
 
-  task_thread::task_thread(const std::string &thread_name)
+  task_thread::task_thread(const std::string &thread_name, release_mode rm)
     : name_(thread_name)
+    , release_mode_(rm)
     , exit_flag_(false)
     , thread_(NULL)
   {
@@ -12,19 +13,15 @@ namespace chef {
 
   task_thread::~task_thread() {
     exit_flag_ = true;
-    join();
+    join_();
   }
 
   void task_thread::start() {
-    thread_ = std::make_shared<std::thread>(std::bind(
-      &task_thread::run_in_thread,
-      this,
-      name_
-    ));
+    thread_ = std::make_shared<std::thread>(std::bind(&task_thread::run_in_thread_, this, name_));
     runned_event_.wait();
   }
 
-  void task_thread::join() {
+  void task_thread::join_() {
     if (thread_) {
       thread_->join();
     }
@@ -35,7 +32,7 @@ namespace chef {
     if (defferred_time_ms == 0) {
       tasks_.push_back(t);
     } else {
-      defferred_tasks_.insert(std::pair<uint64_t, task>(now() + defferred_time_ms, t));
+      defferred_tasks_.insert(std::pair<uint64_t, task>(now_() + defferred_time_ms, t));
     }
   }
 
@@ -44,34 +41,50 @@ namespace chef {
     return tasks_.size() + defferred_tasks_.size();
   }
 
-  void task_thread::run_in_thread(const std::string &name) {
+  void task_thread::run_in_thread_(const std::string &name) {
     prctl(PR_SET_NAME, name.c_str());
 
     runned_event_.notify();
 
     std::deque<task> collect_tasks;
-    while(!exit_flag_) {
-      {
+    for (; ; ) {
+      { /// enter lock scope
         std::unique_lock<std::mutex> lock(mutex_);
-        cond_.wait_for(lock, std::chrono::milliseconds(100));
+        while(!exit_flag_ && tasks_.empty() && defferred_tasks_.empty()) {
+          cond_.wait_for(lock, std::chrono::milliseconds(100));
+        }
+        /// 收集需要立即执行的任务
         if (!tasks_.empty()) {
           collect_tasks.swap(tasks_);
         }
-        append_expired_task(collect_tasks);
-      }
-      while(!collect_tasks.empty()) {
-        task t = collect_tasks.front();
-        collect_tasks.pop_front();
-        t();
-      }
+        /// 收集到达执行时间的延时任务
+        if (!defferred_tasks_.empty()) {
+          append_expired_tasks_(collect_tasks);
+        }
+        /// @NOTICE 把这个判断放在两次收集任务的下面，便于退出时通过release_mode_去执行需要执行的任务
+        if (exit_flag_) {
+            break;
+        }
+      } /// leave lock scope
+      execute_tasks_(collect_tasks);
+    }
+
+    std::unique_lock<std::mutex> lock(mutex_);
+    switch (release_mode_) {
+    case RELEASE_MODE_ASAP:
+      break;
+    case RELEASE_MODE_DO_SHOULD_DONE:
+      execute_tasks_(collect_tasks);
+      break;
+    case RELEASE_MODE_DO_ALL_DONE:
+      execute_tasks_(collect_tasks);
+      execute_tasks_(defferred_tasks_);
+      break;
     }
   }
 
-  void task_thread::append_expired_task(std::deque<task> &tasks) {
-    if (defferred_tasks_.empty()) {
-      return;
-    }
-    uint64_t now_ms = now();
+  void task_thread::append_expired_tasks_(std::deque<task> &tasks) {
+    uint64_t now_ms = now_();
     auto iter = defferred_tasks_.begin();
     for (; iter != defferred_tasks_.end(); iter++) {
       if (iter->first > now_ms) {
@@ -82,7 +95,21 @@ namespace chef {
     defferred_tasks_.erase(defferred_tasks_.begin(), iter);
   }
 
-  uint64_t task_thread::now() {
+  void task_thread::execute_tasks_(std::deque<task> &tasks) {
+    while(!tasks.empty()) {
+      tasks.front()();
+      tasks.pop_front();
+    }
+  }
+
+  void task_thread::execute_tasks_(std::multimap<uint64_t, task> &tasks) {
+    for (auto item : tasks) {
+      item.second();
+    }
+    tasks.clear();
+  }
+
+  uint64_t task_thread::now_() {
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
     return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
