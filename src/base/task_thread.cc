@@ -57,11 +57,11 @@ namespace chef {
         if (!tasks_.empty()) {
           collect_tasks.swap(tasks_);
         }
-        /// 收集到达执行时间的延时任务
+        /// 收集已到定时时间的延时任务
         if (!defferred_tasks_.empty()) {
           append_expired_tasks_(collect_tasks);
         }
-        /// @NOTICE 把这个判断放在两次收集任务的下面，便于退出时通过release_mode_去执行需要执行的任务
+        /// @NOTICE 把这个判断放在两次收集任务的下面，便于退出时通过release_mode_判断执行需要执行的任务
         if (exit_flag_) {
             break;
         }

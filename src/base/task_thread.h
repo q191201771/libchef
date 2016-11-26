@@ -36,8 +36,8 @@ namespace chef {
       ///         析构函数会等待应该执行的异步任务执行完再返回。
       enum release_mode {
         RELEASE_MODE_ASAP,           /// 析构时，未执行的任务全部丢弃。
-        RELEASE_MODE_DO_SHOULD_DONE, /// 析构时，执行需要执行的任务——实时任务加已到定时时间的定时任务，未到定时时间的定时任务不执行。
-        RELEASE_MODE_DO_ALL_DONE,    /// 析构时，执行所有任务——实时任务加所有定时任务，未到定时时间的任务也会提前执行。
+        RELEASE_MODE_DO_SHOULD_DONE, /// 析构时，执行需要执行的任务——实时任务和已到定时时间的延时任务，未到定时时间的延时任务不执行。
+        RELEASE_MODE_DO_ALL_DONE,    /// 析构时，执行所有任务——实时任务和所有延时任务，未到定时时间的延时任务也会提前执行。
       };
 
       task_thread(const std::string &thread_name=std::string("task thread"), release_mode rm=RELEASE_MODE_ASAP);
@@ -79,9 +79,9 @@ namespace chef {
       void run_in_thread_(const std::string &name);
 
       /**
-       * 收集已经到时间该执的行延时任务
+       * 收集已到定时时间该执行的延时任务
        *
-       * @param tasks 传出参数 将达到执行时间的延时任务插入[tasks]尾部
+       * @param tasks 传出参数 将达到定时时间的延时任务插入[tasks]尾部
        *
        */
       void append_expired_tasks_(std::deque<task> &tasks);
