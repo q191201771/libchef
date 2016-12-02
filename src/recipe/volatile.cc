@@ -26,7 +26,7 @@ volatile int32_t int32_val = INT32_ARRAY[0];
 volatile int64_t int64_val = INT64_ARRAY[0];
 
 const static int THREAD_NUM = 16; /// 读线程和写线程加起来等于THREAD_NUM * 2
-const static int64_t LOOP_COUNT= 1024 * 1024 * 1024;
+const static int64_t LOOP_COUNT= 1 * 1024 * 1024;
 
 std::atomic<int64_t> index_0_count{0};
 std::atomic<int64_t> index_1_count{0};
@@ -57,37 +57,31 @@ int main() {
                     /// 很遗憾，我测试的时候，尽管几乎每次都能assert到bad case，但是并没能打出脏数值。
                     printf("bad case!!! i:%d j:%ld int32_val_ninja:%d int64_val_ninja:%ld\n", i, j, int32_val_ninja, int64_val_ninja);
                     // exit(-1);
-                }
-                /// try to take a guess
-                switch (int32_val_ninja) {
-                case     0x000F: printf("int32_val_ninja == 0x000F\n"); break;
-                case     0x00FF: printf("int32_val_ninja == 0x00FF\n"); break;
-                case     0x0FFF: printf("int32_val_ninja == 0x0FFF\n"); break;
-                case     0xFFFF: printf("int32_val_ninja == 0xFFFF\n"); break;
-                case    0xFFFFF: printf("int32_val_ninja == 0xFFFFF\n"); break;
-                case   0xFFFFFF: printf("int32_val_ninja == 0xFFFFFF\n"); break;
-                case  0xFFFFFFF: printf("int32_val_ninja == 0xFFFFFFF\n"); break;
-                case 0x7FFF0000: printf("int32_val_ninja == 0x7FFF0000\n"); break;
-                case 0xFFFFFFFF: printf("int32_val_ninja == 0xFFFFFFFF\n"); break;
-                };
-                switch (int64_val_ninja) {
-                case             0x000F: printf("int64_val_ninja == 0xFFFF\n"); break;
-                case             0x00FF: printf("int64_val_ninja == 0xFFFF\n"); break;
-                case             0x0FFF: printf("int64_val_ninja == 0xFFFF\n"); break;
-                case             0xFFFF: printf("int64_val_ninja == 0xFFFF\n"); break;
-                case         0x7FFF0000: printf("int64_val_ninja == 0x7FFF0000\n"); break;
-                case         0x7FFFFFFF: printf("int64_val_ninja == 0xFFFFFFFF\n"); break;
-                case         0xFFFFFFFF: printf("int64_val_ninja == 0xFFFFFFFF\n"); break;
-                case 0x7FFFFFFF00000000: printf("int64_val_ninja == 0x7FFFFFFF00000000\n"); break;
-                case 0xFFFFFFFF00000000: printf("int64_val_ninja == 0xFFFFFFFF00000000\n"); break;
-                case 0xFFFFFFFFFFFFFFFF: printf("int64_val_ninja == 0xFFFFFFFFFFFFFFFF\n"); break;
-                };
 
-                /// stat
-                if (int32_val_ninja == 0) {
-                    index_0_count++;
-                } else if (int32_val_ninja == 0x7FFFFFFF) {
-                    index_1_count++;
+                    /// try to take a guess
+                    switch (int32_val_ninja) {
+                    case     0x000F: printf("int32_val_ninja == 0x000F\n"); break;
+                    case     0x00FF: printf("int32_val_ninja == 0x00FF\n"); break;
+                    case     0x0FFF: printf("int32_val_ninja == 0x0FFF\n"); break;
+                    case     0xFFFF: printf("int32_val_ninja == 0xFFFF\n"); break;
+                    case    0xFFFFF: printf("int32_val_ninja == 0xFFFFF\n"); break;
+                    case   0xFFFFFF: printf("int32_val_ninja == 0xFFFFFF\n"); break;
+                    case  0xFFFFFFF: printf("int32_val_ninja == 0xFFFFFFF\n"); break;
+                    case 0x7FFF0000: printf("int32_val_ninja == 0x7FFF0000\n"); break;
+                    case 0xFFFFFFFF: printf("int32_val_ninja == 0xFFFFFFFF\n"); break;
+                    };
+                    switch (int64_val_ninja) {
+                    case             0x000F: printf("int64_val_ninja == 0xFFFF\n"); break;
+                    case             0x00FF: printf("int64_val_ninja == 0xFFFF\n"); break;
+                    case             0x0FFF: printf("int64_val_ninja == 0xFFFF\n"); break;
+                    case             0xFFFF: printf("int64_val_ninja == 0xFFFF\n"); break;
+                    case         0x7FFF0000: printf("int64_val_ninja == 0x7FFF0000\n"); break;
+                    case         0x7FFFFFFF: printf("int64_val_ninja == 0xFFFFFFFF\n"); break;
+                    case         0xFFFFFFFF: printf("int64_val_ninja == 0xFFFFFFFF\n"); break;
+                    case 0x7FFFFFFF00000000: printf("int64_val_ninja == 0x7FFFFFFF00000000\n"); break;
+                    case 0xFFFFFFFF00000000: printf("int64_val_ninja == 0xFFFFFFFF00000000\n"); break;
+                    case 0xFFFFFFFFFFFFFFFF: printf("int64_val_ninja == 0xFFFFFFFFFFFFFFFF\n"); break;
+                    };
                 }
             }
         }));
@@ -98,9 +92,10 @@ int main() {
         get_threads[i]->join();
     }
 
-    printf("stat. index_0_count:%ld index_1_count:%ld sum:%ld total:%ld bad:%ld\n",
-           index_0_count.load(), index_1_count.load(), index_0_count.load()+index_1_count.load(), THREAD_NUM*LOOP_COUNT,
-           THREAD_NUM*LOOP_COUNT - index_0_count.load() - index_1_count.load());
+    // printf("stat. index_0_count:%ld index_1_count:%ld sum:%ld total:%ld bad:%ld\n",
+    //        index_0_count.load(), index_1_count.load(), index_0_count.load()+index_1_count.load(), THREAD_NUM*LOOP_COUNT,
+    //        THREAD_NUM*LOOP_COUNT - index_0_count.load() - index_1_count.load());
 
+    printf("bye.\n");
     return 0;
 }

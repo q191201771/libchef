@@ -87,6 +87,38 @@ namespace chef {
     return ret;
   }
 
+  std::vector<std::string> strings_op::splitlines(const std::string &s, bool keepends) {
+    std::vector<std::string> ret;
+    if (s.empty()) {
+      return ret;
+    }
+    std::size_t len = s.length();
+    std::size_t l = 0;
+    std::size_t r = 0;
+    std::string item;
+    for (; r != len; r++) {
+      if (s[r] == '\r') {
+        item = s.substr(l, r-l);
+        if (keepends) { item += '\r'; }
+        if ((r+1) != len && s[r+1] == '\n') {
+          r++;
+          if (keepends) { item += '\n'; }
+        }
+        l = r+1;
+        ret.push_back(item);
+      } else if (s[r] == '\n') {
+        item = s.substr(l, r-l);
+        if (keepends) { item += '\n'; }
+        l = r+1;
+        ret.push_back(item);
+      }
+    }
+    if (l < r) {
+        ret.push_back(s.substr(l, r-l));
+    }
+    return ret;
+  }
+
   std::string strings_op::join(const std::vector<std::string> &ss, const std::string &sep) {
     if (ss.empty()) {
       return std::string();

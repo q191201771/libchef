@@ -304,6 +304,32 @@ void strings_trim_suffix_test() {
   }
 }
 
+void strings_splitlines_test() {
+  std::vector<std::string> lines;
+  lines = chef::strings_op::splitlines("", true);
+  assert(lines.size() == 0);
+  lines = chef::strings_op::splitlines("", false);
+  assert(lines.size() == 0);
+
+  lines = chef::strings_op::splitlines("\r", false);
+  assert(lines.size() == 1 && lines[0].empty());
+  lines = chef::strings_op::splitlines("\n", false);
+  assert(lines.size() == 1 && lines[0].empty());
+  lines = chef::strings_op::splitlines("\r\n", false);
+  assert(lines.size() == 1 && lines[0].empty());
+  lines = chef::strings_op::splitlines("\r", true);
+  assert(lines.size() == 1 && lines[0] == "\r");
+  lines = chef::strings_op::splitlines("\n", true);
+  assert(lines.size() == 1 && lines[0] == "\n");
+  lines = chef::strings_op::splitlines("\r\n", true);
+  assert(lines.size() == 1 && lines[0] == "\r\n");
+
+  lines = chef::strings_op::splitlines("ab c\n\nde fg\rkl\r\n", false);
+  assert(lines.size() == 4 && lines[0] == "ab c" && lines[1] == "" && lines[2] == "de fg" && lines[3] == "kl");
+  lines = chef::strings_op::splitlines("ab c\n\nde fg\rkl\r\n", true);
+  assert(lines.size() == 4 && lines[0] == "ab c\n" && lines[1] == "\n" && lines[2] == "de fg\r" && lines[3] == "kl\r\n");
+}
+
 int main() {
   ENTER_TEST;
 
@@ -320,6 +346,7 @@ int main() {
   strings_trim_right_test();
   strings_trim_prefix_test();
   strings_trim_suffix_test();
+  strings_splitlines_test();
 
   return 0;
 }

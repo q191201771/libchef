@@ -18,7 +18,7 @@ encoding_base64_op_sources = ['encoding_base64_op_test.cc']
 
 stuff_sources              = ['../base/stuff.o', 'stuff_test.cc']
 buffer_sources             = ['../base/buffer.o', 'buffer_test.cc']
-strings_sources            = ['../base/strings_op.o', 'strings_test.cc']
+strings_sources            = ['../base/strings_op.o', 'strings_op_test.cc']
 daemon_op_sources          = ['../base/daemon_op.o', 'daemon_op_test.cc']
 wait_event_sources         = ['../base/wait_event.o', 'wait_event_test.cc']
 os_exec_op_sources         = ['../base/os_exec_op.o', 'os_exec_op_test.cc']
@@ -50,7 +50,7 @@ prgs += env.Program('task_thread_test', task_thread_sources, LIBS = platform_lib
 prgs += env.Program('thread_pool_test', thread_pool_sources, LIBS = platform_libs)
 prgs += env.Program('stuff_test', stuff_sources, LIBS = platform_libs)
 prgs += env.Program('dump_test', dump_sources, LIBS = platform_libs)
-prgs += env.Program('strings_test', strings_sources, LIBS = platform_libs)
+prgs += env.Program('strings_op_test', strings_sources, LIBS = platform_libs)
 prgs += env.Program('this_proc_op_test', this_proc_op_sources, LIBS = platform_libs)
 prgs += env.Program('this_machine_op_test', this_machine_op_sources, LIBS = platform_libs)
 prgs += env.Program('hash_test', hash_sources, LIBS = platform_libs)
