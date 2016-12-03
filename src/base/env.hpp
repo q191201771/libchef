@@ -10,9 +10,10 @@
  *
  */
 
-// #define CHEF_USE_BOOST
+#ifndef _CHEF_BASE_ENV_HPP_
+#define _CHEF_BASE_ENV_HPP_
 
-// namespace chef {
+// #define CHEF_USE_BOOST
 
 #ifdef CHEF_USE_BOOST
 
@@ -23,6 +24,7 @@
       using boost::lock_guard;
       using boost::unique_lock;
       using boost::condition_variable;
+      namespace this_thread = boost::this_thread;
     } /// namespace chef
 
   #include <boost/atomic.hpp>
@@ -58,6 +60,7 @@
       using std::lock_guard;
       using std::unique_lock;
       using std::condition_variable;
+      namespace this_thread = std::this_thread;
     } /// namespace chef
 
   #include <atomic>
@@ -84,4 +87,4 @@
 
 #endif /// ifdef CHEF_USE_BOOST ... else ... CHEF_USE_BOOST
 
-// } /// namespace chef
+#endif /// _CHEF_BASE_ENV_HPP_

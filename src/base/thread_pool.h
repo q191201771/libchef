@@ -47,8 +47,8 @@ namespace chef {
       task take();
 
     private:
-      typedef std::vector<std::shared_ptr<std::thread> >      thread_vector;
-      typedef std::vector<std::shared_ptr<chef::wait_event> > wait_event_vector;
+      typedef std::vector<chef::shared_ptr<chef::thread> >      thread_vector;
+      typedef std::vector<chef::shared_ptr<chef::wait_event> > wait_event_vector;
 
       int                      num_of_thread_;
       std::string              thread_prefix_name_;
