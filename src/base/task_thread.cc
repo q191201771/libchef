@@ -69,7 +69,7 @@ namespace chef {
       execute_tasks_(collect_tasks);
     }
 
-    std::unique_lock<std::mutex> lock(mutex_);
+    std::lock_guard<std::mutex> lock(mutex_);
     switch (release_mode_) {
     case RELEASE_MODE_ASAP:
       break;
@@ -84,6 +84,10 @@ namespace chef {
   }
 
   void task_thread::append_expired_tasks_(std::deque<task> &tasks) {
+    if (defferred_tasks_.empty()) {
+      return;
+    }
+
     uint64_t now_ms = now_();
     auto iter = defferred_tasks_.begin();
     for (; iter != defferred_tasks_.end(); iter++) {
