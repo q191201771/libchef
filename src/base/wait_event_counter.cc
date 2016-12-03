@@ -11,13 +11,13 @@ namespace chef {
   wait_event_counter::~wait_event_counter() {}
 
   void wait_event_counter::notify() {
-    std::unique_lock<std::mutex> lock(mutex_);
+    chef::unique_lock<chef::mutex> lock(mutex_);
     count_++;
     cond_.notify_one();
   }
 
   void wait_event_counter::wait() {
-    std::unique_lock<std::mutex> lock(mutex_);
+    chef::unique_lock<chef::mutex> lock(mutex_);
     while (count_.load() < need_count_) {
       cond_.wait(lock);
     }

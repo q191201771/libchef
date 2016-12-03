@@ -26,7 +26,7 @@ namespace chef {
       return -1;
     }
     backend_thread_.start();
-    backend_thread_.add(std::bind(&redis_backend::ping_in_thread, this));
+    backend_thread_.add(chef::bind(&redis_backend::ping_in_thread, this));
     started_ = true;
     return 0;
   }
@@ -88,17 +88,17 @@ namespace chef {
 
   void redis_backend::async_hset(const std::string &key, const std::string &value) {
     // assert(started_);
-    backend_thread_.add(std::bind(&redis_backend::hset_in_thread, this, key, value));
+    backend_thread_.add(chef::bind(&redis_backend::hset_in_thread, this, key, value));
   }
 
   void redis_backend::async_hdel(const std::string &key) {
     // assert(started_);
-    backend_thread_.add(std::bind(&redis_backend::hdel_in_thread, this, key));
+    backend_thread_.add(chef::bind(&redis_backend::hdel_in_thread, this, key));
   }
 
   void redis_backend::hset_in_thread(const std::string &key, const std::string &value) {
     if (backend_context_ == NULL) {
-      undone_tasks_.push_back(std::make_shared<redis_task>(TASK_TYPE_HSET, key, value));
+      undone_tasks_.push_back(chef::make_shared<redis_task>(TASK_TYPE_HSET, key, value));
       return;
     }
     redisReply *reply = reinterpret_cast<redisReply*>(redisCommand(
@@ -109,7 +109,7 @@ namespace chef {
       value.c_str()
     ));
     if (reply == NULL) {
-      undone_tasks_.push_back(std::make_shared<redis_task>(TASK_TYPE_HSET, key, value));
+      undone_tasks_.push_back(chef::make_shared<redis_task>(TASK_TYPE_HSET, key, value));
       return;
     }
     freeReplyObject(reply);
@@ -117,7 +117,7 @@ namespace chef {
 
   void redis_backend::hdel_in_thread(const std::string &key) {
     if (backend_context_ == NULL) {
-      undone_tasks_.push_back(std::make_shared<redis_task>(TASK_TYPE_HDEL, key));
+      undone_tasks_.push_back(chef::make_shared<redis_task>(TASK_TYPE_HDEL, key));
       return;
     }
     redisReply *reply = reinterpret_cast<redisReply*>(redisCommand(
@@ -127,7 +127,7 @@ namespace chef {
       key.c_str()
     ));
     if (reply == NULL) {
-      undone_tasks_.push_back(std::make_shared<redis_task>(TASK_TYPE_HDEL, key));
+      undone_tasks_.push_back(chef::make_shared<redis_task>(TASK_TYPE_HDEL, key));
       return;
     }
     freeReplyObject(reply);
@@ -164,7 +164,7 @@ namespace chef {
   void redis_backend::ping_in_thread() {
     if (backend_context_ == NULL) {
       connect_in_thread();
-      backend_thread_.add(std::bind(&redis_backend::ping_in_thread, this), ping_interval_sec_);
+      backend_thread_.add(chef::bind(&redis_backend::ping_in_thread, this), ping_interval_sec_);
       return;
     }
 
@@ -176,7 +176,7 @@ namespace chef {
       freeReplyObject(reply);
     }
 
-    backend_thread_.add(std::bind(&redis_backend::ping_in_thread, this), ping_interval_sec_);
+    backend_thread_.add(chef::bind(&redis_backend::ping_in_thread, this), ping_interval_sec_);
   }
 
 } // namespace chef

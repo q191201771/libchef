@@ -6,13 +6,13 @@ namespace chef {
   wait_event::~wait_event() {}
 
   void wait_event::notify() {
-    std::unique_lock<std::mutex> lock(mutex_);
+    chef::unique_lock<chef::mutex> lock(mutex_);
     done_ = true;
     cond_.notify_one();
   }
 
   void wait_event::wait() {
-    std::unique_lock<std::mutex> lock(mutex_);
+    chef::unique_lock<chef::mutex> lock(mutex_);
     while (!done_) {
       cond_.wait(lock);
     }
@@ -24,9 +24,9 @@ namespace chef {
       return true;
     }
 
-    std::unique_lock<std::mutex> lock(mutex_);
+    chef::unique_lock<chef::mutex> lock(mutex_);
 
-    return cond_.wait_for(lock, std::chrono::milliseconds(timeout_ms), [this]() {
+    return cond_.wait_for(lock, chef::chrono::milliseconds(timeout_ms), [this]() {
       return this->done_;
     });
   }

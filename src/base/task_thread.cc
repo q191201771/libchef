@@ -17,7 +17,7 @@ namespace chef {
   }
 
   void task_thread::start() {
-    thread_ = std::make_shared<std::thread>(std::bind(&task_thread::run_in_thread_, this, name_));
+    thread_ = chef::make_shared<chef::thread>(chef::bind(&task_thread::run_in_thread_, this, name_));
     runned_event_.wait();
   }
 
@@ -28,7 +28,7 @@ namespace chef {
   }
 
   void task_thread::add(const task &t, int defferred_time_ms) {
-    std::lock_guard<std::mutex> guard(mutex_);
+    chef::lock_guard<chef::mutex> guard(mutex_);
     if (defferred_time_ms == 0) {
       tasks_.push_back(t);
     } else {
@@ -37,7 +37,7 @@ namespace chef {
   }
 
   uint64_t task_thread::num_of_undone_task() {
-    std::lock_guard<std::mutex> guard(mutex_);
+    chef::lock_guard<chef::mutex> guard(mutex_);
     return tasks_.size() + defferred_tasks_.size();
   }
 
@@ -49,9 +49,9 @@ namespace chef {
     std::deque<task> collect_tasks;
     for (; ; ) {
       { /// enter lock scope
-        std::unique_lock<std::mutex> lock(mutex_);
+        chef::unique_lock<chef::mutex> lock(mutex_);
         while(!exit_flag_ && tasks_.empty() && defferred_tasks_.empty()) {
-          cond_.wait_for(lock, std::chrono::milliseconds(100));
+          cond_.wait_for(lock, chef::chrono::milliseconds(100));
         }
         /// 收集需要立即执行的任务
         if (!tasks_.empty()) {
@@ -69,7 +69,7 @@ namespace chef {
       execute_tasks_(collect_tasks);
     }
 
-    std::lock_guard<std::mutex> lock(mutex_);
+    chef::lock_guard<chef::mutex> lock(mutex_);
     switch (release_mode_) {
     case RELEASE_MODE_ASAP:
       break;

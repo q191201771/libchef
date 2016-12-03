@@ -16,20 +16,17 @@
 
 #include "noncopyable.hpp"
 #include "wait_event.h"
+#include "env.hpp"
 #include <stdint.h>
 #include <string>
 #include <deque>
 #include <map>
-#include <mutex>
-#include <thread>
-#include <memory>
-#include <functional>
 
 namespace chef {
 
   class task_thread : public chef::noncopyable {
     public:
-      typedef std::function<void()> task;
+      typedef chef::function<void()> task;
 
       /// @NOTICE 如果选择 RELEASE_MODE_DO_SHOULD_DONE 或 RELEASE_MODE_DO_ALL_DONE，
       ///         内部依然会保证任务的执行线程体是task_thread内部开启的线程。
@@ -113,15 +110,15 @@ namespace chef {
        void execute_tasks_(std::multimap<uint64_t, task> &tasks);
 
     private:
-      std::string                   name_;
-      release_mode                  release_mode_;
-      bool                          exit_flag_;
-      std::shared_ptr<std::thread>  thread_;
-      std::deque<task>              tasks_;
-      std::multimap<uint64_t, task> defferred_tasks_;
-      std::mutex                    mutex_;
-      std::condition_variable       cond_;
-      chef::wait_event              runned_event_;
+      std::string                    name_;
+      release_mode                   release_mode_;
+      bool                           exit_flag_;
+      chef::shared_ptr<chef::thread> thread_;
+      std::deque<task>               tasks_;
+      std::multimap<uint64_t, task>  defferred_tasks_;
+      chef::mutex                    mutex_;
+      chef::condition_variable       cond_;
+      chef::wait_event               runned_event_;
   };
 
 } // namespace chef

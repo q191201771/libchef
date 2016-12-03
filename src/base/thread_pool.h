@@ -19,18 +19,16 @@
 
 #include "wait_event.h"
 #include "noncopyable.hpp"
+#include "env.hpp"
 #include <deque>
 #include <string>
 #include <vector>
-#include <mutex>
-#include <thread>
-#include <functional>
 
 namespace chef {
 
   class thread_pool : public chef::noncopyable {
     public:
-      typedef std::function<void()> task;
+      typedef chef::function<void()> task;
 
       explicit thread_pool(int num_of_thread, const std::string &name = std::string("thread_pool"));
       ~thread_pool();
@@ -52,14 +50,14 @@ namespace chef {
       typedef std::vector<std::shared_ptr<std::thread> >      thread_vector;
       typedef std::vector<std::shared_ptr<chef::wait_event> > wait_event_vector;
 
-      int                     num_of_thread_;
-      std::string             thread_prefix_name_;
-      bool                    exit_flag_;
-      thread_vector           threads_;
-      wait_event_vector       thread_runned_events_;
-      std::deque<task>        tasks_;
-      std::mutex              mutex_;
-      std::condition_variable cond_;
+      int                      num_of_thread_;
+      std::string              thread_prefix_name_;
+      bool                     exit_flag_;
+      thread_vector            threads_;
+      wait_event_vector        thread_runned_events_;
+      std::deque<task>         tasks_;
+      chef::mutex              mutex_;
+      chef::condition_variable cond_;
   };
 
 } // namespace chef

@@ -20,22 +20,22 @@ namespace chef {
 
   void thread_pool::start() {
     for (int i = 0; i < num_of_thread_; i++) {
-      thread_runned_events_.push_back(std::make_shared<chef::wait_event>());
-      threads_.push_back(std::make_shared<std::thread>(
-        std::bind(&thread_pool::run_in_thread, this, i)
+      thread_runned_events_.push_back(chef::make_shared<chef::wait_event>());
+      threads_.push_back(chef::make_shared<chef::thread>(
+        chef::bind(&thread_pool::run_in_thread, this, i)
       ));
       thread_runned_events_[i]->wait();
     }
   }
 
   void thread_pool::add(const task &t) {
-    std::unique_lock<std::mutex> lock(mutex_);
+    chef::unique_lock<chef::mutex> lock(mutex_);
     tasks_.push_back(t);
     cond_.notify_one();
   }
 
   uint64_t thread_pool::num_of_undone_task() {
-    std::lock_guard<std::mutex> guard(mutex_);
+    chef::lock_guard<chef::mutex> guard(mutex_);
     return tasks_.size();
   }
 
@@ -53,7 +53,7 @@ namespace chef {
   }
 
   thread_pool::task thread_pool::take() {
-    std::unique_lock<std::mutex> lock(mutex_);
+    chef::unique_lock<chef::mutex> lock(mutex_);
     while(!exit_flag_ && tasks_.empty()) {
       cond_.wait(lock);
     }

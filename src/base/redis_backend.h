@@ -24,13 +24,11 @@
 
 #include "task_thread.h"
 #include "noncopyable.hpp"
+#include "env.hpp"
 #include <hiredis/hiredis.h>
 #include <string>
 #include <vector>
 #include <deque>
-#include <thread>
-#include <memory>
-#include <functional>
 
 namespace chef {
 
@@ -131,7 +129,7 @@ namespace chef {
           , value_(std::string())
         {}
       };
-      typedef std::shared_ptr<redis_task> redis_task_ptr;
+      typedef chef::shared_ptr<redis_task> redis_task_ptr;
 
     private:
       std::string                ip_;

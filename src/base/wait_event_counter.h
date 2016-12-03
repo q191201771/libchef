@@ -15,10 +15,7 @@
 #define _CHEF_BASE_WAIT_EVENT_COUNTER_H_
 
 #include "noncopyable.hpp"
-#include <mutex>
-#include <atomic>
-#include <chrono>
-#include <condition_variable>
+#include "env.hpp"
 
 namespace chef {
 
@@ -38,10 +35,10 @@ namespace chef {
       void wait();
 
     private:
-      const int               need_count_;
-      std::atomic<int>        count_;
-      std::mutex              mutex_;
-      std::condition_variable cond_;
+      const int                need_count_;
+      chef::atomic<int>        count_;
+      chef::mutex              mutex_;
+      chef::condition_variable cond_;
   };
 
 } // namespace chef

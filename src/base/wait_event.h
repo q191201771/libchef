@@ -15,9 +15,7 @@
 #define _CHEF_BASE_WAIT_EVENT_H_
 
 #include "noncopyable.hpp"
-#include <chrono>
-#include <mutex>
-#include <condition_variable>
+#include "env.hpp"
 
 namespace chef {
 
@@ -48,9 +46,9 @@ namespace chef {
       bool wait_for(uint32_t timeout_ms);
 
     private:
-      std::mutex mutex_;
-      std::condition_variable cond_;
-      bool done_;
+      chef::mutex              mutex_;
+      chef::condition_variable cond_;
+      bool                     done_;
   };
 
 } // namespace chef
