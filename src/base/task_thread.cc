@@ -7,7 +7,6 @@ namespace chef {
     : name_(thread_name)
     , release_mode_(rm)
     , exit_flag_(false)
-    , thread_(NULL)
   {
   }
 

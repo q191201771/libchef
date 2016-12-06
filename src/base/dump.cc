@@ -1,5 +1,4 @@
 #include "dump.h"
-#include "env.hpp"
 #include "filepath_op.h"
 #include <ctime>
 #include <chrono>
@@ -9,7 +8,6 @@ namespace chef {
 
   dump::dump()
     : filename_(std::string())
-    , thread_(NULL)
     , exit_flag_(false)
   {}
 

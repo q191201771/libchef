@@ -98,13 +98,13 @@ namespace chef {
       };
 
     private:
-      typedef std::map<std::string, int>   tag2num;
+      typedef std::map<std::string, int>     tag2num;
       typedef chef::shared_ptr<chef::thread> thread_ptr;
 
-      std::string  filename_;
-      tag2num      tag2num_;
-      thread_ptr   thread_;
-      bool         exit_flag_;
+      std::string   filename_;
+      tag2num       tag2num_;
+      thread_ptr    thread_;
+      bool          exit_flag_;
       chef::mutex   mutex_;
   };
 
