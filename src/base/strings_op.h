@@ -64,7 +64,7 @@ namespace chef {
 
       static std::string trim_suffix(const std::string &s, const std::string &suffix);
 
-      static std::vector<std::string> split(const std::string &s, char sep);
+      static std::vector<std::string> split(const std::string &s, char sep, bool keep_empty_strings=true);
 
       /**
        * 用 '\r' 或 '\n' 或 '\r\n' 分割
@@ -72,7 +72,7 @@ namespace chef {
        * @param keepends 如果为true，则把该行的分割符跟在该行后
        *
        */
-      static std::vector<std::string> splitlines(const std::string &s, bool keepends=false);
+      static std::vector<std::string> splitlines(const std::string &s, bool keep_ends=false);
 
       static std::string join(const std::vector<std::string> &ss, const std::string &sep);
   };

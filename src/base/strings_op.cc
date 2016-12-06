@@ -84,17 +84,26 @@ namespace chef {
     return ret;
   }
 
-  std::vector<std::string> strings_op::split(const std::string &s, char sep) {
+  std::vector<std::string> strings_op::split(const std::string &s, char sep, bool keep_empty_strings) {
     std::vector<std::string> ret;
     std::stringstream ss(s);
     std::string item;
     while(std::getline(ss, item, sep)) {
+      if (!keep_empty_strings && item.empty()) {
+        continue;
+      }
       ret.push_back(item);
+    }
+
+    /// 如果最后一个字符是分隔符，那么后面需不需要append一个空item呢？
+    /// std::getline的行为是不append，我认为要，所以处理一下~
+    if (keep_empty_strings && *s.rbegin() == sep) {
+      ret.push_back(std::string());
     }
     return ret;
   }
 
-  std::vector<std::string> strings_op::splitlines(const std::string &s, bool keepends) {
+  std::vector<std::string> strings_op::splitlines(const std::string &s, bool keep_ends) {
     std::vector<std::string> ret;
     if (s.empty()) {
       return ret;
@@ -106,16 +115,16 @@ namespace chef {
     for (; r != len; r++) {
       if (s[r] == '\r') {
         item = s.substr(l, r-l);
-        if (keepends) { item += '\r'; }
+        if (keep_ends) { item += '\r'; }
         if ((r+1) != len && s[r+1] == '\n') {
           r++;
-          if (keepends) { item += '\n'; }
+          if (keep_ends) { item += '\n'; }
         }
         l = r+1;
         ret.push_back(item);
       } else if (s[r] == '\n') {
         item = s.substr(l, r-l);
-        if (keepends) { item += '\n'; }
+        if (keep_ends) { item += '\n'; }
         l = r+1;
         ret.push_back(item);
       }

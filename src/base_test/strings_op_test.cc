@@ -176,34 +176,79 @@ void strings_join_test() {
 }
 
 void strings_split_test() {
+  std::string str;
+  std::vector<std::string> res;
   assert(chef::strings_op::split(std::string(), '-').empty());
-  std::string str1 = "a";
-  std::vector<std::string> res1 = chef::strings_op::split(str1, '-');
-  assert(res1.size() == 1);
-  assert(res1[0] == "a");
+  assert(chef::strings_op::split(std::string(), '-', false).empty());
 
-  std::string str2 = "a-";
-  std::vector<std::string> res2 = chef::strings_op::split(str2, '-');
-  assert(res2.size() == 1);
-  assert(res2[0] == "a");
+  str = "a";
+  res = chef::strings_op::split(str, '-');
+  assert(res.size() == 1);
+  assert(res[0] == "a");
+  res = chef::strings_op::split(str, '-', false);
+  assert(res.size() == 1);
+  assert(res[0] == "a");
 
-  std::string str3 = "-a";
-  std::vector<std::string> res3 = chef::strings_op::split(str3, '-');
-  assert(res3.size() == 2);
-  assert(res3[0] == "");
-  assert(res3[1] == "a");
+  str = "b1-";
+  res = chef::strings_op::split(str, '-');
+  assert(res.size() == 2);
+  assert(res[0] == "b1");
+  assert(res[1] == "");
+  res = chef::strings_op::split(str, '-', false);
+  assert(res.size() == 1);
+  assert(res[0] == "b1");
 
-  std::string str4 = "a*bc";
-  std::vector<std::string> res4 = chef::strings_op::split(str4, '*');
-  assert(res4.size() == 2);
-  assert(res4[0] == "a");
-  assert(res4[1] == "bc");
+  str = "-c22";
+  res = chef::strings_op::split(str, '-');
+  assert(res.size() == 2);
+  assert(res[0] == "");
+  assert(res[1] == "c22");
+  res = chef::strings_op::split(str, '-', false);
+  assert(res.size() == 1);
+  assert(res[0] == "c22");
 
-  std::string str5 = "--";
-  std::vector<std::string> res5 = chef::strings_op::split(str5, '-');
-  assert(res5.size() == 2);
-  assert(res5[0] == "");
-  assert(res5[1] == "");
+  str = "d333*e4444";
+  res = chef::strings_op::split(str, '*');
+  assert(res.size() == 2);
+  assert(res[0] == "d333");
+  assert(res[1] == "e4444");
+  res = chef::strings_op::split(str, '*', false);
+  assert(res.size() == 2);
+  assert(res[0] == "d333");
+  assert(res[1] == "e4444");
+
+  str = "f55555-g4444-";
+  res = chef::strings_op::split(str, '-');
+  assert(res.size() == 3);
+  assert(res[0] == "f55555");
+  assert(res[1] == "g4444");
+  assert(res[2] == "");
+  res = chef::strings_op::split(str, '-', false);
+  assert(res.size() == 2);
+  assert(res[0] == "f55555");
+  assert(res[1] == "g4444");
+
+  str = "h333--i22-j1";
+  res = chef::strings_op::split(str, '-');
+  assert(res.size() == 4);
+  assert(res[0] == "h333");
+  assert(res[1] == "");
+  assert(res[2] == "i22");
+  assert(res[3] == "j1");
+  res = chef::strings_op::split(str, '-', false);
+  assert(res.size() == 3);
+  assert(res[0] == "h333");
+  assert(res[1] == "i22");
+  assert(res[2] == "j1");
+
+  str = "--";
+  res = chef::strings_op::split(str, '-');
+  assert(res.size() == 3);
+  assert(res[0] == "");
+  assert(res[1] == "");
+  assert(res[2] == "");
+  res = chef::strings_op::split(str, '-', false);
+  assert(res.size() == 0);
 }
 
 void strings_trim_left_test() {
