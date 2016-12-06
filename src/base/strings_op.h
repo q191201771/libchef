@@ -20,6 +20,21 @@ namespace chef {
 
   class strings_op {
     public:
+      static char SPC;
+      static char TAB;
+      static char CR;
+      static char LF;
+      static std::string DIGITS;
+      static std::string HEXDIGITS;
+      static std::string OCTDIGITS;
+      static std::string LETTERS;
+      static std::string LOWERCASE;
+      static std::string UPPERCASE;
+      static std::string PUNCTUATION;
+      static std::string WRITESPACE;
+      static std::string PRINTABLE;
+
+    public:
       /**
        * @function compare
        * @return   0 或 >0 或 <0
@@ -60,16 +75,6 @@ namespace chef {
       static std::vector<std::string> splitlines(const std::string &s, bool keepends=false);
 
       static std::string join(const std::vector<std::string> &ss, const std::string &sep);
-
-      static std::string DIGITS;
-      static std::string HEXDIGITS;
-      static std::string OCTDIGITS;
-      static std::string LETTERS;
-      static std::string LOWERCASE;
-      static std::string UPPERCASE;
-      static std::string PUNCTUATION;
-      static std::string WRITESPACE;
-      static std::string PRINTABLE;
   };
 
 } // namespace chef

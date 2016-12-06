@@ -115,7 +115,7 @@ void strings_has_suffix_test() {
   vec.push_back(string_pair_2_bool("", "a", false));
   vec.push_back(string_pair_2_bool("abc", "c", true));
   vec.push_back(string_pair_2_bool("abc", "bc", true));
-  vec.push_back(string_pair_2_bool("abc", "", true));
+  vec.push_back(string_pair_2_bool("abc", "", false));
 
   for (auto &item : vec) {
     assert(chef::strings_op::has_suffix(item.pair_[0], item.pair_[1]) == item.result_);

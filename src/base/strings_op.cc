@@ -4,6 +4,11 @@
 #include <stdint.h>
 
 namespace chef {
+
+  char strings_op::SPC = ' ';
+  char strings_op::TAB = '\t';
+  char strings_op::CR  = '\r';
+  char strings_op::LF  = '\n';
   std::string strings_op::DIGITS          = "0123456789";
   std::string strings_op::OCTDIGITS       = "01234567";
   std::string strings_op::HEXDIGITS       = "0123456789abcdefABCDEF";
@@ -23,16 +28,7 @@ namespace chef {
   }
 
   bool strings_op::contains_any(const std::string &s, const std::string &charlist) {
-//    for (auto &c : charlist) {
-//      for (auto &sc : s) {
-      for (std::string::const_iterator c = charlist.begin(); c != charlist.end(); c++) {
-        for (std::string::const_iterator sc = s.begin(); sc != charlist.end(); sc++) {
-        if (*c == *sc) {
-          return true;
-        }
-      }
-    }
-    return false;
+    return s.find_first_of(charlist) != std::string::npos;
   }
 
   bool strings_op::has_prefix(const std::string &s, const std::string &prefix) {
@@ -40,12 +36,11 @@ namespace chef {
   }
 
   bool strings_op::has_suffix(const std::string &s, const std::string &suffix) {
-    size_t sl = s.length();
-    size_t cl = suffix.length();
-    if (sl < cl) {
+    std::size_t pos = s.find(suffix);
+    if (pos == std::string::npos) {
       return false;
     }
-    return s.substr(sl - cl) == suffix;
+    return (suffix.length() + pos) == s.length();
   }
 
   int strings_op::count(const std::string &s, const std::string &sep) {
@@ -56,16 +51,15 @@ namespace chef {
       return 0;
     }
     int count = 0;
-    size_t pos = 0;
+    std::size_t pos = 0;
     for (; ;) {
-      size_t found = s.find(sep, pos);
-      if (found != std::string::npos) {
-        count++;
-        pos = found + sep.length();
-        if (pos >= s.length()) {
-          break;
-        }
-      } else {
+      std::size_t found = s.find(sep, pos);
+      if (found == std::string::npos) {
+        break;
+      }
+      count++;
+      pos = found + sep.length();
+      if (pos >= s.length()) {
         break;
       }
     }
