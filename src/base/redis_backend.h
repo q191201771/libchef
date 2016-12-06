@@ -129,18 +129,21 @@ namespace chef {
           , value_(std::string())
         {}
       };
-      typedef chef::shared_ptr<redis_task> redis_task_ptr;
 
     private:
-      std::string                ip_;
-      int                        port_;
-      std::string                container_name_;
-      int                        connect_timeout_sec_;
-      int                        ping_interval_sec_;
-      chef::task_thread          backend_thread_;
-      redisContext              *backend_context_;
-      bool                       started_;
-      std::deque<redis_task_ptr> undone_tasks_;
+      typedef chef::shared_ptr<redis_task> redis_task_ptr;
+      typedef std::deque<redis_task_ptr>   redis_task_deque;
+
+    private:
+      std::string        ip_;
+      int                port_;
+      std::string        container_name_;
+      int                connect_timeout_sec_;
+      int                ping_interval_sec_;
+      chef::task_thread  backend_thread_;
+      redisContext      *backend_context_;
+      bool               started_;
+      redis_task_deque   undone_tasks_;
   };
 
 }  // namespace chef

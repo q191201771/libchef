@@ -23,9 +23,11 @@ namespace chef {
   }
 
   bool strings_op::contains_any(const std::string &s, const std::string &charlist) {
-    for (auto &c : charlist) {
-      for (auto &sc : s) {
-        if (c == sc) {
+//    for (auto &c : charlist) {
+//      for (auto &sc : s) {
+      for (std::string::const_iterator c = charlist.begin(); c != charlist.end(); c++) {
+        for (std::string::const_iterator sc = s.begin(); sc != charlist.end(); sc++) {
+        if (*c == *sc) {
           return true;
         }
       }
@@ -72,16 +74,18 @@ namespace chef {
 
   std::string strings_op::to_lower(const std::string &s) {
     std::string ret;
-    for (auto &c : s) {
-      ret += static_cast<char>(std::tolower(c));
+//    for (auto &c : s) {
+    for (std::string::const_iterator c = s.begin(); c != s.end(); c++) {
+      ret += static_cast<char>(std::tolower(*c));
     }
     return ret;
   }
 
   std::string strings_op::to_upper(const std::string &s) {
     std::string ret;
-    for (auto &c : s) {
-      ret += static_cast<char>(std::toupper(c));
+//    for (auto &c : s) {
+    for (std::string::const_iterator c = s.begin(); c != s.end(); c++) {
+      ret += static_cast<char>(std::toupper(*c));
     }
     return ret;
   }

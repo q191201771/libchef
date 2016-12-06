@@ -26,8 +26,12 @@ namespace chef {
 
   void dump::init(const std::string &filename, const std::vector<std::string> &tags) {
     filename_ = filename;
-    for (auto &tag : tags) {
-      tag2num_[tag] = 0;
+//    for (auto &tag : tags) {
+//      tag2num_[tag] = 0;
+//    }
+    std::vector<std::string>::const_iterator iter = tags.begin();
+    for (; iter != tags.end(); iter++) {
+      tag2num_[*iter] = 0;
     }
 
     thread_ = chef::make_shared<chef::thread>(chef::bind(&dump::run_in_thread, this));
@@ -35,7 +39,8 @@ namespace chef {
 
   void dump::add(const std::string &tag, int num) {
     chef::lock_guard<chef::mutex> guard(mutex_);
-    auto iter = tag2num_.find(tag);
+//    auto iter = tag2num_.find(tag);
+    tag2num_iterator iter = tag2num_.find(tag);
     if (iter == tag2num_.end()) {
       tag2num_[tag] = num;
     } else {
@@ -62,8 +67,12 @@ namespace chef {
 
   void dump::reset() {
     chef::lock_guard<chef::mutex> guard(mutex_);
-    for (auto &iter : tag2num_) {
-      iter.second = 0;
+//    for (auto &iter : tag2num_) {
+//      iter.second = 0;
+//    }
+    tag2num_iterator iter = tag2num_.begin();
+    for (; iter != tag2num_.end(); iter++) {
+        iter->second = 0;
     }
   }
 
@@ -75,7 +84,8 @@ namespace chef {
       std::time_t now = std::time(NULL);
       ss << "dump - " << std::asctime(std::localtime(&now)) << "-----\n";
 
-      auto iter = tag2num_.begin();
+//      auto iter = tag2num_.begin();
+      tag2num_iterator iter = tag2num_.begin();
       uint32_t count = 1;
       for (; iter != tag2num_.end(); iter++, count++) {
         ss << iter->first << ": " << iter->second;

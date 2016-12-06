@@ -147,7 +147,8 @@ namespace chef {
     backend_context_ = connect();
     if (backend_context_) {
       while (!undone_tasks_.empty()) {
-        auto t = undone_tasks_.front();
+//        auto t = undone_tasks_.front();
+        redis_task_ptr t = undone_tasks_.front();
         undone_tasks_.pop_front();
         switch (t->type_) {
           case TASK_TYPE_HSET:

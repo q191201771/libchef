@@ -88,7 +88,8 @@ namespace chef {
     }
 
     uint64_t now_ms = now_();
-    auto iter = defferred_tasks_.begin();
+//    auto iter = defferred_tasks_.begin();
+    std::multimap<uint64_t, task>::iterator iter = defferred_tasks_.begin();
     for (; iter != defferred_tasks_.end(); iter++) {
       if (iter->first > now_ms) {
         break;
@@ -106,8 +107,10 @@ namespace chef {
   }
 
   void task_thread::execute_tasks_(std::multimap<uint64_t, task> &tasks) {
-    for (auto item : tasks) {
-      item.second();
+//    for (auto item : tasks) {
+    std::multimap<uint64_t, task>::iterator iter = tasks.begin();
+    for (; iter != tasks.end(); iter++) {
+      iter->second();
     }
     tasks.clear();
   }
