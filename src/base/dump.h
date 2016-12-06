@@ -19,6 +19,7 @@
 
 #include "env.hpp"
 #include <stdio.h>
+#include <stdint.h>
 #include <map>
 #include <string>
 #include <vector>
@@ -31,10 +32,10 @@ namespace chef {
       ~dump();
 
       /**
-       * 见 void dump::init(const std::string &filename, const std::vector<std::string> &tags);
+       * 见init重载函数
        *
        */
-      void init(const std::string &filename);
+      void init(const std::string &filename, int32_t dump_interval_ms=1000);
 
       /**
        * 初始化，开启dump线程，每[DUMP_INTERVAL_MS]刷新一次文件
@@ -44,7 +45,7 @@ namespace chef {
        *   可选，提前初始化一些tag，即使这些tag后续没有操作，也会有一个num=0的记录
        *
        */
-      void init(const std::string &filename, const std::vector<std::string> &tags);
+      void init(const std::string &filename, const std::vector<std::string> &tags, int32_t dump_interval_ms=1000);
 
       /**
        * 如果[tag]不存在，设置为[num]，如果[tag]已存在，则已有num再加上[num]。
@@ -93,7 +94,7 @@ namespace chef {
 
     private:
       enum {
-        DUMP_INTERVAL_MS    = 1000,
+//        DUMP_INTERVAL_MS    = 1000,
         NUM_OF_TAG_PER_LINE = 5,
       };
 
@@ -103,11 +104,12 @@ namespace chef {
       typedef chef::shared_ptr<chef::thread>       thread_ptr;
 
     private:
-      std::string   filename_;
-      tag2num       tag2num_;
-      thread_ptr    thread_;
-      bool          exit_flag_;
-      chef::mutex   mutex_;
+      std::string filename_;
+      int32_t     dump_interval_ms_;
+      tag2num     tag2num_;
+      thread_ptr  thread_;
+      bool        exit_flag_;
+      chef::mutex mutex_;
   };
 
 } // namespace chef

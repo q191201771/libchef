@@ -7,6 +7,7 @@ namespace chef {
 
   dump::dump()
     : filename_(std::string())
+    , dump_interval_ms_(-1)
     , exit_flag_(false)
   {}
 
@@ -18,12 +19,13 @@ namespace chef {
     }
   }
 
-  void dump::init(const std::string &filename) {
+  void dump::init(const std::string &filename, int32_t dump_interval_ms) {
     std::vector<std::string> dummy;
-    dump::init(filename, dummy);
+    dump::init(filename, dummy, dump_interval_ms);
   }
 
-  void dump::init(const std::string &filename, const std::vector<std::string> &tags) {
+  void dump::init(const std::string &filename, const std::vector<std::string> &tags, int32_t dump_interval_ms) {
+    dump_interval_ms_ = dump_interval_ms;
     filename_ = filename;
 //    for (auto &tag : tags) {
 //      tag2num_[tag] = 0;
@@ -99,7 +101,7 @@ namespace chef {
       ss << "\n";
       filepath_op::write_file(filename_.c_str(), ss.str());
 
-      chef::this_thread::sleep_for(chef::chrono::microseconds(DUMP_INTERVAL_MS));
+      chef::this_thread::sleep_for(chef::chrono::microseconds(dump_interval_ms_));
     }
   }
 
