@@ -13,6 +13,7 @@
 #ifndef _CHEF_BASE_STRINGS_H_
 #define _CHEF_BASE_STRINGS_H_
 
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -20,19 +21,19 @@ namespace chef {
 
   class strings_op {
     public:
-      static char SPC;
-      static char TAB;
-      static char CR;
-      static char LF;
-      static std::string DIGITS;
-      static std::string HEXDIGITS;
-      static std::string OCTDIGITS;
-      static std::string LETTERS;
-      static std::string LOWERCASE;
-      static std::string UPPERCASE;
-      static std::string PUNCTUATION;
-      static std::string WRITESPACE;
-      static std::string PRINTABLE;
+      static const char SPC;
+      static const char TAB;
+      static const char CR;
+      static const char LF;
+      static const std::string DIGITS;
+      static const std::string HEXDIGITS;
+      static const std::string OCTDIGITS;
+      static const std::string LETTERS;
+      static const std::string LOWERCASE;
+      static const std::string UPPERCASE;
+      static const std::string PUNCTUATION;
+      static const std::string WRITESPACE;
+      static const std::string PRINTABLE;
 
     public:
       /// @return   0 或 >0 或 <0
@@ -99,6 +100,14 @@ namespace chef {
 
       /// 把字符串数组<ss>用连接符<sep>连接起来，返回连接后的字符串
       static std::string join(const std::vector<std::string> &ss, const std::string &sep);
+
+      ///
+      template <class T>
+      static std::string to_string(const T &t) {
+          std::stringstream ss;
+          ss << t;
+          return ss.str();
+      }
   };
 
 } // namespace chef

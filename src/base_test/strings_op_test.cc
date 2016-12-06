@@ -1,5 +1,6 @@
 #include "../base/strings_op.h"
 #include <stdio.h>
+#include <stdint.h>
 #include <string>
 #include <map>
 #include <vector>
@@ -375,6 +376,23 @@ void strings_splitlines_test() {
   assert(lines.size() == 4 && lines[0] == "ab c\n" && lines[1] == "\n" && lines[2] == "de fg\r" && lines[3] == "kl\r\n");
 }
 
+void strings_to_string_test() {
+  int a         = 1;
+  float b       = 2.3f;
+  double c      = 3.4;
+  char d        = 'a';
+  const char *e = "hello";
+  std::string f = "world";
+  uint32_t g    = 5;
+  assert(chef::strings_op::to_string(a) == "1");
+  assert(chef::strings_op::to_string(b) == "2.3");
+  assert(chef::strings_op::to_string(c) == "3.4");
+  assert(chef::strings_op::to_string(d) == "a");
+  assert(chef::strings_op::to_string(e) == "hello");
+  assert(chef::strings_op::to_string(f) == "world");
+  assert(chef::strings_op::to_string(g) == "5");
+}
+
 int main() {
   ENTER_TEST;
 
@@ -392,6 +410,7 @@ int main() {
   strings_trim_prefix_test();
   strings_trim_suffix_test();
   strings_splitlines_test();
+  strings_to_string_test();
 
   return 0;
 }
