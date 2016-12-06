@@ -15,7 +15,7 @@ namespace chef {
     exit_flag_ = true;
     if (thread_) {
       thread_->join();
-      thread_ = NULL;
+      thread_.reset();
     }
   }
 
