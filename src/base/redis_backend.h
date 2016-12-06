@@ -96,16 +96,16 @@ namespace chef {
        * @param 成功返回redisContext指针，失败返回NULL
        *
        */
-      redisContext *connect();
+      redisContext *connect_();
 
       /**
        * 以下函数只能在backend_thread_中调用
        *
        */
       void connect_in_thread();
-      void ping_in_thread();
-      void hset_in_thread(const std::string &key, const std::string &value);
-      void hdel_in_thread(const std::string &key);
+      void ping_in_thread_();
+      void hset_in_thread_(const std::string &key, const std::string &value);
+      void hdel_in_thread_(const std::string &key);
 
     private:
       enum task_type {

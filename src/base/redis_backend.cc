@@ -21,18 +21,18 @@ namespace chef {
   }
 
   int redis_backend::start() {
-    backend_context_ = connect();
+    backend_context_ = connect_();
     if (backend_context_ == NULL) {
       return -1;
     }
     backend_thread_.start();
-    backend_thread_.add(chef::bind(&redis_backend::ping_in_thread, this));
+    backend_thread_.add(chef::bind(&redis_backend::ping_in_thread_, this));
     started_ = true;
     return 0;
   }
 
   int redis_backend::ping() {
-    redisContext *context = connect();
+    redisContext *context = connect_();
     if (context == NULL) {
       return -1;
     }
@@ -47,7 +47,7 @@ namespace chef {
   }
 
   int redis_backend::hgetall(std::vector<std::string> &keys, std::vector<std::string> &values) {
-    redisContext *context = connect();
+    redisContext *context = connect_();
     if (context == NULL) {
       return -1;
     }
@@ -88,15 +88,15 @@ namespace chef {
 
   void redis_backend::async_hset(const std::string &key, const std::string &value) {
     // assert(started_);
-    backend_thread_.add(chef::bind(&redis_backend::hset_in_thread, this, key, value));
+    backend_thread_.add(chef::bind(&redis_backend::hset_in_thread_, this, key, value));
   }
 
   void redis_backend::async_hdel(const std::string &key) {
     // assert(started_);
-    backend_thread_.add(chef::bind(&redis_backend::hdel_in_thread, this, key));
+    backend_thread_.add(chef::bind(&redis_backend::hdel_in_thread_, this, key));
   }
 
-  void redis_backend::hset_in_thread(const std::string &key, const std::string &value) {
+  void redis_backend::hset_in_thread_(const std::string &key, const std::string &value) {
     if (backend_context_ == NULL) {
       undone_tasks_.push_back(chef::make_shared<redis_task>(TASK_TYPE_HSET, key, value));
       return;
@@ -115,7 +115,7 @@ namespace chef {
     freeReplyObject(reply);
   }
 
-  void redis_backend::hdel_in_thread(const std::string &key) {
+  void redis_backend::hdel_in_thread_(const std::string &key) {
     if (backend_context_ == NULL) {
       undone_tasks_.push_back(chef::make_shared<redis_task>(TASK_TYPE_HDEL, key));
       return;
@@ -133,7 +133,7 @@ namespace chef {
     freeReplyObject(reply);
   }
 
-  redisContext *redis_backend::connect() {
+  redisContext *redis_backend::connect_() {
     struct timeval timeout = {connect_timeout_sec_, 0};
     redisContext *context = redisConnectWithTimeout(ip_.c_str(), port_, timeout);
     if (context && context->err) {
@@ -144,7 +144,7 @@ namespace chef {
   }
 
   void redis_backend::connect_in_thread() {
-    backend_context_ = connect();
+    backend_context_ = connect_();
     if (backend_context_) {
       while (!undone_tasks_.empty()) {
 //        auto t = undone_tasks_.front();
@@ -152,20 +152,20 @@ namespace chef {
         undone_tasks_.pop_front();
         switch (t->type_) {
           case TASK_TYPE_HSET:
-            hset_in_thread(t->key_, t->value_);
+            hset_in_thread_(t->key_, t->value_);
             break;
           case TASK_TYPE_HDEL:
-            hdel_in_thread(t->key_);
+            hdel_in_thread_(t->key_);
             break;
         }
       }
     }
   }
 
-  void redis_backend::ping_in_thread() {
+  void redis_backend::ping_in_thread_() {
     if (backend_context_ == NULL) {
       connect_in_thread();
-      backend_thread_.add(chef::bind(&redis_backend::ping_in_thread, this), ping_interval_sec_);
+      backend_thread_.add(chef::bind(&redis_backend::ping_in_thread_, this), ping_interval_sec_);
       return;
     }
 
@@ -177,7 +177,7 @@ namespace chef {
       freeReplyObject(reply);
     }
 
-    backend_thread_.add(chef::bind(&redis_backend::ping_in_thread, this), ping_interval_sec_);
+    backend_thread_.add(chef::bind(&redis_backend::ping_in_thread_, this), ping_interval_sec_);
   }
 
 } // namespace chef

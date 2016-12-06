@@ -22,7 +22,7 @@ namespace chef {
     for (int i = 0; i < num_of_thread_; i++) {
       thread_runned_events_.push_back(chef::make_shared<chef::wait_event>());
       threads_.push_back(chef::make_shared<chef::thread>(
-        chef::bind(&thread_pool::run_in_thread, this, i)
+        chef::bind(&thread_pool::run_in_thread_, this, i)
       ));
       thread_runned_events_[i]->wait();
     }
@@ -39,20 +39,20 @@ namespace chef {
     return tasks_.size();
   }
 
-  void thread_pool::run_in_thread(int index) {
+  void thread_pool::run_in_thread_(int index) {
     char thread_name[32] = {0};
     snprintf(thread_name, 31, "%s%d", thread_prefix_name_.c_str(), index+1);
     ::prctl(PR_SET_NAME, thread_name);
     thread_runned_events_[index]->notify();
     while(!exit_flag_) {
-      task t(take());
+      task t(take_());
       if (t) {
         t();
       }
     }
   }
 
-  thread_pool::task thread_pool::take() {
+  thread_pool::task thread_pool::take_() {
     chef::unique_lock<chef::mutex> lock(mutex_);
     while(!exit_flag_ && tasks_.empty()) {
       cond_.wait(lock);

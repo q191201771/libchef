@@ -35,7 +35,7 @@ namespace chef {
       tag2num_[*iter] = 0;
     }
 
-    thread_ = chef::make_shared<chef::thread>(chef::bind(&dump::run_in_thread, this));
+    thread_ = chef::make_shared<chef::thread>(chef::bind(&dump::run_in_thread_, this));
   }
 
   void dump::add(const std::string &tag, int num) {
@@ -77,7 +77,7 @@ namespace chef {
     }
   }
 
-  void dump::run_in_thread() {
+  void dump::run_in_thread_() {
     while(!exit_flag_) {
       std::stringstream ss;
 

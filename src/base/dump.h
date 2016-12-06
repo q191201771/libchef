@@ -90,7 +90,7 @@ namespace chef {
       std::map<std::string, int> kv();
 
     private:
-      void run_in_thread();
+      void run_in_thread_();
 
     private:
       enum {

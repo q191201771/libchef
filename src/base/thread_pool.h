@@ -43,8 +43,8 @@ namespace chef {
       uint64_t num_of_undone_task();
 
     private:
-      void run_in_thread(int index);
-      task take();
+      void run_in_thread_(int index);
+      task take_();
 
     private:
       typedef std::vector<chef::shared_ptr<chef::thread> >      thread_vector;
