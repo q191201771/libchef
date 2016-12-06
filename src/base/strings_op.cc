@@ -23,8 +23,8 @@ namespace chef {
     return a.compare(b);
   }
 
-  bool strings_op::contains(const std::string &s, const std::string &substr) {
-    return s.find(substr) != std::string::npos;
+  bool strings_op::contains(const std::string &s, const std::string &key) {
+    return s.find(key) != std::string::npos;
   }
 
   bool strings_op::contains_any(const std::string &s, const std::string &charlist) {
@@ -43,22 +43,22 @@ namespace chef {
     return (suffix.length() + pos) == s.length();
   }
 
-  int strings_op::count(const std::string &s, const std::string &sep) {
-    if (s == sep) {
+  int strings_op::count(const std::string &s, const std::string &key) {
+    if (s == key) {
       return 1;
     }
-    if (s.length() == 0 || sep.length() == 0) {
+    if (s.length() == 0 || key.length() == 0) {
       return 0;
     }
     int count = 0;
     std::size_t pos = 0;
     for (; ;) {
-      std::size_t found = s.find(sep, pos);
+      std::size_t found = s.find(key, pos);
       if (found == std::string::npos) {
         break;
       }
       count++;
-      pos = found + sep.length();
+      pos = found + key.length();
       if (pos >= s.length()) {
         break;
       }
