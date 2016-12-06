@@ -79,25 +79,27 @@ namespace chef {
 
   void dump::run_in_thread() {
     while(!exit_flag_) {
-      chef::lock_guard<chef::mutex> guard(mutex_);
       std::stringstream ss;
 
       std::time_t now = std::time(NULL);
       ss << "dump - " << std::asctime(std::localtime(&now)) << "-----\n";
 
-//      auto iter = tag2num_.begin();
-      tag2num_iterator iter = tag2num_.begin();
-      uint32_t count = 1;
-      for (; iter != tag2num_.end(); iter++, count++) {
-        ss << iter->first << ": " << iter->second;
-        if ((count % NUM_OF_TAG_PER_LINE == 0) ||
-          count == tag2num_.size()
-        ) {
-          ss << "\n";
-        } else {
-          ss << " | ";
+      { /// lock
+        chef::lock_guard<chef::mutex> guard(mutex_);
+//        auto iter = tag2num_.begin();
+        tag2num_iterator iter = tag2num_.begin();
+        uint32_t count = 1;
+        for (; iter != tag2num_.end(); iter++, count++) {
+          ss << iter->first << ": " << iter->second;
+          if ((count % NUM_OF_TAG_PER_LINE == 0) ||
+            count == tag2num_.size()
+          ) {
+            ss << "\n";
+          } else {
+            ss << " | ";
+          }
         }
-      }
+      } /// unlock
       ss << "\n";
       filepath_op::write_file(filename_.c_str(), ss.str());
 
