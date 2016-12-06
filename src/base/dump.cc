@@ -101,7 +101,8 @@ namespace chef {
         }
       } /// unlock
       ss << "\n";
-      filepath_op::write_file(filename_.c_str(), ss.str());
+      filepath_op::write_file(filename_+".tmp", ss.str());
+      filepath_op::rename(filename_+".tmp", filename_);
 
       chef::this_thread::sleep_for(chef::chrono::microseconds(dump_interval_ms_));
     }
