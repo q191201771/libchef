@@ -16,7 +16,7 @@ namespace chef {
   const std::string strings_op::LOWERCASE       = "abcdefghijklmnopqrstuvwxyz";
   const std::string strings_op::UPPERCASE       = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const std::string strings_op::PUNCTUATION     = "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~";
-  const std::string strings_op::WRITESPACE      = " \t\n\r\x0b\x0c";
+  const std::string strings_op::WHITESPACE      = " \t\n\r\x0b\x0c";
   const std::string strings_op::PRINTABLE       = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c";
 
   int strings_op::compare(const std::string &a, const std::string &b) {

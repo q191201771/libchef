@@ -32,7 +32,7 @@ namespace chef {
       static const std::string LOWERCASE;
       static const std::string UPPERCASE;
       static const std::string PUNCTUATION;
-      static const std::string WRITESPACE;
+      static const std::string WHITESPACE;
       static const std::string PRINTABLE;
 
     public:
@@ -61,10 +61,10 @@ namespace chef {
       static std::string to_upper(const std::string &s);
 
       /// 从<s>头部开始，移除<charlist>中的字符，直到遇到不属于<charlist>的字符停止
-      static std::string trim_left(const std::string &s, const std::string &charlist);
+      static std::string trim_left(const std::string &s, const std::string &charlist=WHITESPACE);
 
       /// 从<s>尾部开始，移除<charlist>中的字符，直到遇到不属于<charlist>的字符停止
-      static std::string trim_right(const std::string &s, const std::string &charlist);
+      static std::string trim_right(const std::string &s, const std::string &charlist=WHITESPACE);
 
       /// 如果<s>以<prefix>开头，则移除<prefix>
       static std::string trim_prefix(const std::string &s, const std::string &prefix);

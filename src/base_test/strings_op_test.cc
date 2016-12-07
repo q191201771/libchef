@@ -272,6 +272,7 @@ void strings_trim_left_test() {
   for (auto &item : vec) {
     assert(chef::strings_op::trim_left(item[0], item[1]) == item[2]);
   }
+  assert(chef::strings_op::trim_left(" \taa b  \t") == "aa b  \t");
 }
 
 void strings_trim_right_test() {
@@ -294,6 +295,7 @@ void strings_trim_right_test() {
   for (auto &item : vec) {
     assert(chef::strings_op::trim_right(item[0], item[1]) == item[2]);
   }
+  assert(chef::strings_op::trim_right(" \taa b  \t") == " \taa b");
 }
 
 void strings_trim_prefix_test() {
