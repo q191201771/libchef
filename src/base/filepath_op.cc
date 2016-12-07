@@ -34,19 +34,19 @@ namespace chef {
     char *path_dup = strdup(pathname.c_str());
     size_t len = strlen(path_dup);
     if (len == 0) {
-        return -1;
+      return -1;
     }
     size_t i = path_dup[0] == '/' ? 1 : 0;
     for (; i <= len; ++i) {
-        if (path_dup[i] == '/' || path_dup[i] == '\0') {
-            char ch = path_dup[i];
-            path_dup[i] = '\0';
-            if (::mkdir(path_dup, 0755) == -1 && errno != EEXIST) {
-                free(path_dup);
-                return -1;
-            }
-            path_dup[i] = ch;
+      if (path_dup[i] == '/' || path_dup[i] == '\0') {
+        char ch = path_dup[i];
+        path_dup[i] = '\0';
+        if (::mkdir(path_dup, 0755) == -1 && errno != EEXIST) {
+          free(path_dup);
+          return -1;
         }
+        path_dup[i] = ch;
+      }
     }
     free(path_dup);
     return 0;

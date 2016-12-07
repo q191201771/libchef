@@ -61,6 +61,7 @@ namespace chef {
        *
        * if COUNT_DUMP_TYPE_MUTABLE_TAGS:  如果<tag>不存在，添加新tag，设置为<num>，如果<tag>已存在，则已有num再加上<num>。
        * if COUNT_DUMP_TYPE_IMMUTABLE_TAGS: return -1（increment，decrement，del接口相同）
+       *
        */
       int add(const std::string &tag, int num);
 
@@ -120,14 +121,14 @@ namespace chef {
       typedef chef::shared_ptr<chef::thread>                                         thread_ptr;
 
     private:
-      count_dump_type     type_;
-      std::string         filename_;
-      int32_t             dump_interval_ms_;
-      tag2num             tag2num_;
-      tag2atomic_num      tag2atomic_num_;
-      thread_ptr          thread_;
-      bool                exit_flag_;
-      chef::mutex         mutex_;
+      count_dump_type type_;
+      std::string     filename_;
+      int32_t         dump_interval_ms_;
+      tag2num         tag2num_;
+      tag2atomic_num  tag2atomic_num_;
+      thread_ptr      thread_;
+      bool            exit_flag_;
+      chef::mutex     mutex_;
   };
 
 } // namespace chef
