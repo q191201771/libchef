@@ -14,7 +14,7 @@ cd build/base_test
 ./noncopyable_test
 ./os_exec_op_test
 #./redis_backend_test
-./strings_test
+./strings_op_test
 ./stuff_test
 ./task_thread_test
 ./this_machine_op_test

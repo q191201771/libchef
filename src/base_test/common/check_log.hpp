@@ -1,3 +1,16 @@
+/**
+ * @file   check_log.hpp
+ * @deps   nope
+ *
+ * @author
+ *   chef <191201771@qq.com>
+ *     -initial release xxxx-xx-xx
+ *
+ * @brief
+ *   构造、析构时分别打印一行带颜色的字符串，用于多个程序串行跑unit test时显示。
+ *
+ */
+
 #ifndef _BASE_TEST_COMMON_CHECK_LOG_HPP_
 #define _BASE_TEST_COMMON_CHECK_LOG_HPP_
 

@@ -103,7 +103,7 @@ namespace chef {
       std::stringstream ss;
 
       std::time_t now = std::time(NULL);
-      ss << "count_dump - " << std::asctime(std::localtime(&now)) << "-----\n";
+      ss << "count dump - " << std::asctime(std::localtime(&now)) << "-----\n";
 
       if (type_ == COUNT_DUMP_TYPE_MUTABLE_TAGS){
         chef::lock_guard<chef::mutex> guard(mutex_);

@@ -4,7 +4,7 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release 2016-08-31
+ *     -initial release xxxx-xx-xx
  *
  * @brief  文件、文件夹操作相关
  *
