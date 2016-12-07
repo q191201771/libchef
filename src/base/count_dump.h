@@ -27,55 +27,69 @@
 namespace chef {
 
   class count_dump {
+    private:
+      enum count_dump_type {
+        COUNT_DUMP_TYPE_MUTABLE_TAGS,  /// 对tags的map容器读写加锁，可随时添加新tag。
+        COUNT_DUMP_TYPE_IMMUTABLE_TAGS, /// 对tags的map容器不加锁，初始化以后不能再添加新tag，性能较COUNT_DUMP_TYPE_MUTABLE_TAGS更高。
+      };
+
     public:
       count_dump();
       ~count_dump();
 
       /**
-       * 见init重载函数
+       * 初始化，开启dump线程，每<dump_interval_ms>刷新一次文件
+       *
+       * @NOTICE 由于没有指定初始tags，所以只能使用COUNT_DUMP_TYPE_MUTABLE_TAGS
        *
        */
       void init(const std::string &filename, int32_t dump_interval_ms=1000);
 
       /**
-       * 初始化，开启dump线程，每[DUMP_INTERVAL_MS]刷新一次文件
+       * 重载init
        *
-       * @param filename dump文件名
-       * @param tags
-       *   可选，提前初始化一些tag，即使这些tag后续没有操作，也会有一个num=0的记录
+       * @param         filename dump文件名
+       * @param             tags 初始化tags，使用COUNT_DUMP_TYPE_IMMUTABLE_TAGS，后续不能再动态添加新tag
+       * @param dump_interval_ms ~
        *
        */
-      void init(const std::string &filename, const std::vector<std::string> &tags, int32_t dump_interval_ms=1000);
+      void init_with_constant_tags(const std::string &filename, const std::vector<std::string> &tags,
+                                   int32_t dump_interval_ms=1000);
 
       /**
-       * 如果[tag]不存在，设置为[num]，如果[tag]已存在，则已有num再加上[num]。
+       * @return 0 成功 -1 失败
        *
+       * if COUNT_DUMP_TYPE_MUTABLE_TAGS:  如果<tag>不存在，添加新tag，设置为<num>，如果<tag>已存在，则已有num再加上<num>。
+       * if COUNT_DUMP_TYPE_IMMUTABLE_TAGS: return -1（increment，decrement，del接口相同）
        */
-      void add(const std::string &tag, int num);
+      int add(const std::string &tag, int num);
 
       /**
        * 等价于 add(tag, 1);
        *
        */
-      void increment(const std::string &tag);
+      int increment(const std::string &tag);
 
       /**
        * 等价于 add(tag, -1);
        *
        */
-      void decrement(const std::string &tag);
+      int decrement(const std::string &tag);
 
       /**
        * 等价于 add(tag, -num);
        *
        */
-      void del(const std::string &tag, int num);
+      int del(const std::string &tag, int num);
 
       /**
-       * 将[tag]对应的num置为0
+       * 将<tag>对应的num置为0
+       *
+       * 当tag之前不存在时， if COUNT_DUMP_TYPE_MUTABLE_TAGS:  将tag加入并初始化为0
+       *                  if COUNT_DUMP_TYPE_IMMUTABLE_TAGS: return -1
        *
        */
-      void reset(const std::string &tag);
+      int reset(const std::string &tag);
 
       /**
        * 将所有tag都置为0
@@ -99,17 +113,21 @@ namespace chef {
       };
 
     private:
-      typedef std::map<std::string, int>           tag2num;
-      typedef std::map<std::string, int>::iterator tag2num_iterator;
-      typedef chef::shared_ptr<chef::thread>       thread_ptr;
+      typedef std::map<std::string, int>                          tag2num;
+      typedef std::map<std::string, int>::iterator                tag2num_iterator;
+      typedef std::map<std::string, chef::atomic<int> >           tag2atomic_num;
+      typedef std::map<std::string, chef::atomic<int> >::iterator tag2atomic_num_iterator;
+      typedef chef::shared_ptr<chef::thread>                      thread_ptr;
 
     private:
-      std::string filename_;
-      int32_t     dump_interval_ms_;
-      tag2num     tag2num_;
-      thread_ptr  thread_;
-      bool        exit_flag_;
-      chef::mutex mutex_;
+      count_dump_type     type_;
+      std::string         filename_;
+      int32_t             dump_interval_ms_;
+      tag2num             tag2num_;
+      tag2atomic_num      tag2atomic_num_;
+      thread_ptr          thread_;
+      bool                exit_flag_;
+      chef::mutex         mutex_;
   };
 
 } // namespace chef
