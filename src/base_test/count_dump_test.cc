@@ -1,4 +1,4 @@
-#include "../base/dump.h"
+#include "../base/count_dump.h"
 #include <stdio.h>
 #include <thread>
 #include <chrono>
@@ -12,7 +12,7 @@ std::vector<std::string> initial_tags = {
   "reader",
   "teacher",
 };
-chef::dump d;
+chef::count_dump d;
 bool exit_flag = false;
 
 void thd_fun() {

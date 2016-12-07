@@ -30,7 +30,7 @@ wait_event_counter_sources = ['../base/wait_event_counter.o', 'wait_event_counte
 task_thread_sources = ['../base/wait_event.o', '../base/task_thread.o', 'task_thread_test.cc']
 thread_pool_sources = ['../base/wait_event.o', '../base/thread_pool.o', 'thread_pool_test.cc']
 
-dump_sources            = ['../base/filepath_op.o', '../base/dump.o', 'dump_test.cc']
+count_dump_sources      = ['../base/filepath_op.o', '../base/count_dump.o', 'count_dump_test.cc']
 logo_sources            = ['../base/filepath_op.o', '../base/logo.o', 'logo_test.cc']
 this_proc_op_sources    = ['../base/filepath_op.o', '../base/this_proc_op.o', 'this_proc_op_test.cc']
 this_machine_op_sources = ['../base/filepath_op.o', '../base/this_machine_op.o', 'this_machine_op_test.cc']
@@ -49,7 +49,7 @@ prgs += env.Program('this_thread_op_test', this_thread_op_sources, LIBS = platfo
 prgs += env.Program('task_thread_test', task_thread_sources, LIBS = platform_libs)
 prgs += env.Program('thread_pool_test', thread_pool_sources, LIBS = platform_libs)
 prgs += env.Program('stuff_test', stuff_sources, LIBS = platform_libs)
-prgs += env.Program('dump_test', dump_sources, LIBS = platform_libs)
+prgs += env.Program('count_dump_test', count_dump_sources, LIBS = platform_libs)
 prgs += env.Program('strings_op_test', strings_sources, LIBS = platform_libs)
 prgs += env.Program('this_proc_op_test', this_proc_op_sources, LIBS = platform_libs)
 prgs += env.Program('this_machine_op_test', this_machine_op_sources, LIBS = platform_libs)

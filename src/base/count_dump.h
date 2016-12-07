@@ -14,8 +14,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_DUMP_H_
-#define _CHEF_BASE_DUMP_H_
+#ifndef _CHEF_BASE_COUNT_DUMP_H_
+#define _CHEF_BASE_COUNT_DUMP_H_
 
 #include "env.hpp"
 #include <stdio.h>
@@ -26,10 +26,10 @@
 
 namespace chef {
 
-  class dump {
+  class count_dump {
     public:
-      dump();
-      ~dump();
+      count_dump();
+      ~count_dump();
 
       /**
        * 见init重载函数
@@ -114,4 +114,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_DUMP_H_
+#endif // _CHEF_BASE_COUNT_DUMP_H_

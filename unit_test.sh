@@ -5,7 +5,7 @@ cd build/base_test
 ./chunk_head_op_test
 # ./crypto_md5_op_test
 ./daemon_op_test
-./dump_test
+./count_dump_test
 # ./encoding_base64_op_test
 ./filepath_op_test
 ./hash_test
