@@ -4,7 +4,7 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release 2016-08-31
+ *     -initial release xxxx-xx-xx
  *
  * @brief
  *   每秒将加入其中的tag->num KV结构写入文件中。
