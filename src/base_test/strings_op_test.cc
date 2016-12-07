@@ -168,12 +168,14 @@ void strings_join_test() {
   std::string delimiter = "---";
   std::vector<std::string> array;
   assert(chef::strings_op::join(array, delimiter) == std::string());
+  array.push_back(std::string());
+  assert(chef::strings_op::join(array, delimiter) == std::string(""));
   array.push_back("test");
-  assert(chef::strings_op::join(array, delimiter) == std::string("test"));
+  assert(chef::strings_op::join(array, delimiter) == std::string("---test"));
   array.push_back("hello");
-  assert(chef::strings_op::join(array, delimiter) == std::string("test---hello"));
+  assert(chef::strings_op::join(array, delimiter) == std::string("---test---hello"));
   array.push_back("world");
-  assert(chef::strings_op::join(array, delimiter) == std::string("test---hello---world"));
+  assert(chef::strings_op::join(array, delimiter) == std::string("---test---hello---world"));
 }
 
 void strings_split_test() {
@@ -395,6 +397,23 @@ void strings_to_string_test() {
   assert(chef::strings_op::to_string(g) == "5");
 }
 
+void strings_replace_test() {
+  std::string s;
+  std::string target;
+  std::string replacement;
+  assert(chef::strings_op::replace("", "aaa", "bbb") == "");
+  assert(chef::strings_op::replace("aaa", "", "bbb") == "aaa");
+  assert(chef::strings_op::replace("aba", "b", "") == "aa");
+  assert(chef::strings_op::replace("aa", "aa", "c") == "c");
+  assert(chef::strings_op::replace("aaa", "aa", "c") == "ca");
+  assert(chef::strings_op::replace("aaaa", "aa", "c") == "cc");
+  assert(chef::strings_op::replace("aaaa", "aaa", "c") == "ca");
+  assert(chef::strings_op::replace("aaaaa", "aa", "c") == "cca");
+  assert(chef::strings_op::replace("aaaaa", "aaa", "c") == "caa");
+  assert(chef::strings_op::replace("aabacaada", "aa", "c") == "cbaccda");
+  assert(chef::strings_op::replace("abacaadaa", "aa", "c") == "abaccdc");
+}
+
 int main() {
   ENTER_TEST;
 
@@ -413,6 +432,7 @@ int main() {
   strings_trim_suffix_test();
   strings_splitlines_test();
   strings_to_string_test();
+  strings_replace_test();
 
   return 0;
 }

@@ -39,8 +39,8 @@ namespace chef {
       /// @return   0 或 >0 或 <0
       static int compare(const std::string &a, const std::string &b);
 
-      /// <s>是否包含子串<substr>
-      static bool contains(const std::string &s, const std::string &key);
+      /// <s>是否包含子串<target>
+      static bool contains(const std::string &s, const std::string &target);
 
       /// <s>中是否包含<charlist>中的任一字符
       static bool contains_any(const std::string &s, const std::string &charlist);
@@ -51,8 +51,8 @@ namespace chef {
       /// <s>是否以<suffix>结束
       static bool has_suffix(const std::string &s, const std::string &suffix);
 
-      /// <s>中包含多少个<key>
-      static int count(const std::string &s, const std::string &key);
+      /// <s>中包含多少个<target>
+      static int count(const std::string &s, const std::string &target);
 
       /// 转小写
       static std::string to_lower(const std::string &s);
@@ -72,6 +72,9 @@ namespace chef {
       /// 如果<s>以<suffix>结束，则移除<suffix>
       static std::string trim_suffix(const std::string &s, const std::string &suffix);
 
+      /// 把<s>中的<target>全部替换成<replacement>
+      static std::string replace(const std::string &s, const std::string &target, const std::string &replacement);
+
       /**
        * 用<sep>分割<s>
        *
@@ -89,6 +92,12 @@ namespace chef {
        *
        */
       static std::vector<std::string> split(const std::string &s, char sep, bool keep_empty_strings=true);
+
+      /// TODO
+      // static std::vector<std::string> split(const std::string &s, const std::string &sep, bool keep_empty_strings=true);
+
+      /// TODO
+      // static std::vector<std::string> split_any(const std::string &s, const std::string &charlist, bool keep_empty_strings=true);
 
       /**
        * 用 '\r' 或 '\n' 或 '\r\n' 分割

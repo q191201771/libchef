@@ -2,6 +2,7 @@
 #include <sstream>
 #include <cctype>
 #include <stdint.h>
+#include <stdio.h>
 
 namespace chef {
 
@@ -23,8 +24,8 @@ namespace chef {
     return a.compare(b);
   }
 
-  bool strings_op::contains(const std::string &s, const std::string &key) {
-    return s.find(key) != std::string::npos;
+  bool strings_op::contains(const std::string &s, const std::string &target) {
+    return s.find(target) != std::string::npos;
   }
 
   bool strings_op::contains_any(const std::string &s, const std::string &charlist) {
@@ -43,22 +44,22 @@ namespace chef {
     return (suffix.length() + pos) == s.length();
   }
 
-  int strings_op::count(const std::string &s, const std::string &key) {
-    if (s == key) {
+  int strings_op::count(const std::string &s, const std::string &target) {
+    if (s == target) {
       return 1;
     }
-    if (s.length() == 0 || key.length() == 0) {
+    if (s.length() == 0 || target.length() == 0) {
       return 0;
     }
     int count = 0;
     std::size_t pos = 0;
     for (; ;) {
-      std::size_t found = s.find(key, pos);
+      std::size_t found = s.find(target, pos);
       if (found == std::string::npos) {
         break;
       }
       count++;
-      pos = found + key.length();
+      pos = found + target.length();
       if (pos >= s.length()) {
         break;
       }
@@ -68,7 +69,6 @@ namespace chef {
 
   std::string strings_op::to_lower(const std::string &s) {
     std::string ret;
-//    for (auto &c : s) {
     for (std::string::const_iterator c = s.begin(); c != s.end(); c++) {
       ret += static_cast<char>(std::tolower(*c));
     }
@@ -77,9 +77,31 @@ namespace chef {
 
   std::string strings_op::to_upper(const std::string &s) {
     std::string ret;
-//    for (auto &c : s) {
     for (std::string::const_iterator c = s.begin(); c != s.end(); c++) {
       ret += static_cast<char>(std::toupper(*c));
+    }
+    return ret;
+  }
+
+  std::string strings_op::replace(const std::string &s, const std::string &target, const std::string &replacement) {
+    if (s.empty() || target.empty()) {
+      return s;
+    }
+    std::string ret;
+    const std::size_t target_len = target.length();
+    std::size_t l = 0;
+    std::size_t r = 0;
+    for (; ; ) {
+      r = s.find(target, l);
+      if (r == std::string::npos) {
+        break;
+      }
+      ret.append(s.substr(l, r-l));
+      ret.append(replacement);
+      l = r + target_len;
+    }
+    if (l < s.length()) {
+      ret.append(s.substr(l));
     }
     return ret;
   }
