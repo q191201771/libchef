@@ -38,7 +38,7 @@ namespace chef {
 
     std::vector<std::string>::const_iterator iter = tags.begin();
     for (; iter != tags.end(); iter++) {
-      tag2atomic_num_[*iter] = 0;
+      tag2atomic_num_[*iter] = chef::make_shared<chef::atomic<int> >(0);
     }
 
     thread_ = chef::make_shared<chef::thread>(chef::bind(&count_dump::run_in_thread_, this));
@@ -58,7 +58,7 @@ namespace chef {
       if (iter == tag2atomic_num_.end()) {
         return -1;
       }
-      iter->second += num;
+      iter->second->fetch_add(num);
     }
     return 0;
   }
@@ -78,7 +78,7 @@ namespace chef {
       if (iter == tag2atomic_num_.end()) {
         return -1;
       }
-      iter->second = 0;
+      iter->second->store(0);
     }
     return 0;
   }
@@ -93,7 +93,7 @@ namespace chef {
     } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
       tag2atomic_num_iterator iter = tag2atomic_num_.begin();
       for (; iter != tag2atomic_num_.end(); iter++) {
-        iter->second = 0;
+        iter->second->store(0);
       }
     }
   }
@@ -123,7 +123,7 @@ namespace chef {
         tag2atomic_num_iterator iter = tag2atomic_num_.begin();
         uint32_t count = 1;
         for (; iter != tag2atomic_num_.end(); iter++, count++) {
-          ss << iter->first << ": " << iter->second;
+          ss << iter->first << ": " << iter->second->load();
           if ((count % NUM_OF_TAG_PER_LINE == 0) ||
               (count == tag2atomic_num_.size())
           ) {
@@ -151,7 +151,7 @@ namespace chef {
       std::map<std::string, int> ret;
       tag2atomic_num_iterator iter = tag2atomic_num_.begin();
       for (; iter != tag2atomic_num_.end(); iter++) {
-        ret[iter->first] = iter->second;
+        ret[iter->first] = iter->second->load();
       }
       return ret;
     }

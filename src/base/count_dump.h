@@ -113,11 +113,11 @@ namespace chef {
       };
 
     private:
-      typedef std::map<std::string, int>                          tag2num;
-      typedef std::map<std::string, int>::iterator                tag2num_iterator;
-      typedef std::map<std::string, chef::atomic<int> >           tag2atomic_num;
-      typedef std::map<std::string, chef::atomic<int> >::iterator tag2atomic_num_iterator;
-      typedef chef::shared_ptr<chef::thread>                      thread_ptr;
+      typedef std::map<std::string, int>                                             tag2num;
+      typedef std::map<std::string, int>::iterator                                   tag2num_iterator;
+      typedef std::map<std::string, chef::shared_ptr<chef::atomic<int> > >           tag2atomic_num;
+      typedef std::map<std::string, chef::shared_ptr<chef::atomic<int> > >::iterator tag2atomic_num_iterator;
+      typedef chef::shared_ptr<chef::thread>                                         thread_ptr;
 
     private:
       count_dump_type     type_;
