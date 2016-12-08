@@ -41,23 +41,24 @@ libhiredis.a
 ### 编译
 
 ```
-$sudo apt-get install scons g++ libjsoncpp-dev libboost-dev libboot-all-dev libhiredis-dev -y
+$sudo apt-get install scons g++ libjsoncpp-dev libboost-dev libboost-all-dev libhiredis-dev -y
 $scons
 ```
 
-### c++11以及boost已经能很好hold住，不需要自己实现或过度封装的模块
+### c++11 or boost
 
-#### STL
-
-* atomic
-* condition_variable
+* thread
 * mutex
-* rwlock
-* random
-
-#### boost
-
 * spinlock
+* rwlock
+* lock_guard
+* condition_variable
+* this_thread
+* smart_ptr
+* bind/function/ref
+* chrono
+* atomic
+* random
 * uuid
 * object_pool
 
