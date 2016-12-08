@@ -96,8 +96,8 @@ namespace chef {
       /// TODO
       // static std::vector<std::string> split(const std::string &s, const std::string &sep, bool keep_empty_strings=true);
 
-      /// TODO
-      // static std::vector<std::string> split_any(const std::string &s, const std::string &charlist, bool keep_empty_strings=true);
+      /// 可指定多个分隔符，一次到位~
+      static std::vector<std::string> split_any(const std::string &s, const std::string &charlist, bool keep_empty_strings=true);
 
       /**
        * 用 '\r' 或 '\n' 或 '\r\n' 分割
