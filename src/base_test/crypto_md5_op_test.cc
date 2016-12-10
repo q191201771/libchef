@@ -1,4 +1,4 @@
-#include "../base/crypto_md5_op.hpp"
+#include "../base/crypto_md5_op.h"
 #include <map>
 #include <string>
 #include "./common/assert_wrapper.hpp"
@@ -15,7 +15,7 @@ int main() {
   mapping["de3a4d2fd6c73ec2db2abad23b444281"] = "There is no reason for any individual to have a computer in their home. -Ken Olsen, 1977";
 
   for (auto &iter : mapping) {
-    assert(chef::md5_hash_hex(iter.second) == iter.first);
+    assert(chef::crypto_md5_op::sum(iter.second) == iter.first);
   }
 
   return 0;

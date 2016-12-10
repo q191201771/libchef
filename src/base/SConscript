@@ -23,6 +23,9 @@ objs += env.Object('this_machine_op', ['this_machine_op.cc'])
 objs += env.Object('logo', ['logo.cc'])
 objs += env.Object('wait_event_counter', ['wait_event_counter.cc'])
 
+# objs += env.Object('crypto_md5_op', ['crypto_md5_op.cc'])
+# objs += env.Object('encoding_base64_op', ['encoding_base64_op.cc'])
+
 objs += env.Object('json_config', ['json_config.cc'], CPPPATH = jsoncpp_include_path)
 
 Return('objs')

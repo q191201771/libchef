@@ -1,17 +1,24 @@
-/**
- * @file   encoding_base64_op.hpp
- * @deps   nope
- *
- * @author
- *   chef <191201771@qq.com>
- *     -initial release 2016-08-31
- *
- * @brief
- *   base64编码、解码
- *
- *   copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
- *
- */
+#include "encoding_base64_op.h"
+
+namespace inner {
+  std::string base64_decode(const std::string &s);
+  std::string base64_encode(const std::string &s);
+}
+
+namespace chef {
+
+  std::string encoding_base64_op::encode(const std::string &s) {
+    return inner::base64_encode(s);
+  }
+
+  std::string encoding_base64_op::decode(const std::string &s) {
+    return inner::base64_decode(s);
+  }
+} /// namespace chef
+
+
+
+/// ----- 下面的代码时拷贝过来的 ----------------------------------------------
 
 /*
     ******
@@ -48,12 +55,7 @@
 
 */
 
-#ifndef _CHEF_BASE_BASE64_HPP_
-#define _CHEF_BASE_BASE64_HPP_
-
-#include <string>
-
-namespace chef {
+namespace inner {
 
 static std::string const base64_chars =
              "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -188,6 +190,4 @@ inline std::string base64_decode(std::string const & input) {
     return ret;
 }
 
-} // namespace chef
-
-#endif // _CHEF_BASE_BASE64_HPP_
+} /// namespace inner

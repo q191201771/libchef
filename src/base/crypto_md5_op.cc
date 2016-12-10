@@ -1,18 +1,20 @@
-/**
- * @file   crypto_md5_op.hpp
- * @deps   nope
- *
- * @author
- *   chef <191201771@qq.com>
- *     -initial release 2016-08-31
- *
- * @brief
- *   copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
- *
- */
+#include "crypto_md5_op.h"
 
-#ifndef _CHEF_BASE_CRYPTO_MD5_OP_HPP_
-#define _CHEF_BASE_CRYPTO_MD5_OP_HPP_
+namespace inner {
+  std::string md5_hash_hex(const std::string &);
+}
+
+namespace chef {
+
+std::string crypto_md5_op::sum(const std::string &s) {
+  return inner::md5_hash_hex(s);
+}
+
+} /// namespace chef
+
+
+
+/// ----- 下面的代码时拷贝过来的 ----------------------------------------------
 
 /*
  * This package supports both compile-time and run-time determination of CPU
@@ -28,7 +30,7 @@
 #include <string>
 #include <cstring>
 
-namespace chef {
+namespace inner {
 /// Provides MD5 hashing functionality
 
 typedef unsigned char md5_byte_t; /* 8-bit byte */
@@ -398,6 +400,4 @@ inline std::string md5_hash_hex(std::string const & input) {
     return hex;
 }
 
-} // namespace chef
-
-#endif // _CHEF_BASE_CRYPTO_MD5_OP_HPP_
+} // namespace inner

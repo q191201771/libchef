@@ -13,7 +13,6 @@ prgs = []
 
 hash_sources               = ['hash_test.cc']
 noncopyable_sources        = ['noncopyable_test.cc']
-crypto_md5_op_sources      = ['crypto_md5_op_test.cc']
 encoding_base64_op_sources = ['encoding_base64_op_test.cc']
 
 stuff_sources              = ['../base/stuff.o', 'stuff_test.cc']
@@ -27,6 +26,9 @@ chunk_head_op_sources      = ['../base/chunk_head_op.o', 'chunk_head_op_test.cc'
 this_thread_op_sources     = ['../base/this_thread_op.o', 'this_thread_op_test.cc']
 wait_event_counter_sources = ['../base/wait_event_counter.o', 'wait_event_counter_test.cc']
 
+# crypto_md5_op_sources      = ['../base/crypto_md5_op.o', 'crypto_md5_op_test.cc']
+# encoding_base64_op_sources = ['../base/encoding_base64_op.o', 'encoding_base64_op_test.cc']
+
 task_thread_sources = ['../base/wait_event.o', '../base/task_thread.o', 'task_thread_test.cc']
 thread_pool_sources = ['../base/wait_event.o', '../base/thread_pool.o', 'thread_pool_test.cc']
 
@@ -36,8 +38,6 @@ this_proc_op_sources    = ['../base/filepath_op.o', '../base/this_proc_op.o', 't
 this_machine_op_sources = ['../base/filepath_op.o', '../base/this_machine_op.o', 'this_machine_op_test.cc']
 
 prgs += env.Program('os_exec_op_test', os_exec_op_sources, LIBS = platform_libs)
-# prgs += env.Program('crypto_md5_op_test', crypto_md5_op_sources, LIBS = platform_libs)
-# prgs += env.Program('encoding_base64_op_test', encoding_base64_op_sources, LIBS = platform_libs)
 prgs += env.Program('daemon_op_test', daemon_op_sources, LIBS = platform_libs)
 prgs += env.Program('chunk_head_op_test', chunk_head_op_sources, LIBS = platform_libs)
 prgs += env.Program('buffer_test', buffer_sources, LIBS = platform_libs)
@@ -55,6 +55,9 @@ prgs += env.Program('this_proc_op_test', this_proc_op_sources, LIBS = platform_l
 prgs += env.Program('this_machine_op_test', this_machine_op_sources, LIBS = platform_libs)
 prgs += env.Program('hash_test', hash_sources, LIBS = platform_libs)
 prgs += env.Program('logo_test', logo_sources, LIBS = platform_libs)
+
+# prgs += env.Program('crypto_md5_op_test', crypto_md5_op_sources, LIBS = platform_libs)
+# prgs += env.Program('encoding_base64_op_test', encoding_base64_op_sources, LIBS = platform_libs)
 
 log_sources = ['../base/log.o', 'log_test.cc']
 with_boost_libs = [platform_libs]
