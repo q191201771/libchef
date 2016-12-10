@@ -18,7 +18,7 @@ namespace chef {
 
   void wait_event_counter::wait() {
     chef::unique_lock<chef::mutex> lock(mutex_);
-    while (count_.load() < need_count_) {
+    for (; count_.load() < need_count_; ) {
       cond_.wait(lock);
     }
   }

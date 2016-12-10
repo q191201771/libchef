@@ -99,11 +99,12 @@ namespace chef {
   }
 
   void count_dump::run_in_thread_() {
-    while(!exit_flag_) {
+    for (; !exit_flag_; ) {
       std::stringstream ss;
 
       std::time_t now = std::time(NULL);
-      ss << "count dump - " << std::asctime(std::localtime(&now)) << "-----\n";
+      ss << "count dump - " << std::asctime(std::localtime(&now))
+         << "-------------------------------------\n\n";
 
       if (type_ == COUNT_DUMP_TYPE_MUTABLE_TAGS){
         chef::lock_guard<chef::mutex> guard(mutex_);
@@ -147,7 +148,7 @@ namespace chef {
       chef::lock_guard<chef::mutex> guard(mutex_);
       return tag2num_;
   } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
-      /// swap£¬second atomic_int -> int
+      /// swapï¿½ï¿½second atomic_int -> int
       std::map<std::string, int> ret;
       tag2atomic_num_iterator iter = tag2atomic_num_.begin();
       for (; iter != tag2atomic_num_.end(); iter++) {

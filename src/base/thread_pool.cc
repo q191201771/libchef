@@ -44,7 +44,7 @@ namespace chef {
     snprintf(thread_name, 31, "%s%d", thread_prefix_name_.c_str(), index+1);
     ::prctl(PR_SET_NAME, thread_name);
     thread_runned_events_[index]->notify();
-    while(!exit_flag_) {
+    for (; !exit_flag_; ) {
       task t(take_());
       if (t) {
         t();
@@ -54,7 +54,7 @@ namespace chef {
 
   thread_pool::task thread_pool::take_() {
     chef::unique_lock<chef::mutex> lock(mutex_);
-    while(!exit_flag_ && tasks_.empty()) {
+    for (; !exit_flag_ && tasks_.empty(); ) {
       cond_.wait(lock);
     }
     task t;

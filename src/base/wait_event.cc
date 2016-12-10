@@ -13,7 +13,7 @@ namespace chef {
 
   void wait_event::wait() {
     chef::unique_lock<chef::mutex> lock(mutex_);
-    while (!done_) {
+    for (; !done_; ) {
       cond_.wait(lock);
     }
   }

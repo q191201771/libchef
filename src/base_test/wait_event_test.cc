@@ -5,6 +5,11 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
+void wait_without_notify_test() {
+  chef::wait_event we;
+  we.wait();
+}
+
 void notify_before_wait_test() {
   chef::wait_event we;
   we.notify();
@@ -46,6 +51,7 @@ int main() {
   notify_before_wait_for_test();
   wait_for_timeout_test();
   notify_after_wait_test();
+  // wait_without_notify_test();
 
   return 0;
 }

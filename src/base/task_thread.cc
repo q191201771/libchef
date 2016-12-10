@@ -49,7 +49,7 @@ namespace chef {
     for (; ; ) {
       { /// enter lock scope
         chef::unique_lock<chef::mutex> lock(mutex_);
-        while(!exit_flag_ && tasks_.empty() && defferred_tasks_.empty()) {
+        for (; !exit_flag_ && tasks_.empty() && defferred_tasks_.empty(); ) {
           cond_.wait_for(lock, chef::chrono::milliseconds(100));
         }
         /// 收集需要立即执行的任务
@@ -100,7 +100,7 @@ namespace chef {
   }
 
   void task_thread::execute_tasks_(std::deque<task> &tasks) {
-    while(!tasks.empty()) {
+    for (; !tasks.empty(); ) {
       tasks.front()();
       tasks.pop_front();
     }

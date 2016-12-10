@@ -146,7 +146,7 @@ namespace chef {
   void redis_backend::connect_in_thread() {
     backend_context_ = connect_();
     if (backend_context_) {
-      while (!undone_tasks_.empty()) {
+      for (; !undone_tasks_.empty(); ) {
 //        auto t = undone_tasks_.front();
         redis_task_ptr t = undone_tasks_.front();
         undone_tasks_.pop_front();

@@ -16,7 +16,7 @@ namespace chef {
 
     const int MAX_LEN = 1024;
     char line[MAX_LEN] = {0};
-    while(fgets(line, MAX_LEN, fp) != NULL) {
+    for (; fgets(line, MAX_LEN, fp); ) {
       size_t rend = strlen(line) - 1;
       if (line[rend] == '\n') {
         line[rend] = '\0';

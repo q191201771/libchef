@@ -20,7 +20,7 @@ bool immutable_exit_flag = false;
 
 void immutable_thd_fun() {
   uint64_t index = 0;
-  while(!immutable_exit_flag) {
+  for (; !immutable_exit_flag; ) {
     index++;index = index % INITIAL_TAGS.size();
     immutable_cd->increment(INITIAL_TAGS[index]);
     std::this_thread::sleep_for(std::chrono::milliseconds(1));

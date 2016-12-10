@@ -140,7 +140,7 @@ namespace chef {
     std::vector<std::string> ret;
     std::stringstream ss(s);
     std::string item;
-    while(std::getline(ss, item, sep)) {
+    for (; std::getline(ss, item, sep); ) {
       if (!keep_empty_strings && item.empty()) {
         continue;
       }
