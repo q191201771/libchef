@@ -18,6 +18,7 @@
 #define _CHEF_BASE_COUNT_DUMP_H_
 
 #include "env.hpp"
+#include "noncopyable.hpp"
 #include <stdio.h>
 #include <stdint.h>
 #include <map>
@@ -26,7 +27,7 @@
 
 namespace chef {
 
-  class count_dump {
+  class count_dump : public chef::noncopyable {
     private:
       enum count_dump_type {
         COUNT_DUMP_TYPE_MUTABLE_TAGS,  /// 对tags的map容器读写加锁，可随时添加新tag。

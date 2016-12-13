@@ -16,10 +16,11 @@
 #define _CHEF_BASE_LOGO_H_
 
 #include <string>
+#include "noncopyable.hpp"
 
 namespace chef {
 
-  class logo {
+  class logo : public chef::noncopyable {
     public:
       logo(const std::string &filename);
       ~logo();
