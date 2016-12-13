@@ -7,7 +7,7 @@
  *     -initial release xxxx-xx-xx
  *
  * @brief
- *   ÖØ¶¨ÒådebugÄ£Ê½Ê±£¬assertµÄĞĞÎª£¨ÓÉcoredump¸ÄÎªÍùstderrÊä³öÈÕÖ¾£©¡£releaseÄ£Ê½ÏÂÒÀÈ»±£³ÖÔ­ÓĞÂß¼­£¨ºöÂÔassert£©
+ *   é‡å®šä¹‰debugæ¨¡å¼æ—¶ï¼Œassertçš„è¡Œä¸ºï¼ˆç”±coredumpæ”¹ä¸ºå¾€stderrè¾“å‡ºæ—¥å¿—ï¼‰ã€‚releaseæ¨¡å¼ä¸‹ä¾ç„¶ä¿æŒåŸæœ‰é€»è¾‘ï¼ˆå¿½ç•¥assertï¼‰
  *
  */
 
