@@ -93,10 +93,12 @@ namespace chef {
        */
       static std::vector<std::string> split(const std::string &s, char sep, bool keep_empty_strings=true);
 
-      /// TODO
-      // static std::vector<std::string> split(const std::string &s, const std::string &sep, bool keep_empty_strings=true);
+      /// 允许分隔符是字符串
+      /// like s='ab--cd' and sep='--' -> ['ab', 'cd']
+      static std::vector<std::string> split(const std::string &s, const std::string &sep, bool keep_empty_strings=true);
 
       /// 可指定多个分隔符，一次到位~
+      /// like s='a-b*c' and sep='-*' -> ['a', 'b', 'c']
       static std::vector<std::string> split_any(const std::string &s, const std::string &charlist, bool keep_empty_strings=true);
 
       /**
