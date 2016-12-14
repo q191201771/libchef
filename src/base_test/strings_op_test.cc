@@ -508,13 +508,20 @@ void strings_splitlines_test() {
 }
 
 void strings_to_string_test() {
-  int a         = 1;
-  float b       = 2.3f;
-  double c      = 3.4;
-  char d        = 'a';
-  const char *e = "hello";
-  std::string f = "world";
-  uint32_t g    = 5;
+  int a                = 1;
+  float b              = 2.3f;
+  double c             = 3.4;
+  char d               = 'a';
+  const char *e        = "hello";
+  std::string f        = "world";
+  uint32_t g           = 5;
+  short h              = -1;
+  long i               = -2;
+  long long j          = -3;
+  unsigned short k     = 9;
+  unsigned long l      = 10;
+  unsigned long long m = 11;
+
   assert(chef::strings_op::to_string(a) == "1");
   assert(chef::strings_op::to_string(b) == "2.3");
   assert(chef::strings_op::to_string(c) == "3.4");
@@ -522,6 +529,12 @@ void strings_to_string_test() {
   assert(chef::strings_op::to_string(e) == "hello");
   assert(chef::strings_op::to_string(f) == "world");
   assert(chef::strings_op::to_string(g) == "5");
+  assert(chef::strings_op::to_string(h) == "-1");
+  assert(chef::strings_op::to_string(i) == "-2");
+  assert(chef::strings_op::to_string(j) == "-3");
+  assert(chef::strings_op::to_string(k) == "9");
+  assert(chef::strings_op::to_string(l) == "10");
+  assert(chef::strings_op::to_string(m) == "11");
 }
 
 void strings_replace_test() {

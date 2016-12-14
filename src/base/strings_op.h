@@ -115,7 +115,7 @@ namespace chef {
       ///
       template <class T>
       static std::string to_string(const T &t) {
-          std::stringstream ss;
+          std::ostringstream ss;
           ss << t;
           return ss.str();
       }

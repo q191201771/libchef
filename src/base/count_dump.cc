@@ -100,7 +100,7 @@ namespace chef {
 
   void count_dump::run_in_thread_() {
     for (; !exit_flag_; ) {
-      std::stringstream ss;
+      std::ostringstream ss;
 
       std::time_t now = std::time(NULL);
       ss << "count dump - " << std::asctime(std::localtime(&now))
