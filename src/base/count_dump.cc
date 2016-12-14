@@ -148,7 +148,7 @@ namespace chef {
       chef::lock_guard<chef::mutex> guard(mutex_);
       return tag2num_;
   } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
-      /// swap��second atomic_int -> int
+      /// swap second atomic_int -> int
       std::map<std::string, int> ret;
       tag2atomic_num_iterator iter = tag2atomic_num_.begin();
       for (; iter != tag2atomic_num_.end(); iter++) {

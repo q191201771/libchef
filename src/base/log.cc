@@ -6,8 +6,8 @@
 BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(global_logger_src,
                                        boost::log::sources::severity_logger_mt<boost::log::trivial::severity_level>);
 
-static long int gettid() {
-  return syscall(SYS_gettid);
+static pid_t gettid() {
+  return static_cast<pid_t>(syscall(SYS_gettid));
 }
 
 namespace chef {

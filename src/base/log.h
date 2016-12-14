@@ -4,7 +4,7 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release 2016-08-31
+ *     -initial release xxxx-xx-xx
  *
  * @brief
  *   近乎零配置的日志模块，有其他需求请直接修改源码。

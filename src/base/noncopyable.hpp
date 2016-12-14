@@ -1,6 +1,6 @@
 /**
  * @file   noncopyable.hpp
- * @deps   jsoncpp
+ * @deps   nope
  *
  * @author
  *   chef <191201771@qq.com>

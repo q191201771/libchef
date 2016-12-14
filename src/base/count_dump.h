@@ -1,6 +1,6 @@
 /**
  * @file   dump.h/dump.cc
- * @deps   env.hpp/filepath_op.h
+ * @deps   env.hpp/noncopyable.hpp/filepath_op.h
  *
  * @author
  *   chef <191201771@qq.com>
