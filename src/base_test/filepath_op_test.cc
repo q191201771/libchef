@@ -31,14 +31,14 @@ void is_dir_test() {
 
 void mkdir_recursive_test() {
   std::string pathname = std::string("/tmp");
-  assert(chef::filepath_op::mkdir_recursive(pathname.c_str()) == 0);
+  assert(chef::filepath_op::mkdir_recursive(pathname) == 0);
   pathname += std::string("/") + rand_string();
-  assert(chef::filepath_op::mkdir_recursive(pathname.c_str()) == 0);
+  assert(chef::filepath_op::mkdir_recursive(pathname) == 0);
   gc_list.push_back(pathname);
   pathname = chef::filepath_op::join("/tmp", rand_string());
   gc_list.push_back(pathname);
   pathname = chef::filepath_op::join(pathname, rand_string());
-  assert(chef::filepath_op::mkdir_recursive(pathname.c_str()) == 0);
+  assert(chef::filepath_op::mkdir_recursive(pathname) == 0);
 }
 
 void rm_file_test() {
@@ -53,12 +53,12 @@ void rm_file_test() {
 
 void rmdir_recursive_test() {
   std::string root_path = "/tmp/rm_dir_test";
-  assert(chef::filepath_op::mkdir_recursive(root_path.c_str()) == 0);
+  assert(chef::filepath_op::mkdir_recursive(root_path) == 0);
 
   std::string child_path = chef::filepath_op::join(root_path, rand_string());
-  assert(chef::filepath_op::mkdir_recursive(child_path.c_str()) == 0);
+  assert(chef::filepath_op::mkdir_recursive(child_path) == 0);
   std::string child_path_child1 = chef::filepath_op::join(child_path, rand_string());
-  assert(chef::filepath_op::mkdir_recursive(child_path_child1.c_str()) == 0);
+  assert(chef::filepath_op::mkdir_recursive(child_path_child1) == 0);
   std::string child_path_child2 = chef::filepath_op::join(child_path, rand_string());
   assert(chef::filepath_op::write_file(child_path_child2.c_str(), std::string("hello\n")) == 0);
 
@@ -124,6 +124,25 @@ void gc() {
   }
 }
 
+void walk_dir_test() {
+  std::vector<std::string> child_dirs;
+  std::vector<std::string> child_files;
+  std::string pathname = chef::filepath_op::join("/tmp", rand_string());
+  assert(chef::filepath_op::walk_dir(pathname, child_dirs, child_files) == -1);
+  assert(chef::filepath_op::mkdir_recursive(pathname) == 0);
+  gc_list.push_back(pathname);
+  assert(chef::filepath_op::walk_dir(pathname, child_dirs, child_files, true) == 0);
+  assert(child_dirs.empty() && child_files.empty());
+  assert(chef::filepath_op::mkdir_recursive(chef::filepath_op::join(pathname, "1")) == 0);
+  assert(chef::filepath_op::mkdir_recursive(chef::filepath_op::join(pathname, "22")) == 0);
+  assert(chef::filepath_op::write_file(chef::filepath_op::join(pathname, "4444"), std::string("hello\n")) == 0);
+  assert(chef::filepath_op::write_file(chef::filepath_op::join(pathname, "55555"), std::string("world\n")) == 0);
+  assert(chef::filepath_op::walk_dir(pathname, child_dirs, child_files, false) == 0);
+  assert(child_dirs.size() == 2 && child_files.size() == 2);
+  assert((child_dirs[0] == "1" && child_dirs[1] == "22") || (child_dirs[0] == "22" && child_dirs[1] == "1"));
+  assert((child_files[0] == "4444" && child_files[1] == "55555") || (child_files[0] == "55555" && child_files[1] == "4444"));
+}
+
 int main(){
   ENTER_TEST;
 
@@ -138,6 +157,7 @@ int main(){
   get_file_size_test();
   write_file_test();
   read_file_test();
+  walk_dir_test();
   gc();
 
   return 0;

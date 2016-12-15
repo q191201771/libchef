@@ -14,6 +14,7 @@
 #define _CHEF_BASE_FILEPATH_OP_H_
 
 #include <string>
+#include <vector>
 #include <stdint.h>
 
 namespace chef {
@@ -35,6 +36,21 @@ namespace chef {
        *
        */
       static int is_dir(const std::string &pathname);
+
+      /**
+       * @param    pathname          需要查询的文件夹
+       * @param  child_dirs          传出参数，文件夹下的文件夹
+       * @param child_files          传出参数，文件夹下的文件
+       * @param with_pathname_prefix 传出的文件、文件夹前是否加上<pathname>前缀
+       *
+       * @return  0 成功
+       *         -1 失败 <pathname>不可遍历
+       *
+       */
+      static int walk_dir(const std::string &pathname,
+                          std::vector<std::string> &child_dirs /*out*/,
+                          std::vector<std::string> &child_files /*out*/,
+                          bool with_pathname_prefix=true);
 
       /**
        * @return

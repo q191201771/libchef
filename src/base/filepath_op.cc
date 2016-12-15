@@ -29,6 +29,55 @@ namespace chef {
     return S_ISDIR(st.st_mode) ? 0 : -1;
   }
 
+  int filepath_op::walk_dir(const std::string &pathname,
+                            std::vector<std::string> &child_dirs,
+                            std::vector<std::string> &child_files,
+                            bool with_pathname_prefix)
+  {
+    if (is_dir(pathname) == -1) {
+      return -1;
+    }
+
+    child_dirs.clear();
+    child_files.clear();
+
+    DIR *open_ret = ::opendir(pathname.c_str());
+    IF_NULL_RETURN_NAGETIVE_ONE(open_ret);
+
+    struct dirent entry;
+    struct dirent *result = NULL;
+    for (;;) {
+      if (::readdir_r(open_ret, &entry, &result) != 0) {
+        break;
+      }
+      if (result == NULL) {
+        break;
+      }
+      char *name = result->d_name;
+      if (strcmp(name, ".") == 0 ||
+          strcmp(name, "..") == 0
+      ) {
+        continue;
+      }
+      std::string file_with_path = filepath_op::join(pathname, name);
+      if (filepath_op::exist(file_with_path.c_str()) != 0) {
+        fprintf(stderr, "%s:%d %s\n", __FUNCTION__, __LINE__, file_with_path.c_str());
+        continue;
+      }
+      if (filepath_op::is_dir(file_with_path.c_str()) == 0) {
+        child_dirs.push_back(with_pathname_prefix ? file_with_path : name);
+      } else {
+        child_files.push_back(with_pathname_prefix ? file_with_path : name);
+      }
+    }
+
+    if (open_ret) {
+      ::closedir(open_ret);
+    }
+
+    return 0;
+  }
+
   int filepath_op::mkdir_recursive(const std::string &pathname) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(pathname);
     char *path_dup = strdup(pathname.c_str());
@@ -90,7 +139,7 @@ namespace chef {
       }
       char *name = result->d_name;
       if (strcmp(name, ".") == 0 ||
-        strcmp(name, "..") == 0
+          strcmp(name, "..") == 0
       ) {
         continue;
       }
