@@ -292,11 +292,10 @@ void strings_split_chars_test() {
   assert(res[1] == "g4444");
 
   res = chef::strings_op::split("h333---i22--j1", "--");
-  assert(res.size() == 4);
+  assert(res.size() == 3);
   assert(res[0] == "h333");
-  assert(res[1] == "");
-  assert(res[2] == "-i22");
-  assert(res[3] == "j1");
+  assert(res[1] == "-i22");
+  assert(res[2] == "j1");
   res = chef::strings_op::split("h333---i22--j1", "--", false);
   assert(res.size() == 3);
   assert(res[0] == "h333");
@@ -312,7 +311,7 @@ void strings_split_chars_test() {
   assert(res.size() == 0);
 }
 
-void strings_split_test() {
+void strings_split_char_test() {
   std::vector<std::string> res;
 
   assert(chef::strings_op::split(std::string(), '-').empty());
@@ -565,7 +564,8 @@ int main() {
   strings_count_test();
   strings_to_lower_test();
   strings_join_test();
-  strings_split_test();
+  strings_split_char_test();
+  strings_split_chars_test();
   strings_trim_left_test();
   strings_trim_right_test();
   strings_trim_prefix_test();
