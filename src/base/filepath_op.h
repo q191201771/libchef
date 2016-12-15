@@ -43,8 +43,9 @@ namespace chef {
        * @param child_files          传出参数，文件夹下的文件
        * @param with_pathname_prefix 传出的文件、文件夹前是否加上<pathname>前缀
        *
-       * @return  0 成功
-       *         -1 失败 <pathname>不可遍历
+       * @return  0 成功 -1 失败 <pathname>不可遍历
+       *
+       * @NOTICE 只访问第一层目录，不会递归访问子目录下的内容
        *
        */
       static int walk_dir(const std::string &pathname,
