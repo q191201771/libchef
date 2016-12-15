@@ -17,23 +17,24 @@
 #include <string>
 #include <vector>
 
+#define STRINGS_OP_SPC ' '
+#define STRINGS_OP_TAB '\t'
+#define STRINGS_OP_CR  '\r'
+#define STRINGS_OP_LF  '\n'
+#define STRINGS_OP_DIGITS      "0123456789"
+#define STRINGS_OP_OCTDIGITS   "01234567"
+#define STRINGS_OP_HEXDIGITS   "0123456789abcdefABCDEF"
+#define STRINGS_OP_LETTERS     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+#define STRINGS_OP_LOWERCASE   "abcdefghijklmnopqrstuvwxyz"
+#define STRINGS_OP_UPPERCASE   "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+#define STRINGS_OP_PUNCTUATION "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~"
+#define STRINGS_OP_WHITESPACE  " \t\n\r\x0b\x0c"
+#define STRINGS_OP_PRINTABLE   "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c"
+
 namespace chef {
 
   class strings_op {
     public:
-      static const char SPC;
-      static const char TAB;
-      static const char CR;
-      static const char LF;
-      static const std::string DIGITS;
-      static const std::string HEXDIGITS;
-      static const std::string OCTDIGITS;
-      static const std::string LETTERS;
-      static const std::string LOWERCASE;
-      static const std::string UPPERCASE;
-      static const std::string PUNCTUATION;
-      static const std::string WHITESPACE;
-      static const std::string PRINTABLE;
 
     public:
       /// @return   0 或 >0 或 <0
@@ -61,10 +62,10 @@ namespace chef {
       static std::string to_upper(const std::string &s);
 
       /// 从<s>头部开始，移除<charlist>中的字符，直到遇到不属于<charlist>的字符停止
-      static std::string trim_left(const std::string &s, const std::string &charlist=WHITESPACE);
+      static std::string trim_left(const std::string &s, const std::string &charlist=STRINGS_OP_WHITESPACE);
 
       /// 从<s>尾部开始，移除<charlist>中的字符，直到遇到不属于<charlist>的字符停止
-      static std::string trim_right(const std::string &s, const std::string &charlist=WHITESPACE);
+      static std::string trim_right(const std::string &s, const std::string &charlist=STRINGS_OP_WHITESPACE);
 
       /// 如果<s>以<prefix>开头，则移除<prefix>
       static std::string trim_prefix(const std::string &s, const std::string &prefix);

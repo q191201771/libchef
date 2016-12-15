@@ -6,20 +6,6 @@
 
 namespace chef {
 
-  const char strings_op::SPC = ' ';
-  const char strings_op::TAB = '\t';
-  const char strings_op::CR  = '\r';
-  const char strings_op::LF  = '\n';
-  const std::string strings_op::DIGITS          = "0123456789";
-  const std::string strings_op::OCTDIGITS       = "01234567";
-  const std::string strings_op::HEXDIGITS       = "0123456789abcdefABCDEF";
-  const std::string strings_op::LETTERS         = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const std::string strings_op::LOWERCASE       = "abcdefghijklmnopqrstuvwxyz";
-  const std::string strings_op::UPPERCASE       = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const std::string strings_op::PUNCTUATION     = "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~";
-  const std::string strings_op::WHITESPACE      = " \t\n\r\x0b\x0c";
-  const std::string strings_op::PRINTABLE       = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c";
-
   int strings_op::compare(const std::string &a, const std::string &b) {
     return a.compare(b);
   }
