@@ -241,7 +241,7 @@ void strings_split_any_test() {
   assert(res[2] == "ddd=b");
 }
 
-void strings_split_chars_test() {
+void strings_split_by_chars_test() {
   std::vector<std::string> res;
 
   assert(chef::strings_op::split(std::string(), "-").empty());
@@ -311,7 +311,7 @@ void strings_split_chars_test() {
   assert(res.size() == 0);
 }
 
-void strings_split_char_test() {
+void strings_split_by_char_test() {
   std::vector<std::string> res;
 
   assert(chef::strings_op::split(std::string(), '-').empty());
@@ -553,6 +553,10 @@ void strings_replace_test() {
   assert(chef::strings_op::replace("abacaadaa", "aa", "c") == "abaccdc");
 }
 
+void strings_macro_test() {
+  assert(chef::SPC== ' ');
+}
+
 int main() {
   ENTER_TEST;
 
@@ -564,8 +568,8 @@ int main() {
   strings_count_test();
   strings_to_lower_test();
   strings_join_test();
-  strings_split_char_test();
-  strings_split_chars_test();
+  strings_split_by_char_test();
+  strings_split_by_chars_test();
   strings_trim_left_test();
   strings_trim_right_test();
   strings_trim_prefix_test();
@@ -574,6 +578,7 @@ int main() {
   strings_to_string_test();
   strings_replace_test();
   strings_split_any_test();
+  strings_macro_test();
 
   return 0;
 }
