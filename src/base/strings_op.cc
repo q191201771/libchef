@@ -34,7 +34,7 @@ namespace chef {
     if (s == target) {
       return 1;
     }
-    if (s.length() == 0 || target.length() == 0) {
+    if (s.empty() || target.empty()) {
       return 0;
     }
     int count = 0;
@@ -222,7 +222,7 @@ namespace chef {
   }
 
   std::string strings_op::trim_left(const std::string &s, const std::string &charlist) {
-    if (s.length() == 0 || charlist.length() == 0) {
+    if (s.empty() || charlist.empty()) {
       return s;
     }
     uint64_t pos = 0;
@@ -236,7 +236,7 @@ namespace chef {
   }
 
   std::string strings_op::trim_right(const std::string &s, const std::string &charlist) {
-    if (s.length() == 0 || charlist.length() == 0) {
+    if (s.empty() || charlist.empty()) {
       return s;
     }
     int64_t pos = s.length() - 1;

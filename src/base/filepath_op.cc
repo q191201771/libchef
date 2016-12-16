@@ -10,7 +10,7 @@
 
 #define IF_ZERO_RETURN_NAGETIVE_ONE(x) do { if ((x) == 0) return -1; } while(0);
 #define IF_NULL_RETURN_NAGETIVE_ONE(x) do { if ((x) == NULL) return -1; } while(0);
-#define IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(x) do { if (x.length() == 0) return -1; } while(0);
+#define IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(x) do { if (x.empty()) return -1; } while(0);
 
 namespace chef {
 
@@ -234,7 +234,7 @@ namespace chef {
   }
 
   std::string filepath_op::read_link(const std::string &filename, size_t content_size) {
-    if (filename.length() == 0 || content_size == 0) {
+    if (filename.empty() || content_size == 0) {
       return std::string();
     }
     char *content = new char[content_size];
