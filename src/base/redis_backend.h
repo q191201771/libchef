@@ -32,7 +32,7 @@
 
 namespace chef {
 
-  class redis_backend : chef::noncopyable {
+  class redis_backend : public chef::noncopyable {
     public:
       /**
        * @param ip                  redis ip

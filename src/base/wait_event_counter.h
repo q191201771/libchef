@@ -1,10 +1,10 @@
 /**
  * @file   wait_event_counter.h/wait_event_counter.cc
- * @deps   nope
+ * @deps   env.hpp/noncopyable.hpp
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release 2016-11-26
+ *     -initial release xxxx-xx-xx
  *
  * @brief
  *   阻塞等待N个事件发生。

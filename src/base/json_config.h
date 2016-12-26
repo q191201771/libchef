@@ -19,7 +19,7 @@
 
 namespace chef {
 
-  class json_config : chef::noncopyable {
+  class json_config : public chef::noncopyable {
     public:
       json_config();
       virtual ~json_config();
