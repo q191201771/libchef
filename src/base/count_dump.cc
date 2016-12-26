@@ -18,6 +18,7 @@ namespace chef {
     if (thread_) {
       thread_->join();
       thread_.reset();
+      dump2disk_();
     }
   }
 
@@ -100,54 +101,58 @@ namespace chef {
 
   void count_dump::run_in_thread_() {
     for (; !exit_flag_; ) {
-      std::ostringstream ss;
-
-      std::time_t now = std::time(NULL);
-      ss << "count dump - " << std::asctime(std::localtime(&now))
-         << "-------------------------------------\n\n";
-
-      if (type_ == COUNT_DUMP_TYPE_MUTABLE_TAGS){
-        chef::lock_guard<chef::mutex> guard(mutex_);
-        tag2num_iterator iter = tag2num_.begin();
-        uint32_t count = 1;
-        for (; iter != tag2num_.end(); iter++, count++) {
-          ss << iter->first << ": " << iter->second;
-          if ((count % NUM_OF_TAG_PER_LINE == 0) ||
-              (count == tag2num_.size())
-          ) {
-            ss << "\n";
-          } else {
-            ss << " | ";
-          }
-        }
-      } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
-        tag2atomic_num_iterator iter = tag2atomic_num_.begin();
-        uint32_t count = 1;
-        for (; iter != tag2atomic_num_.end(); iter++, count++) {
-          ss << iter->first << ": " << iter->second->load();
-          if ((count % NUM_OF_TAG_PER_LINE == 0) ||
-              (count == tag2atomic_num_.size())
-          ) {
-            ss << "\n";
-          } else {
-            ss << " | ";
-          }
-        }
-      }
-
-      ss << "\n";
-      filepath_op::write_file(filename_+".tmp", ss.str());
-      filepath_op::rename(filename_+".tmp", filename_);
+      dump2disk_();
 
       chef::this_thread::sleep_for(chef::chrono::microseconds(dump_interval_ms_));
     }
+  }
+
+  void count_dump::dump2disk_() {
+    std::ostringstream ss;
+
+    std::time_t now = std::time(NULL);
+    ss << "count dump - " << std::asctime(std::localtime(&now))
+       << "-------------------------------------\n\n";
+
+    if (type_ == COUNT_DUMP_TYPE_MUTABLE_TAGS){
+      chef::lock_guard<chef::mutex> guard(mutex_);
+      tag2num_iterator iter = tag2num_.begin();
+      uint32_t count = 1;
+      for (; iter != tag2num_.end(); iter++, count++) {
+        ss << iter->first << ": " << iter->second;
+        if ((count % NUM_OF_TAG_PER_LINE == 0) ||
+            (count == tag2num_.size())
+        ) {
+          ss << "\n";
+        } else {
+          ss << " | ";
+        }
+      }
+    } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
+      tag2atomic_num_iterator iter = tag2atomic_num_.begin();
+      uint32_t count = 1;
+      for (; iter != tag2atomic_num_.end(); iter++, count++) {
+        ss << iter->first << ": " << iter->second->load();
+        if ((count % NUM_OF_TAG_PER_LINE == 0) ||
+            (count == tag2atomic_num_.size())
+        ) {
+          ss << "\n";
+        } else {
+          ss << " | ";
+        }
+      }
+    }
+
+    ss << "\n";
+    filepath_op::write_file(filename_+".tmp", ss.str());
+    filepath_op::rename(filename_+".tmp", filename_);
   }
 
   std::map<std::string, int> count_dump::kv() {
     if (type_ == COUNT_DUMP_TYPE_MUTABLE_TAGS) {
       chef::lock_guard<chef::mutex> guard(mutex_);
       return tag2num_;
-  } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
+    } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
       /// swap second atomic_int -> int
       std::map<std::string, int> ret;
       tag2atomic_num_iterator iter = tag2atomic_num_.begin();

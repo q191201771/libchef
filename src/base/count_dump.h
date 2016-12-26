@@ -107,6 +107,7 @@ namespace chef {
 
     private:
       void run_in_thread_();
+      void dump2disk_();
 
     private:
       enum {
