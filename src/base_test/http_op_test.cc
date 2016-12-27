@@ -18,6 +18,7 @@ int main() {
 
     ret = chef::http_op::get(url, &headers, 10000, resp);
     assert(ret == 0 && resp.code_ == 200 && !resp.content_.empty());
+    printf("ret:%d,code:%d\n", ret, resp.code_);
     printf("headers:------\n");
     std::map<std::string, std::string>::iterator iter = resp.headers_.begin();
     for (; iter != resp.headers_.end(); iter++) {

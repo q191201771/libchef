@@ -44,7 +44,6 @@ namespace chef {
       }
     }
 
-
     std::string resp_headers_buf;
 
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
@@ -54,6 +53,7 @@ namespace chef {
 
     curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, static_cast<long>(timeout_ms));
     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
     //curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, inner::response_body_cb);
@@ -71,8 +71,7 @@ namespace chef {
     std::vector<std::string>::iterator iter = header_pairs.begin();
     for (; iter != header_pairs.end(); iter++) {
       std::vector<std::string> header_kv = strings_op::split(*iter, ':', true);
-      if (header_kv.size() < 2 || strings_op::contains(header_kv[0], "Set-Cookie")) {
-        printf("fucked,%s\n", iter->c_str());
+      if (header_kv.size() < 2 || strings_op::contains(strings_op::to_lower(header_kv[0]), "set-cookie")) {
         continue;
       }
       std::string header_k = strings_op::trim_left(strings_op::trim_right(header_kv[0]));
