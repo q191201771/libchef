@@ -1,8 +1,9 @@
 #include "strings_op.h"
-#include <sstream>
 #include <cctype>
+#include <sstream>
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 
 namespace chef {
 
@@ -19,15 +20,27 @@ namespace chef {
   }
 
   bool strings_op::has_prefix(const std::string &s, const std::string &prefix) {
-    return s.find(prefix) == 0;
+    //return s.find(prefix) == 0;
+
+    /// 更高效些
+    if (s.empty() || prefix.empty()) {
+      return false;
+    }
+    return s.length() >= prefix.length() && s.substr(0, prefix.length()) == prefix;
   }
 
   bool strings_op::has_suffix(const std::string &s, const std::string &suffix) {
-    std::size_t pos = s.find(suffix);
-    if (pos == std::string::npos) {
+    //std::size_t pos = s.find(suffix);
+    //if (pos == std::string::npos) {
+    //  return false;
+    //}
+    //return (suffix.length() + pos) == s.length();
+
+    /// 更高效些
+    if (s.empty() || suffix.empty()) {
       return false;
     }
-    return (suffix.length() + pos) == s.length();
+    return s.length() >= suffix.length() && s.substr(s.length()-suffix.length(), suffix.length()) == suffix;
   }
 
   int strings_op::count(const std::string &s, const std::string &target) {
