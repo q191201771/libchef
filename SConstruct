@@ -3,7 +3,7 @@ import os, sys, commands
 build_dir     = 'build'
 platform_libs = ['pthread', 'rt']
 
-env = Environment(ENV = os.environ)
+env = Environment(ENV=os.environ)
 
 mode = ARGUMENTS.get('mode', 'release')
 if mode == 'debug':
@@ -21,16 +21,20 @@ env.Append(LINKFLAGS = ['-pthread', '-static-libstdc++'])
 env.Append(CPPPATH   = [])
 
 jsoncpp_include_path = '/usr/include/jsoncpp'
+libcurl_include_path = '/usr/include'
 boost_lib_path       = '/usr/lib/x86_64-linux-gnu'
 jsoncpp_lib_path     = '/usr/lib/x86_64-linux-gnu'
 hiredis_lib_path     = '/usr/lib/x86_64-linux-gnu'
+libcurl_lib_path     = '/usr/lib/x86_64-linux-gnu'
 
 Export('env')
+Export('libcurl_include_path')
 Export('jsoncpp_include_path')
 Export('platform_libs')
 Export('boost_lib_path')
 Export('jsoncpp_lib_path')
 Export('hiredis_lib_path')
+Export('libcurl_lib_path')
 
 base = SConscript("#/src/base/SConscript", variant_dir=build_dir+'/base', duplicate=0)
 

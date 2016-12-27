@@ -35,8 +35,6 @@ namespace chef {
 
   class strings_op {
     public:
-
-    public:
       /// @return   0 或 >0 或 <0
       static int compare(const std::string &a, const std::string &b);
 

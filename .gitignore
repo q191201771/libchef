@@ -1,3 +1,4 @@
+dump
 deploy_156.sh
 exclude_list
 diff.sh
@@ -50,6 +51,7 @@ CTestTestfile.cmake
 .*.swp
 *tags*
 .ycm_extra_conf.py
+.ycm_extra_conf.pyc
 
 ##### JS #####
 node_modules
