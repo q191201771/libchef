@@ -76,7 +76,7 @@ namespace chef {
       std::string header_k = strings_op::trim_left(strings_op::trim_right(header_kv[0]));
       std::string header_v = header_kv[1];
 
-      /// 实际上，这里我们只需要split第一个':'，偷懒用了strings_op，就再把后面多切的join一下好了，反正header不会很大，
+      /// TODO 实际上，这里我们只需要split第一个':'，偷懒用了strings_op，就再把后面多切的join一下好了，反正header不会很大，
       /// 做个效率和可读的trade off~
       /// 后面可以考虑不用strings_op或给strings_op::split添加一个只切一次的参数。。
       if (header_kv.size() > 2) {
