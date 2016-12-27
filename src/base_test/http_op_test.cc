@@ -16,7 +16,7 @@ int main() {
     headers["fuck"] = "you";
     headers["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36";
 
-    ret = chef::http_op::get(url, headers, 10000, resp);
+    ret = chef::http_op::get(url, &headers, 10000, resp);
     assert(ret == 0 && resp.code_ == 200 && !resp.content_.empty());
     printf("headers:------\n");
     std::map<std::string, std::string>::iterator iter = resp.headers_.begin();

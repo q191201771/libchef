@@ -102,7 +102,7 @@ void strings_has_prifex_test() {
   vec.push_back(string_pair_2_bool("", "a", false));
   vec.push_back(string_pair_2_bool("abc", "a", true));
   vec.push_back(string_pair_2_bool("abc", "ab", true));
-  vec.push_back(string_pair_2_bool("abc", "", true));
+  vec.push_back(string_pair_2_bool("abc", "", false));
 
   for (auto &item : vec) {
     assert(chef::strings_op::has_prefix(item.pair_[0], item.pair_[1]) == item.result_);

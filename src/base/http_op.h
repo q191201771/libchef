@@ -56,7 +56,7 @@ namespace chef {
        *
        */
       static int get(const std::string &url,
-                     const std::map<std::string, std::string> headers,
+                     const std::map<std::string, std::string> *headers,
                      int timeout_ms,
                      response &resp /*out*/);
 

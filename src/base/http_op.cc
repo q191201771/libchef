@@ -7,14 +7,14 @@
 
 namespace inner {
 
-  static size_t write_memory_cb(void *contents, size_t size, size_t nmemb, void *userp) {
+  static size_t response_body_cb(void *contents, size_t size, size_t nmemb, void *userp) {
     size_t realsize = size * nmemb;
     std::string *body = static_cast<std::string *>(userp);
     body->append(static_cast<char *>(contents), realsize);
     return realsize;
   }
 
-  static size_t header_cb(void *contents, size_t size, size_t nmemb, void *userp) {
+  static size_t response_header_cb(void *contents, size_t size, size_t nmemb, void *userp) {
     size_t realsize = size * nmemb;
     std::string *headers = static_cast<std::string *>(userp);
     headers->append(static_cast<char *>(contents), realsize);
@@ -29,34 +29,36 @@ namespace chef {
 
   void http_op::global_cleanup_curl() { curl_global_cleanup(); }
 
-  int http_op::get(const std::string &url, const std::map<std::string, std::string> headers, int timeout_ms, response &resp) {
+  int http_op::get(const std::string &url, const std::map<std::string, std::string> *headers, int timeout_ms, response &resp) {
     CURL *curl = curl_easy_init();
     if (curl == NULL) {
       return -1;
     }
 
     curl_slist *request_header_list = NULL;
-    std::map<std::string, std::string>::const_iterator request_headers_iter = headers.begin();
-    for (; request_headers_iter != headers.end(); request_headers_iter++) {
-      std::string request_header_line = request_headers_iter->first+": "+request_headers_iter->second;
-      request_header_list = curl_slist_append(request_header_list, request_header_line.c_str());
+    if (headers != NULL && !headers->empty()) {
+      std::map<std::string, std::string>::const_iterator request_headers_iter = headers->begin();
+      for (; request_headers_iter != headers->end(); request_headers_iter++) {
+        std::string request_header_line = request_headers_iter->first+": "+request_headers_iter->second;
+        request_header_list = curl_slist_append(request_header_list, request_header_line.c_str());
+      }
     }
 
 
     std::string resp_headers_buf;
 
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    if (!headers.empty()) {
+    if (request_header_list) {
       curl_easy_setopt(curl, CURLOPT_HTTPHEADER, request_header_list);
     }
 
     curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, static_cast<long>(timeout_ms));
     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
-    curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+    //curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, inner::write_memory_cb);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, inner::response_body_cb);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, static_cast<void *>(&resp.content_));
-    curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, inner::header_cb);
+    curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, inner::response_header_cb);
     curl_easy_setopt(curl, CURLOPT_HEADERDATA, static_cast<void *>(&resp_headers_buf));
 
     if (curl_easy_perform(curl) != CURLE_OK) {
@@ -87,7 +89,7 @@ namespace chef {
     }
 
     curl_easy_cleanup(curl);
-    if (!headers.empty() && request_header_list != NULL) {
+    if (request_header_list != NULL) {
       curl_slist_free_all(request_header_list);
     }
     return 0;
