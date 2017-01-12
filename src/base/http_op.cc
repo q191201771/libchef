@@ -29,64 +29,118 @@ namespace chef {
 
   void http_op::global_cleanup_curl() { curl_global_cleanup(); }
 
-  int http_op::get(const std::string &url, const std::map<std::string, std::string> *headers, int timeout_ms, response &resp) {
+  int http_op::get(const std::string &url,
+                   const std::map<std::string, std::string> *headers,
+                   const std::map<std::string, std::string> *cookies,
+                   int timeout_ms,
+                   response &resp
+  ) {
     CURL *curl = curl_easy_init();
     if (curl == NULL) {
       return -1;
     }
 
+    /// 转换request headers kv至libcurl格式
     curl_slist *request_header_list = NULL;
     if (headers != NULL && !headers->empty()) {
       std::map<std::string, std::string>::const_iterator request_headers_iter = headers->begin();
       for (; request_headers_iter != headers->end(); request_headers_iter++) {
-        std::string request_header_line = request_headers_iter->first+": "+request_headers_iter->second;
+        std::string request_header_line = request_headers_iter->first + ": " + request_headers_iter->second;
         request_header_list = curl_slist_append(request_header_list, request_header_line.c_str());
       }
     }
 
-    std::string resp_headers_buf;
-
-    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-    if (request_header_list) {
-      curl_easy_setopt(curl, CURLOPT_HTTPHEADER, request_header_list);
+    /// 转换request cookies kv至libcurl格式
+    std::string request_cookies_buf;
+    if (cookies != NULL && !cookies->empty()) {
+      std::map<std::string, std::string>::const_iterator request_cookies_iter = cookies->begin();
+      for (; request_cookies_iter != cookies->end(); request_cookies_iter++) {
+        request_cookies_buf += request_cookies_iter->first + ":" + request_cookies_iter->second + ";";
+      }
     }
 
+    /// 设置request headers
+    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+
+    if (request_header_list != NULL) {
+      curl_easy_setopt(curl, CURLOPT_HTTPHEADER, request_header_list);
+    }
+    if (!request_cookies_buf.empty()) {
+      curl_easy_setopt(curl, CURLOPT_COOKIE, request_cookies_buf.c_str());
+    }
+
+    /// 设置请求超时时间，单位毫秒
     curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, static_cast<long>(timeout_ms));
+    /// 屏蔽信号
     curl_easy_setopt(curl, CURLOPT_NOSIGNAL, 1L);
+    /// 让libcurl帮忙hold 3xx跳转
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    /// 设置最大允许跳转的次数，避免无限跳转
+    curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 32L);
+    /// 打开libcurl的调试输出
     //curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 
+    /// 收body回调
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, inner::response_body_cb);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, static_cast<void *>(&resp.content_));
+    /// 收headers回调
     curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, inner::response_header_cb);
+    std::string resp_headers_buf;
     curl_easy_setopt(curl, CURLOPT_HEADERDATA, static_cast<void *>(&resp_headers_buf));
 
+    /// 开启cookie引擎，收resp cookie
+    curl_easy_setopt(curl, CURLOPT_COOKIEFILE, "");
+
+    /// go
     if (curl_easy_perform(curl) != CURLE_OK) {
       return -1;
     }
 
+    /// 获取返回的cookie
+    struct curl_slist *cs_cookies     = NULL;
+    struct curl_slist *cs_cookies_dup = NULL;
+    if (curl_easy_getinfo(curl, CURLINFO_COOKIELIST, &cs_cookies) != CURLE_OK) {
+      return -1;
+    }
+    cs_cookies_dup = cs_cookies;
+    while(cs_cookies_dup) {
+      std::vector<std::string> cookie_attrs = strings_op::split_any(std::string(cs_cookies_dup->data), chef::WHITESPACE);
+      if (cookie_attrs.size() != 7) {
+        continue;
+      }
+      /// format:
+      /// <hostname> \t <include subdomains> \t <path> \t <secure> \t <expiry epoch time> \t <name> \t <value>
+      response_cookie rc;
+      rc.hostname_                   = cookie_attrs[0];
+      rc.is_include_subdomains_      = cookie_attrs[1] == "TRUE" ? true : false;
+      rc.path_                       = cookie_attrs[2];
+      rc.is_secure_                  = cookie_attrs[3] == "TRUE" ? true : false;
+      rc.expiry_epoch_time_          = atol(cookie_attrs[4].c_str());
+      rc.name_                       = cookie_attrs[5];
+      rc.value_                      = cookie_attrs[6];
+      resp.cookies_[cookie_attrs[5]] = rc;
+      cs_cookies_dup = cs_cookies_dup->next;
+    }
+    curl_slist_free_all(cs_cookies);
+
+    /// 获取返回的http code
     curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &resp.code_);
 
+    /// 处理返回的headers
     std::vector<std::string> header_pairs = strings_op::splitlines(resp_headers_buf, false);
     std::vector<std::string>::iterator iter = header_pairs.begin();
     for (; iter != header_pairs.end(); iter++) {
-      std::vector<std::string> header_kv = strings_op::split(*iter, ':', true);
-      if (header_kv.size() < 2 || strings_op::contains(strings_op::to_lower(header_kv[0]), "set-cookie")) {
-        continue;
+      std::string &head_item = *iter;
+      std::size_t split_pos = head_item.find(":");
+      if (split_pos == std::string::npos) {
+          continue;
       }
-      std::string header_k = strings_op::trim_left(strings_op::trim_right(header_kv[0]));
-      std::string header_v = header_kv[1];
-
-      /// TODO 实际上，这里我们只需要split第一个':'，偷懒用了strings_op，就再把后面多切的join一下好了，反正header不会很大，
-      /// 做个效率和可读的trade off~
-      /// 后面可以考虑不用strings_op或给strings_op::split添加一个只切一次的参数。。
-      if (header_kv.size() > 2) {
-        header_v = strings_op::join(std::vector<std::string>(header_kv.begin()+1, header_kv.end()), ":");
-      }
-
-      resp.headers_[header_k] = strings_op::trim_left(strings_op::trim_right(header_v));
+      std::string header_k = strings_op::trim_left(strings_op::trim_right(head_item.substr(0, split_pos)));
+      std::string header_v = strings_op::trim_left(strings_op::trim_right(head_item.substr(split_pos+1)));
+      resp.headers_[header_k] = header_v;
     }
 
+    /// 扫尾
     curl_easy_cleanup(curl);
     if (request_header_list != NULL) {
       curl_slist_free_all(request_header_list);
