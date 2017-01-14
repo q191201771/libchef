@@ -6,7 +6,6 @@
 src/                        ......代码根目录
   base/                     ......基础库
   base_test/                ......基础库相应测试
-  recipe/                   ......平时一些小demo
 build/                      ......编译后生成的中间文件，可执行文件
 .gitignore                  ......
 LINCENSE                    ......
@@ -35,7 +34,7 @@ boost 1.58.0 静态库
 
 libjsoncpp.a
 libhiredis.a
-
+libz.a
 ```
 
 ### 编译
@@ -65,8 +64,6 @@ $scons
 #### boost asio [自己写的demo](https://github.com/q191201771/asio-tutorial)
 
 #### mysql++ [官方地址](http://tangentsoft.net/mysql++/)
-
-#### http client [cpr github地址](https://github.com/whoshuu/cpr)
 
 ### 拷贝自第三方工程的代码
 

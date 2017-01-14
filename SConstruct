@@ -40,4 +40,4 @@ base = SConscript("#/src/base/SConscript", variant_dir=build_dir+'/base', duplic
 
 base_test = SConscript("#/src/base_test/SConscript", variant_dir=build_dir+'/base_test', duplicate=0)
 
-recipe = SConscript("#/src/recipe/SConscript", variant_dir=build_dir+'/recipe', duplicate=0)
+#recipe = SConscript("#/src/recipe/SConscript", variant_dir=build_dir+'/recipe', duplicate=0)
