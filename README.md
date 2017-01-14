@@ -35,6 +35,7 @@ boost 1.58.0 静态库
 libjsoncpp.a
 libhiredis.a
 libz.a
+libcurl.a
 ```
 
 ### 编译
