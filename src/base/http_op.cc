@@ -23,6 +23,20 @@ namespace inner {
 
 } // namespace inner
 
+#define RELEASE_CURL_IF_NEEDED(x) do { \
+  if (x != NULL) { \
+    curl_easy_cleanup(x); \
+    x = NULL; \
+  } \
+} while(0);
+
+#define RELEASE_CURL_SLIST_IF_NEEDED(x) do { \
+  if (x != NULL) { \
+    curl_slist_free_all(x); \
+    x = NULL; \
+  } \
+} while(0);
+
 namespace chef {
 
   int http_op::global_init_curl() { return curl_global_init(CURL_GLOBAL_ALL) == CURLE_OK ? 0 : -1; }
@@ -93,6 +107,8 @@ namespace chef {
 
     /// go
     if (curl_easy_perform(curl) != CURLE_OK) {
+      RELEASE_CURL_IF_NEEDED(curl);
+      RELEASE_CURL_SLIST_IF_NEEDED(request_header_list);
       return -1;
     }
 
@@ -100,6 +116,8 @@ namespace chef {
     struct curl_slist *cs_cookies     = NULL;
     struct curl_slist *cs_cookies_dup = NULL;
     if (curl_easy_getinfo(curl, CURLINFO_COOKIELIST, &cs_cookies) != CURLE_OK) {
+      RELEASE_CURL_IF_NEEDED(curl);
+      RELEASE_CURL_SLIST_IF_NEEDED(request_header_list);
       return -1;
     }
     cs_cookies_dup = cs_cookies;
@@ -141,10 +159,8 @@ namespace chef {
     }
 
     /// 扫尾
-    curl_easy_cleanup(curl);
-    if (request_header_list != NULL) {
-      curl_slist_free_all(request_header_list);
-    }
+    RELEASE_CURL_IF_NEEDED(curl);
+    RELEASE_CURL_SLIST_IF_NEEDED(request_header_list);
     return 0;
   }
 
