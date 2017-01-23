@@ -15,6 +15,7 @@ prgs = []
 hash_sources               = ['hash_test.cc']
 noncopyable_sources        = ['noncopyable_test.cc']
 encoding_base64_op_sources = ['encoding_base64_op_test.cc']
+macro_sources              = ['macro_test.cc']
 
 stuff_sources              = ['../base/stuff.o', 'stuff_test.cc']
 buffer_sources             = ['../base/buffer.o', 'buffer_test.cc']
@@ -56,6 +57,7 @@ prgs += env.Program('this_proc_op_test', this_proc_op_sources, LIBS=platform_lib
 prgs += env.Program('this_machine_op_test', this_machine_op_sources, LIBS=platform_libs)
 prgs += env.Program('hash_test', hash_sources, LIBS=platform_libs)
 prgs += env.Program('logo_test', logo_sources, LIBS=platform_libs)
+prgs += env.Program('macro_test', macro_sources, LIBS=platform_libs)
 
 # prgs += env.Program('crypto_md5_op_test', crypto_md5_op_sources, LIBS=platform_libs)
 # prgs += env.Program('encoding_base64_op_test', encoding_base64_op_sources, LIBS=platform_libs)

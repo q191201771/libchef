@@ -23,3 +23,4 @@ cd build/base_test
 ./thread_pool_test
 ./wait_event_test
 ./wait_event_counter_test
+./macro_test
