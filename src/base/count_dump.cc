@@ -103,7 +103,7 @@ namespace chef {
     for (; !exit_flag_; ) {
       dump2disk_();
 
-      chef::this_thread::sleep_for(chef::chrono::microseconds(dump_interval_ms_));
+      chef::this_thread::sleep_for(chef::chrono::milliseconds(dump_interval_ms_));
     }
   }
 
