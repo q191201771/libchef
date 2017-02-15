@@ -1,3 +1,7 @@
+src/base/leader_election.h
+src/base/zkclient.h
+src/base/zkclient.cc
+
 dump
 deploy_156.sh
 exclude_list
