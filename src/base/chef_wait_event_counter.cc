@@ -1,4 +1,4 @@
-#include "wait_event_counter.h"
+#include "chef_wait_event_counter.h"
 
 namespace chef {
 

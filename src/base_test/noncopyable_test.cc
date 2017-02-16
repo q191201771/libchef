@@ -1,4 +1,4 @@
-#include "../base/noncopyable.hpp"
+#include "../base/chef_noncopyable.hpp"
 #include <stdio.h>
 #include "./common/check_log.hpp"
 

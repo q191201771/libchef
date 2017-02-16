@@ -1,6 +1,6 @@
 /**
  * @file   buffer.h/buffer.cc
- * @deps   nope
+ * @deps   chef_noncopyable.hpp
  *
  * @author
  *   chef <191201771@qq.com>
@@ -13,7 +13,7 @@
 #ifndef _CHEF_BASE_BUFFER_H_
 #define _CHEF_BASE_BUFFER_H_
 
-#include "noncopyable.hpp"
+#include "chef_noncopyable.hpp"
 #include <stdint.h>
 
 namespace chef {

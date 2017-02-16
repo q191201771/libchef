@@ -1,6 +1,6 @@
 /**
  * @file   json_config.h/json_config.cc
- * @deps   jsoncpp
+ * @deps   chef_noncopyable.hpp/libjsoncpp
  *
  * @author
  *   chef <191201771@qq.com>
@@ -13,7 +13,7 @@
 #ifndef _CHEF_BASE_JSON_CONFIG_H_
 #define _CHEF_BASE_JSON_CONFIG_H_
 
-#include "noncopyable.hpp"
+#include "chef_noncopyable.hpp"
 #include <json/json.h>
 #include <string>
 

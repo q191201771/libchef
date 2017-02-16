@@ -1,6 +1,6 @@
 /**
  * @file   redis_backend.h/redis_backend.cc
- * @deps   hirdis
+ * @deps   chef_env.hpp/chef_noncopyable.hpp/chef_task_thread.h/libhirdis
  *
  * @author
  *   chef <191201771@qq.com>
@@ -22,9 +22,9 @@
 #ifndef _CHEF_BASE_REDIS_BACKEND_H_
 #define _CHEF_BASE_REDIS_BACKEND_H_
 
-#include "task_thread.h"
-#include "noncopyable.hpp"
-#include "env.hpp"
+#include "chef_noncopyable.hpp"
+#include "chef_task_thread.h"
+#include "chef_env.hpp"
 #include <hiredis/hiredis.h>
 #include <string>
 #include <vector>

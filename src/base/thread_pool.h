@@ -1,6 +1,6 @@
 /**
  * @file   thread_pool.h/thread_pool.cc
- * @deps   nope
+ * @deps   chef_env.hpp/chef_noncopyable.hpp/chef_wait_event.h
  *
  * @author
  *   chef <191201771@qq.com>
@@ -17,9 +17,9 @@
 #ifndef _CHEF_BASE_THREAD_POOL_H_
 #define _CHEF_BASE_THREAD_POOL_H_
 
-#include "wait_event.h"
-#include "noncopyable.hpp"
-#include "env.hpp"
+#include "chef_noncopyable.hpp"
+#include "chef_wait_event.h"
+#include "chef_env.hpp"
 #include <deque>
 #include <string>
 #include <vector>

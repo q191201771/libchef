@@ -1,6 +1,6 @@
 /**
  * @file   logo.h/logo.cc
- * @deps   nope
+ * @deps   chef_noncopyable.hpp
  *
  * @author
  *   chef <191201771@qq.com>
@@ -16,7 +16,7 @@
 #define _CHEF_BASE_LOGO_H_
 
 #include <string>
-#include "noncopyable.hpp"
+#include "chef_noncopyable.hpp"
 
 namespace chef {
 

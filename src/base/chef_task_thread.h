@@ -1,10 +1,10 @@
 /**
- * @file   task_thread.h/task_thread.cc
- * @deps   nope
+ * @file   chef_task_thread.h/chef_task_thread.cc
+ * @deps   chef_env.hpp/chef_noncopyable.hpp/chef_wait_event.h
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release 2016-08-31
+ *     -initial release xxxx-xx-xx
  *
  * @brief
  *   开启一个线程，可以往里面添加异步任务（支持延时任务）。
@@ -14,9 +14,9 @@
 #ifndef _CHEF_BASE_TASK_THREAD_H_
 #define _CHEF_BASE_TASK_THREAD_H_
 
-#include "noncopyable.hpp"
-#include "wait_event.h"
-#include "env.hpp"
+#include "chef_noncopyable.hpp"
+#include "chef_wait_event.h"
+#include "chef_env.hpp"
 #include <stdint.h>
 #include <string>
 #include <deque>

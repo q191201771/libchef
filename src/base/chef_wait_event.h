@@ -1,10 +1,10 @@
 /**
- * @file   wait_event.h/wait_event.cc
- * @deps   nope
+ * @file   chef_wait_event.h/chef_wait_event.cc
+ * @deps   chef_env.hpp/chef_noncopyable.hpp
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release 2016-08-31
+ *     -initial release xxxx-xx-xx
  *
  * @brief
  *   对一次性的用于同步两个并行操作的condition_variable的封装，使用者不用关心cv，mutex的细节。
@@ -14,8 +14,8 @@
 #ifndef _CHEF_BASE_WAIT_EVENT_H_
 #define _CHEF_BASE_WAIT_EVENT_H_
 
-#include "noncopyable.hpp"
-#include "env.hpp"
+#include "chef_noncopyable.hpp"
+#include "chef_env.hpp"
 
 namespace chef {
 
