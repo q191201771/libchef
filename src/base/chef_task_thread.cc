@@ -1,5 +1,8 @@
 #include "chef_task_thread.h"
+
+#ifdef __linux__
 #include <sys/prctl.h>
+#endif
 
 namespace chef {
 
@@ -41,7 +44,9 @@ namespace chef {
   }
 
   void task_thread::run_in_thread_(const std::string &name) {
+#ifdef __linux__
     prctl(PR_SET_NAME, name.c_str());
+#endif
 
     runned_event_.notify();
 
