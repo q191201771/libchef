@@ -37,7 +37,7 @@ namespace chef {
         RELEASE_MODE_DO_ALL_DONE,    /// 析构时，执行所有任务——实时任务和所有延时任务，未到定时时间的延时任务也会提前执行。
       };
 
-      task_thread(const std::string &thread_name=std::string("task thread"), release_mode rm=RELEASE_MODE_ASAP);
+      task_thread(const std::string &thread_name=std::string(), release_mode rm=RELEASE_MODE_ASAP);
 
       ~task_thread();
 
@@ -73,7 +73,7 @@ namespace chef {
        * 新建线程的执行体loop
        *
        */
-      void run_in_thread_(const std::string &name);
+      void run_in_thread_();
 
       /**
        * 收集已到定时时间该执行的延时任务

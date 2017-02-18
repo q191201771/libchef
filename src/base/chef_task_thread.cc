@@ -19,7 +19,7 @@ namespace chef {
   }
 
   void task_thread::start() {
-    thread_ = chef::make_shared<chef::thread>(chef::bind(&task_thread::run_in_thread_, this, name_));
+    thread_ = chef::make_shared<chef::thread>(chef::bind(&task_thread::run_in_thread_, this));
     runned_event_.wait();
   }
 
@@ -43,9 +43,9 @@ namespace chef {
     return tasks_.size() + defferred_tasks_.size();
   }
 
-  void task_thread::run_in_thread_(const std::string &name) {
+  void task_thread::run_in_thread_() {
 #ifdef __linux__
-    prctl(PR_SET_NAME, name.c_str());
+    prctl(PR_SET_NAME, name_.c_str());
 #endif
 
     runned_event_.notify();
