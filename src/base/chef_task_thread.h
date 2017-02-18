@@ -78,7 +78,7 @@ namespace chef {
       /**
        * 收集已到定时时间该执行的延时任务
        *
-       * @param tasks 传出参数 将达到定时时间的延时任务插入[tasks]尾部
+       * @param tasks 传出参数 将达到定时时间的延时任务插入<tasks>尾部
        *
        */
       void append_expired_tasks_(std::deque<task> &tasks);
@@ -96,7 +96,7 @@ namespace chef {
       void join_();
 
       /**
-       * 执行[tasks]里的所有任务，并清空tasks
+       * 执行<tasks>里的所有任务，并清空<tasks>
        *
        */
       void execute_tasks_(std::deque<task> &tasks);
@@ -104,7 +104,7 @@ namespace chef {
       /**
        * @overload
        *
-       * 执行[tasks]里的所有任务，并清空tasks
+       * 执行<tasks>里的所有任务，并清空<tasks>
        *
        */
        void execute_tasks_(std::multimap<uint64_t, task> &tasks);
