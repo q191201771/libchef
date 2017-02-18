@@ -1,6 +1,6 @@
 /**
  * @file   chef_task_thread.h/chef_task_thread.cc
- * @deps   chef_env.hpp/chef_noncopyable.hpp/chef_wait_event.h
+ * @deps   chef_env.hpp/chef_noncopyable.hpp/chef_wait_event_counter.h
  *
  * @author
  *   chef <191201771@qq.com>
@@ -15,7 +15,7 @@
 #define _CHEF_BASE_TASK_THREAD_H_
 
 #include "chef_noncopyable.hpp"
-#include "chef_wait_event.h"
+#include "chef_wait_event_counter.h"
 #include "chef_env.hpp"
 #include <stdint.h>
 #include <string>
@@ -118,7 +118,7 @@ namespace chef {
       std::multimap<uint64_t, task>  defferred_tasks_;
       chef::mutex                    mutex_;
       chef::condition_variable       cond_;
-      chef::wait_event               runned_event_;
+      chef::wait_event_counter       runned_event_;
   };
 
 } // namespace chef

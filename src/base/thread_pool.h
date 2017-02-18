@@ -18,7 +18,7 @@
 #define _CHEF_BASE_THREAD_POOL_H_
 
 #include "chef_noncopyable.hpp"
-#include "chef_wait_event.h"
+#include "chef_wait_event_counter.h"
 #include "chef_env.hpp"
 #include <deque>
 #include <string>
@@ -47,8 +47,8 @@ namespace chef {
       task take_();
 
     private:
-      typedef std::vector<chef::shared_ptr<chef::thread> >      thread_vector;
-      typedef std::vector<chef::shared_ptr<chef::wait_event> > wait_event_vector;
+      typedef std::vector<chef::shared_ptr<chef::thread> >             thread_vector;
+      typedef std::vector<chef::shared_ptr<chef::wait_event_counter> > wait_event_vector;
 
       int                      num_of_thread_;
       std::string              thread_prefix_name_;

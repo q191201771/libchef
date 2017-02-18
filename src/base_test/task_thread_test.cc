@@ -29,7 +29,7 @@ void add_and_start_test() {
   tt.start();
 }
 
-chef::wait_event we;
+chef::wait_event_counter we;
 std::atomic<int> count{0};
 
 void parallel_helper() {

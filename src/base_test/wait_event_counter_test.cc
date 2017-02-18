@@ -54,6 +54,38 @@ void counter_parallel_test() {
   thd2.join();
 }
 
+void wait_for_test() {
+  bool ret;
+
+  chef::wait_event_counter wec1;
+  wec1.notify();
+  ret = wec1.wait_for(0);
+  assert(ret == true);
+
+  chef::wait_event_counter wec2(2);
+  wec2.notify();
+  wec2.notify();
+  ret = wec1.wait_for(0);
+  assert(ret == true);
+
+
+  chef::wait_event_counter wec3(2);
+  wec3.notify();
+  wec3.notify();
+  ret = wec1.wait_for(100);
+  assert(ret == true);
+
+  chef::wait_event_counter wec4;
+  ret = wec4.wait_for(100);
+  assert(ret == false);
+
+  chef::wait_event_counter wec5(3);
+  wec5.notify();
+  wec5.notify();
+  ret = wec4.wait_for(100);
+  assert(ret == false);
+}
+
 int main() {
   ENTER_TEST;
 
@@ -61,6 +93,7 @@ int main() {
   notify_after_wait_test();
   counter_test();
   counter_parallel_test();
+  wait_for_test();
 
   return 0;
 }

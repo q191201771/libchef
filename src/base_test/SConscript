@@ -21,7 +21,7 @@ stuff_sources              = ['../base/stuff.o', 'stuff_test.cc']
 buffer_sources             = ['../base/buffer.o', 'buffer_test.cc']
 strings_sources            = ['../base/strings_op.o', 'strings_op_test.cc']
 daemon_op_sources          = ['../base/daemon_op.o', 'daemon_op_test.cc']
-wait_event_sources         = ['../base/wait_event.o', 'wait_event_test.cc']
+wait_event_sources         = ['../base/wait_event_counter.o', 'wait_event_test.cc']
 os_exec_op_sources         = ['../base/os_exec_op.o', 'os_exec_op_test.cc']
 filepath_op_sources        = ['../base/filepath_op.o', 'filepath_op_test.cc']
 chunk_head_op_sources      = ['../base/chunk_head_op.o', 'chunk_head_op_test.cc']
@@ -31,8 +31,8 @@ wait_event_counter_sources = ['../base/wait_event_counter.o', 'wait_event_counte
 # crypto_md5_op_sources      = ['../base/crypto_md5_op.o', 'crypto_md5_op_test.cc']
 # encoding_base64_op_sources = ['../base/encoding_base64_op.o', 'encoding_base64_op_test.cc']
 
-task_thread_sources = ['../base/wait_event.o', '../base/task_thread.o', 'task_thread_test.cc']
-thread_pool_sources = ['../base/wait_event.o', '../base/thread_pool.o', 'thread_pool_test.cc']
+task_thread_sources = ['../base/wait_event_counter.o', '../base/task_thread.o', 'task_thread_test.cc']
+thread_pool_sources = ['../base/wait_event_counter.o', '../base/thread_pool.o', 'thread_pool_test.cc']
 
 count_dump_sources      = ['../base/filepath_op.o', '../base/count_dump.o', 'count_dump_test.cc']
 logo_sources            = ['../base/filepath_op.o', '../base/logo.o', 'logo_test.cc']
@@ -76,7 +76,7 @@ with_jsoncpp_libs = [platform_libs]
 with_jsoncpp_libs += [File(os.path.join(jsoncpp_lib_path, 'libjsoncpp.a'))]
 prgs += env.Program('json_config_test', json_config_sources, CPPPATH = jsoncpp_include_path, LIBS=with_jsoncpp_libs)
 
-redis_backend_sources = ['../base/wait_event.o', '../base/task_thread.o', '../base/redis_backend.o', 'redis_backend_test.cc']
+redis_backend_sources = ['../base/wait_event_counter.o', '../base/task_thread.o', '../base/redis_backend.o', 'redis_backend_test.cc']
 with_hiredis_libs = [platform_libs]
 with_hiredis_libs += [File(os.path.join(hiredis_lib_path, 'libhiredis.a'))]
 prgs += env.Program('redis_backend_test', redis_backend_sources, LIBS=with_hiredis_libs)
