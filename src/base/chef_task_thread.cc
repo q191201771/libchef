@@ -45,7 +45,9 @@ namespace chef {
 
   void task_thread::run_in_thread_() {
 #ifdef __linux__
-    prctl(PR_SET_NAME, name_.c_str());
+    if (!name_.empty()) {
+      prctl(PR_SET_NAME, name_.c_str());
+    }
 #endif
 
     runned_event_.notify();
