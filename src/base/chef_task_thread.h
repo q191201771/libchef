@@ -37,6 +37,10 @@ namespace chef {
         RELEASE_MODE_DO_ALL_DONE,    /// 析构时，执行所有任务——实时任务和所有延时任务，未到定时时间的延时任务也会提前执行。
       };
 
+      /**
+       * @param thread_name 线程名，linux平台下调用prctl设置，其他平台或<thread_name>为空则不设置~
+       *
+       */
       explicit task_thread(const std::string &thread_name=std::string(), release_mode rm=RELEASE_MODE_ASAP);
 
       ~task_thread();
