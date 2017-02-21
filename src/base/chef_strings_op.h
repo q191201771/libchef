@@ -1,5 +1,5 @@
 /**
- * @file   strings.h/strings.cc
+ * @file   chef_strings.h/chef_strings.cc
  * @deps   nope
  *
  * @author

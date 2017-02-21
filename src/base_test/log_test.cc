@@ -1,4 +1,4 @@
-#include "../base/log.h"
+#include "../base/chef_log.h"
 #include "./common/check_log.hpp"
 
 int main() {

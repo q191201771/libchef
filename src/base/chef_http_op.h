@@ -1,6 +1,6 @@
 /**
- * @file   http_op.h/http_op.cc
- * @deps   libcurl/strings_op.h
+ * @file   chef_http_op.h/chef_http_op.cc
+ * @deps   libcurl/chef_strings_op.h
  *
  * @author
  *   chef <19120177@qq.com>

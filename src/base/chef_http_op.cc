@@ -1,5 +1,5 @@
-#include "http_op.h"
-#include "strings_op.h"
+#include "chef_http_op.h"
+#include "chef_strings_op.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
