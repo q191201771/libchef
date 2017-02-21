@@ -14,8 +14,8 @@
 #ifndef _CHEF_BASE_TASK_THREAD_H_
 #define _CHEF_BASE_TASK_THREAD_H_
 
-#include "chef_noncopyable.hpp"
 #include "chef_wait_event_counter.h"
+#include "chef_noncopyable.hpp"
 #include "chef_env.hpp"
 #include <stdint.h>
 #include <string>
@@ -37,7 +37,7 @@ namespace chef {
         RELEASE_MODE_DO_ALL_DONE,    /// 析构时，执行所有任务——实时任务和所有延时任务，未到定时时间的延时任务也会提前执行。
       };
 
-      task_thread(const std::string &thread_name=std::string(), release_mode rm=RELEASE_MODE_ASAP);
+      explicit task_thread(const std::string &thread_name=std::string(), release_mode rm=RELEASE_MODE_ASAP);
 
       ~task_thread();
 
@@ -55,7 +55,7 @@ namespace chef {
        * @param defferred_time_ms 可指定延时多少毫秒后执行，如果为0，则尽快执行。
        *
        */
-      void add(const task &t, int defferred_time_ms = 0);
+      void add(const task &t, int defferred_time_ms=0);
 
       /**
        * @return 还未执行的任务数量

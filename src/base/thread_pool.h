@@ -17,12 +17,12 @@
 #ifndef _CHEF_BASE_THREAD_POOL_H_
 #define _CHEF_BASE_THREAD_POOL_H_
 
-#include "chef_noncopyable.hpp"
 #include "chef_wait_event_counter.h"
+#include "chef_noncopyable.hpp"
 #include "chef_env.hpp"
-#include <deque>
 #include <string>
 #include <vector>
+#include <deque>
 
 namespace chef {
 

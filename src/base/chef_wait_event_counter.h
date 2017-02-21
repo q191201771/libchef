@@ -21,13 +21,13 @@
 
 namespace chef {
 
-  class wait_event_counter : public noncopyable {
+  class wait_event_counter : public chef::noncopyable {
     public:
       /**
        * @param need_count 需要notify多少次，wait才能通过
        *
        */
-      wait_event_counter(int need_count = 1);
+      explicit wait_event_counter(int need_count=1);
 
       ~wait_event_counter();
 

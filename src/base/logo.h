@@ -22,7 +22,7 @@ namespace chef {
 
   class logo : public chef::noncopyable {
     public:
-      logo(const std::string &filename);
+      explicit logo(const std::string &filename);
       ~logo();
 
       int init();
