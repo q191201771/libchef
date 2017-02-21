@@ -44,9 +44,11 @@ namespace chef {
 
   void thread_pool::run_in_thread_(int index) {
 #ifdef __linux__
-    char thread_name[32] = {0};
-    snprintf(thread_name, 31, "%s%d", thread_prefix_name_.c_str(), index+1);
-    ::prctl(PR_SET_NAME, thread_name);
+    if (!thread_prefix_name_.empty()) {
+      char thread_name[32] = {0};
+      snprintf(thread_name, 31, "%s%d", thread_prefix_name_.c_str(), index+1);
+      ::prctl(PR_SET_NAME, thread_name);
+    }
 #endif
     thread_runned_events_[index]->notify();
     for (; !exit_flag_; ) {
