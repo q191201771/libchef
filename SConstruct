@@ -15,7 +15,7 @@ else:
     exit()
 
 env.Append(TOOLSET   = ['g++'])
-env.Append(CXXFLAGS  = ['-g', '-pthread', '-std=c++14'])
+env.Append(CXXFLAGS  = ['-g', '-pthread', '-std=c++14', '-pipe'])
 env.Append(CXXFLAGS  = ['-Wall', '-Wextra', '-Werror', '-Wunused-parameter', '-Woverloaded-virtual', '-Wpointer-arith', '-Wshadow', '-Wwrite-strings', '-Wcast-align', '-Wreorder'])
 env.Append(CXXFLAGS  = ['-Wconversion',  '-Wold-style-cast'])
 env.Append(LINKFLAGS = ['-pthread', '-static-libstdc++'])
