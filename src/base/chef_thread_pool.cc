@@ -1,4 +1,5 @@
 #include "chef_thread_pool.h"
+#include <stdio.h>
 
 #ifdef __linux__
 #include <sys/prctl.h>
