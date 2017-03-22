@@ -11,7 +11,7 @@ void ctor_test() {
   chef::task_thread tt;
   chef::task_thread tt2("ctor_test");
   assert(tt.num_of_undone_task() == 0);
-  assert(tt.thread_name() == "task thread");
+  assert(tt.thread_name() == "");
   assert(tt2.num_of_undone_task() == 0);
   assert(tt2.thread_name() == "ctor_test");
 }

@@ -25,9 +25,7 @@ namespace chef {
   void thread_pool::start() {
     for (int i = 0; i < num_of_thread_; i++) {
       thread_runned_events_.push_back(chef::make_shared<chef::wait_event_counter>());
-      threads_.push_back(chef::make_shared<chef::thread>(
-        chef::bind(&thread_pool::run_in_thread_, this, i)
-      ));
+      threads_.push_back(chef::make_shared<chef::thread>(chef::bind(&thread_pool::run_in_thread_, this, i)));
       thread_runned_events_[i]->wait();
     }
   }

@@ -36,6 +36,7 @@ namespace chef {
     } else {
       defferred_tasks_.insert(std::pair<uint64_t, task>(now_() + defferred_time_ms, t));
     }
+    cond_.notify_one();
   }
 
   uint64_t task_thread::num_of_undone_task() {
