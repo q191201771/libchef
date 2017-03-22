@@ -41,6 +41,17 @@ namespace inner {
 
 namespace chef {
 
+  std::string this_proc_op::version() {
+#define MACRO_2_STRING_(x) #x
+#define MACRO_2_STRING(x) MACRO_2_STRING_(x)
+
+#ifdef CHEF_VERSION
+    return std::string(MACRO_2_STRING(CHEF_VERSION));
+#else
+    return "unknown";
+#endif
+  }
+
   int32_t this_proc_op::pid() {
     return static_cast<int32_t>(::getpid());
   }

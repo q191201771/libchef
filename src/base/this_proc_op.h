@@ -21,6 +21,10 @@ namespace chef {
 
   class this_proc_op {
     public:
+      /// 读取Makefile中宏定义传入的版本号，格式为<编译时间>_<git最后一次commit号的前7位>，例如20170322212416_516ffc1
+      /// 如果读取不到返回"unknown"
+      static std::string version();
+
       /**
        * 进程启动时的unix时间戳，单位秒
        *

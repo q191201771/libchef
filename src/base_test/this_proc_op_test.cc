@@ -40,6 +40,7 @@ int main() {
   num_of_threads_test();
   memory_test();
 
+  std::string version              = chef::this_proc_op::version();
   int32_t pid                      = chef::this_proc_op::pid();
   int32_t ppid                     = chef::this_proc_op::ppid();
   int32_t uid                      = chef::this_proc_op::uid();
@@ -57,6 +58,7 @@ int main() {
   int32_t virt_kb                  = chef::this_proc_op::virt_kb();
   int32_t res_kb                   = chef::this_proc_op::res_kb();
 
+  printf("version: %s\n", version.c_str());
   printf("pid: %d\n", pid);
   printf("ppid: %d\n", ppid);
   printf("uid: %d\n", uid);
@@ -74,6 +76,7 @@ int main() {
   //printf("-----status-----\n%s\n----------", status.c_str());
   //printf("-----stat-----\n%s\n----------", stat.c_str());
 
+  assert(version.length() = 22 || version == "unknown");
   assert(pid > 0);
   assert(ppid > 0);
   assert(uid > 0);
