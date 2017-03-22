@@ -3,7 +3,7 @@
  * @deps   libcurl/chef_strings_op.h
  *
  * @author
- *   chef <19120177@qq.com>
+ *   chef <191201771@qq.com>
  *     -initial release xxxx-xx-xx
  *
  * @brief 一些http操作的封装
