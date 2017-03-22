@@ -69,6 +69,7 @@ namespace chef {
 
       /**
        * @return 线程名
+       *
        */
       std::string thread_name() const { return name_; }
 
