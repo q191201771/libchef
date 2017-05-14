@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		043DC04F1EC87BCB0071DD9B /* count_dump_test.cc in Sources */ = {isa = PBXBuildFile; fileRef = 043DC04E1EC87BCB0071DD9B /* count_dump_test.cc */; };
 		04ED81441EC875F60026A37A /* libchefbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ED81431EC875F60026A37A /* libchefbase.a */; };
-		04ED81491EC877F20026A37A /* filepath_op_test.cc in Sources */ = {isa = PBXBuildFile; fileRef = 04ED81481EC877F20026A37A /* filepath_op_test.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,10 +24,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		043DC04D1EC87BCB0071DD9B /* common */ = {isa = PBXFileReference; lastKnownFileType = folder; path = common; sourceTree = "<group>"; };
+		043DC04E1EC87BCB0071DD9B /* count_dump_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = count_dump_test.cc; sourceTree = "<group>"; };
 		04ED81381EC875460026A37A /* base_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = base_test; sourceTree = BUILT_PRODUCTS_DIR; };
 		04ED81431EC875F60026A37A /* libchefbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libchefbase.a; path = "../../../../../../../Library/Developer/Xcode/DerivedData/starry-night-hdbnkbbhxxjcqidmpynqlknqaldd/Build/Products/Debug/libchefbase.a"; sourceTree = "<group>"; };
-		04ED81451EC877110026A37A /* common */ = {isa = PBXFileReference; lastKnownFileType = folder; name = common; path = ../../../../src/base_test/common; sourceTree = "<group>"; };
-		04ED81481EC877F20026A37A /* filepath_op_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = filepath_op_test.cc; path = ../../../../src/base_test/filepath_op_test.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +62,11 @@
 		04ED813A1EC875460026A37A /* base_test */ = {
 			isa = PBXGroup;
 			children = (
-				04ED81481EC877F20026A37A /* filepath_op_test.cc */,
-				04ED81451EC877110026A37A /* common */,
+				043DC04D1EC87BCB0071DD9B /* common */,
+				043DC04E1EC87BCB0071DD9B /* count_dump_test.cc */,
 			);
-			path = base_test;
+			name = base_test;
+			path = ../../../src/base_test;
 			sourceTree = "<group>";
 		};
 		04ED81421EC875F50026A37A /* Frameworks */ = {
@@ -134,7 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04ED81491EC877F20026A37A /* filepath_op_test.cc in Sources */,
+				043DC04F1EC87BCB0071DD9B /* count_dump_test.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +266,7 @@
 				04ED81411EC875460026A37A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -99,7 +99,7 @@
 				042480181EC871EE004C20CC /* chef_wait_event_counter.h */,
 			);
 			name = base;
-			path = "../../../../starry-night/build/macos/base/base";
+			path = ../../../src/base;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */

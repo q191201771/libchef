@@ -24,6 +24,16 @@ Linux ubuntu 4.4.0-62-generic #83-Ubuntu SMP Wed Jan 18 14:10:15 UTC 2017 x86_64
 gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
 ```
 
+### 依赖
+
+```
+ubuntu
+$cd ${ROOT_DIR}/script/ && sh install_ubuntu_deps.sh
+
+macos with xcode
+$cd ${ROOT_DIR}/script/ && sh install_macos_deps.sh
+```
+
 ### 编译
 
 linux下使用scons
@@ -74,7 +84,7 @@ $make clean
 mac
 
 ```
-xcode，待完成
+用xcode打开 ${ROOT_DIR}/build/macos/starry-night.xcworkspace ，之后就可以愉快的编译、运行调试啦。
 ```
 
 ### 声明，拷贝自第三方工程的代码
