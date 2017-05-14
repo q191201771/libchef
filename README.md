@@ -19,9 +19,13 @@ README.md                   ......
 ### 我的环境
 
 ```
-ubuntu-16.04.2-server-amd64
+ubuntu
 Linux ubuntu 4.4.0-62-generic #83-Ubuntu SMP Wed Jan 18 14:10:15 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
 gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
+
+macos
+Darwin MacdeMacBook-Pro.local 16.5.0 Darwin Kernel Version 16.5.0: Fri Mar  3 16:52:33 PST 2017; root:xnu-3789.51.2~3/RELEASE_X86_64 x86_64
+xcode: Version 8.3.2 (8E2002)
 ```
 
 `以下所有 ROOT_DIR 目录指git工程根目录`
@@ -86,7 +90,7 @@ $make clean
 mac
 
 ```
-用xcode打开 ${ROOT_DIR}/build/macos/starry-night.xcworkspace ，之后就可以愉快的编译、运行调试啦。
+用xcode打开 ${ROOT_DIR}/build/macos/starry-night.xcworkspace ，之后就可以愉快的编译、运行、调试啦。
 
 目前只添加了 ${ROOT_DIR}/src/base/chef_*.cc ，因为这些文件在公司的项目中使用了，而同事们用xcode做开发，所以我至少保证下它们在xcode下是可编译的。
 ```
