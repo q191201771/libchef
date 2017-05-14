@@ -76,7 +76,7 @@ int main() {
   //printf("-----status-----\n%s\n----------", status.c_str());
   //printf("-----stat-----\n%s\n----------", stat.c_str());
 
-  assert(version.length() = 22 || version == "unknown");
+  assert(version.length() == 22 || version == "unknown");
   assert(pid > 0);
   assert(ppid > 0);
   assert(uid > 0);

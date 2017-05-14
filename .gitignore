@@ -5,7 +5,6 @@ src/base/sub
 
 dump
 deploy_156.sh
-exclude_list
 diff.sh
 TODO.md
 secret.md

@@ -1,4 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# @file   valgrind.sh
+# @author
+#   chef <191201771@qq.com>
+#     -created 2017-05-14 11:07:59
+#     -initial release xxxx-xx-xx
+# @brief
+#   跑valgrind内存测试
+
+. ./common.sh
+
+cd ${BIN_DIR}
 
 valgrind --leak-check=full --show-leak-kinds=all ./buffer_test
 valgrind --leak-check=full --show-leak-kinds=all ./chunk_head_op_test

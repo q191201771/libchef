@@ -4,8 +4,16 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
+const std::string REDIS_SRV_IP   = "127.0.0.1";
+const int REDIS_SRV_PORT         = 6666;
+
+bool check_redis_server() {
+  chef::redis_backend rb(REDIS_SRV_IP, REDIS_SRV_PORT, "rbt.nert", 1, 1);
+  return rb.start() == 0;
+}
+
 void not_exist_redis_test() {
-  chef::redis_backend rb("8.8.8.8", 8888, "rbt.nert", 1, 1);
+  chef::redis_backend rb(REDIS_SRV_IP, REDIS_SRV_PORT, "rbt.nert", 1, 1);
   assert(rb.start() == -1);
   assert(rb.ping() == -1);
   std::vector<std::string> keys;
@@ -14,7 +22,7 @@ void not_exist_redis_test() {
 }
 
 void normal_test() {
-  chef::redis_backend rb("127.0.0.1", 6379, "rbt.nt");
+  chef::redis_backend rb(REDIS_SRV_IP, REDIS_SRV_PORT, "rbt.nt");
   assert(rb.start() == 0);
   assert(rb.ping() == 0);
   std::vector<std::string> keys;
@@ -40,7 +48,7 @@ void normal_test() {
 }
 
 void redis_break_test() {
-  chef::redis_backend rb("127.0.0.1", 6379, "rbt.bt", 1, 1);
+  chef::redis_backend rb(REDIS_SRV_IP, REDIS_SRV_PORT, "rbt.bt", 1, 1);
   assert(rb.start() == 0);
   assert(rb.ping() == 0);
 
@@ -70,9 +78,12 @@ void redis_break_test() {
 int main() {
   ENTER_TEST;
 
-  not_exist_redis_test();
-  normal_test();
-  redis_break_test();
+  if (check_redis_server()) {
+    normal_test();
+    redis_break_test();
+  } else {
+    not_exist_redis_test();
+  }
 
   return 0;
 }
