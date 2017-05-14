@@ -28,19 +28,19 @@ linux下使用scons
 
 ```
 生成方式：
-$cd ${ROOT_DIR}
+$cd {ROOT_DIR}
 $scons
 如果想生成debug版本，可以
 $scons mode=debug
 
 输出：
-base中各源码对应的编译目标文件
+base中各源码对应的编译目标文件.o
 {ROOT_DIR}/output/base/*.o
-base_test各源码对应的编译目标文件.d、可执行程序
+base_test各源码对应的编译目标文件.o、可执行程序
 {ROOT_DIR}/output/base_test/
 
 清理：
-$cd ${ROOT_DIR}
+$cd {ROOT_DIR}
 $scons -c
 ```
 
@@ -48,13 +48,13 @@ linux下使用make
 
 ```
 生成方式：
-$cd ${ROOT_DIR}/src/base
+$cd {ROOT_DIR}/src/base
 $make
 如果想生成debug版本，可以
 $make debug
 
 输出：
-base中各源码对应的各源码依赖关系文件.d文件、编译目标文件.d、静态库文件libchefbase.a
+base中各源码对应的依赖关系文件.d、编译目标文件.o、静态库文件libchefbase.a
 release:
 {ROOT_DIR}/src/base/release/*.d
 {ROOT_DIR}/src/base/release/*.o
@@ -70,6 +70,10 @@ $make clean
 ```
 
 mac
+
+```
+TODO
+```
 
 ### 声明，拷贝自第三方工程的代码
 
