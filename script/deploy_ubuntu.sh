@@ -11,6 +11,6 @@
 
 sh clean.sh
 rsync -rlpgoDvP -e 'ssh -p 4022' --progress ${ROOT_DIR} --exclude-from=exclude_list chef@localhost:/tmp/starry-night
-ssh -p 4022 chef@localhost "cd /tmp/starry-night && scons"
-#ssh -p 4022 chef@localhost "cd /tmp/starry-night && scons mode=debug && cd script && ./unit_test.sh"
+ssh -p 4022 chef@localhost "cd /tmp/starry-night/build/linux && scons"
+#ssh -p 4022 chef@localhost "cd /tmp/starry-night/build/linux && scons mode=debug && cd /tmp/starry-night/script && ./unit_test.sh"
 #ssh -p 4022 chef@localhost "cd /tmp/starry-night/src/base && make clean && make"

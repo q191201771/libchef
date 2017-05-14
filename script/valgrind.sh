@@ -9,7 +9,7 @@
 
 . ./common.sh
 
-cd ${BIN_DIR}
+cd ${SCONSBIN_DIR}
 
 valgrind --leak-check=full --show-leak-kinds=all ./buffer_test
 valgrind --leak-check=full --show-leak-kinds=all ./chunk_head_op_test

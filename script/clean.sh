@@ -9,9 +9,10 @@
 
 . ./common.sh
 
-find ${OUT_DIR} -name '*.gch' | xargs rm
-find ${OUT_DIR} -name '*.log.chef' | xargs rm
-
-cd ${SCONS_ROOT_DIR}
-scons -c
-
+#find ${ROOT_DIR} -name '*.gch' | xargs rm
+#find ${SCONSOUT_DIR} -name '*.log.chef' | xargs rm
+#
+#cd ${SCONS_ROOT_DIR}
+#scons -c
+#cd ${MAKE_ROOT_DIR}
+#make clean

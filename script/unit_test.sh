@@ -9,7 +9,7 @@
 
 . ./common.sh
 
-cd ${BIN_DIR}
+cd ${SCONS_BIN_DIR}
 
 ./buffer_test
 ./chunk_head_op_test

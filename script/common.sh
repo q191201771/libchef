@@ -8,6 +8,7 @@
 #   脚本共用的常量、函数
 
 ROOT_DIR=`pwd`/..
-SCONS_DIR=${ROOT_DIR}
-OUT_DIR=${ROOT_DIR}
-BIN_DIR=${ROOT_DIR}/output/base_test
+SCONS_ROOT_DIR=${ROOT_DIR}/build/linux
+SCONS_OUT_DIR=${ROOT_DIR}/build/linux/output
+SCONS_BIN_DIR=${SCONS_OUT_DIR}/base_test
+MAKE_ROOT_DIR=${ROOT_DIR}/src/base

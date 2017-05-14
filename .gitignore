@@ -3,9 +3,8 @@ src/base/zkclient.h
 src/base/zkclient.cc
 src/base/sub
 
+build/macos/base/output/
 dump
-deploy_156.sh
-diff.sh
 TODO.md
 secret.md
 *.log.chef
