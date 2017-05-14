@@ -24,6 +24,8 @@ Linux ubuntu 4.4.0-62-generic #83-Ubuntu SMP Wed Jan 18 14:10:15 UTC 2017 x86_64
 gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
 ```
 
+`以下所有 ROOT_DIR 目录指git工程根目录`
+
 ### 依赖
 
 ```
@@ -85,6 +87,8 @@ mac
 
 ```
 用xcode打开 ${ROOT_DIR}/build/macos/starry-night.xcworkspace ，之后就可以愉快的编译、运行调试啦。
+
+目前只添加了 ${ROOT_DIR}/src/base/chef_*.cc ，因为这些文件在公司的项目中使用了，而同事们用xcode做开发，所以我至少保证下它们在xcode下是可编译的。
 ```
 
 ### 声明，拷贝自第三方工程的代码
