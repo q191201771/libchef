@@ -1,6 +1,7 @@
 /**
- * @file   chef_strings.h/chef_strings.cc
- * @deps   nope
+ * @file     chef_strings.h/chef_strings.cc
+ * @deps     nope
+ * @platform linux/macos/xxx
  *
  * @author
  *   chef <191201771@qq.com>

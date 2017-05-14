@@ -1,6 +1,7 @@
 /**
- * @file   chef_noncopyable.hpp
- * @deps   nope
+ * @file     chef_noncopyable.hpp
+ * @deps     nope
+ * @platform linux/macos/xxx
  *
  * @author
  *   chef <191201771@qq.com>

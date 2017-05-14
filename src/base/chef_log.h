@@ -1,6 +1,7 @@
 /**
- * @file   chef_log.h/chef_log.cc
- * @deps   libboost
+ * @file     chef_log.h/chef_log.cc
+ * @deps     libboost
+ * @platform linux/xxx/xxx
  *
  * @author
  *   chef <191201771@qq.com>

@@ -1,6 +1,7 @@
 /**
- * @file   chef_filepath_op.h/chef_filepath.cc
- * @deps   nope
+ * @file     chef_filepath_op.h/chef_filepath.cc
+ * @deps     nope
+ * @platform linux/macos/xxx
  *
  * @author
  *   chef <191201771@qq.com>

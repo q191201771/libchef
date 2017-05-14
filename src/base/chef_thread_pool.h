@@ -1,6 +1,7 @@
 /**
  * @file   chef_thread_pool.h/chef_thread_pool.cc
  * @deps   chef_env.hpp/chef_noncopyable.hpp/chef_wait_event_counter.h
+ * @platform linux/macos/xxx
  *
  * @author
  *   chef <191201771@qq.com>

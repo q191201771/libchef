@@ -92,7 +92,7 @@ mac
 ```
 用xcode打开 ${ROOT_DIR}/build/macos/starry-night.xcworkspace ，之后就可以愉快的编译、运行、调试啦。
 
-目前只添加了 ${ROOT_DIR}/src/base/chef_*.cc ，因为这些文件在公司的项目中使用了，而同事们用xcode做开发，所以我至少保证下它们在xcode下是可编译的。
+目前只添加了部分文件，因为这些文件在公司的项目中使用了，而同事们用xcode做开发，所以我至少保证下它们在xcode下是可编译的。
 ```
 
 ### 声明，拷贝自第三方工程的代码

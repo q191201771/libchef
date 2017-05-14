@@ -1,0 +1,301 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "42B71C98465BB2C5D45AFA2662A3931443AFA393",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "991E806C602D7BB9B25B0DC8788FBF0EF7947D85" : 9223372036854775807,
+    "67EEEB9109B744690E956C6897DFC8A4F54428B8" : 9223372036854775807,
+    "3DF450A1BC58C6D7B3BBA93C984C8B6DB725AC76" : 9223372036854775807,
+    "AB32F2A50AC8543260ED80942597774B89C28EA1" : 9223372036854775807,
+    "BF1AE93E38AFF0EF3927C7065237769CC64F6AD9" : 9223372036854775807,
+    "29A2B8E0883C94167AE6E4D54A734920DF17DA09" : 9223372036854775807,
+    "B420378C50B30F86FFCCB49F62C92BF0EE5C10D7" : 9223372036854775807,
+    "313D7F692A23CD920F897A1941BCC9611C0BE74B" : 9223372036854775807,
+    "7816B71C436736A3994A50AF8DA344559E6A7212" : 9223372036854775807,
+    "AD462B834B5DB4304CD16CCC500958E2D8353EEF" : 9223372036854775807,
+    "AC4CD65697F84B32EE28B049E9A5B7D74610363B" : 9223372036854775807,
+    "19177218567E4C5473934CDA93B337C0B1F8F8F7" : 9223372036854775807,
+    "66C5A5D5D1E961689F66698E971685694481BBB0" : 9223372036854775807,
+    "FA6FBA0799BB3BA453B64D4695980F60B15F4B3C" : 9223372036854775807,
+    "CBF1C1160EAF5271BD17440F0D329052F7DE2441" : 9223372036854775807,
+    "3B5259B69C67A99B1D1FF20A1F1910F3E199B980" : 9223372036854775807,
+    "480F6A97E8D171D420E4D25AB368CD87D036D23F" : 9223372036854775807,
+    "DE78C13E499E001FC8952111D8E32A2D4CE9E78C" : 9223372036854775807,
+    "8856362555BFCED0E191BAB037FD023A13E17F5E" : 9223372036854775807,
+    "1A1C165D09DF264340B16B486C4C9FB5C5AB2918" : 9223372036854775807,
+    "B4A7C566B44D848009ECC6C1D795303D58342868" : 9223372036854775807,
+    "4DF38B460CD0B1E36394057F9913562A9CBB2456" : 9223372036854775807,
+    "51848B199FA9C2CE3963EACA7BFDF4E5D4EDF201" : 9223372036854775807,
+    "42B71C98465BB2C5D45AFA2662A3931443AFA393" : 9223372036854775807,
+    "51CEBB8BBC55556168B63F5CB1544ECE2002440C" : 9223372036854775807,
+    "1568227CFEB074B41DA3A983B1CC2331A724C4FE" : 9223372036854775807,
+    "919B8E84269B2D6775BF2EF2E8C734AE01FD293A" : 9223372036854775807,
+    "D69A715DB81E44F5A2605008DBC3165F2A0D7A91" : 9223372036854775807,
+    "0FD408DCDA764BE037FF7DCD810411B8CF9F4535" : 9223372036854775807,
+    "431AA207DFB5C1812F0DE7706B2CEA51202CB3DB" : 9223372036854775807,
+    "96082A7AA6949C8B154A3349AD21FE02099717A8" : 9223372036854775807,
+    "93D74916E6BEFF9F362D6A07FA7FB12CB0A6FFBF" : 9223372036854775807,
+    "61CF5677EB8C4943D3F508C07DE99CACC8285EFC" : 9223372036854775807,
+    "64F449247AA2CF8E1BC70AB2496E31A1038A8408" : 9223372036854775807,
+    "80E31C04C2205BE4C54F7871116ACAAFA2EE6C26" : 9223372036854775807,
+    "5E2064F21C7E876A882B6DB37E156F0A98D6C184" : 9223372036854775807,
+    "F818FF6E0BA77824867DF47D8F599C76650C4C20" : 9223372036854775807,
+    "2F9B38040A9300AF188C667B39A71C7BC67E59F7" : 9223372036854775807,
+    "44EC1CA88C31389D01476FA8E59E9AB0AE0E78DE" : 9223372036854775807,
+    "B953A055F213AAAA365C83F15EF339BF6A76D122" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "508DFBBD-1A89-4BE3-B4E5-4EBF6A2B2738",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "991E806C602D7BB9B25B0DC8788FBF0EF7947D85" : "..\/..\/..\/.vim\/bundle\/syntastic",
+    "67EEEB9109B744690E956C6897DFC8A4F54428B8" : "..\/..\/..\/.vim\/bundle\/vim-indent-guides",
+    "3DF450A1BC58C6D7B3BBA93C984C8B6DB725AC76" : "..\/..\/..\/.vim\/bundle\/Vundle.vim",
+    "AB32F2A50AC8543260ED80942597774B89C28EA1" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/bottle",
+    "BF1AE93E38AFF0EF3927C7065237769CC64F6AD9" : "..\/..\/..\/.vim\/bundle\/nerdtree-git-plugin",
+    "29A2B8E0883C94167AE6E4D54A734920DF17DA09" : "..\/..\/..\/.vim\/bundle\/vim-signify",
+    "B420378C50B30F86FFCCB49F62C92BF0EE5C10D7" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/JediHTTP",
+    "313D7F692A23CD920F897A1941BCC9611C0BE74B" : "..\/..\/..\/.vim\/bundle\/tagbar",
+    "7816B71C436736A3994A50AF8DA344559E6A7212" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/requests",
+    "AD462B834B5DB4304CD16CCC500958E2D8353EEF" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/frozendict",
+    "AC4CD65697F84B32EE28B049E9A5B7D74610363B" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd",
+    "19177218567E4C5473934CDA93B337C0B1F8F8F7" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/gocode",
+    "66C5A5D5D1E961689F66698E971685694481BBB0" : "..\/..\/..\/.vim\/bundle\/vim-better-whitespace",
+    "FA6FBA0799BB3BA453B64D4695980F60B15F4B3C" : "..\/..\/..\/.vim\/bundle\/nerdcommenter",
+    "CBF1C1160EAF5271BD17440F0D329052F7DE2441" : "..\/..\/..\/.vim\/bundle\/vim-colorschemes",
+    "3B5259B69C67A99B1D1FF20A1F1910F3E199B980" : "..\/..\/..\/.vim\/bundle\/a.vim",
+    "480F6A97E8D171D420E4D25AB368CD87D036D23F" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/OmniSharpServer\/NRefactory",
+    "DE78C13E499E001FC8952111D8E32A2D4CE9E78C" : "..\/..\/..\/.vim\/bundle\/vim-json",
+    "8856362555BFCED0E191BAB037FD023A13E17F5E" : "..\/..\/..\/.vim\/bundle\/ctrlp.vim",
+    "1A1C165D09DF264340B16B486C4C9FB5C5AB2918" : "..\/..\/..\/.vim\/bundle\/dash.vim",
+    "B4A7C566B44D848009ECC6C1D795303D58342868" : "..\/..\/..\/.vim\/bundle\/vim-startify",
+    "4DF38B460CD0B1E36394057F9913562A9CBB2456" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/godef",
+    "51848B199FA9C2CE3963EACA7BFDF4E5D4EDF201" : "..\/..\/..\/.vim\/bundle\/ag.vim",
+    "42B71C98465BB2C5D45AFA2662A3931443AFA393" : "starry-night\/",
+    "51CEBB8BBC55556168B63F5CB1544ECE2002440C" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/OmniSharpServer\/cecil",
+    "1568227CFEB074B41DA3A983B1CC2331A724C4FE" : "..\/..\/..\/.vim\/bundle\/taglist.vim",
+    "919B8E84269B2D6775BF2EF2E8C734AE01FD293A" : "..\/..\/..\/.vim\/bundle\/vim-cpp-enhanced-highlight",
+    "D69A715DB81E44F5A2605008DBC3165F2A0D7A91" : "..\/..\/..\/.vim\/bundle\/vim-go",
+    "0FD408DCDA764BE037FF7DCD810411B8CF9F4535" : "..\/..\/..\/.vim\/bundle\/youcompleteme",
+    "431AA207DFB5C1812F0DE7706B2CEA51202CB3DB" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/JediHTTP\/vendor\/waitress",
+    "96082A7AA6949C8B154A3349AD21FE02099717A8" : "..\/..\/..\/.vim\/bundle\/vim-airline",
+    "93D74916E6BEFF9F362D6A07FA7FB12CB0A6FFBF" : "..\/..\/..\/.vim\/bundle\/auto-pairs",
+    "61CF5677EB8C4943D3F508C07DE99CACC8285EFC" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/JediHTTP\/vendor\/jedi",
+    "64F449247AA2CF8E1BC70AB2496E31A1038A8408" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/OmniSharpServer",
+    "80E31C04C2205BE4C54F7871116ACAAFA2EE6C26" : "..\/..\/..\/.vim\/bundle\/vim-smooth-scroll",
+    "5E2064F21C7E876A882B6DB37E156F0A98D6C184" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/python-future",
+    "F818FF6E0BA77824867DF47D8F599C76650C4C20" : "..\/..\/..\/.vim\/bundle\/nerdtree",
+    "2F9B38040A9300AF188C667B39A71C7BC67E59F7" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/argparse",
+    "44EC1CA88C31389D01476FA8E59E9AB0AE0E78DE" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/ycmd\/third_party\/racerd",
+    "B953A055F213AAAA365C83F15EF339BF6A76D122" : "..\/..\/..\/.vim\/bundle\/youcompleteme\/third_party\/requests-futures"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "starry-night",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "build\/macos\/starry-night.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/valloric\/youcompleteme.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0FD408DCDA764BE037FF7DCD810411B8CF9F4535"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vim-scripts\/taglist.vim.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1568227CFEB074B41DA3A983B1CC2331A724C4FE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nsf\/gocode.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "19177218567E4C5473934CDA93B337C0B1F8F8F7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/rizzatti\/dash.vim.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1A1C165D09DF264340B16B486C4C9FB5C5AB2918"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mhinz\/vim-signify.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "29A2B8E0883C94167AE6E4D54A734920DF17DA09"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bewest\/argparse",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2F9B38040A9300AF188C667B39A71C7BC67E59F7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/majutsushi\/tagbar.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "313D7F692A23CD920F897A1941BCC9611C0BE74B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vim-scripts\/a.vim.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3B5259B69C67A99B1D1FF20A1F1910F3E199B980"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vim-scripts\/Vundle.vim.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3DF450A1BC58C6D7B3BBA93C984C8B6DB725AC76"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/q191201771\/starry-night.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "42B71C98465BB2C5D45AFA2662A3931443AFA393"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Pylons\/waitress",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "431AA207DFB5C1812F0DE7706B2CEA51202CB3DB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jwilm\/racerd",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "44EC1CA88C31389D01476FA8E59E9AB0AE0E78DE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/icsharpcode\/NRefactory.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "480F6A97E8D171D420E4D25AB368CD87D036D23F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Manishearth\/godef.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4DF38B460CD0B1E36394057F9913562A9CBB2456"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/rking\/ag.vim.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "51848B199FA9C2CE3963EACA7BFDF4E5D4EDF201"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jbevain\/cecil.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "51CEBB8BBC55556168B63F5CB1544ECE2002440C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/PythonCharmers\/python-future",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5E2064F21C7E876A882B6DB37E156F0A98D6C184"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/davidhalter\/jedi",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "61CF5677EB8C4943D3F508C07DE99CACC8285EFC"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nosami\/OmniSharpServer",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "64F449247AA2CF8E1BC70AB2496E31A1038A8408"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ntpeters\/vim-better-whitespace.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "66C5A5D5D1E961689F66698E971685694481BBB0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nathanaelkane\/vim-indent-guides.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "67EEEB9109B744690E956C6897DFC8A4F54428B8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kennethreitz\/requests",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7816B71C436736A3994A50AF8DA344559E6A7212"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/terryma\/vim-smooth-scroll.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "80E31C04C2205BE4C54F7871116ACAAFA2EE6C26"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kien\/ctrlp.vim.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8856362555BFCED0E191BAB037FD023A13E17F5E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/octol\/vim-cpp-enhanced-highlight.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "919B8E84269B2D6775BF2EF2E8C734AE01FD293A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jiangmiao\/auto-pairs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "93D74916E6BEFF9F362D6A07FA7FB12CB0A6FFBF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vim-airline\/vim-airline-themes.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "96082A7AA6949C8B154A3349AD21FE02099717A8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/bling\/vim-airline.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "96082A7AA6949C8B154A3349AD21FE02099717A8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/scrooloose\/syntastic.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "991E806C602D7BB9B25B0DC8788FBF0EF7947D85"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/defnull\/bottle",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AB32F2A50AC8543260ED80942597774B89C28EA1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Valloric\/ycmd",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AC4CD65697F84B32EE28B049E9A5B7D74610363B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/slezica\/python-frozendict",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AD462B834B5DB4304CD16CCC500958E2D8353EEF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/vheon\/JediHTTP",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B420378C50B30F86FFCCB49F62C92BF0EE5C10D7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mhinz\/vim-startify.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B4A7C566B44D848009ECC6C1D795303D58342868"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ross\/requests-futures",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B953A055F213AAAA365C83F15EF339BF6A76D122"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Xuyuanp\/nerdtree-git-plugin.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BF1AE93E38AFF0EF3927C7065237769CC64F6AD9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/flazz\/vim-colorschemes.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CBF1C1160EAF5271BD17440F0D329052F7DE2441"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/fatih\/vim-go.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D69A715DB81E44F5A2605008DBC3165F2A0D7A91"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/elzr\/vim-json.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DE78C13E499E001FC8952111D8E32A2D4CE9E78C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/scrooloose\/nerdtree.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F818FF6E0BA77824867DF47D8F599C76650C4C20"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/scrooloose\/nerdcommenter.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FA6FBA0799BB3BA453B64D4695980F60B15F4B3C"
+    }
+  ]
+}

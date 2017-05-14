@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		043DC04F1EC87BCB0071DD9B /* count_dump_test.cc in Sources */ = {isa = PBXBuildFile; fileRef = 043DC04E1EC87BCB0071DD9B /* count_dump_test.cc */; };
+		04C0D0E51EC8943C00342040 /* libcurl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C0D0E41EC8943C00342040 /* libcurl.tbd */; };
+		04C0D0EF1EC8987C00342040 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C0D0EE1EC8987C00342040 /* libboost_filesystem.a */; };
+		04C0D0F11EC8989200342040 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C0D0F01EC8989200342040 /* libboost_system.a */; };
+		04C0D0F31EC898BB00342040 /* libboost_thread-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C0D0F21EC898BB00342040 /* libboost_thread-mt.a */; };
+		04C0D1011EC89C0C00342040 /* wait_event_counter_test.cc in Sources */ = {isa = PBXBuildFile; fileRef = 04C0D1001EC89C0C00342040 /* wait_event_counter_test.cc */; };
 		04ED81441EC875F60026A37A /* libchefbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ED81431EC875F60026A37A /* libchefbase.a */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +29,11 @@
 
 /* Begin PBXFileReference section */
 		043DC04D1EC87BCB0071DD9B /* common */ = {isa = PBXFileReference; lastKnownFileType = folder; path = common; sourceTree = "<group>"; };
-		043DC04E1EC87BCB0071DD9B /* count_dump_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = count_dump_test.cc; sourceTree = "<group>"; };
+		04C0D0E41EC8943C00342040 /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
+		04C0D0EE1EC8987C00342040 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../../../../../../../../usr/local/Cellar/boost/1.64.0_1/lib/libboost_filesystem.a; sourceTree = "<group>"; };
+		04C0D0F01EC8989200342040 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../../../../../usr/local/Cellar/boost/1.64.0_1/lib/libboost_system.a; sourceTree = "<group>"; };
+		04C0D0F21EC898BB00342040 /* libboost_thread-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_thread-mt.a"; path = "../../../../../../../../../usr/local/Cellar/boost/1.64.0_1/lib/libboost_thread-mt.a"; sourceTree = "<group>"; };
+		04C0D1001EC89C0C00342040 /* wait_event_counter_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wait_event_counter_test.cc; sourceTree = "<group>"; };
 		04ED81381EC875460026A37A /* base_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = base_test; sourceTree = BUILT_PRODUCTS_DIR; };
 		04ED81431EC875F60026A37A /* libchefbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libchefbase.a; path = "../../../../../../../Library/Developer/Xcode/DerivedData/starry-night-hdbnkbbhxxjcqidmpynqlknqaldd/Build/Products/Debug/libchefbase.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -35,6 +43,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C0D0F31EC898BB00342040 /* libboost_thread-mt.a in Frameworks */,
+				04C0D0F11EC8989200342040 /* libboost_system.a in Frameworks */,
+				04C0D0EF1EC8987C00342040 /* libboost_filesystem.a in Frameworks */,
+				04C0D0E51EC8943C00342040 /* libcurl.tbd in Frameworks */,
 				04ED81441EC875F60026A37A /* libchefbase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -62,8 +74,8 @@
 		04ED813A1EC875460026A37A /* base_test */ = {
 			isa = PBXGroup;
 			children = (
+				04C0D1001EC89C0C00342040 /* wait_event_counter_test.cc */,
 				043DC04D1EC87BCB0071DD9B /* common */,
-				043DC04E1EC87BCB0071DD9B /* count_dump_test.cc */,
 			);
 			name = base_test;
 			path = ../../../src/base_test;
@@ -72,6 +84,10 @@
 		04ED81421EC875F50026A37A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04C0D0EE1EC8987C00342040 /* libboost_filesystem.a */,
+				04C0D0F01EC8989200342040 /* libboost_system.a */,
+				04C0D0F21EC898BB00342040 /* libboost_thread-mt.a */,
+				04C0D0E41EC8943C00342040 /* libcurl.tbd */,
 				04ED81431EC875F60026A37A /* libchefbase.a */,
 			);
 			name = Frameworks;
@@ -135,7 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				043DC04F1EC87BCB0071DD9B /* count_dump_test.cc in Sources */,
+				04C0D1011EC89C0C00342040 /* wait_event_counter_test.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +251,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = KW2HY72LPX;
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/Cellar/boost/1.64.0_1/include/;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.64.0_1/lib,
+					"$(PROJECT_DIR)",
+				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/local/Cellar/boost/1.64.0_1/lib/;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -243,6 +266,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = KW2HY72LPX;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.64.0_1/lib,
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

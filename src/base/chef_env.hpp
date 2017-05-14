@@ -1,6 +1,7 @@
 /**
- * @file   chef_env.hpp
- * @deps   boost or c++11
+ * @file     chef_env.hpp
+ * @deps     boost or c++11
+ * @platform linux/macos/xxx
  *
  * @author
  *   chef <191201771@qq.com>
