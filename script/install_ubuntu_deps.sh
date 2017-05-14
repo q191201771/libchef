@@ -5,7 +5,7 @@
 #     -created 2017-05-14 11:11:46
 #     -initial release xxxx-xx-xx
 # @brief
-#   xxx
+#   安装ubuntu下编译工具、第三方依赖库
 
 sudo apt-get install make g++ scons -y
 sudo apt-get install gdb valgrind -y
