@@ -4,6 +4,7 @@ src/base/zkclient.cc
 src/base/sub
 
 build/macos/base/output/
+xcuserdata/
 dump
 TODO.md
 secret.md
