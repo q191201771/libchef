@@ -1,0 +1,272 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04ED81441EC875F60026A37A /* libchefbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ED81431EC875F60026A37A /* libchefbase.a */; };
+		04ED81491EC877F20026A37A /* filepath_op_test.cc in Sources */ = {isa = PBXBuildFile; fileRef = 04ED81481EC877F20026A37A /* filepath_op_test.cc */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		04ED81361EC875460026A37A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		04ED81381EC875460026A37A /* base_test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = base_test; sourceTree = BUILT_PRODUCTS_DIR; };
+		04ED81431EC875F60026A37A /* libchefbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libchefbase.a; path = "../../../../../../../Library/Developer/Xcode/DerivedData/starry-night-hdbnkbbhxxjcqidmpynqlknqaldd/Build/Products/Debug/libchefbase.a"; sourceTree = "<group>"; };
+		04ED81451EC877110026A37A /* common */ = {isa = PBXFileReference; lastKnownFileType = folder; name = common; path = ../../../../src/base_test/common; sourceTree = "<group>"; };
+		04ED81481EC877F20026A37A /* filepath_op_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = filepath_op_test.cc; path = ../../../../src/base_test/filepath_op_test.cc; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04ED81351EC875460026A37A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04ED81441EC875F60026A37A /* libchefbase.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04ED812F1EC875460026A37A = {
+			isa = PBXGroup;
+			children = (
+				04ED813A1EC875460026A37A /* base_test */,
+				04ED81391EC875460026A37A /* Products */,
+				04ED81421EC875F50026A37A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		04ED81391EC875460026A37A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04ED81381EC875460026A37A /* base_test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04ED813A1EC875460026A37A /* base_test */ = {
+			isa = PBXGroup;
+			children = (
+				04ED81481EC877F20026A37A /* filepath_op_test.cc */,
+				04ED81451EC877110026A37A /* common */,
+			);
+			path = base_test;
+			sourceTree = "<group>";
+		};
+		04ED81421EC875F50026A37A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04ED81431EC875F60026A37A /* libchefbase.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04ED81371EC875460026A37A /* base_test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04ED813F1EC875460026A37A /* Build configuration list for PBXNativeTarget "base_test" */;
+			buildPhases = (
+				04ED81341EC875460026A37A /* Sources */,
+				04ED81351EC875460026A37A /* Frameworks */,
+				04ED81361EC875460026A37A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = base_test;
+			productName = base_test;
+			productReference = 04ED81381EC875460026A37A /* base_test */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04ED81301EC875460026A37A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = chef;
+				TargetAttributes = {
+					04ED81371EC875460026A37A = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = KW2HY72LPX;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 04ED81331EC875460026A37A /* Build configuration list for PBXProject "base_test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 04ED812F1EC875460026A37A;
+			productRefGroup = 04ED81391EC875460026A37A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04ED81371EC875460026A37A /* base_test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04ED81341EC875460026A37A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04ED81491EC877F20026A37A /* filepath_op_test.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		04ED813D1EC875460026A37A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		04ED813E1EC875460026A37A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		04ED81401EC875460026A37A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = KW2HY72LPX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		04ED81411EC875460026A37A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = KW2HY72LPX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04ED81331EC875460026A37A /* Build configuration list for PBXProject "base_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04ED813D1EC875460026A37A /* Debug */,
+				04ED813E1EC875460026A37A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04ED813F1EC875460026A37A /* Build configuration list for PBXNativeTarget "base_test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04ED81401EC875460026A37A /* Debug */,
+				04ED81411EC875460026A37A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04ED81301EC875460026A37A /* Project object */;
+}
