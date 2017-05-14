@@ -10,4 +10,4 @@
 ROOT_DIR=`pwd`/..
 SCONS_DIR=${ROOT_DIR}
 OUT_DIR=${ROOT_DIR}
-BIN_DIR=${ROOT_DIR}/build/base_test
+BIN_DIR=${ROOT_DIR}/output/base_test

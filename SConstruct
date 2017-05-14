@@ -1,6 +1,6 @@
 import os, sys, commands
 
-build_dir     = 'build'
+build_dir     = 'output'
 platform_libs = ['pthread', 'rt']
 
 env = Environment(ENV=os.environ)
