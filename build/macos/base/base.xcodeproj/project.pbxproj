@@ -7,14 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		040EC0391EC824D2001F484A /* buffer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 040EC0371EC824D2001F484A /* buffer.cc */; };
-		040EC03A1EC824D2001F484A /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 040EC0381EC824D2001F484A /* buffer.h */; };
+		0431AF1E1EC8679500D7A09B /* chef_filepath_op.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0431AF1C1EC8679500D7A09B /* chef_filepath_op.cc */; };
+		0431AF1F1EC8679500D7A09B /* chef_filepath_op.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431AF1D1EC8679500D7A09B /* chef_filepath_op.h */; };
+		0431AF231EC867FF00D7A09B /* chef_count_dump.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0431AF201EC867FF00D7A09B /* chef_count_dump.cc */; };
+		0431AF241EC867FF00D7A09B /* chef_count_dump.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431AF211EC867FF00D7A09B /* chef_count_dump.h */; };
+		0431AF251EC867FF00D7A09B /* chef_env.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0431AF221EC867FF00D7A09B /* chef_env.hpp */; };
+		0431AF281EC8680B00D7A09B /* chef_http_op.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0431AF261EC8680B00D7A09B /* chef_http_op.cc */; };
+		0431AF291EC8680B00D7A09B /* chef_http_op.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431AF271EC8680B00D7A09B /* chef_http_op.h */; };
+		0431AF2C1EC868B600D7A09B /* chef_log.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0431AF2A1EC868B600D7A09B /* chef_log.cc */; };
+		0431AF2D1EC868B600D7A09B /* chef_log.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431AF2B1EC868B600D7A09B /* chef_log.h */; };
+		0431AF2F1EC8693700D7A09B /* chef_noncopyable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0431AF2E1EC8693700D7A09B /* chef_noncopyable.hpp */; };
+		0431AF321EC8695300D7A09B /* chef_strings_op.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0431AF301EC8695300D7A09B /* chef_strings_op.cc */; };
+		0431AF331EC8695300D7A09B /* chef_strings_op.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431AF311EC8695300D7A09B /* chef_strings_op.h */; };
+		0431AF361EC8696000D7A09B /* chef_task_thread.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0431AF341EC8696000D7A09B /* chef_task_thread.cc */; };
+		0431AF371EC8696000D7A09B /* chef_task_thread.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431AF351EC8696000D7A09B /* chef_task_thread.h */; };
+		0431AF3A1EC8697000D7A09B /* chef_thread_pool.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0431AF381EC8697000D7A09B /* chef_thread_pool.cc */; };
+		0431AF3B1EC8697000D7A09B /* chef_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431AF391EC8697000D7A09B /* chef_thread_pool.h */; };
+		0431AF3E1EC8697C00D7A09B /* chef_wait_event_counter.cc in Sources */ = {isa = PBXBuildFile; fileRef = 0431AF3C1EC8697C00D7A09B /* chef_wait_event_counter.cc */; };
+		0431AF3F1EC8697C00D7A09B /* chef_wait_event_counter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0431AF3D1EC8697C00D7A09B /* chef_wait_event_counter.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		040EC0251EC81BA9001F484A /* libchefbase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libchefbase.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		040EC0371EC824D2001F484A /* buffer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = buffer.cc; path = ../../../../src/base/buffer.cc; sourceTree = "<group>"; };
-		040EC0381EC824D2001F484A /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = buffer.h; path = ../../../../src/base/buffer.h; sourceTree = "<group>"; };
+		0431AF1C1EC8679500D7A09B /* chef_filepath_op.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chef_filepath_op.cc; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_filepath_op.cc"; sourceTree = "<absolute>"; };
+		0431AF1D1EC8679500D7A09B /* chef_filepath_op.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chef_filepath_op.h; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_filepath_op.h"; sourceTree = "<absolute>"; };
+		0431AF201EC867FF00D7A09B /* chef_count_dump.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chef_count_dump.cc; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_count_dump.cc"; sourceTree = "<absolute>"; };
+		0431AF211EC867FF00D7A09B /* chef_count_dump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chef_count_dump.h; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_count_dump.h"; sourceTree = "<absolute>"; };
+		0431AF221EC867FF00D7A09B /* chef_env.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = chef_env.hpp; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_env.hpp"; sourceTree = "<absolute>"; };
+		0431AF261EC8680B00D7A09B /* chef_http_op.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chef_http_op.cc; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_http_op.cc"; sourceTree = "<absolute>"; };
+		0431AF271EC8680B00D7A09B /* chef_http_op.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chef_http_op.h; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_http_op.h"; sourceTree = "<absolute>"; };
+		0431AF2A1EC868B600D7A09B /* chef_log.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chef_log.cc; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_log.cc"; sourceTree = "<absolute>"; };
+		0431AF2B1EC868B600D7A09B /* chef_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chef_log.h; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_log.h"; sourceTree = "<absolute>"; };
+		0431AF2E1EC8693700D7A09B /* chef_noncopyable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = chef_noncopyable.hpp; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_noncopyable.hpp"; sourceTree = "<absolute>"; };
+		0431AF301EC8695300D7A09B /* chef_strings_op.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chef_strings_op.cc; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_strings_op.cc"; sourceTree = "<absolute>"; };
+		0431AF311EC8695300D7A09B /* chef_strings_op.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chef_strings_op.h; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_strings_op.h"; sourceTree = "<absolute>"; };
+		0431AF341EC8696000D7A09B /* chef_task_thread.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chef_task_thread.cc; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_task_thread.cc"; sourceTree = "<absolute>"; };
+		0431AF351EC8696000D7A09B /* chef_task_thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chef_task_thread.h; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_task_thread.h"; sourceTree = "<absolute>"; };
+		0431AF381EC8697000D7A09B /* chef_thread_pool.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chef_thread_pool.cc; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_thread_pool.cc"; sourceTree = "<absolute>"; };
+		0431AF391EC8697000D7A09B /* chef_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chef_thread_pool.h; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_thread_pool.h"; sourceTree = "<absolute>"; };
+		0431AF3C1EC8697C00D7A09B /* chef_wait_event_counter.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chef_wait_event_counter.cc; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_wait_event_counter.cc"; sourceTree = "<absolute>"; };
+		0431AF3D1EC8697C00D7A09B /* chef_wait_event_counter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chef_wait_event_counter.h; path = "/Users/mac/Documents/sss/chef_git/starry-night/src/base/chef_wait_event_counter.h"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,11 +79,28 @@
 		040EC0271EC81BA9001F484A /* base */ = {
 			isa = PBXGroup;
 			children = (
-				040EC0371EC824D2001F484A /* buffer.cc */,
-				040EC0381EC824D2001F484A /* buffer.h */,
+				0431AF3C1EC8697C00D7A09B /* chef_wait_event_counter.cc */,
+				0431AF3D1EC8697C00D7A09B /* chef_wait_event_counter.h */,
+				0431AF381EC8697000D7A09B /* chef_thread_pool.cc */,
+				0431AF391EC8697000D7A09B /* chef_thread_pool.h */,
+				0431AF341EC8696000D7A09B /* chef_task_thread.cc */,
+				0431AF351EC8696000D7A09B /* chef_task_thread.h */,
+				0431AF301EC8695300D7A09B /* chef_strings_op.cc */,
+				0431AF311EC8695300D7A09B /* chef_strings_op.h */,
+				0431AF2E1EC8693700D7A09B /* chef_noncopyable.hpp */,
+				0431AF2A1EC868B600D7A09B /* chef_log.cc */,
+				0431AF2B1EC868B600D7A09B /* chef_log.h */,
+				0431AF261EC8680B00D7A09B /* chef_http_op.cc */,
+				0431AF271EC8680B00D7A09B /* chef_http_op.h */,
+				0431AF201EC867FF00D7A09B /* chef_count_dump.cc */,
+				0431AF211EC867FF00D7A09B /* chef_count_dump.h */,
+				0431AF221EC867FF00D7A09B /* chef_env.hpp */,
+				0431AF1C1EC8679500D7A09B /* chef_filepath_op.cc */,
+				0431AF1D1EC8679500D7A09B /* chef_filepath_op.h */,
 			);
-			path = base;
-			sourceTree = "<group>";
+			name = base;
+			path = "/Users/mac/Documents/sss/chef_git/starry-night/build/macos/base/output/Debug/../../base";
+			sourceTree = "<absolute>";
 		};
 /* End PBXGroup section */
 
@@ -60,7 +109,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				040EC03A1EC824D2001F484A /* buffer.h in Headers */,
+				0431AF2D1EC868B600D7A09B /* chef_log.h in Headers */,
+				0431AF2F1EC8693700D7A09B /* chef_noncopyable.hpp in Headers */,
+				0431AF331EC8695300D7A09B /* chef_strings_op.h in Headers */,
+				0431AF251EC867FF00D7A09B /* chef_env.hpp in Headers */,
+				0431AF3B1EC8697000D7A09B /* chef_thread_pool.h in Headers */,
+				0431AF241EC867FF00D7A09B /* chef_count_dump.h in Headers */,
+				0431AF1F1EC8679500D7A09B /* chef_filepath_op.h in Headers */,
+				0431AF291EC8680B00D7A09B /* chef_http_op.h in Headers */,
+				0431AF371EC8696000D7A09B /* chef_task_thread.h in Headers */,
+				0431AF3F1EC8697C00D7A09B /* chef_wait_event_counter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +180,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				040EC0391EC824D2001F484A /* buffer.cc in Sources */,
+				0431AF3E1EC8697C00D7A09B /* chef_wait_event_counter.cc in Sources */,
+				0431AF1E1EC8679500D7A09B /* chef_filepath_op.cc in Sources */,
+				0431AF281EC8680B00D7A09B /* chef_http_op.cc in Sources */,
+				0431AF3A1EC8697000D7A09B /* chef_thread_pool.cc in Sources */,
+				0431AF361EC8696000D7A09B /* chef_task_thread.cc in Sources */,
+				0431AF2C1EC868B600D7A09B /* chef_log.cc in Sources */,
+				0431AF231EC867FF00D7A09B /* chef_count_dump.cc in Sources */,
+				0431AF321EC8695300D7A09B /* chef_strings_op.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +290,7 @@
 				EXECUTABLE_PREFIX = lib;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/Cellar/boost/1.64.0_1/include/;
 				PRODUCT_NAME = chefbase;
 			};
 			name = Debug;
@@ -259,6 +325,7 @@
 				040EC0321EC81BA9001F484A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

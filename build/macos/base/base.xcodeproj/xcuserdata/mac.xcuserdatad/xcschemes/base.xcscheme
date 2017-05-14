@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "040EC0241EC81BA9001F484A"
-               BuildableName = "libbase.a"
+               BuildableName = "libchefbase.a"
                BlueprintName = "base"
                ReferencedContainer = "container:base.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "040EC0241EC81BA9001F484A"
-            BuildableName = "libbase.a"
+            BuildableName = "libchefbase.a"
             BlueprintName = "base"
             ReferencedContainer = "container:base.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "040EC0241EC81BA9001F484A"
-            BuildableName = "libbase.a"
+            BuildableName = "libchefbase.a"
             BlueprintName = "base"
             ReferencedContainer = "container:base.xcodeproj">
          </BuildableReference>

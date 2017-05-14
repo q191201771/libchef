@@ -78,7 +78,7 @@ namespace chef {
        * @param    headers 请求时的header 组，以kv结构传入，可为NULL
        * @param    cookies 请求时的cookies组，以kv结构传入，可为NULL
        * @param timeout_ms 超时时间，单位秒
-       * @param   response 返回结果，参见结构体http_op::response
+       * @param       resp 返回结果，参见结构体http_op::response
        *
        * @return 0 成功 -1 失败
        *

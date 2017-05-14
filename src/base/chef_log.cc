@@ -7,7 +7,10 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(global_logger_src,
                                        boost::log::sources::severity_logger_mt<boost::log::trivial::severity_level>);
 
 static pid_t gettid() {
+#ifdef __linux__
   return static_cast<pid_t>(syscall(SYS_gettid));
+#endif
+  return 0;
 }
 
 namespace chef {

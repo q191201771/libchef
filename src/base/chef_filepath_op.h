@@ -72,7 +72,7 @@ namespace chef {
       static int rm_file(const std::string &name);
 
       /**
-       * @param name 文件夹名
+       * @param pathname 文件夹名
        *
        * @return
        *    0 删除成功，或删除前就不存在

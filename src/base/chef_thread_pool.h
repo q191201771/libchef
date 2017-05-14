@@ -27,9 +27,9 @@ namespace chef {
     public:
       typedef chef::function<void()> task;
 
-      /**
+      /**b
        * @param num_of_thread 线程数
-       * @param 线程前缀名，linux平台下调用prctl设置线程名，下标从1开始。其他平台或<thread_prefix_name>为空则不设置~
+       * @param thread_prefix_name 线程前缀名，linux平台下调用prctl设置线程名，下标从1开始。其他平台或`thread_prefix_name`为空则不设置~
        *
        */
       explicit thread_pool(int num_of_thread, const std::string &thread_prefix_name=std::string());
