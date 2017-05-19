@@ -36,7 +36,7 @@ $cd ${ROOT_DIR}/script/ && sh install_ubuntu_deps.sh
 macos with xcode
 $cd ${ROOT_DIR}/script/ && sh install_macos_deps.sh
 
-NOTICE：ROOT_DIR 指git工程根目录，以下所有 ROOT_DIR 都是
+NOTICE：${ROOT_DIR} 指git工程根目录，以下所有 ${ROOT_DIR} 都是
 ```
 
 ### 编译
@@ -53,16 +53,16 @@ base中各源码对应的编译目标文件.o -> ${ROOT_DIR}/build/linux/output/
 base_test各源码对应的编译目标文件.o、可执行程序 -> ${ROOT_DIR}/build/linux/output/base_test/
 
 清理：
-$cd ${ROOT_DIR}/build/linux
-$scons -c
+$cd ${ROOT_DIR}/build/linux && scons -c
 ```
 
 linux下使用make
 
 ```
+单纯演示下简单、正确使用Makefile的姿势。条件允许的情况下，应该用更友好些的高级编译工具，比如scons或者CMake。
+
 生成方式：
-$cd ${ROOT_DIR}/src/base
-$make [debug]
+$cd ${ROOT_DIR}/src/base && make [debug]
 
 输出：
 base中各源码对应的依赖关系文件.d、编译目标文件.o、静态库文件libchefbase.a
@@ -76,8 +76,7 @@ ${ROOT_DIR}/src/base/debug/*.o
 ${ROOT_DIR}/src/base/debug/libchefbase.a
 
 清理：
-$cd ${ROOT_DIR}/src/base
-$make clean
+$cd ${ROOT_DIR}/src/base && make clean
 ```
 
 mac
