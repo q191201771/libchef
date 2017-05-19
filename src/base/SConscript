@@ -1,6 +1,6 @@
 Import('env')
 Import('jsoncpp_include_path')
-Import('libcurl_include_path')
+Import('third_include_path')
 
 env = env.Clone()
 
@@ -27,6 +27,6 @@ objs += env.Object('wait_event_counter', ['chef_wait_event_counter.cc'])
 # objs += env.Object('encoding_base64_op', ['encoding_base64_op.cc'])
 
 objs += env.Object('json_config', ['json_config.cc'], CPPPATH=jsoncpp_include_path)
-objs += env.Object('http_op', ['chef_http_op.cc'], CPPPATH=libcurl_include_path)
+objs += env.Object('http_op', ['chef_http_op.cc'], CPPPATH=third_include_path)
 
 Return('objs')

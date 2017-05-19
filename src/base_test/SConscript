@@ -1,12 +1,10 @@
 import os, sys, commands
 
 Import('env')
+Import('third_include_path')
 Import('jsoncpp_include_path')
+Import('third_lib_path')
 Import('platform_libs')
-Import('boost_lib_path')
-Import('jsoncpp_lib_path')
-Import('hiredis_lib_path')
-Import('libcurl_lib_path')
 
 env = env.Clone()
 
@@ -64,26 +62,26 @@ prgs += env.Program('macro_test', macro_sources, LIBS=platform_libs)
 
 log_sources = ['../base/log.o', 'log_test.cc']
 with_boost_libs = [platform_libs]
-with_boost_libs += [File(os.path.join(boost_lib_path, 'libboost_log_setup.a'))]
-with_boost_libs += [File(os.path.join(boost_lib_path, 'libboost_log.a'))]
-with_boost_libs += [File(os.path.join(boost_lib_path, 'libboost_thread.a'))]
-with_boost_libs += [File(os.path.join(boost_lib_path, 'libboost_system.a'))]
-with_boost_libs += [File(os.path.join(boost_lib_path, 'libboost_filesystem.a'))]
+with_boost_libs += [File(os.path.join(third_lib_path, 'libboost_log_setup.a'))]
+with_boost_libs += [File(os.path.join(third_lib_path, 'libboost_log.a'))]
+with_boost_libs += [File(os.path.join(third_lib_path, 'libboost_thread.a'))]
+with_boost_libs += [File(os.path.join(third_lib_path, 'libboost_system.a'))]
+with_boost_libs += [File(os.path.join(third_lib_path, 'libboost_filesystem.a'))]
 prgs += env.Program('log_test', log_sources, LIBS=with_boost_libs)
 
 json_config_sources = ['../base/json_config.o', 'json_config_test.cc']
 with_jsoncpp_libs = [platform_libs]
-with_jsoncpp_libs += [File(os.path.join(jsoncpp_lib_path, 'libjsoncpp.a'))]
+with_jsoncpp_libs += [File(os.path.join(third_lib_path, 'libjsoncpp.a'))]
 prgs += env.Program('json_config_test', json_config_sources, CPPPATH = jsoncpp_include_path, LIBS=with_jsoncpp_libs)
 
 redis_backend_sources = ['../base/wait_event_counter.o', '../base/task_thread.o', '../base/redis_backend.o', 'redis_backend_test.cc']
 with_hiredis_libs = [platform_libs]
-with_hiredis_libs += [File(os.path.join(hiredis_lib_path, 'libhiredis.a'))]
+with_hiredis_libs += [File(os.path.join(third_lib_path, 'libhiredis.a'))]
 prgs += env.Program('redis_backend_test', redis_backend_sources, LIBS=with_hiredis_libs)
 
 http_op_sources = ['../base/http_op.o', '../base/strings_op.o', 'http_op_test.cc']
 with_libcurl_libs = [platform_libs]
-with_libcurl_libs += [File(os.path.join(libcurl_lib_path, 'libcurl.so'))]
+with_libcurl_libs += [File(os.path.join(third_lib_path, 'libcurl.so'))]
 prgs += env.Program('http_op_test', http_op_sources, LIBS=with_libcurl_libs)
 
 Return('prgs')
