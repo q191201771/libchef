@@ -27,8 +27,6 @@ Darwin MacdeMacBook-Pro.local 16.5.0 Darwin Kernel Version 16.5.0: Fri Mar  3 16
 xcode: Version 8.3.2 (8E2002)
 ```
 
-*`以下所有 ROOT_DIR 目录指git工程根目录`*
-
 ### 依赖
 
 ```
@@ -37,6 +35,8 @@ $cd ${ROOT_DIR}/script/ && sh install_ubuntu_deps.sh
 
 macos with xcode
 $cd ${ROOT_DIR}/script/ && sh install_macos_deps.sh
+
+NOTICE：ROOT_DIR 指git工程根目录，以下所有 ROOT_DIR 都是
 ```
 
 ### 编译
@@ -45,15 +45,15 @@ linux下使用scons
 
 ```
 生成方式：
-$cd {ROOT_DIR}/build/linux
+$cd ${ROOT_DIR}/build/linux
 $scons [debug]
 
 输出：
-base中各源码对应的编译目标文件.o -> {ROOT_DIR}/build/linux/output/base/*.o
-base_test各源码对应的编译目标文件.o、可执行程序 -> {ROOT_DIR}/build/linux/output/base_test/
+base中各源码对应的编译目标文件.o -> ${ROOT_DIR}/build/linux/output/base/*.o
+base_test各源码对应的编译目标文件.o、可执行程序 -> ${ROOT_DIR}/build/linux/output/base_test/
 
 清理：
-$cd {ROOT_DIR}/build/linux
+$cd ${ROOT_DIR}/build/linux
 $scons -c
 ```
 
@@ -61,22 +61,22 @@ linux下使用make
 
 ```
 生成方式：
-$cd {ROOT_DIR}/src/base
+$cd ${ROOT_DIR}/src/base
 $make [debug]
 
 输出：
 base中各源码对应的依赖关系文件.d、编译目标文件.o、静态库文件libchefbase.a
 release:
-{ROOT_DIR}/src/base/release/*.d
-{ROOT_DIR}/src/base/release/*.o
-{ROOT_DIR}/src/base/release/libchefbase.a
+${ROOT_DIR}/src/base/release/*.d
+${ROOT_DIR}/src/base/release/*.o
+${ROOT_DIR}/src/base/release/libchefbase.a
 debug：
-{ROOT_DIR}/src/base/debug/*.d
-{ROOT_DIR}/src/base/debug/*.o
-{ROOT_DIR}/src/base/debug/libchefbase.a
+${ROOT_DIR}/src/base/debug/*.d
+${ROOT_DIR}/src/base/debug/*.o
+${ROOT_DIR}/src/base/debug/libchefbase.a
 
 清理：
-$cd {ROOT_DIR}/src/base
+$cd ${ROOT_DIR}/src/base
 $make clean
 ```
 

@@ -13,12 +13,15 @@ else:
     print('Argument mode(%s) fatal.', mode)
     exit()
 
+common_CXXFLAGS = ['-g', '-pthread', '-std=c++14', '-pipe', '-fPIC']
 env.Append(TOOLSET   = ['g++'])
-env.Append(CXXFLAGS  = ['-g', '-pthread', '-std=c++14', '-pipe', '-fPIC'])
+env.Append(CXXFLAGS  = common_CXXFLAGS)
 env.Append(CXXFLAGS  = ['-Wall', '-Wextra', '-Werror', '-Wunused-parameter', '-Woverloaded-virtual', '-Wpointer-arith', '-Wshadow', '-Wwrite-strings', '-Wcast-align'])
 env.Append(CXXFLAGS  = ['-Wconversion',  '-Wold-style-cast'])
 env.Append(LINKFLAGS = ['-pthread', '-static-libstdc++'])
 env.Append(CPPPATH   = [])
+
+non_warn_env = env.Clone(CXXFLAGS = common_CXXFLAGS)
 
 # ubuntu boost,zlib,hiredis,curl
 third_include_path     = '/usr/include'
@@ -28,6 +31,7 @@ jsoncpp_include_path = '/usr/include/jsoncpp'
 third_lib_path = '/usr/lib/x86_64-linux-gnu'
 
 Export('env')
+Export('non_warn_env')
 Export('third_include_path')
 Export('jsoncpp_include_path')
 Export('third_lib_path')

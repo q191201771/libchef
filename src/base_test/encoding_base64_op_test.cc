@@ -1,4 +1,4 @@
-#include "../base/encoding_base64_op.hpp"
+#include "../base/encoding_base64_op.h"
 #include <map>
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
@@ -18,8 +18,8 @@ int main() {
   mapping["asure."] = "YXN1cmUu";
 
   for (auto &iter : mapping) {
-    assert(chef::base64_encode(iter.first) == iter.second);
-    assert(chef::base64_decode(iter.second) == iter.first);
+    assert(chef::encoding_base64_op::encode(iter.first) == iter.second);
+    assert(chef::encoding_base64_op::decode(iter.second) == iter.first);
   }
 
   return 0;
