@@ -7,10 +7,9 @@ src/                        ......代码根目录
   base/                     ......基础库
   base_test/                ......基础库相应测试
 script/                     ......脚本目录
-build/                      ......编译目录
+build/                      ......编译脚本目录
   linux/
   macos/
-SConstruct                  ......SCons文件，用于编译
 .gitignore                  ......
 LINCENSE                    ......
 README.md                   ......
@@ -28,7 +27,7 @@ Darwin MacdeMacBook-Pro.local 16.5.0 Darwin Kernel Version 16.5.0: Fri Mar  3 16
 xcode: Version 8.3.2 (8E2002)
 ```
 
-`以下所有 ROOT_DIR 目录指git工程根目录`
+*`以下所有 ROOT_DIR 目录指git工程根目录`*
 
 ### 依赖
 
@@ -47,15 +46,11 @@ linux下使用scons
 ```
 生成方式：
 $cd {ROOT_DIR}/build/linux
-$scons
-如果想生成debug版本，可以
-$scons mode=debug
+$scons [debug]
 
 输出：
-base中各源码对应的编译目标文件.o
-{ROOT_DIR}/build/linux/output/base/*.o
-base_test各源码对应的编译目标文件.o、可执行程序
-{ROOT_DIR}/build/linux/output/base_test/
+base中各源码对应的编译目标文件.o -> {ROOT_DIR}/build/linux/output/base/*.o
+base_test各源码对应的编译目标文件.o、可执行程序 -> {ROOT_DIR}/build/linux/output/base_test/
 
 清理：
 $cd {ROOT_DIR}/build/linux
@@ -67,9 +62,7 @@ linux下使用make
 ```
 生成方式：
 $cd {ROOT_DIR}/src/base
-$make
-如果想生成debug版本，可以
-$make debug
+$make [debug]
 
 输出：
 base中各源码对应的依赖关系文件.d、编译目标文件.o、静态库文件libchefbase.a
