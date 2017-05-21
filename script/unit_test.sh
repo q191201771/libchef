@@ -11,25 +11,18 @@
 
 cd ${SCONS_BIN_DIR}
 
-./buffer_test
+./buffer_test && ./count_dump_test && ./filepath_op_test && ./noncopyable_test && ./strings_op_test && ./task_thread_test &&
+./thread_pool_test && ./wait_event_test && ./wait_event_counter_test
 ./chunk_head_op_test
 ./daemon_op_test
-./count_dump_test
-./filepath_op_test
 ./hash_test
 ./json_config_test
 ./log_test
-./noncopyable_test
 ./os_exec_op_test
-./strings_op_test
 ./stuff_test
-./task_thread_test
 ./this_machine_op_test
 ./this_proc_op_test
 ./this_thread_op_test
-./thread_pool_test
-./wait_event_test
-./wait_event_counter_test
 ./macro_test
 
 if [ -e 'crypto_md5_op_test' ]; then
