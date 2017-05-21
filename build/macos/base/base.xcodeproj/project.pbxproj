@@ -25,6 +25,8 @@
 		042480281EC871EE004C20CC /* chef_thread_pool.h in Headers */ = {isa = PBXBuildFile; fileRef = 042480161EC871EE004C20CC /* chef_thread_pool.h */; };
 		042480291EC871EE004C20CC /* chef_wait_event_counter.cc in Sources */ = {isa = PBXBuildFile; fileRef = 042480171EC871EE004C20CC /* chef_wait_event_counter.cc */; };
 		0424802A1EC871EE004C20CC /* chef_wait_event_counter.h in Headers */ = {isa = PBXBuildFile; fileRef = 042480181EC871EE004C20CC /* chef_wait_event_counter.h */; };
+		045106DE1ED1200A00288133 /* buffer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 045106DC1ED1200A00288133 /* buffer.cc */; };
+		045106DF1ED1200A00288133 /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 045106DD1ED1200A00288133 /* buffer.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		042480161EC871EE004C20CC /* chef_thread_pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chef_thread_pool.h; path = ../../../src/base/chef_thread_pool.h; sourceTree = SOURCE_ROOT; };
 		042480171EC871EE004C20CC /* chef_wait_event_counter.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chef_wait_event_counter.cc; path = ../../../src/base/chef_wait_event_counter.cc; sourceTree = SOURCE_ROOT; };
 		042480181EC871EE004C20CC /* chef_wait_event_counter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chef_wait_event_counter.h; path = ../../../src/base/chef_wait_event_counter.h; sourceTree = SOURCE_ROOT; };
+		045106DC1ED1200A00288133 /* buffer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = buffer.cc; sourceTree = "<group>"; };
+		045106DD1ED1200A00288133 /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 		040EC0271EC81BA9001F484A /* base */ = {
 			isa = PBXGroup;
 			children = (
+				045106DC1ED1200A00288133 /* buffer.cc */,
+				045106DD1ED1200A00288133 /* buffer.h */,
 				042480071EC871EE004C20CC /* chef_count_dump.cc */,
 				042480081EC871EE004C20CC /* chef_count_dump.h */,
 				042480091EC871EE004C20CC /* chef_env.hpp */,
@@ -116,6 +122,7 @@
 				042480281EC871EE004C20CC /* chef_thread_pool.h in Headers */,
 				0424801B1EC871EE004C20CC /* chef_env.hpp in Headers */,
 				0424801A1EC871EE004C20CC /* chef_count_dump.h in Headers */,
+				045106DF1ED1200A00288133 /* buffer.h in Headers */,
 				0424801F1EC871EE004C20CC /* chef_http_op.h in Headers */,
 				042480261EC871EE004C20CC /* chef_task_thread.h in Headers */,
 				0424802A1EC871EE004C20CC /* chef_wait_event_counter.h in Headers */,
@@ -182,6 +189,7 @@
 			files = (
 				042480291EC871EE004C20CC /* chef_wait_event_counter.cc in Sources */,
 				042480191EC871EE004C20CC /* chef_count_dump.cc in Sources */,
+				045106DE1ED1200A00288133 /* buffer.cc in Sources */,
 				0424801E1EC871EE004C20CC /* chef_http_op.cc in Sources */,
 				042480271EC871EE004C20CC /* chef_thread_pool.cc in Sources */,
 				042480251EC871EE004C20CC /* chef_task_thread.cc in Sources */,

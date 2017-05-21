@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdarg.h>
-//#include <assert.h>
+#include <assert.h>
 #include <algorithm>
 #include <cctype>
 
@@ -32,6 +32,7 @@ namespace chef {
 
   buffer::~buffer() {
     delete []data_;
+    data_ = NULL;
   }
 
   buffer::buffer(const buffer &b)
@@ -42,14 +43,14 @@ namespace chef {
     , write_index_(0)
   {
     data_ = new char[capacity_];
-    append(b.read_pos(), b.readable());
+    append(b.read_pos(), b.readable_size());
   }
 
   buffer &buffer::operator=(const chef::buffer &b) {
     if (this != &b) {
       read_index_ = 0;
       write_index_ = 0;
-      this->append(b.read_pos(), b.readable());
+      this->append(b.read_pos(), b.readable_size());
     }
     return *this;
   }
@@ -78,71 +79,70 @@ namespace chef {
   }
 
   void buffer::erase(uint64_t len) {
-    //assert(len <= readable());
+    assert(write_index_ - read_index_ >= len);
     read_index_ += len;
     if (write_index_ - read_index_ < init_capacity_ &&
-      capacity_ > shrink_capacity_) {
-        char *new_data = new char[init_capacity_];
-        memcpy(new_data, data_ + read_index_, write_index_ - read_index_);
-        write_index_ -= read_index_;
-        read_index_ = 0;
-        delete []data_;
-        data_ = new_data;
-        capacity_ = init_capacity_;
+        capacity_ > shrink_capacity_)
+    {
+      char *new_data = new char[init_capacity_];
+      memcpy(new_data, data_ + read_index_, write_index_ - read_index_);
+      write_index_ -= read_index_;
+      read_index_ = 0;
+      delete []data_;
+      data_ = new_data;
+      capacity_ = init_capacity_;
+    }
+  }
+
+  void buffer::clear() {
+    read_index_ = write_index_ = 0;
+    if (capacity_ > shrink_capacity_) {
+      capacity_ = init_capacity_;
+      delete []data_;
+      data_ = new char[capacity_];
+    }
+  }
+
+  void buffer::seek_write_pos(uint64_t len) {
+    assert(capacity_ - write_index_ >= len);
+    write_index_ += len;
+  }
+
+  char *buffer::find(const char *key, int len) const {
+    if (readable_size() == 0) {
+      return NULL;
+    }
+    char *pos = std::search(read_pos(), write_pos(), const_cast<char *>(key),
+      const_cast<char *>(key) + len
+    );
+    return pos == data_ + write_index_ ? NULL : pos;
+  }
+
+  char *buffer::find(char c) const {
+    if (readable_size() == 0) {
+      return NULL;
+    }
+    return static_cast<char *>(memchr(read_pos(), c, readable_size()));
+  }
+
+  char *buffer::trim_left() {
+    for (; write_index_ != read_index_; ++read_index_) {
+      char ch = *(data_ + read_index_);
+      if (!std::isspace(ch)) {
+        break;
       }
     }
+    return read_pos();
+  }
 
-    void buffer::reset() {
-      read_index_ = write_index_ = 0;
-      if (capacity_ > shrink_capacity_) {
-        capacity_ = init_capacity_;
-        delete []data_;
-        data_ = new char[capacity_];
+  char * buffer::trim_right() {
+    for (; write_index_ != read_index_; --write_index_) {
+      char ch = *(data_ + write_index_ - 1);
+      if (!std::isspace(ch)) {
+        break;
       }
     }
+    return read_pos();
+  }
 
-    void buffer::seek_write(uint64_t len) {
-      //assert(capacity_ - write_index_ >= len);
-      write_index_ += len;
-    }
-
-    char *buffer::find(const char *key, int len) {
-      //assert(read_index_ <= write_index_);
-      if (readable() == 0) {
-        return NULL;
-      }
-      char *pos = std::search(read_pos(), write_pos(), const_cast<char *>(key),
-        const_cast<char *>(key) + len
-      );
-      return pos == data_ + write_index_ ? NULL : pos;
-    }
-
-    char *buffer::find(char c) {
-      //assert(read_index_ <= write_index_);
-      if (readable() == 0) {
-        return NULL;
-      }
-      return static_cast<char *>(memchr(read_pos(), c, readable()));
-    }
-
-    char *buffer::trim_left() {
-      for (; write_index_ != read_index_; ++read_index_) {
-        char ch = *(data_ + read_index_);
-        if (!std::isspace(ch)) {
-          break;
-        }
-      }
-      return read_pos();
-    }
-
-    char * buffer::trim_right() {
-      for (; write_index_ != read_index_; --write_index_) {
-        char ch = *(data_ + write_index_ - 1);
-        if (!std::isspace(ch)) {
-          break;
-        }
-      }
-      return read_pos();
-    }
-
-  } // namespace chef
+} // namespace chef

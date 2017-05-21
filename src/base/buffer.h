@@ -1,6 +1,7 @@
 /**
- * @file   buffer.h/buffer.cc
- * @deps   chef_noncopyable.hpp
+ * @file     buffer.h/buffer.cc
+ * @deps     chef_noncopyable.hpp
+ * @platform linux/macos/xxx
  *
  * @author
  *   chef <191201771@qq.com>
@@ -15,6 +16,10 @@
 
 #include "chef_noncopyable.hpp"
 #include <stdint.h>
+
+namespace ut {
+  class buffer_test;
+}
 
 namespace chef {
 
@@ -44,13 +49,11 @@ namespace chef {
       ///
       ~buffer();
 
-      /**
-       * 拷贝构造以及赋值函数，内部执行深拷贝
-       *
-       */
+      /// 拷贝构造以及赋值函数，内部执行深拷贝
       buffer(const buffer &b);
       buffer &operator=(const buffer &b);
 
+    public:
       /** +++++++++++++++++++++++++++++++++++++++++++++++++++++
        * 往buffer填充数据有两种方法：
        * 方法一使用append函数，可填充任意大小数据，空余空间不足时自动扩容。
@@ -62,36 +65,46 @@ namespace chef {
        * 指针位置。提供方法二是为了便于与其他字符串函数配合，在某些场景下减少一次内存拷贝。例如：
        * buf.reserve(128);
        * int len = snprintf(buf.write_pos(), 128, "name=%s,age=%d.", name, age);
-       * buf.seek_write(min(len, 128));
+       * buf.seek_write_pos(min(len, 128));
        *
        * @function reserve
        * @param    len     确保buffer中空余空间大小>=[len],够时不做任何操作，不够则在内部扩容
        *
        * @function write_pos 返回写入位置
        *
-       * @function seek_write 往后挪动写入位置
+       * @function seek_write_pos 往后挪动写入位置
        *
        */
       void reserve(uint64_t len);
       char *write_pos() const { return data_ + write_index_; }
-      void seek_write(uint64_t len);
+      void seek_write_pos(uint64_t len);
 
     /** -----------------------------------------------------
      * 读取buffer中的数据
      *
      */
     char *read_pos() const { return data_ + read_index_; }
-    uint64_t readable() const { return write_index_ - read_index_; }
+    uint64_t readable_size() const { return write_index_ - read_index_; }
+    /// 注意，`len`应不大于readable_size函数的返回值
     void erase(uint64_t len);
 
+    /// 清空，注意：
+    /// 1. 并不会释放内部内存，内部申请的内存只有在析构时释放
+    /// 2. 如果capacity已经大于shrink阈值了，则收缩成init capacity大小
+    void clear();
+
+    /// 已申请内存大小
+    uint64_t capacity() const { return capacity_; }
+
+  public:
     /**
      * @return 找到返回key位置，失败返回NULL
      *
      */
-    char *find(const char *key, int len);
-    char *find(char c);
-    char *find_crlf() { return find("\r\n", 2); }
-    char *find_eol() { return find('\n'); }
+    char *find(const char *key, int len) const;
+    char *find(char c) const;
+    char *find_crlf() const { return find("\r\n", 2); }
+    char *find_eol() const { return find('\n'); }
 
     /**
      * 删除 '空格' '\f' '\r' '\n' '\t' '\v'
@@ -102,35 +115,17 @@ namespace chef {
     char *trim_left();
     char *trim_right();
 
-    /**
-     * 复位
-     *
-     */
-    void reset();
-
-    /**
-     * 已申请内存大小
-     *
-     */
-    uint64_t capacity() const { return capacity_; }
-
   public:
-    #ifdef CHEF_UNIT_TEST
-    uint64_t init_capacity() const { return init_capacity_; }
-    uint64_t shrink_capacity() const { return shrink_capacity_; }
-    uint64_t read_index() const { return read_index_; }
-    uint64_t write_index() const { return write_index_; }
-    char *data() const { return data_; }
-    #endif // CHEF_UNIT_TEST
+    friend class ut::buffer_test;
 
   private:
     const uint64_t init_capacity_;
     const uint64_t shrink_capacity_;
-    uint64_t capacity_;
-    uint64_t read_index_;
-    uint64_t write_index_;
-    char *data_;
-  };
+    uint64_t       capacity_;
+    uint64_t       read_index_;
+    uint64_t       write_index_;
+    char          *data_;
+  }; // class buffer
 
 } // namespace chef
 
