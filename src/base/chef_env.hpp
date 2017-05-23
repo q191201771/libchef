@@ -17,75 +17,40 @@
 // #define CHEF_USE_BOOST
 
 #ifdef CHEF_USE_BOOST
-
   #include <boost/thread.hpp>
-    namespace chef {
-      using boost::thread;
-      using boost::mutex;
-      using boost::lock_guard;
-      using boost::unique_lock;
-      using boost::condition_variable;
-      namespace this_thread = boost::this_thread;
-    } /// namespace chef
-
   #include <boost/atomic.hpp>
-    namespace chef {
-      using boost::atomic;
-    }
-
   #include <boost/smart_ptr.hpp>
-    namespace chef {
-      using boost::shared_ptr;
-      using boost::make_shared;
-    }
-
   #include <boost/functional.hpp>
-    namespace chef {
-      using boost::bind;
-      using boost::function;
-    }
-
   #include <boost/chrono.hpp>
-    namespace chef {
-      namespace chrono = boost::chrono;
-    }
-
-#else /// > c++11
-
+  namespace chef_env_keeper = boost;
+#else
   #include <mutex>
   #include <thread>
   #include <condition_variable>
-    namespace chef {
-      using std::thread;
-      using std::mutex;
-      using std::lock_guard;
-      using std::unique_lock;
-      using std::condition_variable;
-      namespace this_thread = std::this_thread;
-    } /// namespace chef
-
   #include <atomic>
-    namespace chef {
-      using std::atomic;
-    }
-
   #include <memory>
-    namespace chef {
-      using std::shared_ptr;
-      using std::make_shared;
-    }
-
   #include <functional>
-    namespace chef {
-      using std::bind;
-      using std::function;
-    }
-
   #include <chrono>
-    namespace chef {
-      namespace chrono = std::chrono;
-    }
+  namespace chef_env_keeper = std;
+#endif
 
-#endif /// ifdef CHEF_USE_BOOST ... else ... CHEF_USE_BOOST
+namespace chef {
+  using chef_env_keeper::thread;
+  using chef_env_keeper::mutex;
+  using chef_env_keeper::lock_guard;
+  using chef_env_keeper::unique_lock;
+  using chef_env_keeper::condition_variable;
+  namespace this_thread = chef_env_keeper::this_thread;
+
+  using chef_env_keeper::atomic;
+
+  using chef_env_keeper::shared_ptr;
+  using chef_env_keeper::make_shared;
+
+  using chef_env_keeper::bind;
+  using chef_env_keeper::function;
+
+  namespace chrono = chef_env_keeper::chrono;
+} // namespace chef
 
 #endif /// _CHEF_BASE_ENV_HPP_
