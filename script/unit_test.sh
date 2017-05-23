@@ -11,7 +11,7 @@
 
 cd ${SCONS_BIN_DIR}
 
-./buffer_test && ./count_dump_test && ./filepath_op_test && ./noncopyable_test && ./strings_op_test && ./task_thread_test &&
+./buffer_test && ./chef_count_dump_test && ./filepath_op_test && ./noncopyable_test && ./strings_op_test && ./task_thread_test &&
 ./thread_pool_test && ./wait_event_test && ./wait_event_counter_test
 ./chunk_head_op_test
 ./daemon_op_test

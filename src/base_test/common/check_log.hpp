@@ -34,6 +34,6 @@ namespace chef {
 
 } // namespace chef
 
-#define ENTER_TEST chef::check_log(__FILE__);
+#define ENTER_TEST chef::check_log _bASe_TEST_COMMON_CHECK_LOG_HPP_ccl(__FILE__);
 
 #endif // _BASE_TEST_COMMON_CHECK_LOG_HPP_
