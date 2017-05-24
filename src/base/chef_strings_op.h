@@ -42,8 +42,11 @@ namespace chef {
       /// `s`是否包含子串`target`
       static bool contains(const std::string &s, const std::string &target);
 
-      /// `s`中是否包含`charlist`中的任一字符
+      /// `s`中是否包含`charlist`中的一个或多个字符
       static bool contains_any(const std::string &s, const std::string &charlist);
+
+      /// `s`中是否包含`charlist`中的所有字符
+      static bool contains_all(const std::string &s, const std::string &charlist);
 
       /// `s`是否以`prefix`开头
       static bool has_prefix(const std::string &s, const std::string &prefix);

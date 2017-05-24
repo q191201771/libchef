@@ -19,6 +19,23 @@ namespace chef {
     return s.find_first_of(charlist) != std::string::npos;
   }
 
+  bool strings_op::contains_all(const std::string &s, const std::string &charlist) {
+    if (s.empty() || charlist.empty() || s.length() < charlist.length()) {
+      return false;
+    }
+
+    int hash = 0;
+    for (std::size_t i = 0; i < s.length(); i++) {
+      hash |= (1 << (s[i] - 'A'));
+    }
+    for (std::size_t j = 0; j < charlist.length(); j++) {
+      if ((hash & (1 << (charlist[j] - 'A'))) == 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   bool strings_op::has_prefix(const std::string &s, const std::string &prefix) {
     //return s.find(prefix) == 0;
 

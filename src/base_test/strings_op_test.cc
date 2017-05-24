@@ -95,6 +95,30 @@ void strings_contains_any_test() {
   }
 }
 
+void strings_contains_all_test() {
+  std::vector<string_pair_2_bool> vec;
+  vec.push_back(string_pair_2_bool("", "", false));
+  vec.push_back(string_pair_2_bool("", "a", false));
+  vec.push_back(string_pair_2_bool("", "abc", false));
+  vec.push_back(string_pair_2_bool("a", "", false));
+  vec.push_back(string_pair_2_bool("abc", "xyz", false));
+  vec.push_back(string_pair_2_bool("abc", "xcz", false));
+  vec.push_back(string_pair_2_bool("abc", "bcz", false));
+  //vec.push_back(string_pair_2_bool("a☺b☻c☹d", "xcz", false));
+  vec.push_back(string_pair_2_bool("aRegExp*", ".(|)*+?^$[]", false));
+  vec.push_back(string_pair_2_bool(dots+dots+dots, " ", false));
+  vec.push_back(string_pair_2_bool("a", "a", true));
+  vec.push_back(string_pair_2_bool("aaa", "a", true));
+  vec.push_back(string_pair_2_bool("abc", "ba", true));
+  vec.push_back(string_pair_2_bool("abc", "cb", true));
+  vec.push_back(string_pair_2_bool("abcd", "ca", true));
+  vec.push_back(string_pair_2_bool("abcd", "acd", true));
+
+  for (auto &item : vec) {
+    assert(chef::strings_op::contains_all(item.pair_[0], item.pair_[1]) == item.result_);
+  }
+}
+
 void strings_has_prifex_test() {
   std::vector<string_pair_2_bool> vec;
   vec.push_back(string_pair_2_bool("abc", "bc", false));
@@ -563,6 +587,7 @@ int main() {
   strings_compare_test();
   strings_contains_test();
   strings_contains_any_test();
+  strings_contains_all_test();
   strings_has_prifex_test();
   strings_has_suffix_test();
   strings_count_test();
