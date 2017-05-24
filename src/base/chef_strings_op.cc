@@ -1,4 +1,5 @@
 #include "chef_strings_op.h"
+#include <set>
 #include <cctype>
 #include <sstream>
 #include <stdint.h>
@@ -23,13 +24,12 @@ namespace chef {
     if (s.empty() || charlist.empty() || s.length() < charlist.length()) {
       return false;
     }
-
-    int hash = 0;
-    for (std::size_t i = 0; i < s.length(); i++) {
-      hash |= (1 << (s[i] - 'A'));
+    std::set<char> hash;
+    for (std::size_t j = 0; j < s.length(); j++) {
+      hash.insert(s[j]);
     }
-    for (std::size_t j = 0; j < charlist.length(); j++) {
-      if ((hash & (1 << (charlist[j] - 'A'))) == 0) {
+    for (std::size_t i = 0; i < charlist.length(); i++) {
+      if (hash.find(charlist[i]) == hash.end()) {
         return false;
       }
     }

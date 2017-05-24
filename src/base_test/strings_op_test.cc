@@ -104,7 +104,7 @@ void strings_contains_all_test() {
   vec.push_back(string_pair_2_bool("abc", "xyz", false));
   vec.push_back(string_pair_2_bool("abc", "xcz", false));
   vec.push_back(string_pair_2_bool("abc", "bcz", false));
-  //vec.push_back(string_pair_2_bool("a☺b☻c☹d", "xcz", false));
+  vec.push_back(string_pair_2_bool("a☺b☻c☹d", "xcz", false));
   vec.push_back(string_pair_2_bool("aRegExp*", ".(|)*+?^$[]", false));
   vec.push_back(string_pair_2_bool(dots+dots+dots, " ", false));
   vec.push_back(string_pair_2_bool("a", "a", true));
