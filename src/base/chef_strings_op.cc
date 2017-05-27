@@ -184,6 +184,9 @@ namespace chef {
   }
 
   std::vector<std::string> strings_op::split(const std::string &s, char sep, bool keep_empty_strings) {
+	if (s.empty()) {
+	  return std::vector<std::string>();
+	}
     std::vector<std::string> ret;
     std::stringstream ss(s);
     std::string item;
@@ -242,8 +245,8 @@ namespace chef {
     }
 
     std::string ret;
-    uint64_t i = 0;
-    uint64_t size = ss.size();
+    std::size_t i = 0;
+    std::size_t size = ss.size();
     for (; i < size - 1; i++) {
       ret += ss[i] + sep;
     }
@@ -255,8 +258,8 @@ namespace chef {
     if (s.empty() || charlist.empty()) {
       return s;
     }
-    uint64_t pos = 0;
-    uint64_t sl = s.length();
+    std::size_t pos = 0;
+    std::size_t sl = s.length();
     for (; pos < sl; pos++) {
       if (charlist.find(s[pos]) == std::string::npos) {
         break;
@@ -269,7 +272,7 @@ namespace chef {
     if (s.empty() || charlist.empty()) {
       return s;
     }
-    int64_t pos = s.length() - 1;
+    std::size_t pos = s.length() - 1;
     for (; pos >= 0; pos--) {
       if (charlist.find(s[pos]) == std::string::npos) {
         break;

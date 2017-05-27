@@ -3,6 +3,9 @@ src/base/zkclient.h
 src/base/zkclient.cc
 src/base/sub
 
+build/windows/starry-night/Debug
+build/windows/starry-night/base/Debug
+build/windows/starry-night/base_test/Debug
 build/macos/base/output/
 xcuserdata/
 dump
@@ -57,9 +60,14 @@ CTestTestfile.cmake
 .ycm_extra_conf.py
 .ycm_extra_conf.pyc
 
-##### JS #####
+##### javascript #####
 node_modules
 npm-debug.log
 
-##### MAC #####
+##### macos #####
 ._Store
+
+##### windows #####
+.vs
+*.vcxproj.filters
+*.vcxproj.user
