@@ -1,4 +1,8 @@
-# linux c++脚手架
+# linux c++基础库
+
+### 简介
+
+linux c++后台开发基础库。目标是随时随地都能方便快捷的使用，让后台开发时更关注于服务的业务，逻辑清晰，功能分层。
 
 ### 代码结构
 
@@ -25,6 +29,10 @@ gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
 macos
 Darwin MacdeMacBook-Pro.local 16.5.0 Darwin Kernel Version 16.5.0: Fri Mar  3 16:52:33 PST 2017; root:xnu-3789.51.2~3/RELEASE_X86_64 x86_64
 xcode: Version 8.3.2 (8E2002)
+
+windows
+window10
+visual stdio 2017
 ```
 
 ### 依赖
@@ -83,8 +91,14 @@ mac
 
 ```
 用xcode打开 ${ROOT_DIR}/build/macos/starry-night.xcworkspace ，之后就可以愉快的编译、运行、调试啦。
-
 目前只添加了部分文件，因为这些文件在公司的项目中使用了，而有的同事用xcode做开发，所以我至少需要保证它们在xcode下是可编译的。
+```
+
+windows
+
+```
+玩票性质~
+用visual stdio打开 ${ROOT_DIR}/build/windows/starry-night/starry-night.sln
 ```
 
 ### 声明，拷贝自第三方工程的代码

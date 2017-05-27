@@ -273,10 +273,15 @@ namespace chef {
       return s;
     }
     std::size_t pos = s.length() - 1;
-    for (; pos >= 0; pos--) {
+    for (; ; ) {
       if (charlist.find(s[pos]) == std::string::npos) {
         break;
       }
+      if (pos == 0) {
+        pos = -1;
+        break;
+      }
+      pos--;
     }
     return s.substr(0, pos + 1);
   }
