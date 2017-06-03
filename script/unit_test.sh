@@ -24,6 +24,7 @@ cd ${SCONS_BIN_DIR}
 ./this_proc_op_test
 ./this_thread_op_test
 ./macro_test
+./compress_zlib_op_test
 
 if [ -e 'crypto_md5_op_test' ]; then
     ./crypto_md5_op_test

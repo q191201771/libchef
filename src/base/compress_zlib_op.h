@@ -20,7 +20,7 @@ namespace chef {
 
   class compress_zlib_op {
     public:
-      enum COMPRESSION_LEVEL {
+      enum compression_level {
         COMPRESSION_LEVEL_DEFAULT          = -1, /// 默认
         COMPRESSION_LEVEL_BEST_SPEED       =  1, /// 最快
         COMPRESSION_LEVEL_BEST_COMPRESSION =  9, /// 压缩率最高
@@ -38,7 +38,7 @@ namespace chef {
        *
        * @return 0 成功 -1 失败
        */
-      int compress(const unsigned char *in, int in_len, unsigned char **out, int *out_len, COMPRESSION_LEVEL level);
+      static int compress(const unsigned char *in, int in_len, unsigned char **out, int *out_len, compression_level level);
 
       /**
        * zlib解压
@@ -51,7 +51,7 @@ namespace chef {
        * @return 0 成功 -1 失败
        *
        */
-      int decompress(const unsigned char *in, int in_len, unsigned char **out, int *out_len);
+      static int decompress(const unsigned char *in, int in_len, unsigned char **out, int *out_len);
   };
 
   /// TODO class compress_gzip_op

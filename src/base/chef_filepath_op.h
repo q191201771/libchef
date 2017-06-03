@@ -42,9 +42,9 @@ namespace chef {
        * @param    pathname          需要查询的文件夹
        * @param  child_dirs          传出参数，文件夹下的文件夹
        * @param child_files          传出参数，文件夹下的文件
-       * @param with_pathname_prefix 传出的文件、文件夹前是否加上<pathname>前缀
+       * @param with_pathname_prefix 传出的文件、文件夹前是否加上`pathname`前缀
        *
-       * @return  0 成功 -1 失败 <pathname>不可遍历
+       * @return  0 成功 -1 失败 `pathname`不可遍历
        *
        * @NOTICE 只访问第一层目录，不会递归访问子目录下的内容
        *
@@ -67,7 +67,7 @@ namespace chef {
        *
        * @return
        *    0 删除成功，或删除前就不存在
-       *   -1 删除失败，或[name]是文件夹
+       *   -1 删除失败，或`name`是文件夹
        *
        */
       static int rm_file(const std::string &name);
@@ -77,7 +77,7 @@ namespace chef {
        *
        * @return
        *    0 删除成功，或删除前就不存在
-       *   -1 删除失败，或[name]不是文件夹
+       *   -1 删除失败，或`pathname`不是文件夹
        *
        */
       static int rmdir_recursive(const std::string &pathname);
@@ -148,7 +148,7 @@ namespace chef {
        * @param path     目录
        * @param filename 文件名
        *
-       * 连接目录和文件名，解决[path]后面'/'和[filename]前面'/'是否存在，重复的问题
+       * 连接目录和文件名，解决`path`后面'/'和`filename`前面'/'是否存在，重复的问题
        *
        */
       static std::string join(const std::string &path, const std::string &filename);

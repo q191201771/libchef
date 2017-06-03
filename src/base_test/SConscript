@@ -86,4 +86,9 @@ with_libcurl_libs = [platform_libs]
 with_libcurl_libs += [File(os.path.join(third_lib_path, 'libcurl.so'))]
 prgs += env.Program('http_op_test', http_op_sources, LIBS=with_libcurl_libs)
 
+compress_zlib_op_sources = ['../base/compress_zlib_op.o', 'compress_zlib_op_test.cc']
+with_zlib_libs = [platform_libs]
+with_zlib_libs += [File(os.path.join(third_lib_path, 'libz.so'))]
+prgs += env.Program('compress_zlib_op_test', compress_zlib_op_sources, LIBS=with_zlib_libs)
+
 Return('prgs')

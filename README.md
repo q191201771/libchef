@@ -11,7 +11,7 @@ src/                        ......代码根目录
   base/                     ......基础库
   base_test/                ......基础库相应测试
 script/                     ......脚本目录
-build/                      ......编译脚本目录
+build/                      ......各平台编译脚本目录
   linux/
   macos/
   windows/
