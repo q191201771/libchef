@@ -17,9 +17,16 @@
 #define _BASE_TEST_COMMON_ASSERT_WRAPPER_HPP_
 
 #include <assert.h>
+
 //#ifndef NDEBUG
 #undef assert
-#define assert(expr) if(!(expr)) {fprintf(stderr, "%s %s %d\n", #expr, __FILE__, __LINE__);};
+#define assert(expr) if(!(expr)) { fprintf(stderr, "%s %s %d\n", #expr, __FILE__, __LINE__); };
 //#endif
+
+#define PANIC(info) fprintf(stderr, "%s %s %d\n"), info, __FILE__, __LINE__); abort();
+
+#define NOT_IMPL PANIC("not impl yet.")
+
+#define ASSERT_NOT_REACH_HERE PANIC("should not reach here.")
 
 #endif // _BASE_TEST_COMMON_ASSERT_WRAPPER_HPP_

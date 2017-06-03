@@ -17,7 +17,7 @@
 namespace chef {
 
   class noncopyable {
-    public:
+    protected:
       noncopyable() {}
       virtual ~noncopyable() {}
 

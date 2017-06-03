@@ -14,6 +14,7 @@ script/                     ......脚本目录
 build/                      ......编译脚本目录
   linux/
   macos/
+  windows/
 .gitignore                  ......
 LINCENSE                    ......
 README.md                   ......
@@ -22,15 +23,15 @@ README.md                   ......
 ### 我的环境
 
 ```
-ubuntu
+ubuntu:
 Linux ubuntu 4.4.0-62-generic #83-Ubuntu SMP Wed Jan 18 14:10:15 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
 gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
 
-macos
+macos:
 Darwin MacdeMacBook-Pro.local 16.5.0 Darwin Kernel Version 16.5.0: Fri Mar  3 16:52:33 PST 2017; root:xnu-3789.51.2~3/RELEASE_X86_64 x86_64
 xcode: Version 8.3.2 (8E2002)
 
-windows
+windows:
 window10
 visual stdio 2017
 ```
@@ -53,8 +54,7 @@ linux下使用scons
 
 ```
 生成方式：
-$cd ${ROOT_DIR}/build/linux
-$scons [debug]
+$cd ${ROOT_DIR}/build/linux && $scons [debug]
 
 输出：
 base中各源码对应的编译目标文件.o -> ${ROOT_DIR}/build/linux/output/base/*.o
@@ -67,7 +67,7 @@ $cd ${ROOT_DIR}/build/linux && scons -c
 linux下使用make
 
 ```
-单纯演示下简单、正确使用Makefile的姿势。条件允许的情况下，应该用更友好些的高级编译工具，比如scons或者CMake。
+单纯演示下简单、正确使用Makefile的姿势。条件允许的情况下，可以用更友好些的高级编译工具，比如scons或者CMake。
 
 生成方式：
 $cd ${ROOT_DIR}/src/base && make [debug]
@@ -75,13 +75,9 @@ $cd ${ROOT_DIR}/src/base && make [debug]
 输出：
 base中各源码对应的依赖关系文件.d、编译目标文件.o、静态库文件libchefbase.a
 release:
-${ROOT_DIR}/src/base/release/*.d
-${ROOT_DIR}/src/base/release/*.o
-${ROOT_DIR}/src/base/release/libchefbase.a
+${ROOT_DIR}/src/base/release/
 debug：
-${ROOT_DIR}/src/base/debug/*.d
-${ROOT_DIR}/src/base/debug/*.o
-${ROOT_DIR}/src/base/debug/libchefbase.a
+${ROOT_DIR}/src/base/debug/
 
 清理：
 $cd ${ROOT_DIR}/src/base && make clean
