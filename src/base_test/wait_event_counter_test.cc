@@ -5,10 +5,19 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
+#define CHECK_COUNT(wec, need_count, counted) assert(##wec.need_count() == need_count && ##wec.counted() == counted);
+
+static void check_count(const chef::wait_event_counter &wec, int need_count, int counted) {
+  assert(wec.need_count() == need_count && wec.counted() == counted);
+}
+
 void notify_before_wait_test() {
   chef::wait_event_counter wec;
+  check_count(wec, 1, 0);
   wec.notify();
+  check_count(wec, 1, 1);
   wec.wait();
+  check_count(wec, 1, 1);
 }
 
 std::atomic<int> count(0);
@@ -24,16 +33,20 @@ void notify_after_wait_test() {
   std::thread thd(notify_after_wait_helper);
   count = 2;
   gwe.wait();
-  assert(count = 1);
+  assert(count == 1);
   thd.join();
 }
 
 void counter_test() {
   const int need_count = 16;
   chef::wait_event_counter wec(need_count);
+  check_count(wec, need_count, 0);
   for (int i = 0; i < need_count; i++) {
+    check_count(wec, need_count, i);
     wec.notify();
+    check_count(wec, need_count, i+1);
   }
+  check_count(wec, need_count, need_count);
   wec.wait();
 }
 

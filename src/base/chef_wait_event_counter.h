@@ -50,6 +50,10 @@ namespace chef {
        */
       bool wait_for(uint32_t timeout_ms);
 
+    public:
+      int need_count() const { return need_count_; }
+      int counted() const { return counted_; }
+
     private:
       bool check_();
 

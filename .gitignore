@@ -3,6 +3,7 @@ src/base/zkclient.h
 src/base/zkclient.cc
 src/base/sub
 
+build/linux/output/base_test/*_test
 build/windows/starry-night/Debug
 build/windows/starry-night/base/Debug
 build/windows/starry-night/base_test/Debug
