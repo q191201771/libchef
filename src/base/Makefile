@@ -1,6 +1,13 @@
 CXX = g++
 ARCR = ar -cr
 
+OS =
+ifeq ($(shell uname), Linux)
+	OS=linux
+else
+	OS=macos
+endif
+
 ### mod .git path
 CHEF_VERSION =
 ifeq ($(shell test -e ../../.git && echo $$?), 0)
@@ -14,7 +21,7 @@ endif
 # -Wconversion -Wold-style-cast
 CXXFLAGS = -g -pthread -std=c++14 -pipe -fPIC -Wall -Wextra -Werror -Wunused-parameter -Woverloaded-virtual \
            -Wpointer-arith -Wshadow -Wwrite-strings -Wcast-align \
-		   -DCHEF_VERSION=$(CHEF_VERSION)
+           -DCHEF_VERSION=$(CHEF_VERSION)
 
 CXXFLAGS_DEBUG   = -O0
 CXXFLAGS_RELEASE = -O2 -DNDEBUG
