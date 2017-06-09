@@ -29,6 +29,7 @@ this_thread_op_sources     = ['../base/this_thread_op.o', 'this_thread_op_test.c
 wait_event_counter_sources = ['../base/wait_event_counter.o', 'wait_event_counter_test.cc']
 
 crypto_md5_op_sources      = ['../base/crypto_md5_op.o', 'crypto_md5_op_test.cc']
+crypto_sha1_op_sources     = ['../base/crypto_sha1_op.o', 'crypto_sha1_op_test.cc']
 encoding_base64_op_sources = ['../base/encoding_base64_op.o', 'encoding_base64_op_test.cc']
 
 task_thread_sources = ['../base/wait_event_counter.o', '../base/task_thread.o', 'task_thread_test.cc']
@@ -60,6 +61,7 @@ prgs += env.Program('logo_test', logo_sources, LIBS=platform_libs)
 prgs += env.Program('macro_test', macro_sources, LIBS=platform_libs)
 
 prgs += non_warn_env.Program('crypto_md5_op_test', crypto_md5_op_sources, LIBS=platform_libs)
+prgs += non_warn_env.Program('crypto_sha1_op_test', crypto_sha1_op_sources, LIBS=platform_libs)
 prgs += non_warn_env.Program('encoding_base64_op_test', encoding_base64_op_sources, LIBS=platform_libs)
 
 log_sources = ['../base/log.o', 'log_test.cc']

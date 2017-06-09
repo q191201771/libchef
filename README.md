@@ -100,10 +100,14 @@ windows
 ### 声明，拷贝自第三方工程的代码
 
 ```
-src/base/crypto_md5.hpp
+src/base/crypto_sha1_op.h
+https://github.com/antirez/redis/releases/tag/3.2.9
+中src/sha1.h和src/sha1.c
+
+src/base/crypto_md5_op.h
 https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
 
-src/base/encoding_base64.hpp
+src/base/encoding_base64_op.h
 https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
 ```
 
