@@ -107,7 +107,7 @@ https://github.com/antirez/redis/releases/tag/3.2.9
 src/base/crypto_md5_op.h
 https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
 
-src/base/encoding_base64_op.h
+src/base/chef_encoding_base64_op.h
 https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
 ```
 
