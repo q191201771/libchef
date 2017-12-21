@@ -1,4 +1,4 @@
-#include "crypto_md5_op.h"
+#include "chef_crypto_md5_op.h"
 
 namespace inner {
   std::string md5_hash_hex(const std::string &);
