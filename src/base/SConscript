@@ -28,7 +28,7 @@ objs += env.Object('compress_zlib_op', ['compress_zlib_op.cc'])
 
 objs += non_warn_env.Object('crypto_md5_op', ['crypto_md5_op.cc'])
 objs += non_warn_env.Object('crypto_sha1_op', ['crypto_sha1_op.cc'])
-objs += non_warn_env.Object('encoding_base64_op', ['encoding_base64_op.cc'])
+objs += non_warn_env.Object('encoding_base64_op', ['chef_encoding_base64_op.cc'])
 
 objs += env.Object('json_config', ['json_config.cc'], CPPPATH=jsoncpp_include_path)
 objs += env.Object('http_op', ['chef_http_op.cc'], CPPPATH=third_include_path)

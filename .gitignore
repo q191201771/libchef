@@ -1,3 +1,5 @@
+src/base/chef_net_url_op.cc
+src/base/chef_net_url_op.h
 src/base/leader_election.h
 src/base/zkclient.h
 src/base/zkclient.cc

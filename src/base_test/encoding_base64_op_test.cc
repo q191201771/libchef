@@ -1,4 +1,4 @@
-#include "../base/encoding_base64_op.h"
+#include "../base/chef_encoding_base64_op.h"
 #include <map>
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
