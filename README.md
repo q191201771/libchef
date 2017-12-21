@@ -104,7 +104,7 @@ src/base/crypto_sha1_op.h
 https://github.com/antirez/redis/releases/tag/3.2.9
 中src/sha1.h和src/sha1.c
 
-src/base/crypto_md5_op.h
+src/base/chef_crypto_md5_op.h
 https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
 
 src/base/chef_encoding_base64_op.h

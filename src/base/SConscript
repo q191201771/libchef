@@ -26,7 +26,7 @@ objs += env.Object('logo', ['logo.cc'])
 objs += env.Object('wait_event_counter', ['chef_wait_event_counter.cc'])
 objs += env.Object('compress_zlib_op', ['compress_zlib_op.cc'])
 
-objs += non_warn_env.Object('crypto_md5_op', ['crypto_md5_op.cc'])
+objs += non_warn_env.Object('crypto_md5_op', ['chef_crypto_md5_op.cc'])
 objs += non_warn_env.Object('crypto_sha1_op', ['crypto_sha1_op.cc'])
 objs += non_warn_env.Object('encoding_base64_op', ['chef_encoding_base64_op.cc'])
 
