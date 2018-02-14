@@ -10,7 +10,7 @@ if mode == 'debug':
 elif mode == 'release':
     env.Append(CXXFLAGS = ['-O2', '-DNDEBUG'])
 else:
-    print('Argument mode(%s) fatal.', mode)
+    print('Argument mode fatal,only support debug or release.')
     exit()
 
 common_CXXFLAGS = ['-g', '-pthread', '-std=c++14', '-pipe', '-fPIC']

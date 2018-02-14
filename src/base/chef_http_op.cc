@@ -43,11 +43,12 @@ namespace chef {
 
   void http_op::global_cleanup_curl() { curl_global_cleanup(); }
 
-  int http_op::get(const std::string &url,
-                   const std::map<std::string, std::string> *headers,
-                   const std::map<std::string, std::string> *cookies,
-                   int timeout_ms,
-                   response &resp
+  int http_op::get_or_post(const std::string &url,
+                           const std::map<std::string, std::string> *headers,
+                           const std::map<std::string, std::string> *cookies,
+                           const char *post_data,
+                           int timeout_ms,
+                           response &resp
   ) {
     CURL *curl = curl_easy_init();
     if (curl == NULL) {
@@ -73,14 +74,21 @@ namespace chef {
       }
     }
 
-    /// 设置request headers
+    /// 设置请求地址
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 
+    /// 设置request headers
     if (request_header_list != NULL) {
       curl_easy_setopt(curl, CURLOPT_HTTPHEADER, request_header_list);
     }
+    /// 设置request cookies
     if (!request_cookies_buf.empty()) {
       curl_easy_setopt(curl, CURLOPT_COOKIE, request_cookies_buf.c_str());
+    }
+
+    /// 设置post data
+    if (post_data != NULL) {
+      curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_data);
     }
 
     /// 设置请求超时时间，单位毫秒
