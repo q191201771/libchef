@@ -19,7 +19,7 @@ int main() {
     cookies["BAIDUID"]  = "746D850D8998853CEE879633364B4888";
     cookies["BIDUPSID"] = "746D850D8998853CEE879633364B4889";
 
-    ret = chef::http_op::get(url, &headers, &cookies, 10000, resp);
+    ret = chef::http_op::get_or_ost(url, &headers, &cookies, NULL, 10000, resp);
     assert(ret == 0 && resp.code_ == 200 && !resp.content_.empty());
     printf("ret:%d,code:%d\n", ret, resp.code_);
     printf("headers:------\n");

@@ -24,7 +24,7 @@ namespace chef {
   class http_op {
     public:
       /**
-       * @breif 内部调用curl_global_init
+       * @brief 内部调用curl_global_init，建议main函数初始化时调用有且仅有一次即可
        *
        * @NOTICE 关于libcurl的curl_global_init
        *         * 主要作用：初始化win32相关以及ssl部分
@@ -46,7 +46,6 @@ namespace chef {
       static void global_cleanup_curl();
 
     public:
-
       struct response_cookie {
         std::string name_;
         std::string value_;
@@ -73,26 +72,25 @@ namespace chef {
       };
 
       /**
-       * @brief http get方法，阻塞直至收到返回或超时~
+       * @brief http get or post方法（见post_data参数），阻塞直至收到返回或超时~
        *
        * @param        url 'http://'前缀可以有也可以没有，query后缀可以有也可以没有
-       * @param    headers 请求时的header 组，以kv结构传入，可为NULL
-       * @param    cookies 请求时的cookies组，以kv结构传入，可为NULL
-       * @param timeout_ms 超时时间，单位秒
+       * @param    headers 请求时的header 组，以kv结构传入，可为NULL，函数调用结束后，内部不持有该内存，可自由释放
+       * @param    cookies 请求时的cookies组，以kv结构传入，可为NULL，函数调用结束后，内部不持有该内存，可自由释放
+       * @param  post_data post数据，如果为NULL，则为get方法，函数调用结束后，内部不持有该内存，可自由释放
+       * @param timeout_ms 超时时间，单位毫秒
        * @param       resp 返回结果，参见结构体http_op::response
        *
        * @return 0 成功 -1 失败
        *
        */
-      static int get(const std::string &url,
-                     const std::map<std::string, std::string> *headers,
-                     const std::map<std::string, std::string> *cookies,
-                     int timeout_ms,
-                     response &resp /*out*/);
+      static int get_or_post(const std::string &url,
+                             const std::map<std::string, std::string> *headers,
+                             const std::map<std::string, std::string> *cookies,
+                             const char *post_data,
+                             int timeout_ms,
+                             response &resp /*out*/);
 
-      /// TODO * get request with params,cookies
-      ///      * urlencode
-      ///      * post
   };
 
 } // namespace inner
