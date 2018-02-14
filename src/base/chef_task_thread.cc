@@ -1,5 +1,5 @@
 #include "chef_task_thread.h"
-
+#include <sys/time.h>
 #ifdef __linux__
 #include <sys/prctl.h>
 #endif
@@ -114,23 +114,6 @@ namespace chef {
     }
   }
 
-// https://stackoverflow.com/questions/5167269/clock-gettime-alternative-in-mac-os-x
-#if defined(__MACH__) && !defined(CLOCK_REALTIME)
-#include <sys/time.h>
-#define CLOCK_REALTIME 0
-#define CLOCK_MONOTONIC 0
-// clock_gettime is not implemented on older versions of OS X (< 10.12).
-// If implemented, CLOCK_REALTIME will have already been defined.
-int clock_gettime(int /*clk_id*/, struct timespec* t) {
-    struct timeval now;
-    int rv = gettimeofday(&now, NULL);
-    if (rv) return rv;
-    t->tv_sec  = now.tv_sec;
-    t->tv_nsec = now.tv_usec * 1000;
-    return 0;
-}
-#endif
-
   void task_thread::execute_tasks_(std::multimap<uint64_t, task> &tasks) {
 //    for (auto item : tasks) {
     std::multimap<uint64_t, task>::iterator iter = tasks.begin();
@@ -142,7 +125,16 @@ int clock_gettime(int /*clk_id*/, struct timespec* t) {
 
   uint64_t task_thread::now_() {
     struct timespec ts;
+#if defined(CLOCL_REALTIME)
     clock_gettime(CLOCK_MONOTONIC, &ts);
+#else
+    {
+      struct timeval tv;
+      gettimeofday(&tv, NULL);
+      ts.tv_sec = tv.tv_sec;
+      ts.tv_nsec = tv.tv_usec * 1000;
+    }
+#endif
     return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
   }
 
