@@ -88,7 +88,7 @@ namespace chef {
 
     /// 设置post data
     if (post_data != NULL) {
-      curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_data);
+      curl_easy_setopt(curl, CURLOPT_COPYPOSTFIELDS, post_data);
     }
 
     /// 设置请求超时时间，单位毫秒
