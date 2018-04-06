@@ -1,4 +1,5 @@
 #include "chef_task_thread.h"
+#include <time.h>
 #include <sys/time.h>
 #ifdef __linux__
 #include <sys/prctl.h>
