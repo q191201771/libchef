@@ -39,7 +39,6 @@ namespace chef {
   bool strings_op::has_prefix(const std::string &s, const std::string &prefix) {
     //return s.find(prefix) == 0;
 
-    /// 更高效些
     if (s.empty() || prefix.empty()) {
       return false;
     }
@@ -53,7 +52,6 @@ namespace chef {
     //}
     //return (suffix.length() + pos) == s.length();
 
-    /// 更高效些
     if (s.empty() || suffix.empty()) {
       return false;
     }
