@@ -58,8 +58,15 @@ namespace chef {
     for (; ; ) {
       { /// enter lock scope
         chef::unique_lock<chef::mutex> lock(mutex_);
-        for (; !exit_flag_ && tasks_.empty() && defferred_tasks_.empty(); ) {
+        for (; !exit_flag_ && tasks_.empty(); ) {
           cond_.wait_for(lock, chef::chrono::milliseconds(100));
+          if (!defferred_tasks_.empty()) {
+              break;
+          }
+          //chef::cv_status cs = cond_.wait_for(lock, chef::chrono::milliseconds(100));
+          //if (cs == chef::cv_status::timeout && !defferred_tasks_.empty()) {
+          //    break;
+          //}
         }
         /// 收集需要立即执行的任务
         if (!tasks_.empty()) {
@@ -126,7 +133,7 @@ namespace chef {
 
   uint64_t task_thread::now_() {
     struct timespec ts;
-#if defined(CLOCL_REALTIME)
+#if defined(CLOCK_REALTIME) && !defined(__MACH__)
     clock_gettime(CLOCK_MONOTONIC, &ts);
 #else
     {

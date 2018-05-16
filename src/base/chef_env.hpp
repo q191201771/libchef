@@ -40,17 +40,20 @@ namespace chef {
   using chef_env_keeper::lock_guard;
   using chef_env_keeper::unique_lock;
   using chef_env_keeper::condition_variable;
+  typedef chef_env_keeper::cv_status cv_status;
   namespace this_thread = chef_env_keeper::this_thread;
 
   using chef_env_keeper::atomic;
 
   using chef_env_keeper::shared_ptr;
   using chef_env_keeper::make_shared;
+  using chef_env_keeper::enable_shared_from_this;
 
   using chef_env_keeper::bind;
   using chef_env_keeper::function;
 
   namespace chrono = chef_env_keeper::chrono;
+
 } // namespace chef
 
 #endif /// _CHEF_BASE_ENV_HPP_
