@@ -57,7 +57,7 @@ namespace chef {
        * 添加任务，任务按添加顺序执行。
        *
        * @param                 t 任务
-       * @param defferred_time_ms 可指定延时多少毫秒后执行，如果为0，则尽快执行。
+       * @param defferred_time_ms 可指定延时多少毫秒后执行，如果为0，则尽快执行，精度百毫秒级别。
        *
        */
       void add(const task &t, int defferred_time_ms=0);

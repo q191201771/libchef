@@ -1,5 +1,6 @@
 #include "chef_log.h"
 #include <unistd.h>
+#include <pthread.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
 #include <thread>
@@ -11,7 +12,9 @@ static inline int _threadid() {
 #if defined(__linux__)
   return static_cast<int>(syscall(SYS_gettid));
 #elif defined(__MACH__)
-  return static_cast<int>(syscall(SYS_thread_selfid));
+  uint64_t tid64;
+  pthread_threadid_np(NULL, &tid64);
+  return static_cast<int>(tid64);
 #else
   return 0;
 #endif
