@@ -20,6 +20,14 @@ LINCENSE                    ......
 README.md                   ......
 ```
 
+### TODO
+
+```
+1. base64直接url格式
+2. crc16 & crc32
+3. 去除以前xcode、windows vs的工程，只维护macos和linux下scons编译
+```
+
 ### 我的环境
 
 ```

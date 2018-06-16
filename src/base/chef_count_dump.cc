@@ -6,114 +6,168 @@
 
 namespace chef {
 
-  count_dump::count_dump()
-    : type_(COUNT_DUMP_TYPE_IMMUTABLE_TAGS)
-    , filename_(std::string())
-    , dump_interval_ms_(-1)
-    , num_of_tag_per_line_(-1)
-    , exit_flag_(false)
-  {}
+  #define LOCK_IF_NEEDED(t, m) if (t == MULTI_TAG_COUNTER_MUTEX) m.lock();
+  #define UNLOCK_IF_NEEDED(t, m) if (t == MULTI_TAG_COUNTER_MUTEX) m.unlock();
 
-  count_dump::~count_dump() {
+  void multi_tag_counter::add_tag(const std::string &tag) {
+    if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
+      tag2atomic_count_[tag] = 0;
+      return;
+    }
+    LOCK_IF_NEEDED(type_, mutex_);
+    tag2count_[tag] = 0;
+    UNLOCK_IF_NEEDED(type_, mutex_);
+  }
+
+  void multi_tag_counter::add_tags(const std::vector<std::string> &tags) {
+    std::vector<std::string>::const_iterator iter = tags.begin();
+    for (; iter != tags.end(); iter++) {
+      add_tag(*iter);
+    }
+  }
+
+  void multi_tag_counter::del_tag(const std::string &tag) {
+    if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
+      assert(0);
+      tag2atomic_count_.erase(tag);
+      return;
+    }
+    LOCK_IF_NEEDED(type_, mutex_);
+    tag2count_.erase(tag);
+    UNLOCK_IF_NEEDED(type_, mutex_);
+  }
+
+  bool multi_tag_counter::increment(const std::string &tag) {
+    if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
+      TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
+      if (iter == tag2atomic_count_.end()) {
+        return false;
+      }
+      iter->second++;
+      return true;
+    }
+    LOCK_IF_NEEDED(type_, mutex_);
+    tag2count_[tag]++;
+    UNLOCK_IF_NEEDED(type_, mutex_);
+    return true;
+  }
+
+  bool multi_tag_counter::decrement(const std::string &tag) {
+    if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
+      TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
+      if (iter == tag2atomic_count_.end()) {
+        return false;
+      }
+      iter->second--;
+      return true;
+    }
+    LOCK_IF_NEEDED(type_, mutex_);
+    tag2count_[tag]--;
+    UNLOCK_IF_NEEDED(type_, mutex_);
+    return true;
+  }
+
+  bool multi_tag_counter::add_count(const std::string &tag, int64_t num) {
+    if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
+      TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
+      if (iter == tag2atomic_count_.end()) {
+        return false;
+      }
+      iter->second += num;
+      return true;
+    }
+    LOCK_IF_NEEDED(type_, mutex_);
+    tag2count_[tag] += num;
+    UNLOCK_IF_NEEDED(type_, mutex_);
+    return true;
+  }
+
+  bool multi_tag_counter::del_count(const std::string &tag, int64_t num) {
+    if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
+      TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
+      if (iter == tag2atomic_count_.end()) {
+        return false;
+      }
+      iter->second -= num;
+      return true;
+    }
+    LOCK_IF_NEEDED(type_, mutex_);
+    tag2count_[tag] -= num;
+    UNLOCK_IF_NEEDED(type_, mutex_);
+    return true;
+  }
+
+  bool multi_tag_counter::set_count(const std::string &tag, int64_t num) {
+    if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
+      TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
+      if (iter == tag2atomic_count_.end()) {
+        return false;
+      }
+      iter->second = num;
+      return true;
+    }
+    LOCK_IF_NEEDED(type_, mutex_);
+    tag2count_[tag] = num;
+    UNLOCK_IF_NEEDED(type_, mutex_);
+    return true;
+  }
+
+  bool multi_tag_counter::get_tag_count(const std::string &tag, int64_t *num) {
+    if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
+      TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
+      if (iter == tag2atomic_count_.end()) {
+        return false;
+      }
+      *num = iter->second;
+      return true;
+    }
+    LOCK_IF_NEEDED(type_, mutex_);
+    bool ret = false;
+    TAG2COUNT::iterator iter = tag2count_.find(tag);
+    if (iter != tag2count_.end()) {
+      *num = iter->second;
+      ret = true;
+    }
+    UNLOCK_IF_NEEDED(type_, mutex_);
+    return ret;
+  }
+
+  std::map<std::string, int64_t> multi_tag_counter::get_tags_count() {
+    TAG2COUNT ret;
+    if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
+      TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.begin();
+      for (; iter != tag2atomic_count_.end(); iter++) {
+        ret[iter->first] = iter->second;
+      }
+      return ret;
+    }
+    LOCK_IF_NEEDED(type_, mutex_);
+    ret = tag2count_;
+    UNLOCK_IF_NEEDED(type_, mutex_);
+    return ret;
+  }
+
+  multi_tag_count_dumper::~multi_tag_count_dumper() {
     exit_flag_ = true;
     if (thread_) {
       thread_->join();
       thread_.reset();
-      dump2disk_();
+      dump2disk();
     }
   }
 
-  void count_dump::init(const std::string &filename, const count_dump_config &config) {
-    type_                = COUNT_DUMP_TYPE_MUTABLE_TAGS;
-    filename_            = filename;
-    dump_interval_ms_    = config.dump_interval_ms_;
-    num_of_tag_per_line_ = config.num_of_tag_per_line_;
-
-    thread_ = chef::make_shared<chef::thread>(chef::bind(&count_dump::run_in_thread_, this));
+  void multi_tag_count_dumper::start() {
+    thread_ = chef::make_shared<chef::thread>(chef::bind(&multi_tag_count_dumper::run_in_thread, this));
   }
 
-  void count_dump::init_with_constant_tags(const std::string &filename, const std::vector<std::string> &tags,
-                                           const count_dump_config &config)
-  {
-    type_                = COUNT_DUMP_TYPE_IMMUTABLE_TAGS;
-    filename_            = filename;
-    dump_interval_ms_    = config.dump_interval_ms_;
-    num_of_tag_per_line_ = config.num_of_tag_per_line_;
-
-    std::vector<std::string>::const_iterator iter = tags.begin();
-    for (; iter != tags.end(); iter++) {
-      tag2atomic_num_[*iter] = chef::make_shared<chef::atomic<int> >(0);
-    }
-
-    thread_ = chef::make_shared<chef::thread>(chef::bind(&count_dump::run_in_thread_, this));
-  }
-
-  int count_dump::add(const std::string &tag, int num) {
-    if (type_ == COUNT_DUMP_TYPE_MUTABLE_TAGS) {
-      chef::lock_guard<chef::mutex> guard(mutex_);
-      tag2num_iterator iter = tag2num_.find(tag);
-      if (iter == tag2num_.end()) {
-        tag2num_[tag] = num;
-      } else {
-        iter->second += num;
-      }
-    } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
-      tag2atomic_num_iterator iter = tag2atomic_num_.find(tag);
-      if (iter == tag2atomic_num_.end()) {
-        return -1;
-      }
-      iter->second->fetch_add(num);
-    }
-    return 0;
-  }
-
-  int count_dump::del(const std::string &tag, int num) { return add(tag, -num); }
-
-  int count_dump::increment(const std::string &tag) { return add(tag, 1); }
-
-  int count_dump::decrement(const std::string &tag) { return del(tag, 1); }
-
-  int count_dump::reset(const std::string &tag) {
-    if (type_ == COUNT_DUMP_TYPE_MUTABLE_TAGS) {
-      chef::lock_guard<chef::mutex> guard(mutex_);
-      if (tag2num_.find(tag) == tag2num_.end()) {
-        return -1;
-      }
-      tag2num_[tag] = 0;
-    } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
-      tag2atomic_num_iterator iter = tag2atomic_num_.find(tag);
-      if (iter == tag2atomic_num_.end()) {
-        return -1;
-      }
-      iter->second->store(0);
-    }
-    return 0;
-  }
-
-  void count_dump::reset() {
-    if (type_ == COUNT_DUMP_TYPE_MUTABLE_TAGS) {
-      chef::lock_guard<chef::mutex> guard(mutex_);
-      tag2num_iterator iter = tag2num_.begin();
-      for (; iter != tag2num_.end(); iter++) {
-        iter->second = 0;
-      }
-    } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
-      tag2atomic_num_iterator iter = tag2atomic_num_.begin();
-      for (; iter != tag2atomic_num_.end(); iter++) {
-        iter->second->store(0);
-      }
+  void multi_tag_count_dumper::run_in_thread() {
+    while (!exit_flag_) {
+      dump2disk();
+      chef::this_thread::sleep_for(chef::chrono::milliseconds(interval_ms_));
     }
   }
 
-  void count_dump::run_in_thread_() {
-    for (; !exit_flag_; ) {
-      dump2disk_();
-
-      chef::this_thread::sleep_for(chef::chrono::milliseconds(dump_interval_ms_));
-    }
-  }
-
-  void count_dump::dump2disk_() {
+  void multi_tag_count_dumper::dump2disk() {
     std::ostringstream ss;
 
     std::time_t now = std::time(NULL);
@@ -127,69 +181,22 @@ namespace chef {
     filepath_op::rename(filename_+".tmp", filename_);
   }
 
-  std::map<std::string, int> count_dump::kvs() {
-    std::map<std::string, int> ret;
-    if (type_ == COUNT_DUMP_TYPE_MUTABLE_TAGS) {
-      chef::lock_guard<chef::mutex> guard(mutex_);
-      ret = tag2num_;
-    } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
-      tag2atomic_num_iterator iter = tag2atomic_num_.begin();
-      for (; iter != tag2atomic_num_.end(); iter++) {
-        ret[iter->first] = iter->second->load();
-      }
-    }
-    return ret;
-  }
+  std::string multi_tag_count_dumper::styled_stringify() {
+    std::map<std::string, int64_t> tag2count = mtc_->get_tags_count();
 
-  std::string count_dump::stringify() {
     std::ostringstream ss;
-    ss << "{";
-    tag2num tags = kvs();
-    tag2num_iterator iter = tags.begin();
+    std::map<std::string, int64_t>::iterator iter = tag2count.begin();
     uint32_t count = 1;
-    for (; iter != tags.end(); iter++, count++) {
-      ss << iter->first << ":" << iter->second;
-      if (count != tags.size()) {
-        ss << ",";
+    for (; iter != tag2count.end(); iter++, count++) {
+      ss << iter->first << ": " << iter->second;
+      if ((count % num_per_line_ == 0) ||
+          (count == tag2count.size())
+      ) {
+        ss << "\n";
+      } else {
+        ss << " | ";
       }
     }
-    ss << "}";
-
-    return ss.str();
-  }
-
-  std::string count_dump::styled_stringify() {
-    std::ostringstream ss;
-
-    if (type_ == COUNT_DUMP_TYPE_MUTABLE_TAGS){
-      chef::lock_guard<chef::mutex> guard(mutex_);
-      tag2num_iterator iter = tag2num_.begin();
-      uint32_t count = 1;
-      for (; iter != tag2num_.end(); iter++, count++) {
-        ss << iter->first << ": " << iter->second;
-        if ((count % num_of_tag_per_line_ == 0) ||
-            (count == tag2num_.size())
-        ) {
-          ss << "\n";
-        } else {
-          ss << " | ";
-        }
-      }
-    } else if (type_ == COUNT_DUMP_TYPE_IMMUTABLE_TAGS) {
-      tag2atomic_num_iterator iter = tag2atomic_num_.begin();
-      uint32_t count = 1;
-      for (; iter != tag2atomic_num_.end(); iter++, count++) {
-        ss << iter->first << ": " << iter->second->load();
-        if ((count % num_of_tag_per_line_ == 0) ||
-            (count == tag2atomic_num_.size())
-        ) {
-          ss << "\n";
-        } else {
-          ss << " | ";
-        }
-      }
-    }
-
     return ss.str();
   }
 
