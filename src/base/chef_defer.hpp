@@ -7,10 +7,12 @@
  *   chef <191201771@qq.com>
  *     -initial release xxxx-xx-xx
  *
- * @brief nope
+ * @brief 类似golang defer, c goto
  *
  */
 
+#ifndef _CHEF_BASE_DEFER_HPP_
+#define _CHEF_BASE_DEFER_HPP_
 #pragma once
 
 #include <functional>
@@ -39,27 +41,4 @@ class defer {
 
 }; // namespace chef
 
-// #include <string>
-// int main() {
-//   int a = 10;
-//   std::string str = "aaa";
-//   std::string f = __FUNCTION__;
-//   chef::defer x([&a, &str, &f]() {
-//     printf("here. %d %s %s\n", a, str.c_str(), f.c_str());
-//     //str = "ccc";
-//   });
-//
-//   str = "bbb";
-//   printf("%d %s\n", a, str.c_str());
-//
-//   if (1) {
-//     return 0;
-//   }
-//
-//   if (0) {
-//     x.cancel();
-//     return 0;
-//   }
-//
-//   return 0;
-// }
+#endif

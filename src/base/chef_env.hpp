@@ -13,6 +13,7 @@
 
 #ifndef _CHEF_BASE_ENV_HPP_
 #define _CHEF_BASE_ENV_HPP_
+#pragma once
 
 // #define CHEF_USE_BOOST
 

@@ -8,15 +8,15 @@
  *     -initial release xxxx-xx-xx
  *
  * @brief
- *   定时将加入其中的tag->num KV结构写入文件中。
- *   可通过
- *   $watch -n 1 'cat xxx.dump'
- *   监控服务器上一些数值变化(xxx.dump为文件名)。
+ *   在各种线程及场景下高效的对多个tag进行计数
+ *   同时支持定时将计数落盘
+ *   $watch -n 1 'cat xxx.txt'
  *
  */
 
 #ifndef _CHEF_BASE_COUNT_DUMP_H_
 #define _CHEF_BASE_COUNT_DUMP_H_
+#pragma once
 
 #include "chef_env.hpp"
 #include "chef_noncopyable.hpp"
@@ -28,106 +28,78 @@
 
 namespace chef {
 
-  class count_dump : public chef::noncopyable {
+  class multi_tag_counter : public chef::noncopyable {
+    public:
+      enum multi_tag_counter_type {
+        MULTI_TAG_COUNTER_FREE_LOCK, // 无锁模式,适用于单线程环境使用
+        MULTI_TAG_COUNTER_ATOMIC,    // 只锁计数器,适用于所有tag在一开始就固定下来
+        MULTI_TAG_COUNTER_MUTEX,     // 锁模式,适用于tag不固定
+      };
+
+    public:
+      multi_tag_counter(multi_tag_counter_type type) : type_(type) {}
+      ~multi_tag_counter() {}
+
+      // 添加tag会把count置0
+      // @NOTICE
+      //   如果是MULTI_TAG_COUNTER_ATOMIC,则在开始计数后不应该再调用操作tag的接口
+      //   如果是其他两种模式,可以直接使用计数接口,添加tag是非必须的
+      void add_tag(const std::string &tag);
+      void add_tags(const std::vector<std::string> &tags);
+      void del_tag(const std::string &tag);
+
+      // @NOTICE
+      //   如果是MULTI_TAG_COUNTER_ATOMIC,则tag不存在时返回false
+      //   如果是其他两种模式,则永远返回true. count会先初始化为0再做函数调用对应的操作
+      bool increment(const std::string &tag);
+      bool decrement(const std::string &tag);
+      bool add_count(const std::string &tag, int64_t num);
+      bool del_count(const std::string &tag, int64_t num);
+      bool set_count(const std::string &tag, int64_t num);
+
+      // 获取单个tag的计数,如果tag不存在则返回false
+      bool get_tag_count(const std::string &tag, int64_t *num /* out */);
+      std::map<std::string, int64_t> get_tags_count();
+
     private:
-      enum count_dump_type {
-        COUNT_DUMP_TYPE_MUTABLE_TAGS,  /// 对tags的map容器读写加锁，可随时添加新tag。
-        COUNT_DUMP_TYPE_IMMUTABLE_TAGS /// 对tags的map容器不加锁，初始化以后不能再添加新tag，性能较COUNT_DUMP_TYPE_MUTABLE_TAGS更高。
-      };
+      typedef std::map<std::string, int64_t> TAG2COUNT;
+      typedef std::map<std::string, chef::atomic<int64_t> > TAG2ATOMIC_COUNT;
 
-      struct count_dump_config {
-        count_dump_config() : dump_interval_ms_(1000), num_of_tag_per_line_(5) {}
+    private:
+      multi_tag_counter_type type_;
+      TAG2COUNT              tag2count_;
+      TAG2ATOMIC_COUNT       tag2atomic_count_;
+      chef::mutex            mutex_;
 
-        int32_t dump_interval_ms_;    /// 文件刷新频率
-        int32_t num_of_tag_per_line_; /// 格式化时，每行显示多少个tag
-      };
+  }; // class multi_tag_counter
 
+  class multi_tag_count_dumper {
     public:
-      count_dump();
-      ~count_dump();
+      multi_tag_count_dumper(multi_tag_counter *mtc, int interval_ms, uint32_t num_per_line, const std::string &filename)
+        : mtc_(mtc)
+        , interval_ms_(interval_ms)
+        , num_per_line_(num_per_line)
+        , filename_(filename)
+        , exit_flag_(false)
+      {}
+      ~multi_tag_count_dumper();
 
-      /**
-       * 初始化，开启dump线程
-       *
-       * @NOTICE 由于没有指定初始tags，所以只能使用COUNT_DUMP_TYPE_MUTABLE_TAGS模式，tag后续动态添加
-       *
-       */
-      void init(const std::string &filename, const count_dump_config &config=count_dump_config());
+      void start();
 
-      /**
-       * 重载init函数
-       *
-       * @NOTICE 使用COUNT_DUMP_TYPE_IMMUTABLE_TAGS，后续不能再动态添加新tag
-       *
-       * @param filename dump文件名
-       * @param     tags 初始化tags
-       * @param   config 配置项
-       *
-       */
-      void init_with_constant_tags(const std::string &filename, const std::vector<std::string> &tags,
-                                   const count_dump_config &config=count_dump_config());
-
-      /**
-       * @return 0 成功 -1 失败
-       *
-       * if COUNT_DUMP_TYPE_MUTABLE_TAGS:  如果`tag`>不存在，添加新tag，设置为`num`，如果`tag`已存在，则已有num再加上`num`
-       * if COUNT_DUMP_TYPE_IMMUTABLE_TAGS: return -1（increment，decrement，del接口相同）
-       *
-       */
-      int add(const std::string &tag, int num);
-
-      /// 等价于 add(tag, 1);
-      int increment(const std::string &tag);
-
-      /// 等价于 add(tag, -1);
-      int decrement(const std::string &tag);
-
-      /// 等价于 add(tag, -num);
-      int del(const std::string &tag, int num);
-
-      /**
-       * 将`tag`对应的num置为0
-       *
-       * @return 0 成功 -1 失败（tag不存在）
-       *
-       */
-      int reset(const std::string &tag);
-
-      /// 将所有tag都置为0
-      void reset();
-
-    public:
-      /// 以kv对形式返回所有tag
-      std::map<std::string, int> kvs();
-
-      /// 返回字符串化的所有tag
-      std::string stringify();
-
-      /// 返回样式化的所有tag
+    private:
+      void run_in_thread();
+      void dump2disk();
       std::string styled_stringify();
 
     private:
-      void run_in_thread_();
-      void dump2disk_();
+      multi_tag_counter              *mtc_;
+      int                            interval_ms_;
+      uint32_t                       num_per_line_;
+      std::string                    filename_;
+      chef::shared_ptr<chef::thread> thread_;
+      bool                           exit_flag_;
 
-    private:
-      typedef std::map<std::string, int>                                             tag2num;
-      typedef std::map<std::string, int>::iterator                                   tag2num_iterator;
-      typedef std::map<std::string, chef::shared_ptr<chef::atomic<int> > >           tag2atomic_num;
-      typedef std::map<std::string, chef::shared_ptr<chef::atomic<int> > >::iterator tag2atomic_num_iterator;
-      typedef chef::shared_ptr<chef::thread>                                         thread_ptr;
-
-    private:
-      count_dump_type type_;
-      std::string     filename_;
-      int32_t         dump_interval_ms_;
-      int32_t         num_of_tag_per_line_;
-      tag2num         tag2num_;
-      tag2atomic_num  tag2atomic_num_;
-      thread_ptr      thread_;
-      bool            exit_flag_;
-      chef::mutex     mutex_;
-  }; // class chef_count_dump
+  }; // class multi_tag_count_dumper
 
 } // namespace chef
 

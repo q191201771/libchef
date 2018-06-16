@@ -13,6 +13,7 @@
 
 #ifndef _CHEF_BASE_NONCOPYABLE_H_
 #define _CHEF_BASE_NONCOPYABLE_H_
+#pragma once
 
 namespace chef {
 
