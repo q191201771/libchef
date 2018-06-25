@@ -7,12 +7,13 @@
  *   chef <191201771@qq.com>
  *     -initial release xxxx-xx-xx
  *
- * @brief 一些http操作的封装
+ * @brief 对libcurl的封装,同步http get/post
  *
  */
 
 #ifndef _BASE_HTTP_OP_H_
 #define _BASE_HTTP_OP_H_
+#pragma once
 
 #include <map>
 #include <string>

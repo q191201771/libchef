@@ -1,8 +1,8 @@
 #include "chef_encoding_base64_op.h"
 
 namespace inner {
-  std::string base64_decode(const std::string &s);
-  std::string base64_encode(const std::string &s);
+  static std::string base64_decode(const std::string &s);
+  static std::string base64_encode(const std::string &s);
 }
 
 namespace chef {
@@ -133,7 +133,7 @@ inline std::string base64_encode(unsigned char const * input, size_t len) {
  * @param input The input data
  * @return A base64 encoded string representing input
  */
-inline std::string base64_encode(std::string const & input) {
+static inline std::string base64_encode(std::string const & input) {
     return base64_encode(
         reinterpret_cast<const unsigned char *>(input.data()),
         input.size()
@@ -145,7 +145,7 @@ inline std::string base64_encode(std::string const & input) {
  * @param input The base64 encoded input data
  * @return A string representing the decoded raw bytes
  */
-inline std::string base64_decode(std::string const & input) {
+static inline std::string base64_decode(std::string const & input) {
     size_t in_len = input.size();
     int i = 0;
     int j = 0;

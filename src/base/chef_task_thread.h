@@ -14,6 +14,7 @@
 
 #ifndef _CHEF_BASE_TASK_THREAD_H_
 #define _CHEF_BASE_TASK_THREAD_H_
+#pragma once
 
 #include "chef_wait_event_counter.h"
 #include "chef_noncopyable.hpp"

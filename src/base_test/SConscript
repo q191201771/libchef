@@ -2,14 +2,13 @@ import os, sys, commands
 
 Import('env')
 Import('platform_libs')
+Import('boost_lib_path')
 
 env = env.Clone()
 
 prgs = []
 
-chef_filepath_op_srcs = ['../base/chef_filepath_op.o', 'chef_filepath_op_test.cc']
-prgs += env.Program('chef_filepath_op_test', chef_filepath_op_srcs, LIBS=platform_libs)
-
+# ##### 无第三方依赖 #####
 chef_count_dump_srcs = ['../base/chef_filepath_op.o', '../base/chef_count_dump.o', 'chef_count_dump_test.cc']
 prgs += env.Program('chef_count_dump_test', chef_count_dump_srcs, LIBS=platform_libs)
 
@@ -18,5 +17,42 @@ prgs += env.Program('chef_crypto_md5_op_test', chef_crypto_md5_op_srcs, LIBS=pla
 
 chef_defer_srcs = ['chef_defer_test.cc']
 prgs += env.Program('chef_defer_test', chef_defer_srcs, LIBS=platform_libs)
+
+chef_encoding_base64_op_srcs= ['../base/chef_encoding_base64_op.o', 'chef_encoding_base64_op_test.cc']
+prgs += env.Program('chef_encoding_base64_op_test', chef_encoding_base64_op_srcs, LIBS=platform_libs)
+
+chef_filepath_op_srcs = ['../base/chef_filepath_op.o', 'chef_filepath_op_test.cc']
+prgs += env.Program('chef_filepath_op_test', chef_filepath_op_srcs, LIBS=platform_libs)
+
+chef_strings_op_srcs = ['../base/chef_strings_op.o', 'chef_strings_op_test.cc']
+prgs += env.Program('chef_strings_op_test', chef_strings_op_srcs, LIBS=platform_libs)
+
+chef_task_thread_srcs = ['../base/chef_task_thread.o', '../base/chef_wait_event_counter.o', 'chef_task_thread_test.cc']
+prgs += env.Program('chef_task_thread_test', chef_task_thread_srcs, LIBS=platform_libs)
+
+chef_thread_pool_srcs = ['../base/chef_thread_pool.o', '../base/chef_wait_event_counter.o', 'chef_thread_pool_test.cc']
+prgs += env.Program('chef_thread_pool_test', chef_thread_pool_srcs, LIBS=platform_libs)
+
+chef_wait_event_srcs = ['../base/chef_wait_event_counter.o', 'chef_wait_event_test.cc']
+prgs += env.Program('chef_wait_event_test', chef_wait_event_srcs, LIBS=platform_libs)
+
+chef_wait_event_counter_srcs = ['../base/chef_wait_event_counter.o', 'chef_wait_event_counter_test.cc']
+prgs += env.Program('chef_wait_event_counter_test', chef_wait_event_counter_srcs, LIBS=platform_libs)
+
+# ##### 依赖第三方 #####
+#chef_http_op_srcs = ['../base/chef_http_op.o', 'chef_http_op_test.cc']
+#prgs += env.Program('chef_http_op_test', chef_http_op_srcs, LIBS=platform_libs)
+
+chef_log_srcs = ['../base/chef_log.o', 'chef_log_test.cc']
+chef_log_libs = platform_libs
+chef_log_libs += [
+  File(boost_lib_path+'libboost_log_setup.a'),
+  File(boost_lib_path+'libboost_log.a'),
+  File(boost_lib_path+'libboost_thread.a'),
+  File(boost_lib_path+'libboost_system.a'),
+  File(boost_lib_path+'libboost_filesystem.a'),
+  File(boost_lib_path+'libboost_date_time.a')
+]
+prgs += env.Program('chef_log_test', chef_log_srcs, LIBS=platform_libs)
 
 Return('prgs')

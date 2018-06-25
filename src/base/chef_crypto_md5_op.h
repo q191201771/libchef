@@ -13,6 +13,7 @@
 
 #ifndef _CHEF_BASE_CRYPTO_MD5_OP_HPP_
 #define _CHEF_BASE_CRYPTO_MD5_OP_HPP_
+#pragma once
 
 #include <string>
 
