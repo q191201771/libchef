@@ -16,6 +16,7 @@
 
 #ifndef _CHEF_BASE_WAIT_EVENT_COUNTER_H_
 #define _CHEF_BASE_WAIT_EVENT_COUNTER_H_
+#pragma once
 
 #include "chef_noncopyable.hpp"
 #include "chef_env.hpp"

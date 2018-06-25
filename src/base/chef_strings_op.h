@@ -13,6 +13,7 @@
 
 #ifndef _CHEF_BASE_STRINGS_H_
 #define _CHEF_BASE_STRINGS_H_
+#pragma once
 
 #include <sstream>
 #include <string>

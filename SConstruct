@@ -23,11 +23,15 @@ env.Append(CPPPATH   = [])
 
 if env['PLATFORM'] == 'darwin':
     platform_libs = ['pthread']
+    env.Append(CPPPATH = ['#third_party/macos/boost/include'])
+    boost_lib_path = '#third_party/macos/boost/lib/'
 else:
     platform_libs = ['pthread', 'rt']
+    # TODO~
 
 Export('env')
 Export('platform_libs')
+Export('boost_lib_path')
 
 SConscript('src/base/SConscript', variant_dir='output/base', duplicate=0)
 SConscript('src/base_test/SConscript', variant_dir='output/base_test', duplicate=0)
