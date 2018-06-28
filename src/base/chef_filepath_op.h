@@ -1,5 +1,5 @@
 /**
- * @file     chef_filepath_op.h/chef_filepath.cc
+ * @file     chef_filepath_op.h[.cc]
  * @deps     nope
  * @platform linux/macos/xxx
  *

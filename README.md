@@ -56,7 +56,4 @@ src/base/crypto_sha1_op.h https://github.com/antirez/redis/releases/tag/3.2.9 �
 1. base64 url格式
 2. crc16 & crc32
 3. net url op
-4. stringify_stl
-5. lru
 ```
-

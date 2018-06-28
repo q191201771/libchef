@@ -1,9 +1,9 @@
 #include "chef_log.h"
+#include "chef_env.hpp"
 #include <unistd.h>
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/syscall.h>
-#include <thread>
 
 BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(global_logger_src,
                                        boost::log::sources::severity_logger_mt<boost::log::trivial::severity_level>);
@@ -97,7 +97,7 @@ namespace chef {
     core->add_sink(frontend);
 
     if (m == mode_release) {
-      std::thread t([backend] (){
+      chef::thread t([backend] (){
         for (; ; ) {
           backend->flush();
           usleep(1000 * 1000);

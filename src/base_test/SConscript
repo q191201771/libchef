@@ -9,6 +9,9 @@ env = env.Clone()
 prgs = []
 
 # ##### 无第三方依赖 #####
+chef_buffer_srcs = ['../base/chef_buffer.o', 'chef_buffer_test.cc']
+prgs += env.Program('chef_buffer_test', chef_buffer_srcs, LIBS=platform_libs)
+
 chef_count_dump_srcs = ['../base/chef_filepath_op.o', '../base/chef_count_dump.o', 'chef_count_dump_test.cc']
 prgs += env.Program('chef_count_dump_test', chef_count_dump_srcs, LIBS=platform_libs)
 

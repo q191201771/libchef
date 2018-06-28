@@ -1,5 +1,5 @@
 /**
- * @file     chef_strings_op.h/chef_strings_op.cc
+ * @file     chef_strings_op.h[.cc]
  * @deps     nope
  * @platform linux/macos/windows
  *

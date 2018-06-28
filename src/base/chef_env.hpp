@@ -1,6 +1,6 @@
 /**
  * @file     chef_env.hpp
- * @deps     boost or c++11
+ * @deps     libboost or c++11
  * @platform linux/macos/xxx
  *
  * @author

@@ -1,6 +1,6 @@
 /**
- * @file     chef_http_op.h/chef_http_op.cc
- * @deps     libcurl/chef_strings_op.h
+ * @file     chef_http_op.h[.cc]
+ * @deps     libcurl | chef_strings_op.h[.cc]
  * @platform linux/macos/xxx
  *
  * @author
