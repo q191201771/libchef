@@ -1,3 +1,4 @@
+scons -c
 scons mode=debug
 echo '----------------------------------------'
 ./output/base_test/chef_count_dump_test
@@ -13,4 +14,7 @@ echo '----------------------------------------'
 
 #./output/base_test/chef_http_op_test
 ./output/base_test/chef_log_test
+
+./output/base_test/stringify_stl_test
+./output/base_test/lru_test
 echo '----------------------------------------'

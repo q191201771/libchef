@@ -1,5 +1,6 @@
 .sconsign.dblite
 *.log.chef
+*.gch
 /output
 /src/base/chef_net_url_op.*
 /src/base/release/
