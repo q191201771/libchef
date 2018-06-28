@@ -39,6 +39,12 @@ prgs += env.Program('chef_wait_event_test', chef_wait_event_srcs, LIBS=platform_
 chef_wait_event_counter_srcs = ['../base/chef_wait_event_counter.o', 'chef_wait_event_counter_test.cc']
 prgs += env.Program('chef_wait_event_counter_test', chef_wait_event_counter_srcs, LIBS=platform_libs)
 
+stringify_stl_srcs = ['stringify_stl_test.cc']
+prgs += env.Program('stringify_stl_test', stringify_stl_srcs, LIBS=platform_libs)
+
+lru_srcs = ['lru_test.cc']
+prgs += env.Program('lru_test', lru_srcs, LIBS=platform_libs)
+
 # ##### 依赖第三方 #####
 #chef_http_op_srcs = ['../base/chef_http_op.o', 'chef_http_op_test.cc']
 #prgs += env.Program('chef_http_op_test', chef_http_op_srcs, LIBS=platform_libs)

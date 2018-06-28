@@ -5,6 +5,8 @@
 #include "./common/check_log.hpp"
 
 int main() {
+  ENTER_TEST;
+
   int a = 10;
   std::string str = "aaa";
   std::string f = __FUNCTION__;

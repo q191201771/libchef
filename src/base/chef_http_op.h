@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef _BASE_HTTP_OP_H_
-#define _BASE_HTTP_OP_H_
+#ifndef _CHEF_BASE_HTTP_OP_H_
+#define _CHEF_BASE_HTTP_OP_H_
 #pragma once
 
 #include <map>
@@ -96,4 +96,4 @@ namespace chef {
 
 } // namespace inner
 
-#endif // _BASE_HTTP_OP_H_
+#endif // _CHEF_BASE_HTTP_OP_H_

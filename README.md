@@ -29,7 +29,7 @@ OS X EI Capitan 10.11.6 Apple LLVM version 8.0.0 (clang-800.0.42.1)
 * libcurl
   * chef_http_op.h[.cc]
 * boost 1.66
-  * src/base/chef_log.h[.cc]
+  * chef_log.h[.cc]
 
 ### 编译
 
@@ -38,7 +38,6 @@ OS X EI Capitan 10.11.6 Apple LLVM version 8.0.0 (clang-800.0.42.1)
 $scons
 # 如果想要编译debug版本
 $scons mode=debug
-
 ```
 
 ### 声明，拷贝自第三方工程的代码
@@ -57,5 +56,7 @@ src/base/crypto_sha1_op.h https://github.com/antirez/redis/releases/tag/3.2.9 �
 1. base64 url格式
 2. crc16 & crc32
 3. net url op
+4. stringify_stl
+5. lru
 ```
 
