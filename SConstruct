@@ -17,7 +17,7 @@ env.Append(CXXFLAGS  = common_CXXFLAGS)
 env.Append(CXXFLAGS  = ['-Wall', '-Wextra', '-Wunused-parameter', '-Woverloaded-virtual', '-Wpointer-arith', '-Wshadow',
                         '-Wwrite-strings', '-Wcast-align'])
 #env.Append(CXXFLAGS  = ['-Werror'])
-env.Append(CXXFLAGS  = ['-Wconversion',  '-Wold-style-cast'])
+#env.Append(CXXFLAGS  = ['-Wconversion',  '-Wold-style-cast'])
 env.Append(LINKFLAGS = ['-pthread', '-static-libstdc++'])
 env.Append(CPPPATH   = [])
 

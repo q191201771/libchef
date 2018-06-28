@@ -1,5 +1,5 @@
 /**
- * @file   chef_crypto_md5_op.h|chef_crypto_md5_op.cc
+ * @file   chef_crypto_md5_op.h[.cc]
  * @deps   nope
  *
  * @author

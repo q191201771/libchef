@@ -1,6 +1,6 @@
 /**
- * @file     chef_log.h/chef_log.cc
- * @deps     libboost
+ * @file     chef_log.h[.cc]
+ * @deps     libboost | chef_env.hpp
  * @platform linux/macos/xxx
  *
  * @author

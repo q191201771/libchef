@@ -1,5 +1,5 @@
 /**
- * @file   chef_encoding_base64_op.h|chef_encoding_base64_op.cc
+ * @file   chef_encoding_base64_op.h[.cc]
  * @deps   nope
  *
  * @author

@@ -1,6 +1,6 @@
 /**
- * @file     chef_task_thread.h/chef_task_thread.cc
- * @deps     chef_env.hpp/chef_noncopyable.hpp/chef_wait_event_counter.h
+ * @file     chef_task_thread.h[.cc]
+ * @deps     chef_env.hpp | chef_noncopyable.hpp | chef_wait_event_counter.h[.cc]
  * @platform linux/macos/xxx
  *
  * @author

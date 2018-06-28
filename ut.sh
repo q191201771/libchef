@@ -1,6 +1,8 @@
+rm -rf output
 scons -c
 scons mode=debug
 echo '----------------------------------------'
+./output/base_test/chef_buffer_test
 ./output/base_test/chef_count_dump_test
 ./output/base_test/chef_crypto_md5_op_test
 ./output/base_test/chef_defer_test

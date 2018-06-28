@@ -1,6 +1,6 @@
 /**
- * @file     chef_wait_event_counter.h/chef_wait_event_counter.cc
- * @deps     chef_env.hpp/chef_noncopyable.hpp
+ * @file     chef_wait_event_counter.h[.cc]
+ * @deps     chef_env.hpp | chef_noncopyable.hpp
  * @platform linux/macos/xxx
  *
  * @author
