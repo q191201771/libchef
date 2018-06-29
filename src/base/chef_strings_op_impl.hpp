@@ -1,4 +1,3 @@
-#include "chef_strings_op.h"
 #include <set>
 #include <cctype>
 #include <sstream>
@@ -8,19 +7,19 @@
 
 namespace chef {
 
-  int strings_op::compare(const std::string &a, const std::string &b) {
+  inline int strings_op::compare(const std::string &a, const std::string &b) {
     return a.compare(b);
   }
 
-  bool strings_op::contains(const std::string &s, const std::string &target) {
+  inline bool strings_op::contains(const std::string &s, const std::string &target) {
     return s.find(target) != std::string::npos;
   }
 
-  bool strings_op::contains_any(const std::string &s, const std::string &charlist) {
+  inline bool strings_op::contains_any(const std::string &s, const std::string &charlist) {
     return s.find_first_of(charlist) != std::string::npos;
   }
 
-  bool strings_op::contains_all(const std::string &s, const std::string &charlist) {
+  inline bool strings_op::contains_all(const std::string &s, const std::string &charlist) {
     if (s.empty() || charlist.empty() || s.length() < charlist.length()) {
       return false;
     }
@@ -36,7 +35,7 @@ namespace chef {
     return true;
   }
 
-  bool strings_op::has_prefix(const std::string &s, const std::string &prefix) {
+  inline bool strings_op::has_prefix(const std::string &s, const std::string &prefix) {
     //return s.find(prefix) == 0;
 
     if (s.empty() || prefix.empty()) {
@@ -45,7 +44,7 @@ namespace chef {
     return s.length() >= prefix.length() && s.substr(0, prefix.length()) == prefix;
   }
 
-  bool strings_op::has_suffix(const std::string &s, const std::string &suffix) {
+  inline bool strings_op::has_suffix(const std::string &s, const std::string &suffix) {
     //std::size_t pos = s.find(suffix);
     //if (pos == std::string::npos) {
     //  return false;
@@ -58,7 +57,7 @@ namespace chef {
     return s.length() >= suffix.length() && s.substr(s.length()-suffix.length(), suffix.length()) == suffix;
   }
 
-  int strings_op::count(const std::string &s, const std::string &target) {
+  inline int strings_op::count(const std::string &s, const std::string &target) {
     if (s == target) {
       return 1;
     }
@@ -81,7 +80,7 @@ namespace chef {
     return count;
   }
 
-  std::string strings_op::to_lower(const std::string &s) {
+  inline std::string strings_op::to_lower(const std::string &s) {
     std::string ret;
     for (std::string::const_iterator c = s.begin(); c != s.end(); c++) {
       ret += static_cast<char>(std::tolower(*c));
@@ -89,7 +88,7 @@ namespace chef {
     return ret;
   }
 
-  std::string strings_op::to_upper(const std::string &s) {
+  inline std::string strings_op::to_upper(const std::string &s) {
     std::string ret;
     for (std::string::const_iterator c = s.begin(); c != s.end(); c++) {
       ret += static_cast<char>(std::toupper(*c));
@@ -97,7 +96,7 @@ namespace chef {
     return ret;
   }
 
-  std::string strings_op::replace(const std::string &s, const std::string &target, const std::string &replacement) {
+  inline std::string strings_op::replace(const std::string &s, const std::string &target, const std::string &replacement) {
     if (s.empty() || target.empty()) {
       return s;
     }
@@ -120,7 +119,7 @@ namespace chef {
     return ret;
   }
 
-  std::vector<std::string> strings_op::split_any(const std::string &s, const std::string &charlist, bool keep_empty_strings) {
+  inline std::vector<std::string> strings_op::split_any(const std::string &s, const std::string &charlist, bool keep_empty_strings) {
     std::vector<std::string> ret;
     if (s.empty()) {
       return ret;
@@ -150,7 +149,7 @@ namespace chef {
     return ret;
   }
 
-  std::vector<std::string> strings_op::split(const std::string &s, const std::string &sep, bool keep_empty_strings) {
+  inline std::vector<std::string> strings_op::split(const std::string &s, const std::string &sep, bool keep_empty_strings) {
     std::vector<std::string> ret;
     if (s.empty()) {
       return ret;
@@ -181,7 +180,7 @@ namespace chef {
     return ret;
   }
 
-  std::vector<std::string> strings_op::split(const std::string &s, char sep, bool keep_empty_strings) {
+  inline std::vector<std::string> strings_op::split(const std::string &s, char sep, bool keep_empty_strings) {
 	if (s.empty()) {
 	  return std::vector<std::string>();
 	}
@@ -203,7 +202,7 @@ namespace chef {
     return ret;
   }
 
-  std::vector<std::string> strings_op::splitlines(const std::string &s, bool keep_ends) {
+  inline std::vector<std::string> strings_op::splitlines(const std::string &s, bool keep_ends) {
     std::vector<std::string> ret;
     if (s.empty()) {
       return ret;
@@ -235,7 +234,7 @@ namespace chef {
     return ret;
   }
 
-  std::string strings_op::join(const std::vector<std::string> &ss, const std::string &sep) {
+  inline std::string strings_op::join(const std::vector<std::string> &ss, const std::string &sep) {
     if (ss.empty()) {
       return std::string();
     } if (ss.size() == 1) {
@@ -252,7 +251,7 @@ namespace chef {
     return ret;
   }
 
-  std::string strings_op::trim_left(const std::string &s, const std::string &charlist) {
+  inline std::string strings_op::trim_left(const std::string &s, const std::string &charlist) {
     if (s.empty() || charlist.empty()) {
       return s;
     }
@@ -266,7 +265,7 @@ namespace chef {
     return s.substr(pos);
   }
 
-  std::string strings_op::trim_right(const std::string &s, const std::string &charlist) {
+  inline std::string strings_op::trim_right(const std::string &s, const std::string &charlist) {
     if (s.empty() || charlist.empty()) {
       return s;
     }
@@ -284,11 +283,11 @@ namespace chef {
     return s.substr(0, pos + 1);
   }
 
-  std::string strings_op::trim_prefix(const std::string &s, const std::string &prefix) {
+  inline std::string strings_op::trim_prefix(const std::string &s, const std::string &prefix) {
     return has_prefix(s, prefix) ? s.substr(prefix.length()) : s;
   }
 
-  std::string strings_op::trim_suffix(const std::string &s, const std::string &suffix) {
+  inline std::string strings_op::trim_suffix(const std::string &s, const std::string &suffix) {
     return has_suffix(s, suffix) ? s.substr(0, s.length() - suffix.length()) : s;
   }
 

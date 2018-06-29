@@ -1,4 +1,4 @@
-#include "../base/chef_wait_event_counter.h"
+#include "../base/chef_wait_event_counter.hpp"
 #include <thread>
 #include <atomic>
 #include <unistd.h>

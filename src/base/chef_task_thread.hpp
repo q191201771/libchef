@@ -1,6 +1,6 @@
 /**
  * @file     chef_task_thread.h[.cc]
- * @deps     chef_env.hpp | chef_noncopyable.hpp | chef_wait_event_counter.h[.cc]
+ * @deps     chef_env.hpp | chef_noncopyable.hpp | chef_wait_event_counter.hpp[_impl]
  * @platform linux/macos/xxx
  *
  * @author
@@ -16,7 +16,7 @@
 #define _CHEF_BASE_TASK_THREAD_H_
 #pragma once
 
-#include "chef_wait_event_counter.h"
+#include "chef_wait_event_counter.hpp"
 #include "chef_noncopyable.hpp"
 #include "chef_env.hpp"
 #include <stdint.h>
@@ -129,5 +129,7 @@ namespace chef {
   };
 
 } // namespace chef
+
+#include "chef_task_thread_impl.hpp"
 
 #endif // _CHEF_BASE_TASK_THREAD_H_

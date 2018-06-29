@@ -1,4 +1,3 @@
-#include "chef_log.h"
 #include "chef_env.hpp"
 #include <unistd.h>
 #include <pthread.h>
@@ -22,13 +21,12 @@ static inline int _threadid() {
 
 namespace chef {
 
-  boost::log::trivial::severity_level log::level_ = boost::log::trivial::trace;
-
-  boost::log::trivial::severity_level log::get_level() {
+  inline boost::log::trivial::severity_level &log::get_level() {
+    static boost::log::trivial::severity_level level_ = boost::log::trivial::trace;
     return level_;
   }
 
-  void log::init(mode m, const std::string &filename_with_path) {
+  inline void log::init(mode m, const std::string &filename_with_path) {
     boost::shared_ptr<boost::log::core> core = boost::log::core::get();
     core->add_global_attribute("TimeStamp", boost::log::attributes::local_clock());
     core->add_global_attribute("ThreadID", boost::log::attributes::make_function(&_threadid));
@@ -87,11 +85,11 @@ namespace chef {
         boost::log::keywords::open_mode = std::ios::app,
         boost::log::keywords::auto_flush = (m == mode_debug));
 
-    level_ = (m == mode_debug) ? boost::log::trivial::trace : boost::log::trivial::info;
+    get_level() = (m == mode_debug) ? boost::log::trivial::trace : boost::log::trivial::info;
 
     typedef boost::log::sinks::synchronous_sink<boost::log::sinks::text_file_backend> sync_sink_frontend;
     boost::shared_ptr<sync_sink_frontend> frontend(new sync_sink_frontend(backend));
-    frontend->set_filter(boost::log::expressions::attr<boost::log::trivial::severity_level>("Severity") >= level_);
+    frontend->set_filter(boost::log::expressions::attr<boost::log::trivial::severity_level>("Severity") >= get_level());
     frontend->set_formatter(formatter);
 
     core->add_sink(frontend);
@@ -114,13 +112,13 @@ namespace chef {
     CHEF_LOG(fatal)   << "Engine by boost::log,I'm fatal-severity.";
   }
 
-  void log::force_flush() {
+  inline void log::force_flush() {
     boost::shared_ptr<boost::log::core> core = boost::log::core::get();
     core->flush();
   }
 
   namespace internal {
-    boost::log::sources::severity_logger_mt<boost::log::trivial::severity_level> &get_logger() {
+    inline boost::log::sources::severity_logger_mt<boost::log::trivial::severity_level> &get_logger() {
       return global_logger_src::get();
     }
   } // namespace internal

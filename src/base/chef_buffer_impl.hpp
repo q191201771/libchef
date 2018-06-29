@@ -1,4 +1,3 @@
-#include "chef_buffer.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -9,7 +8,7 @@
 
 namespace chef {
 
-  buffer::buffer(uint64_t init_capacity, uint64_t shrink_capacity)
+  inline buffer::buffer(uint64_t init_capacity, uint64_t shrink_capacity)
     : init_capacity_(init_capacity)
     , shrink_capacity_(shrink_capacity)
     , capacity_(init_capacity)
@@ -19,7 +18,7 @@ namespace chef {
     data_ = new char[init_capacity];
   }
 
-  buffer::buffer(const char *data, uint64_t len)
+  inline buffer::buffer(const char *data, uint64_t len)
     : init_capacity_(len)
     , shrink_capacity_(len * 2)
     , capacity_(len)
@@ -30,12 +29,12 @@ namespace chef {
     append(data, len);
   }
 
-  buffer::~buffer() {
+  inline buffer::~buffer() {
     delete []data_;
     data_ = NULL;
   }
 
-  buffer::buffer(const buffer &b)
+  inline buffer::buffer(const buffer &b)
     : init_capacity_(b.init_capacity_)
     , shrink_capacity_(b.shrink_capacity_)
     , capacity_(b.capacity_)
@@ -46,7 +45,7 @@ namespace chef {
     append(b.read_pos(), b.readable_size());
   }
 
-  buffer &buffer::operator=(const chef::buffer &b) {
+  inline buffer &buffer::operator=(const chef::buffer &b) {
     if (this != &b) {
       read_index_ = 0;
       write_index_ = 0;
@@ -55,7 +54,7 @@ namespace chef {
     return *this;
   }
 
-  void buffer::reserve(uint64_t len) {
+  inline void buffer::reserve(uint64_t len) {
     if (capacity_ - write_index_ >= len) {
       return;
     } else if (capacity_ - write_index_ + read_index_ >= len) {
@@ -72,13 +71,13 @@ namespace chef {
     read_index_ = 0;
   }
 
-  void buffer::append(const char *buf, uint64_t len) {
+  inline void buffer::append(const char *buf, uint64_t len) {
     reserve(len);
     memcpy(data_ + write_index_, buf, len);
     write_index_ += len;
   }
 
-  void buffer::erase(uint64_t len) {
+  inline void buffer::erase(uint64_t len) {
     assert(write_index_ - read_index_ >= len);
     read_index_ += len;
     if (write_index_ - read_index_ < init_capacity_ &&
@@ -94,7 +93,7 @@ namespace chef {
     }
   }
 
-  void buffer::clear() {
+  inline void buffer::clear() {
     read_index_ = write_index_ = 0;
     if (capacity_ > shrink_capacity_) {
       capacity_ = init_capacity_;
@@ -103,12 +102,12 @@ namespace chef {
     }
   }
 
-  void buffer::seek_write_pos(uint64_t len) {
+  inline void buffer::seek_write_pos(uint64_t len) {
     assert(capacity_ - write_index_ >= len);
     write_index_ += len;
   }
 
-  char *buffer::find(const char *key, int len) const {
+  inline char *buffer::find(const char *key, int len) const {
     if (readable_size() == 0) {
       return NULL;
     }
@@ -118,14 +117,14 @@ namespace chef {
     return pos == data_ + write_index_ ? NULL : pos;
   }
 
-  char *buffer::find(char c) const {
+  inline char *buffer::find(char c) const {
     if (readable_size() == 0) {
       return NULL;
     }
     return static_cast<char *>(memchr(read_pos(), c, readable_size()));
   }
 
-  char *buffer::trim_left() {
+  inline char *buffer::trim_left() {
     for (; write_index_ != read_index_; ++read_index_) {
       char ch = *(data_ + read_index_);
       if (!std::isspace(ch)) {
@@ -135,7 +134,7 @@ namespace chef {
     return read_pos();
   }
 
-  char * buffer::trim_right() {
+  inline char * buffer::trim_right() {
     for (; write_index_ != read_index_; --write_index_) {
       char ch = *(data_ + write_index_ - 1);
       if (!std::isspace(ch)) {

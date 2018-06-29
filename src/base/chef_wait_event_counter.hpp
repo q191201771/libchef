@@ -1,5 +1,5 @@
 /**
- * @file     chef_wait_event_counter.h[.cc]
+ * @file     chef_wait_event_counter.hpp[_impl]
  * @deps     chef_env.hpp | chef_noncopyable.hpp
  * @platform linux/macos/xxx
  *
@@ -66,5 +66,7 @@ namespace chef {
   };
 
 } // namespace chef
+
+#include "chef_wait_event_counter_impl.hpp"
 
 #endif // _CHEF_BASE_WAIT_EVENT_COUNTER_H_

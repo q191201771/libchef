@@ -9,7 +9,7 @@ env = env.Clone()
 prgs = []
 
 # ##### 无第三方依赖 #####
-chef_buffer_srcs = ['../base/chef_buffer.o', 'chef_buffer_test.cc']
+chef_buffer_srcs = ['chef_buffer_test.cc']
 prgs += env.Program('chef_buffer_test', chef_buffer_srcs, LIBS=platform_libs)
 
 chef_count_dump_srcs = ['../base/chef_filepath_op.o', '../base/chef_count_dump.o', 'chef_count_dump_test.cc']
@@ -27,19 +27,19 @@ prgs += env.Program('chef_encoding_base64_op_test', chef_encoding_base64_op_srcs
 chef_filepath_op_srcs = ['../base/chef_filepath_op.o', 'chef_filepath_op_test.cc']
 prgs += env.Program('chef_filepath_op_test', chef_filepath_op_srcs, LIBS=platform_libs)
 
-chef_strings_op_srcs = ['../base/chef_strings_op.o', 'chef_strings_op_test.cc']
+chef_strings_op_srcs = ['chef_strings_op_test.cc']
 prgs += env.Program('chef_strings_op_test', chef_strings_op_srcs, LIBS=platform_libs)
 
-chef_task_thread_srcs = ['../base/chef_task_thread.o', '../base/chef_wait_event_counter.o', 'chef_task_thread_test.cc']
+chef_task_thread_srcs = ['chef_task_thread_test.cc']
 prgs += env.Program('chef_task_thread_test', chef_task_thread_srcs, LIBS=platform_libs)
 
-chef_thread_pool_srcs = ['../base/chef_thread_pool.o', '../base/chef_wait_event_counter.o', 'chef_thread_pool_test.cc']
+chef_thread_pool_srcs = ['../base/chef_thread_pool.o', 'chef_thread_pool_test.cc']
 prgs += env.Program('chef_thread_pool_test', chef_thread_pool_srcs, LIBS=platform_libs)
 
-chef_wait_event_srcs = ['../base/chef_wait_event_counter.o', 'chef_wait_event_test.cc']
+chef_wait_event_srcs = ['chef_wait_event_test.cc']
 prgs += env.Program('chef_wait_event_test', chef_wait_event_srcs, LIBS=platform_libs)
 
-chef_wait_event_counter_srcs = ['../base/chef_wait_event_counter.o', 'chef_wait_event_counter_test.cc']
+chef_wait_event_counter_srcs = ['chef_wait_event_counter_test.cc']
 prgs += env.Program('chef_wait_event_counter_test', chef_wait_event_counter_srcs, LIBS=platform_libs)
 
 stringify_stl_srcs = ['stringify_stl_test.cc']
@@ -52,7 +52,7 @@ prgs += env.Program('lru_test', lru_srcs, LIBS=platform_libs)
 #chef_http_op_srcs = ['../base/chef_http_op.o', 'chef_http_op_test.cc']
 #prgs += env.Program('chef_http_op_test', chef_http_op_srcs, LIBS=platform_libs)
 
-chef_log_srcs = ['../base/chef_log.o', 'chef_log_test.cc']
+chef_log_srcs = ['chef_log_test.cc']
 chef_log_libs = platform_libs
 chef_log_libs += [
   File(boost_lib_path+'libboost_log_setup.a'),

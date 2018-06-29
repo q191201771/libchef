@@ -1,5 +1,5 @@
 /**
- * @file     buffer.h[.cc]
+ * @file     buffer.hpp[_impl]
  * @deps     chef_noncopyable.hpp
  * @platform linux/macos/xxx
  *
@@ -128,5 +128,7 @@ namespace chef {
   }; // class buffer
 
 } // namespace chef
+
+#include "chef_buffer_impl.hpp"
 
 #endif // _CHEF_BASE_BUFFER_H_
