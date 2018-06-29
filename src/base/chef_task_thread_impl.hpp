@@ -1,4 +1,3 @@
-#include "chef_task_thread.h"
 #include <time.h>
 #include <sys/time.h>
 #ifdef __linux__
@@ -7,30 +6,30 @@
 
 namespace chef {
 
-  task_thread::task_thread(const std::string &thread_name, release_mode rm)
+  inline task_thread::task_thread(const std::string &thread_name, release_mode rm)
     : name_(thread_name)
     , release_mode_(rm)
     , exit_flag_(false)
   {
   }
 
-  task_thread::~task_thread() {
+  inline task_thread::~task_thread() {
     exit_flag_ = true;
     join_();
   }
 
-  void task_thread::start() {
+  inline void task_thread::start() {
     thread_ = chef::make_shared<chef::thread>(chef::bind(&task_thread::run_in_thread_, this));
     runned_event_.wait();
   }
 
-  void task_thread::join_() {
+  inline void task_thread::join_() {
     if (thread_) {
       thread_->join();
     }
   }
 
-  void task_thread::add(const task &t, int defferred_time_ms) {
+  inline void task_thread::add(const task &t, int defferred_time_ms) {
     chef::lock_guard<chef::mutex> guard(mutex_);
     if (defferred_time_ms == 0) {
       tasks_.push_back(t);
@@ -40,12 +39,12 @@ namespace chef {
     cond_.notify_one();
   }
 
-  uint64_t task_thread::num_of_undone_task() {
+  inline uint64_t task_thread::num_of_undone_task() {
     chef::lock_guard<chef::mutex> guard(mutex_);
     return tasks_.size() + defferred_tasks_.size();
   }
 
-  void task_thread::run_in_thread_() {
+  inline void task_thread::run_in_thread_() {
 #ifdef __linux__
     if (!name_.empty()) {
       prctl(PR_SET_NAME, name_.c_str());
@@ -98,7 +97,7 @@ namespace chef {
     }
   }
 
-  void task_thread::append_expired_tasks_(std::deque<task> &tasks) {
+  inline void task_thread::append_expired_tasks_(std::deque<task> &tasks) {
     if (defferred_tasks_.empty()) {
       return;
     }
@@ -115,14 +114,14 @@ namespace chef {
     defferred_tasks_.erase(defferred_tasks_.begin(), iter);
   }
 
-  void task_thread::execute_tasks_(std::deque<task> &tasks) {
+  inline void task_thread::execute_tasks_(std::deque<task> &tasks) {
     for (; !tasks.empty(); ) {
       tasks.front()();
       tasks.pop_front();
     }
   }
 
-  void task_thread::execute_tasks_(std::multimap<uint64_t, task> &tasks) {
+  inline void task_thread::execute_tasks_(std::multimap<uint64_t, task> &tasks) {
 //    for (auto item : tasks) {
     std::multimap<uint64_t, task>::iterator iter = tasks.begin();
     for (; iter != tasks.end(); iter++) {
@@ -131,7 +130,7 @@ namespace chef {
     tasks.clear();
   }
 
-  uint64_t task_thread::now_() {
+  inline uint64_t task_thread::now_() {
     struct timespec ts;
 #if defined(CLOCK_REALTIME) && !defined(__MACH__)
     clock_gettime(CLOCK_MONOTONIC, &ts);

@@ -1,5 +1,5 @@
 /**
- * @file     chef_log.h[.cc]
+ * @file     chef_log.hpp[_impl]
  * @deps     libboost | chef_env.hpp
  * @platform linux/macos/xxx
  *
@@ -61,10 +61,7 @@ namespace chef {
       static void force_flush();
 
     public:
-      static boost::log::trivial::severity_level get_level();
-
-    private:
-      static boost::log::trivial::severity_level level_;
+      static boost::log::trivial::severity_level &get_level();
 
   };
 
@@ -77,5 +74,7 @@ namespace chef {
 #define CHEF_LOG(level) \
   BOOST_LOG_FUNCTION(); \
   if (boost::log::trivial::level >= chef::log::get_level()) BOOST_LOG_SEV(chef::internal::get_logger(), boost::log::trivial::level)
+
+#include "chef_log_impl.hpp"
 
 #endif // _CHEF_BASE_LOG_H_

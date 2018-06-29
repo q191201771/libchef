@@ -1,5 +1,5 @@
 /**
- * @file     chef_strings_op.h[.cc]
+ * @file     chef_strings_op.hpp[_impl]
  * @deps     nope
  * @platform linux/macos/windows
  *
@@ -126,5 +126,7 @@ namespace chef {
   };
 
 } // namespace chef
+
+#include "chef_strings_op_impl.hpp"
 
 #endif // _CHEF_BASE_STRINGS_H_
