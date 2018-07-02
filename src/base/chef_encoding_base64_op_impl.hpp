@@ -1,17 +1,17 @@
-#include "chef_encoding_base64_op.h"
-
-namespace inner {
-  static std::string base64_decode(const std::string &s);
-  static std::string base64_encode(const std::string &s);
-}
+#include "chef_encoding_base64_op.hpp"
 
 namespace chef {
 
-  std::string encoding_base64_op::encode(const std::string &s) {
+  namespace inner {
+    static inline std::string base64_decode(const std::string &s);
+    static inline std::string base64_encode(const std::string &s);
+  }
+
+  inline std::string encoding_base64_op::encode(const std::string &s) {
     return inner::base64_encode(s);
   }
 
-  std::string encoding_base64_op::decode(const std::string &s) {
+  inline std::string encoding_base64_op::decode(const std::string &s) {
     return inner::base64_decode(s);
   }
 } /// namespace chef
@@ -55,9 +55,10 @@ namespace chef {
 
 */
 
+namespace chef {
 namespace inner {
 
-static std::string const base64_chars =
+static const std::string base64_chars =
              "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
              "abcdefghijklmnopqrstuvwxyz"
              "0123456789+/";
@@ -191,3 +192,4 @@ static inline std::string base64_decode(std::string const & input) {
 }
 
 } /// namespace inner
+} /// namespace chef

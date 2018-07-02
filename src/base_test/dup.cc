@@ -3,7 +3,7 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
-int main() {
+int func() {
   ENTER_TEST;
 
   std::map<std::string, std::string> mapping;
@@ -24,3 +24,4 @@ int main() {
 
   return 0;
 }
+
