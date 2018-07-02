@@ -4,22 +4,22 @@
 #include <sys/types.h>
 #include <sys/syscall.h>
 
+namespace chef {
+
 BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(global_logger_src,
                                        boost::log::sources::severity_logger_mt<boost::log::trivial::severity_level>);
 
-static inline int _threadid() {
-#if defined(__linux__)
-  return static_cast<int>(syscall(SYS_gettid));
-#elif defined(__MACH__)
-  uint64_t tid64;
-  pthread_threadid_np(NULL, &tid64);
-  return static_cast<int>(tid64);
-#else
-  return 0;
-#endif
-}
-
-namespace chef {
+  static inline int _threadid() {
+  #if defined(__linux__)
+    return static_cast<int>(syscall(SYS_gettid));
+  #elif defined(__MACH__)
+    uint64_t tid64;
+    pthread_threadid_np(NULL, &tid64);
+    return static_cast<int>(tid64);
+  #else
+    return 0;
+  #endif
+  }
 
   inline boost::log::trivial::severity_level &log::get_level() {
     static boost::log::trivial::severity_level level_ = boost::log::trivial::trace;

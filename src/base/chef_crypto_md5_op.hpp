@@ -1,6 +1,7 @@
 /**
- * @file   chef_crypto_md5_op.h[.cc]
+ * @file   chef_crypto_md5_op.hpp[_impl]
  * @deps   nope
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>
@@ -25,5 +26,7 @@ namespace chef {
   };
 
 } // namespace chef
+
+#include "chef_crypto_md5_op_impl.hpp"
 
 #endif // _CHEF_BASE_CRYPTO_MD5_OP_HPP_

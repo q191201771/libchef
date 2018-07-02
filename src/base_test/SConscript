@@ -15,13 +15,13 @@ prgs += env.Program('chef_buffer_test', chef_buffer_srcs, LIBS=platform_libs)
 chef_count_dump_srcs = ['../base/chef_filepath_op.o', '../base/chef_count_dump.o', 'chef_count_dump_test.cc']
 prgs += env.Program('chef_count_dump_test', chef_count_dump_srcs, LIBS=platform_libs)
 
-chef_crypto_md5_op_srcs = ['../base/chef_crypto_md5_op.o', 'chef_crypto_md5_op_test.cc']
+chef_crypto_md5_op_srcs = ['dup.cc', 'chef_crypto_md5_op_test.cc']
 prgs += env.Program('chef_crypto_md5_op_test', chef_crypto_md5_op_srcs, LIBS=platform_libs)
 
 chef_defer_srcs = ['chef_defer_test.cc']
 prgs += env.Program('chef_defer_test', chef_defer_srcs, LIBS=platform_libs)
 
-chef_encoding_base64_op_srcs= ['../base/chef_encoding_base64_op.o', 'chef_encoding_base64_op_test.cc']
+chef_encoding_base64_op_srcs= ['dup.cc', 'chef_encoding_base64_op_test.cc']
 prgs += env.Program('chef_encoding_base64_op_test', chef_encoding_base64_op_srcs, LIBS=platform_libs)
 
 chef_filepath_op_srcs = ['../base/chef_filepath_op.o', 'chef_filepath_op_test.cc']

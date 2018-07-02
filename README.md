@@ -50,10 +50,3 @@ src/base/chef_encoding_base64_op.h https://github.com/zaphoyd/websocketpp/blob/m
 src/base/crypto_sha1_op.h https://github.com/antirez/redis/releases/tag/3.2.9 中src/sha1.h和src/sha1.c
 ```
 
-### TODO
-
-```
-1. base64 url格式
-2. crc16 & crc32
-3. net url op
-```

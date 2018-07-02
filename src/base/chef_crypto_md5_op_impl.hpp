@@ -1,12 +1,12 @@
-#include "chef_crypto_md5_op.h"
-
-namespace inner {
-  std::string md5_hash_hex(const std::string &);
-}
+#include "chef_crypto_md5_op.hpp"
 
 namespace chef {
 
-std::string crypto_md5_op::sum(const std::string &s) {
+namespace inner {
+  inline std::string md5_hash_hex(const std::string &);
+}
+
+inline std::string crypto_md5_op::sum(const std::string &s) {
   return inner::md5_hash_hex(s);
 }
 
@@ -30,6 +30,7 @@ std::string crypto_md5_op::sum(const std::string &s) {
 #include <string>
 #include <cstring>
 
+namespace chef{
 namespace inner {
 /// Provides MD5 hashing functionality
 
@@ -125,7 +126,7 @@ inline void md5_finish(md5_state_t *pms, md5_byte_t digest[16]);
 #define ZSW_MD5_T63    0x2ad7d2bb
 #define ZSW_MD5_T64 /* 0xeb86d391 */ (ZSW_MD5_T_MASK ^ 0x14792c6e)
 
-static void md5_process(md5_state_t *pms, md5_byte_t const * data /*[64]*/) {
+inline static void md5_process(md5_state_t *pms, md5_byte_t const * data /*[64]*/) {
     md5_word_t
     a = pms->abcd[0], b = pms->abcd[1],
     c = pms->abcd[2], d = pms->abcd[3];
@@ -135,7 +136,7 @@ static void md5_process(md5_state_t *pms, md5_byte_t const * data /*[64]*/) {
     md5_word_t X[16];
 #else
     /* Define storage for little-endian or both types of CPUs. */
-    md5_word_t xbuf[16];
+    md5_word_t chef_md5_xbuf[16];
     md5_word_t const * X;
 #endif
 
@@ -161,8 +162,8 @@ static void md5_process(md5_state_t *pms, md5_byte_t const * data /*[64]*/) {
         X = (md5_word_t const *)data;
         } else {
         /* not aligned */
-        std::memcpy(xbuf, data, 64);
-        X = xbuf;
+        std::memcpy(chef_md5_xbuf, data, 64);
+        X = chef_md5_xbuf;
         }
     }
 #endif
@@ -179,12 +180,12 @@ static void md5_process(md5_state_t *pms, md5_byte_t const * data /*[64]*/) {
         int i;
 
 #  if ZSW_MD5_BYTE_ORDER == 0
-        X = xbuf;       /* (dynamic only) */
+        X = chef_md5_xbuf;       /* (dynamic only) */
 #  else
-#    define xbuf X      /* (static only) */
+#    define chef_md5_xbuf X      /* (static only) */
 #  endif
         for (i = 0; i < 16; ++i, xp += 4)
-        xbuf[i] = xp[0] + (xp[1] << 8) + (xp[2] << 16) + (xp[3] << 24);
+        chef_md5_xbuf[i] = xp[0] + (xp[1] << 8) + (xp[2] << 16) + (xp[3] << 24);
     }
 #endif
     }
@@ -304,7 +305,7 @@ static void md5_process(md5_state_t *pms, md5_byte_t const * data /*[64]*/) {
     pms->abcd[3] += d;
 }
 
-void md5_init(md5_state_t *pms) {
+inline void md5_init(md5_state_t *pms) {
     pms->count[0] = pms->count[1] = 0;
     pms->abcd[0] = 0x67452301;
     pms->abcd[1] = /*0xefcdab89*/ ZSW_MD5_T_MASK ^ 0x10325476;
@@ -312,7 +313,7 @@ void md5_init(md5_state_t *pms) {
     pms->abcd[3] = 0x10325476;
 }
 
-void md5_append(md5_state_t *pms, md5_byte_t const * data, size_t nbytes) {
+inline void md5_append(md5_state_t *pms, md5_byte_t const * data, size_t nbytes) {
     md5_byte_t const * p = data;
     size_t left = nbytes;
     int offset = (pms->count[0] >> 3) & 63;
@@ -348,7 +349,7 @@ void md5_append(md5_state_t *pms, md5_byte_t const * data, size_t nbytes) {
     std::memcpy(pms->buf, p, left);
 }
 
-void md5_finish(md5_state_t *pms, md5_byte_t digest[16]) {
+inline void md5_finish(md5_state_t *pms, md5_byte_t digest[16]) {
     static md5_byte_t const pad[64] = {
     0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -386,7 +387,7 @@ inline std::string md5_hash_string(std::string const & s) {
     return ret;
 }
 
-const char hexval[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+static const char hexval[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
 inline std::string md5_hash_hex(std::string const & input) {
     std::string hash = md5_hash_string(input);
@@ -401,3 +402,4 @@ inline std::string md5_hash_hex(std::string const & input) {
 }
 
 } // namespace inner
+} // namespace chef
