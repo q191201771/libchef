@@ -52,16 +52,16 @@ prgs += env.Program('lru_test', lru_srcs, LIBS=platform_libs)
 #chef_http_op_srcs = ['../base/chef_http_op.o', 'chef_http_op_test.cc']
 #prgs += env.Program('chef_http_op_test', chef_http_op_srcs, LIBS=platform_libs)
 
-chef_log_srcs = ['chef_log_test.cc']
-chef_log_libs = platform_libs
-chef_log_libs += [
-  File(boost_lib_path+'libboost_log_setup.a'),
-  File(boost_lib_path+'libboost_log.a'),
-  File(boost_lib_path+'libboost_thread.a'),
-  File(boost_lib_path+'libboost_system.a'),
-  File(boost_lib_path+'libboost_filesystem.a'),
-  File(boost_lib_path+'libboost_date_time.a')
-]
-prgs += env.Program('chef_log_test', chef_log_srcs, LIBS=platform_libs)
+#chef_log_srcs = ['chef_log_test.cc']
+#chef_log_libs = platform_libs
+#chef_log_libs += [
+#  File(boost_lib_path+'libboost_log_setup.a'),
+#  File(boost_lib_path+'libboost_log.a'),
+#  File(boost_lib_path+'libboost_thread.a'),
+#  File(boost_lib_path+'libboost_system.a'),
+#  File(boost_lib_path+'libboost_filesystem.a'),
+#  File(boost_lib_path+'libboost_date_time.a')
+#]
+#prgs += env.Program('chef_log_test', chef_log_srcs, LIBS=platform_libs)
 
 Return('prgs')

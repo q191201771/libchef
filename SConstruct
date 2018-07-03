@@ -27,7 +27,8 @@ if env['PLATFORM'] == 'darwin':
     boost_lib_path = '#third_party/macos/boost/lib/'
 else:
     platform_libs = ['pthread', 'rt']
-    # TODO~
+    env.Append(CPPPATH = ['#third_party/linux/boost/include'])
+    boost_lib_path = '#third_party/linux/boost/lib/'
 
 Export('env')
 Export('platform_libs')
