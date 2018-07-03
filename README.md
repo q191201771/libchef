@@ -10,11 +10,15 @@ linux c++后台开发基础库。
 
 ```
 src/                        ......代码根目录
-  base/                     ......基础库
-  base_test/                ......基础库相应测试
+  base/                     ......基础库代码
+  base_test/                ......基础库测试代码
+third_party/                ......第三方依赖库
 .gitignore                  ......
+.travis.yml                 ......
 LINCENSE                    ......
 README.md                   ......
+SConstruct                  ......scons编译脚本
+ut.sh                       ......执行测试代码脚本
 ```
 
 ### 我的环境
@@ -26,12 +30,17 @@ gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
 OS X EI Capitan 10.11.6 Apple LLVM version 8.0.0 (clang-800.0.42.1)
 ```
 
-### 依赖
+### 第三方依赖
 
-* libcurl
+```
+libcurl
   * chef_http_op.h[.cc]
-* boost 1.66
+
+libboost
   * chef_log.h[.cc]
+
+其他所有都不依赖第三方代码
+```
 
 ### 编译
 
@@ -45,10 +54,16 @@ $scons mode=debug
 ### 声明，拷贝自第三方工程的代码
 
 ```
-src/base/chef_crypto_md5_op.h https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
+src/base/chef_crypto_md5_op.hpp https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
 
-src/base/chef_encoding_base64_op.h https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
+src/base/chef_encoding_base64_op.hpp https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
 
 src/base/crypto_sha1_op.h https://github.com/antirez/redis/releases/tag/3.2.9 中src/sha1.h和src/sha1.c
+```
+
+### 模块说明
+
+```
+TODO
 ```
 
