@@ -1,5 +1,7 @@
 # linux c++基础库
 
+[![Build Status](https://travis-ci.org/q191201771/starry-night.svg?branch=master)](https://travis-ci.org/q191201771/starry-night)
+
 ### 简介
 
 linux c++后台开发基础库。
