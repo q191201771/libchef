@@ -29,7 +29,8 @@ class Lru {
     typedef std::map<KeyT, typename List::iterator> Map;
 
   public:
-    Lru(std::size_t capacity);
+    // @param cap 容器大小
+    Lru(std::size_t cap);
     ~Lru();
 
     // @NOTICE function put 和 function get 操作都会更新元素热度，put 的 key 即使已经存在甚至对应的 value 相同也会更新热度
@@ -43,8 +44,8 @@ class Lru {
     // 获取整个列表
     List get_list();
 
-    std::size_t size();
-    std::size_t capacity();
+    std::size_t size() const;
+    std::size_t capacity() const;
 
   private:
     const std::size_t capacity_;
@@ -54,7 +55,7 @@ class Lru {
 };
 
 template <typename KeyT, typename ValueT>
-Lru<KeyT, ValueT>::Lru(std::size_t capacity) : capacity_(capacity) {}
+Lru<KeyT, ValueT>::Lru(std::size_t cap) : capacity_(cap) {}
 
 template <typename KeyT, typename ValueT>
 Lru<KeyT, ValueT>::~Lru() { list_.clear(); map_.clear(); }
@@ -95,12 +96,12 @@ bool Lru<KeyT, ValueT>::get(KeyT k, ValueT *v) {
 }
 
 template <typename KeyT, typename ValueT>
-std::size_t Lru<KeyT, ValueT>::size() {
+std::size_t Lru<KeyT, ValueT>::size() const {
   return list_.size();
 }
 
 template <typename KeyT, typename ValueT>
-std::size_t Lru<KeyT, ValueT>::capacity() {
+std::size_t Lru<KeyT, ValueT>::capacity() const {
   return capacity_;
 }
 

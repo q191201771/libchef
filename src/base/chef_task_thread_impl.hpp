@@ -6,8 +6,8 @@
 
 namespace chef {
 
-  inline task_thread::task_thread(const std::string &thread_name, release_mode rm)
-    : name_(thread_name)
+  inline task_thread::task_thread(const std::string &name, release_mode rm)
+    : name_(name)
     , release_mode_(rm)
     , exit_flag_(false)
   {

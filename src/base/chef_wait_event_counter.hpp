@@ -26,21 +26,21 @@ namespace chef {
   class wait_event_counter : public chef::noncopyable {
     public:
       /**
-       * @param need_count 需要notify多少次，wait才能通过
+       * @param nc 需要notify多少次，wait才能通过
        *
        */
-      explicit wait_event_counter(int need_count=1);
+      explicit wait_event_counter(int nc=1);
 
       ~wait_event_counter();
 
       /// notify调用发生在wait执行前或wait中，都有效~
       void notify();
 
-      /// 阻塞直到构造函数中指定的<need_count>次notify已发生。
+      /// 阻塞直到构造函数中指定的<need_count_>次notify已发生。
       void wait();
 
       /**
-       * 阻塞直到构造函数中指定的<need_count>次notify已发生或超时。
+       * 阻塞直到构造函数中指定的<need_count_>次notify已发生或超时。
        *
        * @param timeout_ms 超时时间，单位毫秒，如果设置为0，则无超时机制。
        *

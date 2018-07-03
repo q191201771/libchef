@@ -1,8 +1,8 @@
 
 namespace chef {
 
-  inline wait_event_counter::wait_event_counter(int need_count)
-    : need_count_(need_count)
+  inline wait_event_counter::wait_event_counter(int nc)
+    : need_count_(nc)
     , counted_(0)
   {
   }

@@ -88,8 +88,8 @@ void release_mode_test() {
 
 class foo {
 public:
-  foo(int a) : a_(a) {}
-  void set_a(int a) { a_ = a; }
+  foo(int val) : a_(val) {}
+  void set_a(int val) { a_ = val; }
   int a() const { return a_; }
 private:
   int a_;

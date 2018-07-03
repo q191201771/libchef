@@ -40,10 +40,10 @@ namespace chef {
       };
 
       /**
-       * @param thread_name 线程名，linux平台下调用prctl设置，其他平台或<thread_name>为空则不设置~
+       * @param name 线程名，linux平台下调用prctl设置，其他平台或<name>为空则不设置~
        *
        */
-      explicit task_thread(const std::string &thread_name=std::string(), release_mode rm=RELEASE_MODE_ASAP);
+      explicit task_thread(const std::string &name=std::string(), release_mode rm=RELEASE_MODE_ASAP);
 
       ~task_thread();
 
