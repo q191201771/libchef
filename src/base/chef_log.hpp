@@ -5,10 +5,10 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     - initial release xxxx-xx-xx
  *
  * @brief
- *   近乎零配置的日志模块，有其他需求请直接修改源码。
+ *   对boost log做的wrapper，近乎零配置的日志模块，有其他需求请直接修改源码，这里不做没必要的过度冗余通用性封装。
  *
  *
  *   init时mode_debug和mode_release的区别
@@ -27,6 +27,7 @@
 #define _CHEF_BASE_LOG_H_
 #pragma once
 
+#include "chef_env.hpp"
 #include <boost/log/common.hpp>
 #include <boost/log/core.hpp>
 #include <boost/log/sinks.hpp>

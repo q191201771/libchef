@@ -5,10 +5,11 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release 2016-08-31
+ *     - initial release 2016-08-31
  *
  * @brief
- *   copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
+ *   - md5加密
+ *   - copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
  *
  */
 

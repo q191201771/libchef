@@ -6,7 +6,7 @@
 #include "./common/check_log.hpp"
 
 void mtc_free_lock_or_mutex_test(chef::multi_tag_counter::multi_tag_counter_type type) {
-  int64_t num;
+  int64_t num = 0;
   std::map<std::string, int64_t> counters;
 
   chef::multi_tag_counter mtc(type);
@@ -32,7 +32,7 @@ void mtc_free_lock_or_mutex_test(chef::multi_tag_counter::multi_tag_counter_type
 }
 
 void mtc_atomic_test() {
-  int64_t num;
+  int64_t num = 0;
   std::map<std::string, int64_t> counters;
   chef::multi_tag_counter mtc(chef::multi_tag_counter::MULTI_TAG_COUNTER_ATOMIC);
   mtc.add_tag("1st");

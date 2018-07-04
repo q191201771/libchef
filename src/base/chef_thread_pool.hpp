@@ -5,10 +5,12 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     - initial release xxxx-xx-xx
  *
  * @brief
  *   线程池，池中的空闲线程抢占式执行丢入其中的任务。
+ *   适用于丢入的任务不要求强顺序性执行的场景。
+ *   任务可以是业务方的任意函数（通过bind/function实现）
  *
  */
 
@@ -16,9 +18,9 @@
 #define _CHEF_BASE_THREAD_POOL_H_
 #pragma once
 
-#include "chef_wait_event_counter.hpp"
-#include "chef_noncopyable.hpp"
 #include "chef_env.hpp"
+#include "chef_noncopyable.hpp"
+#include "chef_wait_event_counter.hpp"
 #include <string>
 #include <vector>
 #include <deque>

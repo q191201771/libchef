@@ -1,4 +1,3 @@
-#include "chef_strings_op.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

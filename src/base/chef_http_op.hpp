@@ -5,9 +5,9 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     - initial release xxxx-xx-xx
  *
- * @brief 对libcurl的封装,同步http get/post
+ * @brief  对libcurl的封装,同步http get/post
  *
  */
 
@@ -15,6 +15,7 @@
 #define _CHEF_BASE_HTTP_OP_H_
 #pragma once
 
+#include "chef_strings_op.hpp"
 #include <map>
 #include <string>
 #include <sstream>

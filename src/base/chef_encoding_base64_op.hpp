@@ -5,12 +5,11 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release 2016-08-31
+ *     - initial release 2016-08-31
  *
  * @brief
- *   base64编码、解码
- *
- *   copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
+ *   - base64编码、解码
+ *   - copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
  *
  */
 

@@ -5,12 +5,11 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     - initial release xxxx-xx-xx
  *
  * @brief
- *   在各种线程及场景下高效的对多个tag进行计数
- *   同时支持定时将计数落盘
- *   $watch -n 1 'cat xxx.txt'
+ *   - class multi_tag_counter 在各种线程模型下高效的对多个tag进行计数（打点）
+ *   - class multi_tag_count_dumper 支持定时将计数落盘，可通过 $watch -n 1 'cat xxx.txt' 观察打点变化
  *
  */
 
@@ -20,6 +19,7 @@
 
 #include "chef_env.hpp"
 #include "chef_noncopyable.hpp"
+#include "chef_filepath_op.hpp"
 #include <stdio.h>
 #include <stdint.h>
 #include <map>
@@ -73,7 +73,7 @@ namespace chef {
 
   }; // class multi_tag_counter
 
-  class multi_tag_count_dumper {
+  class multi_tag_count_dumper : public chef::noncopyable {
     public:
       multi_tag_count_dumper(multi_tag_counter *mtc, int interval_ms, uint32_t num_per_line, const std::string &filename)
         : mtc_(mtc)
