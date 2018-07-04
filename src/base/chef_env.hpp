@@ -5,7 +5,7 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     - initial release xxxx-xx-xx
  *
  * @brief  由于一些开发环境不能使用c++11，做一个boost和c++11的选择
  *
