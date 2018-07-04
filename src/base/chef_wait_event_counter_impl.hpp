@@ -1,4 +1,3 @@
-
 namespace chef {
 
   inline wait_event_counter::wait_event_counter(int nc)

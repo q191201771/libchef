@@ -1,5 +1,5 @@
 /**
- * @file   chef_thread_pool.h[.cc]
+ * @file   chef_thread_pool.hpp[_impl]
  * @deps   chef_env.hpp | chef_noncopyable.hpp | chef_wait_event_counter.hpp[_impl]
  * @platform linux/macos/xxx
  *
@@ -73,5 +73,7 @@ namespace chef {
   };
 
 } // namespace chef
+
+#include "chef_thread_pool_impl.hpp"
 
 #endif

@@ -1,4 +1,4 @@
-#include "../base/chef_thread_pool.h"
+#include "../base/chef_thread_pool.hpp"
 #include <stdio.h>
 #include <unistd.h>
 #include <atomic>

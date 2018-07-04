@@ -1,5 +1,5 @@
 /**
- * @file     chef_filepath_op.h[.cc]
+ * @file     chef_filepath_op.hpp[_impl]
  * @deps     nope
  * @platform linux/macos/xxx
  *
@@ -156,5 +156,7 @@ namespace chef {
   };
 
 } // namespace chef
+
+#include "chef_filepath_op_impl.hpp"
 
 #endif // _CHEF_BASE_FILEPATH_OP_H_

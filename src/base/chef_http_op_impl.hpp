@@ -1,27 +1,10 @@
-#include "chef_http_op.h"
 #include "chef_strings_op.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <curl/curl.h>
 
-namespace inner {
-
-  static size_t response_body_cb(void *contents, size_t size, size_t nmemb, void *userp) {
-    size_t realsize = size * nmemb;
-    std::string *body = static_cast<std::string *>(userp);
-    body->append(static_cast<char *>(contents), realsize);
-    return realsize;
-  }
-
-  static size_t response_header_cb(void *contents, size_t size, size_t nmemb, void *userp) {
-    size_t realsize = size * nmemb;
-    std::string *headers = static_cast<std::string *>(userp);
-    headers->append(static_cast<char *>(contents), realsize);
-    return realsize;
-  }
-
-} // namespace inner
+namespace chef {
 
 #define RELEASE_CURL_IF_NEEDED(x) do { \
   if (x != NULL) { \
@@ -37,13 +20,29 @@ namespace inner {
   } \
 } while(0);
 
-namespace chef {
+namespace inner {
 
-  int http_op::global_init_curl() { return curl_global_init(CURL_GLOBAL_ALL) == CURLE_OK ? 0 : -1; }
+  inline static size_t response_body_cb(void *contents, size_t size, size_t nmemb, void *userp) {
+    size_t realsize = size * nmemb;
+    std::string *body = static_cast<std::string *>(userp);
+    body->append(static_cast<char *>(contents), realsize);
+    return realsize;
+  }
 
-  void http_op::global_cleanup_curl() { curl_global_cleanup(); }
+  inline static size_t response_header_cb(void *contents, size_t size, size_t nmemb, void *userp) {
+    size_t realsize = size * nmemb;
+    std::string *headers = static_cast<std::string *>(userp);
+    headers->append(static_cast<char *>(contents), realsize);
+    return realsize;
+  }
 
-  int http_op::get_or_post(const std::string &url,
+} // namespace inner
+
+  inline int http_op::global_init_curl() { return curl_global_init(CURL_GLOBAL_ALL) == CURLE_OK ? 0 : -1; }
+
+  inline void http_op::global_cleanup_curl() { curl_global_cleanup(); }
+
+  inline int http_op::get_or_post(const std::string &url,
                            const std::map<std::string, std::string> *headers,
                            const std::map<std::string, std::string> *cookies,
                            const char *post_data,
@@ -172,6 +171,8 @@ namespace chef {
     return 0;
   }
 
-} // namespace chef
+#undef RELEASE_CURL_IF_NEEDED
+#undef RELEASE_CURL_SLIST_IF_NEEDED
 
+} // namespace chef
 

@@ -1,5 +1,4 @@
-#include "chef_count_dump.h"
-#include "chef_filepath_op.h"
+#include "chef_filepath_op.hpp"
 #include <assert.h>
 #include <ctime>
 #include <sstream>
@@ -9,7 +8,7 @@ namespace chef {
   #define LOCK_IF_NEEDED(t, m) if (t == MULTI_TAG_COUNTER_MUTEX) m.lock();
   #define UNLOCK_IF_NEEDED(t, m) if (t == MULTI_TAG_COUNTER_MUTEX) m.unlock();
 
-  void multi_tag_counter::add_tag(const std::string &tag) {
+  inline void multi_tag_counter::add_tag(const std::string &tag) {
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
       tag2atomic_count_[tag] = 0;
       return;
@@ -19,14 +18,14 @@ namespace chef {
     UNLOCK_IF_NEEDED(type_, mutex_);
   }
 
-  void multi_tag_counter::add_tags(const std::vector<std::string> &tags) {
+  inline void multi_tag_counter::add_tags(const std::vector<std::string> &tags) {
     std::vector<std::string>::const_iterator iter = tags.begin();
     for (; iter != tags.end(); iter++) {
       add_tag(*iter);
     }
   }
 
-  void multi_tag_counter::del_tag(const std::string &tag) {
+  inline void multi_tag_counter::del_tag(const std::string &tag) {
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
       assert(0);
       tag2atomic_count_.erase(tag);
@@ -37,7 +36,7 @@ namespace chef {
     UNLOCK_IF_NEEDED(type_, mutex_);
   }
 
-  bool multi_tag_counter::increment(const std::string &tag) {
+  inline bool multi_tag_counter::increment(const std::string &tag) {
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
       TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
       if (iter == tag2atomic_count_.end()) {
@@ -52,7 +51,7 @@ namespace chef {
     return true;
   }
 
-  bool multi_tag_counter::decrement(const std::string &tag) {
+  inline bool multi_tag_counter::decrement(const std::string &tag) {
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
       TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
       if (iter == tag2atomic_count_.end()) {
@@ -67,7 +66,7 @@ namespace chef {
     return true;
   }
 
-  bool multi_tag_counter::add_count(const std::string &tag, int64_t num) {
+  inline bool multi_tag_counter::add_count(const std::string &tag, int64_t num) {
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
       TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
       if (iter == tag2atomic_count_.end()) {
@@ -82,7 +81,7 @@ namespace chef {
     return true;
   }
 
-  bool multi_tag_counter::del_count(const std::string &tag, int64_t num) {
+  inline bool multi_tag_counter::del_count(const std::string &tag, int64_t num) {
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
       TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
       if (iter == tag2atomic_count_.end()) {
@@ -97,7 +96,7 @@ namespace chef {
     return true;
   }
 
-  bool multi_tag_counter::set_count(const std::string &tag, int64_t num) {
+  inline bool multi_tag_counter::set_count(const std::string &tag, int64_t num) {
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
       TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
       if (iter == tag2atomic_count_.end()) {
@@ -112,7 +111,7 @@ namespace chef {
     return true;
   }
 
-  bool multi_tag_counter::get_tag_count(const std::string &tag, int64_t *num) {
+  inline bool multi_tag_counter::get_tag_count(const std::string &tag, int64_t *num) {
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
       TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.find(tag);
       if (iter == tag2atomic_count_.end()) {
@@ -132,7 +131,7 @@ namespace chef {
     return ret;
   }
 
-  std::map<std::string, int64_t> multi_tag_counter::get_tags_count() {
+  inline std::map<std::string, int64_t> multi_tag_counter::get_tags_count() {
     TAG2COUNT ret;
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
       TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.begin();
@@ -147,7 +146,7 @@ namespace chef {
     return ret;
   }
 
-  multi_tag_count_dumper::~multi_tag_count_dumper() {
+  inline multi_tag_count_dumper::~multi_tag_count_dumper() {
     exit_flag_ = true;
     if (thread_) {
       thread_->join();
@@ -156,18 +155,18 @@ namespace chef {
     }
   }
 
-  void multi_tag_count_dumper::start() {
+  inline void multi_tag_count_dumper::start() {
     thread_ = chef::make_shared<chef::thread>(chef::bind(&multi_tag_count_dumper::run_in_thread, this));
   }
 
-  void multi_tag_count_dumper::run_in_thread() {
+  inline void multi_tag_count_dumper::run_in_thread() {
     while (!exit_flag_) {
       dump2disk();
       chef::this_thread::sleep_for(chef::chrono::milliseconds(interval_ms_));
     }
   }
 
-  void multi_tag_count_dumper::dump2disk() {
+  inline void multi_tag_count_dumper::dump2disk() {
     std::ostringstream ss;
 
     std::time_t now = std::time(NULL);
@@ -181,7 +180,7 @@ namespace chef {
     filepath_op::rename(filename_+".tmp", filename_);
   }
 
-  std::string multi_tag_count_dumper::styled_stringify() {
+  inline std::string multi_tag_count_dumper::styled_stringify() {
     std::map<std::string, int64_t> tag2count = mtc_->get_tags_count();
 
     std::ostringstream ss;
@@ -199,5 +198,8 @@ namespace chef {
     }
     return ss.str();
   }
+
+  #undef LOCK_IF_NEEDED
+  #undef UNLOCK_IF_NEEDED
 
 } // namespace chef

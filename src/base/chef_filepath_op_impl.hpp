@@ -1,4 +1,3 @@
-#include "chef_filepath_op.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -8,19 +7,19 @@
 #include <dirent.h>
 #include <errno.h>
 
+namespace chef {
+
 #define IF_ZERO_RETURN_NAGETIVE_ONE(x) do { if ((x) == 0) return -1; } while(0);
 #define IF_NULL_RETURN_NAGETIVE_ONE(x) do { if ((x) == NULL) return -1; } while(0);
 #define IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(x) do { if (x.empty()) return -1; } while(0);
 
-namespace chef {
-
-  int filepath_op::exist(const std::string &name) {
+  inline int filepath_op::exist(const std::string &name) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(name);
     struct stat st;
     return stat(name.c_str(), &st);
   }
 
-  int filepath_op::is_dir(const std::string &pathname) {
+  inline int filepath_op::is_dir(const std::string &pathname) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(pathname);
     struct stat st;
     if (stat(pathname.c_str(), &st) == -1) {
@@ -29,7 +28,7 @@ namespace chef {
     return S_ISDIR(st.st_mode) ? 0 : -1;
   }
 
-  int filepath_op::walk_dir(const std::string &pathname,
+  inline int filepath_op::walk_dir(const std::string &pathname,
                             std::vector<std::string> &child_dirs,
                             std::vector<std::string> &child_files,
                             bool with_pathname_prefix)
@@ -78,7 +77,7 @@ namespace chef {
     return 0;
   }
 
-  int filepath_op::mkdir_recursive(const std::string &pathname) {
+  inline int filepath_op::mkdir_recursive(const std::string &pathname) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(pathname);
     char *path_dup = strdup(pathname.c_str());
     size_t len = strlen(path_dup);
@@ -101,7 +100,7 @@ namespace chef {
     return 0;
   }
 
-  int filepath_op::rm_file(const std::string &name) {
+  inline int filepath_op::rm_file(const std::string &name) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(name);
     if (exist(name) == -1) {
       return 0;
@@ -115,7 +114,7 @@ namespace chef {
     return 0;
   }
 
-  int filepath_op::rmdir_recursive(const std::string &pathname) {
+  inline int filepath_op::rmdir_recursive(const std::string &pathname) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(pathname);
     if (exist(pathname) == -1) {
       return 0;
@@ -166,13 +165,13 @@ namespace chef {
     return (::rmdir(pathname.c_str()) == 0 && ret == 0) ? 0 : -1;
   }
 
-  int filepath_op::rename(const std::string &src, const std::string &dst) {
+  inline int filepath_op::rename(const std::string &src, const std::string &dst) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(src);
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(dst);
     return ::rename(src.c_str(), dst.c_str());
   }
 
-  int filepath_op::write_file(const std::string &filename, const char *content, size_t content_size) {
+  inline int filepath_op::write_file(const std::string &filename, const char *content, size_t content_size) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(filename);
     IF_NULL_RETURN_NAGETIVE_ONE(content);
     IF_ZERO_RETURN_NAGETIVE_ONE(content_size);
@@ -183,11 +182,11 @@ namespace chef {
     return written == content_size;
   }
 
-  int filepath_op::write_file(const std::string &filename, const std::string &content) {
+  inline int filepath_op::write_file(const std::string &filename, const std::string &content) {
     return filepath_op::write_file(filename, content.c_str(), content.length());
   }
 
-  int64_t filepath_op::get_file_size(const std::string &filename) {
+  inline int64_t filepath_op::get_file_size(const std::string &filename) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(filename);
     if (exist(filename) == -1 || is_dir(filename) == 0) {
       return -1;
@@ -199,7 +198,7 @@ namespace chef {
     return st.st_size;
   }
 
-  int64_t filepath_op::read_file(const std::string &filename, char *content, size_t content_size) {
+  inline int64_t filepath_op::read_file(const std::string &filename, char *content, size_t content_size) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(filename);
     IF_NULL_RETURN_NAGETIVE_ONE(content);
     IF_ZERO_RETURN_NAGETIVE_ONE(content_size);
@@ -210,7 +209,7 @@ namespace chef {
     return read_size;
   }
 
-  std::string filepath_op::read_file(const std::string &filename) {
+  inline std::string filepath_op::read_file(const std::string &filename) {
     int64_t size = get_file_size(filename.c_str());
     if (size <= 0) {
       return std::string();
@@ -218,7 +217,7 @@ namespace chef {
     return read_file(filename, size);
   }
 
-  std::string filepath_op::read_file(const std::string &filename, size_t content_size) {
+  inline std::string filepath_op::read_file(const std::string &filename, size_t content_size) {
     if (content_size == 0) {
       return std::string();
     }
@@ -233,7 +232,7 @@ namespace chef {
     return content_string;
   }
 
-  std::string filepath_op::read_link(const std::string &filename, size_t content_size) {
+  inline std::string filepath_op::read_link(const std::string &filename, size_t content_size) {
     if (filename.empty() || content_size == 0) {
       return std::string();
     }
@@ -248,7 +247,7 @@ namespace chef {
     return ret;
   }
 
-  std::string filepath_op::join(const std::string &path, const std::string &filename) {
+  inline std::string filepath_op::join(const std::string &path, const std::string &filename) {
     std::string ret;
     size_t path_length = path.length();
     size_t filename_length = filename.length();
@@ -271,5 +270,9 @@ namespace chef {
     }
     return ret;
   }
+
+#undef IF_ZERO_RETURN_NAGETIVE_ONE
+#undef IF_NULL_RETURN_NAGETIVE_ONE
+#undef IF_STRING_EMPTY_RETURN_NAGETIVE_ONE
 
 } // namespace chef
