@@ -7,7 +7,7 @@
  *   chef <191201771@qq.com>
  *     - initial release xxxx-xx-xx
  *
- * @brief  对libcurl的封装,同步http get/post
+ * @brief  对libcurl做的wrapper，同步阻塞式完成http get/post
  *
  */
 
