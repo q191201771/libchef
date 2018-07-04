@@ -1,5 +1,3 @@
-#include "chef_crypto_md5_op.hpp"
-
 namespace chef {
 
 namespace inner {

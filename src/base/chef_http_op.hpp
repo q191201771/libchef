@@ -1,6 +1,6 @@
 /**
- * @file     chef_http_op.h[.cc]
- * @deps     libcurl | chef_strings_op.h[.cc]
+ * @file     chef_http_op.hpp[_impl]
+ * @deps     libcurl | chef_strings_op.hpp[_impl]
  * @platform linux/macos/xxx
  *
  * @author
@@ -94,6 +94,8 @@ namespace chef {
 
   };
 
-} // namespace inner
+} // namespace chef
+
+#include "chef_http_op_impl.hpp"
 
 #endif // _CHEF_BASE_HTTP_OP_H_

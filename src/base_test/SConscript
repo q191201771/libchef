@@ -8,23 +8,23 @@ env = env.Clone()
 
 prgs = []
 
-# do not deps of any third party
+# -----do not deps of any third party-----
 chef_buffer_srcs = ['chef_buffer_test.cc']
 prgs += env.Program('chef_buffer_test', chef_buffer_srcs, LIBS=platform_libs)
 
-chef_count_dump_srcs = ['../base/chef_filepath_op.o', '../base/chef_count_dump.o', 'chef_count_dump_test.cc']
+chef_count_dump_srcs = ['chef_count_dump_test.cc']
 prgs += env.Program('chef_count_dump_test', chef_count_dump_srcs, LIBS=platform_libs)
 
-chef_crypto_md5_op_srcs = ['dup.cc', 'chef_crypto_md5_op_test.cc']
+chef_crypto_md5_op_srcs = ['chef_crypto_md5_op_test.cc']
 prgs += env.Program('chef_crypto_md5_op_test', chef_crypto_md5_op_srcs, LIBS=platform_libs)
 
 chef_defer_srcs = ['chef_defer_test.cc']
 prgs += env.Program('chef_defer_test', chef_defer_srcs, LIBS=platform_libs)
 
-chef_encoding_base64_op_srcs= ['dup.cc', 'chef_encoding_base64_op_test.cc']
+chef_encoding_base64_op_srcs= ['chef_encoding_base64_op_test.cc']
 prgs += env.Program('chef_encoding_base64_op_test', chef_encoding_base64_op_srcs, LIBS=platform_libs)
 
-chef_filepath_op_srcs = ['../base/chef_filepath_op.o', 'chef_filepath_op_test.cc']
+chef_filepath_op_srcs = ['chef_filepath_op_test.cc']
 prgs += env.Program('chef_filepath_op_test', chef_filepath_op_srcs, LIBS=platform_libs)
 
 chef_strings_op_srcs = ['chef_strings_op_test.cc']
@@ -33,7 +33,7 @@ prgs += env.Program('chef_strings_op_test', chef_strings_op_srcs, LIBS=platform_
 chef_task_thread_srcs = ['chef_task_thread_test.cc']
 prgs += env.Program('chef_task_thread_test', chef_task_thread_srcs, LIBS=platform_libs)
 
-chef_thread_pool_srcs = ['../base/chef_thread_pool.o', 'chef_thread_pool_test.cc']
+chef_thread_pool_srcs = ['chef_thread_pool_test.cc']
 prgs += env.Program('chef_thread_pool_test', chef_thread_pool_srcs, LIBS=platform_libs)
 
 chef_wait_event_srcs = ['chef_wait_event_test.cc']
@@ -48,8 +48,11 @@ prgs += env.Program('stringify_stl_test', stringify_stl_srcs, LIBS=platform_libs
 lru_srcs = ['lru_test.cc']
 prgs += env.Program('lru_test', lru_srcs, LIBS=platform_libs)
 
-# deps third party
-#chef_http_op_srcs = ['../base/chef_http_op.o', 'chef_http_op_test.cc']
+# -----deps third party-----
+
+#chef_http_op_srcs = ['dup.cc', 'chef_http_op_test.cc']
+#chef_http_libs = platform_libs
+#chef_http_libs += ['curl']
 #prgs += env.Program('chef_http_op_test', chef_http_op_srcs, LIBS=platform_libs)
 
 #chef_log_srcs = ['chef_log_test.cc']

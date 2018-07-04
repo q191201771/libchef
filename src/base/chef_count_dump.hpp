@@ -1,6 +1,6 @@
 /**
- * @file     chef_count_dump.h[.cc]
- * @deps     chef_env.hpp | chef_noncopyable.hpp | chef_filepath_op.h[.cc]
+ * @file     chef_count_dump.hpp[_impl]
+ * @deps     chef_env.hpp | chef_noncopyable.hpp | chef_filepath_op.hpp[_impl]
  * @platform linux | macos | xxx
  *
  * @author
@@ -102,5 +102,7 @@ namespace chef {
   }; // class multi_tag_count_dumper
 
 } // namespace chef
+
+#include "chef_count_dump_impl.hpp"
 
 #endif // _CHEF_BASE_COUNT_DUMP_H_

@@ -1,5 +1,3 @@
-#include "chef_encoding_base64_op.hpp"
-
 namespace chef {
 
   namespace inner {

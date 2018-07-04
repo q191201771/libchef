@@ -15,7 +15,7 @@ echo '----------------------------------------'
 ./output/base_test/chef_wait_event_counter_test
 
 #./output/base_test/chef_http_op_test
-./output/base_test/chef_log_test
+#./output/base_test/chef_log_test
 
 ./output/base_test/stringify_stl_test
 ./output/base_test/lru_test

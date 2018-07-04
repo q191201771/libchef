@@ -1,4 +1,4 @@
-#include "../base/chef_http_op.h"
+#include "../base/chef_http_op.hpp"
 #include "./common/check_log.hpp"
 #include "./common/assert_wrapper.hpp"
 #include <stdio.h>
