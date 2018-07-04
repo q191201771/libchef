@@ -1,13 +1,51 @@
 /**
- * @file   crypto_sha1_op.cc
+ * @file   crypto_sha1_op.hpp
+ * @deps   nope
+ * @platform linux/macos/xxx
+ *
  * @author
  *   chef <191201771@qq.com>
- *     -created 2017-06-09 09:31:24
+ *     -created 2017-06-09 09:28:48
  *     -initial release xxxx-xx-xx
+ *
+ * @brief
+ *   sha1算法
+ *   NOTICE: 实现部分拷贝自redis3.2.9中的sha1.h和sha1.c https://github.com/antirez/redis/releases/tag/3.2.9
  *
  */
 
-#include "crypto_sha1_op.h"
+#ifndef _CHEF_BASE_CRYPTO_SHA1_OP_
+#define _CHEF_BASE_CRYPTO_SHA1_OP_
+#pragma once
+
+#include <string>
+
+namespace chef {
+
+class crypto_sha1_op {
+  public:
+    static void sum(unsigned char *in_data, size_t in_data_len, unsigned char digest[20] /*out*/);
+
+    /**
+     * @return 对`data`执行sha1编码后得到的20字节，每个字节用16进制表示（2字节）拼接成的字符串
+     *
+     */
+    static std::string sum(const std::string &data);
+}; /// class crypto_sha1_op
+
+} /// namespace chef
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// @NOTICE 该分隔线以上部分为该模块的接口，分割线以下部分为对应的实现
+
+
+
+
+
 
 namespace chef {
 
@@ -24,19 +62,19 @@ typedef struct {
     unsigned char buffer[64];
 } SHA1_CTX;
 
-void SHA1Transform(uint32_t state[5], const unsigned char buffer[64]);
-void SHA1Init(SHA1_CTX* context);
-void SHA1Update(SHA1_CTX* context, const unsigned char* data, uint32_t len);
-void SHA1Final(unsigned char digest[20], SHA1_CTX* context);
+inline void SHA1Transform(uint32_t state[5], const unsigned char buffer[64]);
+inline void SHA1Init(SHA1_CTX* context);
+inline void SHA1Update(SHA1_CTX* context, const unsigned char* data, uint32_t len);
+inline void SHA1Final(unsigned char digest[20], SHA1_CTX* context);
 
-void crypto_sha1_op::sum(unsigned char *in_data, size_t in_data_len, unsigned char digest[20] /*out*/) {
+inline void crypto_sha1_op::sum(unsigned char *in_data, size_t in_data_len, unsigned char digest[20] /*out*/) {
   SHA1_CTX ctx;
   SHA1Init(&ctx);
   SHA1Update(&ctx, (unsigned char *)in_data, in_data_len);
   SHA1Final(digest, &ctx);
 }
 
-std::string crypto_sha1_op::sum(const std::string &data) {
+inline std::string crypto_sha1_op::sum(const std::string &data) {
   unsigned char digest[20];
   crypto_sha1_op::sum((unsigned char *)data.c_str(), data.length(), digest);
 
@@ -102,7 +140,7 @@ A million repetitions of "a"
 
 /* Hash a single 512-bit block. This is the core of the algorithm. */
 
-void SHA1Transform(uint32_t state[5], const unsigned char buffer[64])
+inline void SHA1Transform(uint32_t state[5], const unsigned char buffer[64])
 {
     uint32_t a, b, c, d, e;
     typedef union {
@@ -163,7 +201,7 @@ void SHA1Transform(uint32_t state[5], const unsigned char buffer[64])
 
 /* SHA1Init - Initialize new context */
 
-void SHA1Init(SHA1_CTX* context)
+inline void SHA1Init(SHA1_CTX* context)
 {
     /* SHA1 initialization constants */
     context->state[0] = 0x67452301;
@@ -177,7 +215,7 @@ void SHA1Init(SHA1_CTX* context)
 
 /* Run your data through this. */
 
-void SHA1Update(SHA1_CTX* context, const unsigned char* data, uint32_t len)
+inline void SHA1Update(SHA1_CTX* context, const unsigned char* data, uint32_t len)
 {
     uint32_t i, j;
 
@@ -201,7 +239,7 @@ void SHA1Update(SHA1_CTX* context, const unsigned char* data, uint32_t len)
 
 /* Add padding and return the message digest. */
 
-void SHA1Final(unsigned char digest[20], SHA1_CTX* context)
+inline void SHA1Final(unsigned char digest[20], SHA1_CTX* context)
 {
     unsigned i;
     unsigned char finalcount[8];
@@ -246,5 +284,16 @@ void SHA1Final(unsigned char digest[20], SHA1_CTX* context)
 }
 /* ================ end of sha1.c ================ */
 
+#undef SHA1HANDSOFF
+#undef rol
+#undef blk0
+#undef blk
+#undef R0
+#undef R1
+#undef R2
+#undef R3
+#undef R4
+
 } /// namespace chef
 
+#endif

@@ -9,7 +9,7 @@
  *
  * @brief
  *   - md5加密
- *   - copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
+ *   - @NOTICE copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
  *
  */
 

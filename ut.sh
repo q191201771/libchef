@@ -5,6 +5,7 @@ echo '----------------------------------------'
 ./output/base_test/chef_buffer_test
 ./output/base_test/chef_count_dump_test
 ./output/base_test/chef_crypto_md5_op_test
+./output/base_test/chef_crypto_sha1_op_test
 ./output/base_test/chef_defer_test
 ./output/base_test/chef_encoding_base64_op_test
 ./output/base_test/chef_filepath_op_test

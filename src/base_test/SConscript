@@ -18,6 +18,9 @@ prgs += env.Program('chef_count_dump_test', chef_count_dump_srcs, LIBS=platform_
 chef_crypto_md5_op_srcs = ['chef_crypto_md5_op_test.cc']
 prgs += env.Program('chef_crypto_md5_op_test', chef_crypto_md5_op_srcs, LIBS=platform_libs)
 
+chef_crypto_sha1_op_srcs = ['chef_crypto_sha1_op_test.cc']
+prgs += env.Program('chef_crypto_sha1_op_test', chef_crypto_sha1_op_srcs, LIBS=platform_libs)
+
 chef_defer_srcs = ['chef_defer_test.cc']
 prgs += env.Program('chef_defer_test', chef_defer_srcs, LIBS=platform_libs)
 
