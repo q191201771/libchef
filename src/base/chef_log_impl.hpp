@@ -1,4 +1,3 @@
-#include "chef_env.hpp"
 #include <unistd.h>
 #include <pthread.h>
 #include <sys/types.h>

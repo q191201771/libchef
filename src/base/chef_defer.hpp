@@ -5,9 +5,9 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     - initial release xxxx-xx-xx
  *
- * @brief 类似golang defer, c goto
+ * @brief  类似golang defer，解决c goto清理等场景
  *
  */
 

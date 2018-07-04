@@ -5,12 +5,12 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     - initial release xxxx-xx-xx
  *
  * @brief
- *   -阻塞等待1~N个事件发生。
- *   -也可选择设置超时时间，到达后不再阻塞。
- *   -使用者不用关心cv、mutex等线程同步实现的细节~
+ *   阻塞等待1~N个事件发生。
+ *   也可选择设置超时时间，超时后不再阻塞。
+ *   使用者不用关心条件变量、锁等线程同步实现的细节。
  *
  */
 
@@ -18,8 +18,8 @@
 #define _CHEF_BASE_WAIT_EVENT_COUNTER_H_
 #pragma once
 
-#include "chef_noncopyable.hpp"
 #include "chef_env.hpp"
+#include "chef_noncopyable.hpp"
 
 namespace chef {
 

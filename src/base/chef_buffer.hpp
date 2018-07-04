@@ -5,9 +5,9 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release 2016-08-31
+ *     - initial release 2016-08-31
  *
- * @brief  FIFO的流式buffer类，支持自动扩容、收缩。
+ * @brief  FIFO的流式buffer类，供生产消费使用（例如tcp的buf）。支持自动扩容、收缩。
  *
  */
 

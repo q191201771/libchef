@@ -5,9 +5,11 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     - initial release xxxx-xx-xx
  *
- * @brief  nope
+ * @brief
+ *   - class noncopyable 继承这个类，禁用拷贝构造函数、赋值函数
+ *   - class copyable 空接口，继承这个类起注释强调作用说明类是可拷贝的
  *
  */
 
@@ -27,10 +29,6 @@ namespace chef {
       const noncopyable &operator=(const noncopyable &);
   };
 
-  /**
-   * 空接口,可起强调作用.
-   *
-   */
   class copyable {};
 
 } // namespace chef

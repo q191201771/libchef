@@ -5,10 +5,11 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     - initial release xxxx-xx-xx
  *
  * @brief
  *   开启一个线程，可以往里面添加异步任务（支持延时任务）。
+ *   任务可以是业务方的任意函数（通过bind/function实现）
  *
  */
 
@@ -16,9 +17,9 @@
 #define _CHEF_BASE_TASK_THREAD_H_
 #pragma once
 
-#include "chef_wait_event_counter.hpp"
-#include "chef_noncopyable.hpp"
 #include "chef_env.hpp"
+#include "chef_noncopyable.hpp"
+#include "chef_wait_event_counter.hpp"
 #include <stdint.h>
 #include <string>
 #include <deque>
