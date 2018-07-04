@@ -9,7 +9,7 @@
  *
  * @brief
  *   - base64编码、解码
- *   - copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
+ *   - @NOTICE copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
  *
  */
 

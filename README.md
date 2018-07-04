@@ -4,7 +4,7 @@
 
 ### 简介
 
-linux c++后台开发基础库。header only，直接在你的代码中引入相应的头文件即可使用对应功能。
+linux c++后台开发基础库。header only，直接在你的代码中引入相应的头文件即可使用。
 
 ### 代码结构
 
@@ -42,12 +42,15 @@ $scons
 ```
 所有供业务方适用的代码都在 /src/base 目录下，目前大体分为三部分：
 
-/src/base/
-  [chef_xxx.hpp ...]               ......header only的接口文件，业务方直接包含头文件即可使用
-  wrapper/                         ......对第三方代码的封装
-    chef_http_op.hpp[_impl]        ......对libcurl的封装，同步阻塞式完成http get/post
-    chef_log.hpp[_impl]            ......对libboost log的封装，近乎零配置，快速使用
-  unfinished/                      ......等待被整理的代码
+/src/base/[chef_xxx.hpp ...]    ......header only的接口文件，业务方直接包含头文件即可使用
+
+/src/base/.wrapper/             ......一些对第三方代码的封装，由于目前starry-night定位于header only不依赖第三方，所以暂时
+                                      隐藏这部分内容，不直接提供给业务方适用
+    chef_http_op.hpp[_impl]     ......对libcurl的封装，同步阻塞式完成http get/post
+    chef_log.hpp[_impl]         ......对libboost log的封装，近乎零配置，快速使用
+    compress_zlib_op.h[.cc]     ......对zlib压缩、解压缩操作的封装
+
+/src/base/.unfinished/          ......等待被整理的代码
     ...
 ```
 

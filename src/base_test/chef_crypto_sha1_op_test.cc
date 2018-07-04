@@ -7,7 +7,7 @@
  *
  */
 
-#include "../base/crypto_sha1_op.h"
+#include "../base/chef_crypto_sha1_op.hpp"
 #include <map>
 #include <string>
 #include "./common/assert_wrapper.hpp"
