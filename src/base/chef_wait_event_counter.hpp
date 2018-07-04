@@ -1,5 +1,5 @@
 /**
- * @file     chef_wait_event_counter.hpp[_impl]
+ * @file     chef_wait_event_counter.hpp
  * @deps     chef_env.hpp | chef_noncopyable.hpp
  * @platform linux/macos/xxx
  *
@@ -67,6 +67,57 @@ namespace chef {
 
 } // namespace chef
 
-#include "chef_wait_event_counter_impl.hpp"
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// @NOTICE 该分隔线以上部分为该模块的接口，分割线以下部分为对应的实现
+
+
+
+
+
+namespace chef {
+
+  inline wait_event_counter::wait_event_counter(int nc)
+    : need_count_(nc)
+    , counted_(0)
+  {
+  }
+
+  inline wait_event_counter::~wait_event_counter() {}
+
+  inline void wait_event_counter::notify() {
+    chef::unique_lock<chef::mutex> lock(mutex_);
+    counted_++;
+    cond_.notify_one();
+  }
+
+  inline void wait_event_counter::wait() {
+    chef::unique_lock<chef::mutex> lock(mutex_);
+    for (; counted_.load() < need_count_; ) {
+      cond_.wait(lock);
+    }
+  }
+
+  inline bool wait_event_counter::wait_for(uint32_t timeout_ms) {
+    if (timeout_ms == 0) {
+      wait();
+      return true;
+    }
+
+    chef::unique_lock<chef::mutex> lock(mutex_);
+    return cond_.wait_for(lock,
+                          chef::chrono::milliseconds(timeout_ms),
+    //                      [this]() {
+    //                        return this->counted_.load() >= need_count_;
+    //                      });
+                          chef::bind(&wait_event_counter::check_, this));
+  }
+
+  inline bool wait_event_counter::check_() { return this->counted_.load() >= need_count_; }
+
+} // namespace chef
 
 #endif // _CHEF_BASE_WAIT_EVENT_COUNTER_H_

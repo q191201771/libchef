@@ -8,7 +8,8 @@
  *     - initial release xxxx-xx-xx
  *
  * @brief
- *   对boost log做的wrapper，近乎零配置的日志模块，有其他需求请直接修改源码，这里不做没必要的过度冗余通用性封装。
+ *   对boost log做的wrapper，近乎零配置的日志模块，快速使用。
+ *   有其他需求请直接修改源码，这里不做没必要的过度冗余通用性封装。
  *
  *
  *   init时mode_debug和mode_release的区别
