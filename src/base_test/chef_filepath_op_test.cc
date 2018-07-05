@@ -82,12 +82,22 @@ void get_file_size_test() {
   std::string filename = std::string("/tmp/") + rand_string();
   assert(chef::filepath_op::get_file_size(filename.c_str()) == -1);
   assert(chef::filepath_op::write_file(filename.c_str(), std::string("hello\n")) == 0);
-  gc_list.push_back(filename);
   assert(chef::filepath_op::get_file_size(filename.c_str()) == 6);
+  gc_list.push_back(filename);
 }
 
 void write_file_test() {
-  assert(true);
+  std::string filename = std::string("/tmp/") + rand_string();
+  assert(chef::filepath_op::get_file_size(filename.c_str()) == -1);
+  assert(chef::filepath_op::write_file(filename.c_str(), std::string("1")) == 0);
+  //int ret = chef::filepath_op::write_file(filename.c_str(), std::string("1"));
+  //printf("ret:%d\n", ret);
+  assert(chef::filepath_op::get_file_size(filename.c_str()) == 1);
+  assert(chef::filepath_op::write_file(filename.c_str(), std::string("22")) == 0);
+  assert(chef::filepath_op::get_file_size(filename.c_str()) == 2);
+  assert(chef::filepath_op::write_file(filename.c_str(), std::string("333"), true) == 0);
+  assert(chef::filepath_op::get_file_size(filename.c_str()) == 5);
+  gc_list.push_back(filename);
 }
 
 void read_file_test() {

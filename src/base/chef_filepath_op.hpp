@@ -95,18 +95,20 @@ namespace chef {
       /**
        * 写文件
        *
+       * @param append 当文件已经存在时，true则追加至末尾，false则覆盖原文件内容
        * @return 0 成功 -1 失败
        *
        */
-      static int write_file(const std::string &filename, const std::string &content);
+      static int write_file(const std::string &filename, const std::string &content, bool append=false);
 
       /**
        * 写文件
        *
+       * @param append 当文件已经存在时，true则追加至末尾，false则覆盖原文件内容
        * @return 0 成功 -1 失败
        *
        */
-      static int write_file(const std::string &filename, const char *content, size_t content_size);
+      static int write_file(const std::string &filename, const char *content, size_t content_size, bool append=false);
 
       /**
        * @NOTICE
@@ -341,19 +343,19 @@ namespace chef {
     return ::rename(src.c_str(), dst.c_str());
   }
 
-  inline int filepath_op::write_file(const std::string &filename, const char *content, size_t content_size) {
+  inline int filepath_op::write_file(const std::string &filename, const char *content, size_t content_size, bool append) {
     IF_STRING_EMPTY_RETURN_NAGETIVE_ONE(filename);
     IF_NULL_RETURN_NAGETIVE_ONE(content);
     IF_ZERO_RETURN_NAGETIVE_ONE(content_size);
-    FILE *fp = fopen(filename.c_str(), "wb");
+    FILE *fp = fopen(filename.c_str(), append ? "ab" : "wb");
     IF_NULL_RETURN_NAGETIVE_ONE(fp);
-    size_t written = fwrite(reinterpret_cast<const void *>(content), content_size, 1, fp);
+    size_t written = fwrite(reinterpret_cast<const void *>(content), 1, content_size, fp);
     fclose(fp);
-    return written == content_size;
+    return (written == content_size) ? 0 : -1;
   }
 
-  inline int filepath_op::write_file(const std::string &filename, const std::string &content) {
-    return filepath_op::write_file(filename, content.c_str(), content.length());
+  inline int filepath_op::write_file(const std::string &filename, const std::string &content, bool append) {
+    return filepath_op::write_file(filename, content.c_str(), content.length(), append);
   }
 
   inline int64_t filepath_op::get_file_size(const std::string &filename) {
