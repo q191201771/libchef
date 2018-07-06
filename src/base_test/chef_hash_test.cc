@@ -59,7 +59,7 @@ void print(const std::string &name, const code2count &cc) {
 
   printf("-----%s-----\n", name.c_str());
   printf("size: %lu\n", cc.size());
-  printf("max_count: %d hash_code: %lu\n", max_count, max_count_code);
+  printf("max_count: %d max_hash_code: %lu\n", max_count, max_count_code);
   printf("\n");
 }
 
@@ -68,7 +68,7 @@ int main() {
 
   std::srand(static_cast<unsigned int>(std::time(0)));
 
-  const int NUM = 1000 * 1000;
+  const int NUM = 100 * 1000;
 
   std::vector<std::shared_ptr<student> > students;
   for (int i = 0; i < NUM; i++) {
