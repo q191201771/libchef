@@ -7,7 +7,7 @@
  *   chef <191201771@qq.com>
  *     - initial release xxxx-xx-xx
  *
- * @brief  std::string常用操作帮助函数集合
+ * @brief    std::string常用操作帮助函数集合
  *
  */
 

@@ -1,6 +1,6 @@
 /**
- * @file   hash.hpp
- * @deps   c++11
+ * @file     hash.hpp
+ * @deps     c++11
  * @platform linux/macos/xxx
  *
  * @author
@@ -8,7 +8,8 @@
  *     -initial release xxxx-xx-xx
  *
  * @brief
- *   利用变参模板实现万能哈希函数
+ *   利用变参模板和std::hash实现的万能哈希
+ *   可通过多种类型的多个变量组合生成哈希值
  *   按候捷老师课上讲的写的~
  *
  */

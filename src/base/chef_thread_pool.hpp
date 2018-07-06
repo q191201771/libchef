@@ -1,6 +1,6 @@
 /**
- * @file   chef_thread_pool.hpp
- * @deps   chef_env.hpp | chef_wait_event_counter.hpp
+ * @file     chef_thread_pool.hpp
+ * @deps     chef_env.hpp | chef_wait_event_counter.hpp
  * @platform linux/macos/xxx
  *
  * @author
@@ -8,9 +8,9 @@
  *     - initial release xxxx-xx-xx
  *
  * @brief
- *   线程池，池中的空闲线程抢占式执行丢入其中的任务。
- *   适用于丢入的任务不要求强顺序性执行的场景。
- *   任务可以是业务方的任意函数（通过bind/function实现）。
+ *   线程池，池中的空闲线程抢占式执行丢入其中的任务
+ *   适用于丢入的任务不要求强顺序性执行的场景
+ *   任务可以是业务方的任意函数（通过bind/function实现）
  *
  */
 
