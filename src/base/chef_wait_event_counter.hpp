@@ -1,6 +1,6 @@
 /**
  * @file     chef_wait_event_counter.hpp
- * @deps     chef_env.hpp | chef_noncopyable.hpp
+ * @deps     chef_env.hpp
  * @platform linux/macos/xxx
  *
  * @author
@@ -19,20 +19,24 @@
 #pragma once
 
 #include "chef_env.hpp"
-#include "chef_noncopyable.hpp"
 
 namespace chef {
 
-  class wait_event_counter : public chef::noncopyable {
+  class wait_event_counter {
     public:
       /**
+       * @function 构造函数
        * @param nc 需要notify多少次，wait才能通过
        *
        */
       explicit wait_event_counter(int nc=1);
-
       ~wait_event_counter();
 
+    private:
+      wait_event_counter(const wait_event_counter &);
+      wait_event_counter operator=(const wait_event_counter &);
+
+    public:
       /// notify调用发生在wait执行前或wait中，都有效~
       void notify();
 

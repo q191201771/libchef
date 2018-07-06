@@ -123,7 +123,13 @@ namespace chef {
           ss << t;
           return ss.str();
       }
-  };
+
+    private:
+      strings_op();
+      strings_op(const strings_op &);
+      strings_op &operator=(const strings_op &);
+
+  }; // class strings_op
 
 } // namespace chef
 

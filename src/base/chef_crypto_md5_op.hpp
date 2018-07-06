@@ -24,7 +24,13 @@ namespace chef {
   class crypto_md5_op {
     public:
       static std::string sum(const std::string &s);
-  };
+
+    private:
+      crypto_md5_op();
+      crypto_md5_op(const crypto_md5_op &);
+      crypto_md5_op &operator=(const crypto_md5_op &);
+
+  }; // class crypto_md5_op
 
 } // namespace chef
 

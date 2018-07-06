@@ -25,9 +25,15 @@ namespace chef {
       static std::string encode(const std::string &s);
 
       static std::string decode(const std::string &s);
-  };
 
-} /// namespace chef
+    private:
+      encoding_base64_op();
+      encoding_base64_op(const encoding_base64_op &);
+      encoding_base64_op &operator=(const encoding_base64_op &);
+
+  }; // class encoding_base64_op
+
+} // namespace chef
 
 
 

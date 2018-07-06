@@ -19,25 +19,31 @@
 
 namespace chef {
 
-class defer {
-  public:
-    typedef std::function<void()> task;
+  class defer {
+    public:
+      typedef std::function<void()> task;
 
-  public:
-    defer(const task &t=nullptr) : cancel_(false), t_(t) {}
+    public:
+      defer(const task &t=nullptr) : cancel_(false), t_(t) {}
 
-    ~defer() {
-      if (!cancel_ && t_) {
-        t_();
+      ~defer() {
+        if (!cancel_ && t_) {
+          t_();
+        }
       }
-    }
 
-    void cancel() { cancel_ = true; }
+    private:
+      defer(const defer &);
+      defer &operator=(const defer &);
 
-  private:
-    bool cancel_;
-    task t_;
-}; // class defer
+    public:
+      void cancel() { cancel_ = true; }
+
+    private:
+      bool cancel_;
+      task t_;
+
+  }; // class defer
 
 }; // namespace chef
 
