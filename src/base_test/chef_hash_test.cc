@@ -1,4 +1,4 @@
-#include "../base/hash.hpp"
+#include "../base/chef_hash.hpp"
 #include <string>
 #include <map>
 #include <vector>

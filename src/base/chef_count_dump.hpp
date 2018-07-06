@@ -8,6 +8,7 @@
  *     - initial release xxxx-xx-xx
  *
  * @brief
+ *   提供两个类：
  *   - class multi_tag_counter 在各种线程模型下高效的对多个tag进行计数（打点）
  *   - class multi_tag_count_dumper 支持定时将计数落盘，可通过 $watch -n 1 'cat xxx.txt' 观察打点变化
  *

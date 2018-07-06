@@ -5,9 +5,23 @@
 
 ### 简介
 
-linux c++后台开发基础库。header only，直接在你的代码中引入相应的头文件即可使用。
+* linux c++11后台开发基础库
+* header only，直接在你的代码中引入相应的头文件即可使用
+* 支持macos和linux两个平台。
 
-### 代码结构
+### 已完成模块
+
+```
+chef_buffer.hpp
+ * @brief  FIFO的流式buffer，支持自动扩容、收缩，供生产和消费长度不固定的场景使用（例如tcp的读写buffer）。
+
+chef_count_dump.hpp
+ * @brief
+ *   - class multi_tag_counter 在各种线程模型下高效的对多个tag进行计数（打点）
+ *   - class multi_tag_count_dumper 支持定时将计数落盘，可通过 $watch -n 1 'cat xxx.txt' 观察打点变化
+```
+
+### 项目文件说明
 
 ```
 src/                        ......代码根目录

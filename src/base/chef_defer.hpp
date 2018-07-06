@@ -1,6 +1,6 @@
 /**
  * @file     chef_defer.hpp
- * @deps     nope
+ * @deps     c++11
  * @platform linux/macos/xxx
  *
  * @author
