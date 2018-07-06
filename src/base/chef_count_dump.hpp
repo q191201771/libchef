@@ -1,6 +1,6 @@
 /**
  * @file     chef_count_dump.hpp
- * @deps     chef_env.hpp | chef_noncopyable.hpp | chef_filepath_op.hpp
+ * @deps     chef_env.hpp | chef_filepath_op.hpp
  * @platform linux | macos | xxx
  *
  * @author
@@ -9,8 +9,8 @@
  *
  * @brief
  *   提供两个类：
- *   - class multi_tag_counter 在各种线程模型下高效的对多个tag进行计数（打点）
- *   - class multi_tag_count_dumper 支持定时将计数落盘，可通过 $watch -n 1 'cat xxx.txt' 观察打点变化
+ *   - class multi_tag_counter 在各种线程模型及使用场景下高效的对多个tag进行计数（打点）
+ *   - class multi_tag_count_dumper 支持定时将计数落盘，观察打点变化
  *
  */
 
@@ -19,7 +19,6 @@
 #pragma once
 
 #include "chef_env.hpp"
-#include "chef_noncopyable.hpp"
 #include "chef_filepath_op.hpp"
 #include <stdio.h>
 #include <stdint.h>
@@ -29,7 +28,7 @@
 
 namespace chef {
 
-  class multi_tag_counter : public chef::noncopyable {
+  class multi_tag_counter {
     public:
       enum multi_tag_counter_type {
         MULTI_TAG_COUNTER_FREE_LOCK, // 无锁模式,适用于单线程环境使用
@@ -41,6 +40,11 @@ namespace chef {
       multi_tag_counter(multi_tag_counter_type type) : type_(type) {}
       ~multi_tag_counter() {}
 
+    private:
+      multi_tag_counter(const multi_tag_counter &);
+      multi_tag_counter &operator=(const multi_tag_counter &);
+
+    public:
       // 添加tag会把count置0
       // @NOTICE
       //   如果是MULTI_TAG_COUNTER_ATOMIC,则在开始计数后不应该再调用操作tag的接口
@@ -74,7 +78,7 @@ namespace chef {
 
   }; // class multi_tag_counter
 
-  class multi_tag_count_dumper : public chef::noncopyable {
+  class multi_tag_count_dumper {
     public:
       multi_tag_count_dumper(multi_tag_counter *mtc, int interval_ms, uint32_t num_per_line, const std::string &filename)
         : mtc_(mtc)
@@ -84,7 +88,11 @@ namespace chef {
         , exit_flag_(false)
       {}
       ~multi_tag_count_dumper();
+    private:
+      multi_tag_count_dumper(const multi_tag_count_dumper &);
+      multi_tag_count_dumper &operator=(const multi_tag_count_dumper &);
 
+    public:
       void start();
 
     private:

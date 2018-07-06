@@ -1,6 +1,6 @@
 /**
  * @file   chef_thread_pool.hpp
- * @deps   chef_env.hpp | chef_noncopyable.hpp | chef_wait_event_counter.hpp
+ * @deps   chef_env.hpp | chef_wait_event_counter.hpp
  * @platform linux/macos/xxx
  *
  * @author
@@ -19,7 +19,6 @@
 #pragma once
 
 #include "chef_env.hpp"
-#include "chef_noncopyable.hpp"
 #include "chef_wait_event_counter.hpp"
 #include <string>
 #include <vector>
@@ -27,11 +26,12 @@
 
 namespace chef {
 
-  class thread_pool : public chef::noncopyable {
+  class thread_pool {
     public:
       typedef chef::function<void()> task;
 
-      /**b
+    public:
+      /**
        * @param num_of_thread 线程数
        * @param thread_prefix_name 线程前缀名，linux平台下调用prctl设置线程名，下标从1开始。其他平台或`thread_prefix_name`为空则不设置~
        *
@@ -47,6 +47,11 @@ namespace chef {
        */
       ~thread_pool();
 
+    private:
+      thread_pool(const thread_pool &);
+      thread_pool &operator=(const thread_pool &);
+
+    public:
       /// 开启后台线程池，非阻塞函数
       void start();
 

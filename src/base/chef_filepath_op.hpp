@@ -155,7 +155,13 @@ namespace chef {
        *
        */
       static std::string join(const std::string &path, const std::string &filename);
-  };
+
+    private:
+      filepath_op();
+      filepath_op(const filepath_op &);
+      filepath_op &operator=(const filepath_op &);
+
+  }; // class filepath_op
 
 } // namespace chef
 

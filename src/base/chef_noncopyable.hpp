@@ -22,14 +22,25 @@ namespace chef {
   class noncopyable {
     protected:
       noncopyable() {}
-      virtual ~noncopyable() {}
+      ~noncopyable() {}
 
     private:
       noncopyable(const noncopyable &);
-      const noncopyable &operator=(const noncopyable &);
+      noncopyable &operator=(const noncopyable &);
   };
 
   class copyable {};
+
+  class static_class {
+    protected:
+      ~static_class() {}
+
+    private:
+      static_class();
+      static_class(const static_class &);
+      const static_class &operator=(const static_class &);
+
+  };
 
 } // namespace chef
 

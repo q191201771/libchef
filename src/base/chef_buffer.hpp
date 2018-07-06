@@ -1,6 +1,6 @@
 /**
  * @file     buffer.hpp
- * @deps     chef_noncopyable.hpp
+ * @deps     nope
  * @platform linux/macos/xxx
  *
  * @author
@@ -15,16 +15,13 @@
 #define _CHEF_BASE_BUFFER_H_
 #pragma once
 
-#include "chef_noncopyable.hpp"
 #include <stdint.h>
 
-namespace ut {
-  class buffer_test;
-}
+namespace ut { class buffer_test; }
 
 namespace chef {
 
-  class buffer : public chef::copyable {
+  class buffer {
     public:
       /**
        * @param init_capacity   初始化大小，后续不够时内部会自动扩容，两倍增长
@@ -79,52 +76,54 @@ namespace chef {
       char *write_pos() const;
       void seek_write_pos(uint64_t len);
 
-    /** -----------------------------------------------------
-     * 读取buffer中的数据
-     *
-     */
-    char *read_pos() const;
-    uint64_t readable_size() const;
-    /// 注意，<len>应不大于readable_size函数的返回值
-    void erase(uint64_t len);
+    public:
+      /** -----------------------------------------------------
+       * 读取buffer中的数据
+       *
+       */
+      char *read_pos() const;
+      uint64_t readable_size() const;
+      /// 注意，<len>应不大于readable_size函数的返回值
+      void erase(uint64_t len);
 
-    /// 清空，注意：
-    /// 1. 并不会释放内部内存，只是将空间全部标记为空闲，内部申请的内存只有在析构时释放
-    /// 2. 如果capacity已经大于shrink阈值了，则收缩成init capacity大小
-    void clear();
+      /// 清空，注意：
+      /// 1. 并不会释放内部内存，只是将空间全部标记为空闲，内部申请的内存只有在析构时释放
+      /// 2. 如果capacity已经大于shrink阈值了，则收缩成init capacity大小
+      void clear();
 
-    /// 已申请内存大小
-    uint64_t capacity() const { return capacity_; }
+      /// 已申请内存大小
+      uint64_t capacity() const { return capacity_; }
 
-  public:
-    /**
-     * @return 找到返回key位置，失败返回NULL
-     *
-     */
-    char *find(const char *key, int len) const;
-    char *find(char c) const;
-    char *find_crlf() const;
-    char *find_eol() const;
+    public:
+      /**
+       * @return 找到返回key位置，失败返回NULL
+       *
+       */
+      char *find(const char *key, int len) const;
+      char *find(char c) const;
+      char *find_crlf() const;
+      char *find_eol() const;
 
-    /**
-     * 删除 '空格' '\f' '\r' '\n' '\t' '\v'
-     *
-     * @return 返回操作后的读取位置
-     *
-     */
-    char *trim_left();
-    char *trim_right();
+      /**
+       * 删除 '空格' '\f' '\r' '\n' '\t' '\v'
+       *
+       * @return 返回操作后的读取位置
+       *
+       */
+      char *trim_left();
+      char *trim_right();
 
-  public:
-    friend class ut::buffer_test;
+    public:
+      friend class ut::buffer_test;
 
-  private:
-    const uint64_t init_capacity_;
-    const uint64_t shrink_capacity_;
-    uint64_t       capacity_;
-    uint64_t       read_index_;
-    uint64_t       write_index_;
-    char          *data_;
+    private:
+      const uint64_t init_capacity_;
+      const uint64_t shrink_capacity_;
+      uint64_t       capacity_;
+      uint64_t       read_index_;
+      uint64_t       write_index_;
+      char          *data_;
+
   }; // class buffer
 
 } // namespace chef

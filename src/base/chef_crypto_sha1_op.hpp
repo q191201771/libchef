@@ -22,18 +22,24 @@
 
 namespace chef {
 
-class crypto_sha1_op {
-  public:
-    static void sum(unsigned char *in_data, size_t in_data_len, unsigned char digest[20] /*out*/);
+  class crypto_sha1_op {
+    public:
+      static void sum(unsigned char *in_data, size_t in_data_len, unsigned char digest[20] /*out*/);
 
-    /**
-     * @return 对`data`执行sha1编码后得到的20字节，每个字节用16进制表示（2字节）拼接成的字符串
-     *
-     */
-    static std::string sum(const std::string &data);
-}; /// class crypto_sha1_op
+      /**
+       * @return 对`data`执行sha1编码后得到的20字节，每个字节用16进制表示（2字节）拼接成的字符串
+       *
+       */
+      static std::string sum(const std::string &data);
 
-} /// namespace chef
+    private:
+      crypto_sha1_op();
+      crypto_sha1_op(const crypto_sha1_op &);
+      crypto_sha1_op &operator=(const crypto_sha1_op &);
+
+  }; // class crypto_sha1_op
+
+} // namespace chef
 
 
 
