@@ -1,7 +1,7 @@
 # linux c++基础库
 
 [![Build Status](https://travis-ci.org/q191201771/starry-night.svg?branch=master)](https://travis-ci.org/q191201771/starry-night)
-[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
+[![License](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
 
 ### 简介
 
