@@ -9,7 +9,7 @@ linux c++ server base library.
 
 * header only，直接在你的代码中引入相应的头文件即可使用
 * 支持macos和linux两个平台
-* 多线程等部分[chef_env.hpp链接]支持c++11和boost切换，所以大部分模块兼容低版本编译器
+* 多线程等部分（具体见 [chef_env.hpp](https://github.com/q191201771/starry-night/blob/master/src/base/chef_env.hpp)）支持c++11和boost切换，所以大部分模块兼容低版本编译器
 
 ### 已完成模块
 
@@ -112,7 +112,7 @@ OS X EI Capitan 10.11.6 Apple LLVM version 8.0.0 (clang-800.0.42.1)
 ### 编译
 
 ```
-# linux和macos，需要先安装scons，运行scons即可
+# linux和macos，需要先安装scons编译工具，然后运行scons即可
 $scons
 ```
 
@@ -123,23 +123,20 @@ $scons
 
 /src/base/[chef_xxx.hpp ...]    ......header only的接口文件，业务方直接包含头文件即可使用，每个头文件头部都有简单的功能说明。
 
-/src/base/.wrapper/             ......一些对第三方代码的封装，由于目前starry-night定位于header only且不依赖第三方，所以暂时
-                                      隐藏这部分内容，不直接提供给业务方使用
+/src/base/.unfinished/          ......等待被整理的代码
+
+/src/base/.wrapper/             ......一些对第三方代码的封装，由于目前starry-night定位于header only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
     chef_http_op.hpp[_impl]     ......对libcurl的封装，同步阻塞式完成http get/post
     chef_log.hpp[_impl]         ......对libboost log的封装，近乎零配置，快速使用
     compress_zlib_op.h[.cc]     ......对zlib压缩、解压缩操作的封装
-
-/src/base/.unfinished/          ......等待被整理的代码
     ...
 ```
 
 ### 声明，拷贝自第三方工程的代码
 
 ```
-src/base/chef_crypto_md5_op.hpp https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
-
-src/base/chef_crypto_sha1_op.h https://github.com/antirez/redis/releases/tag/3.2.9 中src/sha1.h和src/sha1.c
-
+src/base/chef_crypto_md5_op.hpp      https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
+src/base/chef_crypto_sha1_op.h       https://github.com/antirez/redis/releases/tag/3.2.9 中src/sha1.h和src/sha1.c
 src/base/chef_encoding_base64_op.hpp https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
 ```
 
