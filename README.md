@@ -9,7 +9,7 @@ linux c++ server base library.
 
 * header only，直接在你的代码中引入相应的头文件即可使用
 * 支持macos和linux两个平台
-* 多线程等部分（具体见 [chef_env.hpp](https://github.com/q191201771/starry-night/blob/master/src/base/chef_env.hpp)）支持c++11和boost切换，所以大部分模块兼容低版本编译器
+* 部分c++11（具体见 [chef_env.hpp](https://github.com/q191201771/starry-night/blob/master/src/base/chef_env.hpp)）支持使用boost替换，所以大部分模块兼容非c++11的低版本编译器
 
 ### 已完成模块
 
@@ -55,6 +55,10 @@ chef_hash.hpp
  * @brief
  *   利用变参模板和std::hash实现的万能哈希
  *   可通过多种类型的多个变量组合生成哈希值
+
+chef_lru.hpp
+ * @deps     nope
+ * @brief    固定大小的LRU cache，支持插入，查询，以及获取全量列表
 
 chef_noncopyable.hpp
  * @deps     nope

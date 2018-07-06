@@ -5,7 +5,6 @@
 namespace chef {
 
   std::vector<std::string> os_exec_op::run_command(const std::string &cmd) {
-    (void)cmd;
     std::vector<std::string> result;
 
     FILE *fp = popen(cmd.c_str(), "r");
