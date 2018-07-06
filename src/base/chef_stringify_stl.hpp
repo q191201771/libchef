@@ -1,5 +1,5 @@
 /**
- * @file     stringify_stl.hpp
+ * @file     chef_stringify_stl.hpp
  * @deps     nope
  * @platform linux/macos/xxx
  *
@@ -7,8 +7,7 @@
  *   chef <191201771@qq.com>
  *     -initial release xxxx-xx-xx
  *
- * @brief
- *   字符串化stl容器
+ * @brief    字符串化stl容器
  *
  */
 

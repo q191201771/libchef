@@ -1,5 +1,5 @@
 /**
- * @file     hash.hpp
+ * @file     chef_hash.hpp
  * @deps     c++11
  * @platform linux/macos/xxx
  *

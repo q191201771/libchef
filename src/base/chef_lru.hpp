@@ -1,5 +1,5 @@
 /**
- * @file     lru.hpp
+ * @file     chef_lru.hpp
  * @deps     nope
  * @platform linux/macos/xxx
  *
@@ -7,8 +7,7 @@
  *   chef <191201771@qq.com>
  *     -initial release xxxx-xx-xx
  *
- * @brief
- *   LRU Cache
+ * @brief    固定大小的LRU cache，支持插入，查询，以及获取全量列表
  *
  */
 
@@ -21,38 +20,59 @@
 
 namespace chef {
 
-template <typename KeyT, typename ValueT>
-class Lru {
-  public:
-    typedef std::pair<KeyT, ValueT> KvPair;
-    typedef std::list<KvPair> List;
-    typedef std::map<KeyT, typename List::iterator> Map;
+  template <typename KeyT, typename ValueT>
+  class Lru {
+    public:
+      typedef std::pair<KeyT, ValueT> KvPair;
+      typedef std::list<KvPair> List;
 
-  public:
-    // @param cap 容器大小
-    Lru(std::size_t cap);
-    ~Lru();
+    public:
+      // @param cap 容器大小
+      Lru(std::size_t cap);
+      ~Lru();
 
-    // @NOTICE function put 和 function get 操作都会更新元素热度，put 的 key 即使已经存在甚至对应的 value 相同也会更新热度
+    private:
+      Lru(const Lru&);
+      Lru &operator=(const Lru&);
 
-    // 插入前k不存在返回true，否则返回false
-    bool put(KeyT k, ValueT v);
+    public:
+      // @NOTICE function put 和 function get 操作都会更新元素热度，put 的 key 即使已经存在甚至对应的 value 相同也会更新热度
 
-    // k存在返回true，否则false
-    bool get(KeyT k, ValueT *v);
+      // 插入前k不存在返回true，否则返回false
+      bool put(KeyT k, ValueT v);
 
-    // 获取整个列表
-    List get_list();
+      // k存在返回true，否则false
+      bool get(KeyT k, ValueT *v);
 
-    std::size_t size() const;
-    std::size_t capacity() const;
+      // 获取整个列表
+      List get_list();
 
-  private:
-    const std::size_t capacity_;
-    List              list_;
-    Map               map_;
+      std::size_t size() const;
+      std::size_t capacity() const;
 
-};
+    private:
+      typedef std::map<KeyT, typename List::iterator> Map;
+
+    private:
+      const std::size_t capacity_;
+      List              list_;
+      Map               map_;
+
+  }; // class lru
+
+} // namespace chef
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// @NOTICE 该分隔线以上部分为该模块的接口，分割线以下部分为对应的实现
+
+
+
+
+namespace chef {
 
 template <typename KeyT, typename ValueT>
 Lru<KeyT, ValueT>::Lru(std::size_t cap) : capacity_(cap) {}
@@ -110,6 +130,6 @@ typename Lru<KeyT, ValueT>::List Lru<KeyT, ValueT>::get_list() {
   return list_;
 }
 
-};
+} // namespace chef
 
 #endif

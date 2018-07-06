@@ -33,6 +33,12 @@ prgs += env.Program('chef_filepath_op_test', chef_filepath_op_srcs, LIBS=platfor
 chef_hash_srcs = ['chef_hash_test.cc']
 prgs += env.Program('chef_hash_test', chef_hash_srcs, LIBS=platform_libs)
 
+chef_lru_srcs = ['chef_lru_test.cc']
+prgs += env.Program('chef_lru_test', chef_lru_srcs, LIBS=platform_libs)
+
+chef_stringify_stl_srcs = ['chef_stringify_stl_test.cc']
+prgs += env.Program('chef_stringify_stl_test', chef_stringify_stl_srcs, LIBS=platform_libs)
+
 chef_strings_op_srcs = ['chef_strings_op_test.cc']
 prgs += env.Program('chef_strings_op_test', chef_strings_op_srcs, LIBS=platform_libs)
 
