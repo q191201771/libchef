@@ -19,7 +19,9 @@ int main() {
 
   for (auto &iter : mapping) {
     assert(chef::encoding_base64_op::encode(iter.first) == iter.second);
+    assert(chef::encoding_base64_op::encode(iter.first.c_str(), iter.first.length()) == iter.second);
     assert(chef::encoding_base64_op::decode(iter.second) == iter.first);
+    assert(chef::encoding_base64_op::decode(iter.second.c_str(), iter.second.length()) == iter.first);
   }
 
   return 0;

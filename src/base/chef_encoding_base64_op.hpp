@@ -23,8 +23,11 @@ namespace chef {
   class encoding_base64_op {
     public:
       static std::string encode(const std::string &s);
+      static std::string encode(const char *data, std::size_t len);
+
 
       static std::string decode(const std::string &s);
+      static std::string decode(const char *data, std::size_t len);
 
     private:
       encoding_base64_op();
@@ -49,16 +52,24 @@ namespace chef {
 namespace chef {
 
   namespace inner {
-    static inline std::string base64_decode(const std::string &s);
-    static inline std::string base64_encode(const std::string &s);
+    static inline std::string base64_encode(unsigned char const * input, size_t len);
+    static inline std::string base64_decode(unsigned char const * input, size_t len);
+  }
+
+  inline std::string encoding_base64_op::encode(const char *data, std::size_t len) {
+    return inner::base64_encode((unsigned char const *)data, len);
   }
 
   inline std::string encoding_base64_op::encode(const std::string &s) {
-    return inner::base64_encode(s);
+    return encode(s.c_str(), s.length());
+  }
+
+  inline std::string encoding_base64_op::decode(const char *data, std::size_t len) {
+    return inner::base64_decode((unsigned char const *)data, len);
   }
 
   inline std::string encoding_base64_op::decode(const std::string &s) {
-    return inner::base64_decode(s);
+    return decode(s.c_str(), s.length());
   }
 } /// namespace chef
 
@@ -127,7 +138,7 @@ static inline bool is_base64(unsigned char c) {
  * @param len The length of input in bytes
  * @return A base64 encoded string representing input
  */
-inline std::string base64_encode(unsigned char const * input, size_t len) {
+static inline std::string base64_encode(unsigned char const * input, size_t len) {
     std::string ret;
     int i = 0;
     int j = 0;
@@ -192,8 +203,10 @@ static inline std::string base64_encode(std::string const & input) {
  * @param input The base64 encoded input data
  * @return A string representing the decoded raw bytes
  */
-static inline std::string base64_decode(std::string const & input) {
-    size_t in_len = input.size();
+//static inline std::string base64_decode(std::string const & input) {
+static inline std::string base64_decode(unsigned char const * input, size_t len) {
+    //size_t in_len = input.size();
+    size_t in_len = len;
     int i = 0;
     int j = 0;
     int in_ = 0;

@@ -31,6 +31,7 @@ namespace chef {
        *
        */
       static std::string sum(const std::string &data);
+      static std::string sum(const char *data, std::size_t len);
 
     private:
       crypto_sha1_op();
@@ -80,9 +81,9 @@ inline void crypto_sha1_op::sum(unsigned char *in_data, size_t in_data_len, unsi
   SHA1Final(digest, &ctx);
 }
 
-inline std::string crypto_sha1_op::sum(const std::string &data) {
+inline std::string crypto_sha1_op::sum(const char *data, std::size_t len) {
   unsigned char digest[20];
-  crypto_sha1_op::sum((unsigned char *)data.c_str(), data.length(), digest);
+  crypto_sha1_op::sum((unsigned char *)data, len, digest);
 
   char hash_buf[40];
   for (int i = 0; i < 20; i++) {
@@ -90,6 +91,10 @@ inline std::string crypto_sha1_op::sum(const std::string &data) {
   }
 
   return std::string(hash_buf, 40);
+}
+
+inline std::string crypto_sha1_op::sum(const std::string &data) {
+  return sum(data.c_str(), data.length());
 }
 
 /* from valgrind tests */
