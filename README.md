@@ -13,8 +13,9 @@ linux c++基础库
 
 ### 已完成模块
 
+注意，下表中*依赖*这一列的含义：
+
 ```
-注意，下表中*依赖*这一列：
 nope     无任何依赖
 chef_env 模块需要使用c++11或libboost
 c++11    必须依赖c++11
@@ -51,16 +52,22 @@ src/base/chef_encoding_base64_op.hpp https://github.com/zaphoyd/websocketpp/blob
 ### 项目文件树
 
 ```
-src/                        ......代码根目录
-  base/                     ......基础库代码
-  base_test/                ......基础库测试代码
-third_party/                ......第三方依赖库
-.gitignore                  ......
-.travis.yml                 ......
-LINCENSE                    ......
-README.md                   ......
-SConstruct                  ......scons编译脚本
-ut.sh                       ......执行测试代码脚本
+src/                          ......代码根目录
+  base/                       ......基础库代码
+    [chef_xxx.hpp ...]        ......header only的接口文件，业务方直接包含头文件即可使用，每个头文件头部都有简单的功能说明。
+    .unfinished/              ......等待被整理的代码
+    .wrapper/                 ......一些对第三方代码的封装，由于目前starry-night定位于header only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
+      chef_http_op.hpp[_impl] ......对libcurl的封装，同步阻塞式完成http get/post
+      chef_log.hpp[_impl]     ......对libboost log的封装，近乎零配置，快速使用
+      compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
+  base_test/                  ......基础库测试代码
+third_party/                  ......第三方依赖库
+.gitignore                    ......
+.travis.yml                   ......
+LINCENSE                      ......
+README.md                     ......
+SConstruct                    ......scons编译脚本
+ut.sh                         ......执行测试代码脚本
 ```
 
 ### 我的环境
@@ -84,14 +91,8 @@ $scons
 ```
 所有供业务方使用的代码都在 /src/base 目录下，目前大体分为三部分：
 
-/src/base/[chef_xxx.hpp ...]    ......header only的接口文件，业务方直接包含头文件即可使用，每个头文件头部都有简单的功能说明。
 
-/src/base/.unfinished/          ......等待被整理的代码
 
-/src/base/.wrapper/             ......一些对第三方代码的封装，由于目前starry-night定位于header only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
-    chef_http_op.hpp[_impl]     ......对libcurl的封装，同步阻塞式完成http get/post
-    chef_log.hpp[_impl]         ......对libboost log的封装，近乎零配置，快速使用
-    compress_zlib_op.h[.cc]     ......对zlib压缩、解压缩操作的封装
     ...
 ```
 
