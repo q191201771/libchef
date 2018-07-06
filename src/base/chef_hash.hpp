@@ -1,6 +1,7 @@
 /**
  * @file   hash.hpp
- * @deps   nope
+ * @deps   c++11
+ * @platform linux/macos/xxx
  *
  * @author
  *   chef <191201771@qq.com>
@@ -8,13 +9,13 @@
  *
  * @brief
  *   利用变参模板实现万能哈希函数
- *
- *   按候捷老师课上讲的写的，他说是从std::tr1抄的~
+ *   按候捷老师课上讲的写的~
  *
  */
 
 #ifndef _CHEF_BASE_HASH_HPP_
 #define _CHEF_BASE_HASH_HPP_
+#pragma once
 
 #include <functional>
 

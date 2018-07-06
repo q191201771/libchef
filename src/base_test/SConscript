@@ -30,6 +30,9 @@ prgs += env.Program('chef_encoding_base64_op_test', chef_encoding_base64_op_srcs
 chef_filepath_op_srcs = ['chef_filepath_op_test.cc']
 prgs += env.Program('chef_filepath_op_test', chef_filepath_op_srcs, LIBS=platform_libs)
 
+chef_hash_srcs = ['chef_hash_test.cc']
+prgs += env.Program('chef_hash_test', chef_hash_srcs, LIBS=platform_libs)
+
 chef_strings_op_srcs = ['chef_strings_op_test.cc']
 prgs += env.Program('chef_strings_op_test', chef_strings_op_srcs, LIBS=platform_libs)
 
