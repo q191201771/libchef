@@ -54,6 +54,7 @@ int main() {
   std::map<std::string, std::string>::iterator iter = mapping.begin();
   for (; iter != mapping.end(); iter++) {
     assert(chef::crypto_sha1_op::sum(iter->second) == iter->first);
+    assert(chef::crypto_sha1_op::sum(iter->second.c_str(), iter->second.length()) == iter->first);
   }
 
   return 0;

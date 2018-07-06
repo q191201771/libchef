@@ -24,6 +24,7 @@ namespace chef {
   class crypto_md5_op {
     public:
       static std::string sum(const std::string &s);
+      static std::string sum(const char *data, std::size_t len);
 
     private:
       crypto_md5_op();
@@ -48,12 +49,17 @@ namespace chef {
 namespace chef {
 
 namespace inner {
-  inline std::string md5_hash_hex(const std::string &);
+  inline std::string md5_hash_hex(const char *data, std::size_t len);
+}
+
+inline std::string crypto_md5_op::sum(const char *data, std::size_t len) {
+  return inner::md5_hash_hex(data, len);
 }
 
 inline std::string crypto_md5_op::sum(const std::string &s) {
-  return inner::md5_hash_hex(s);
+  return sum(s.c_str(), s.length());
 }
+
 
 } /// namespace chef
 
@@ -472,13 +478,13 @@ inline void md5_finish(md5_state_t *pms, md5_byte_t digest[16]) {
 }
 
 // some convenience c++ functions
-inline std::string md5_hash_string(std::string const & s) {
+inline std::string md5_hash_string(const char *data, std::size_t len) {
     char digest[16];
 
     md5_state_t state;
 
     md5_init(&state);
-    md5_append(&state, (md5_byte_t const *)s.c_str(), s.size());
+    md5_append(&state, (md5_byte_t const *)data, len);
     md5_finish(&state, (md5_byte_t *)digest);
 
     std::string ret;
@@ -490,8 +496,8 @@ inline std::string md5_hash_string(std::string const & s) {
 
 static const char hexval[16] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
-inline std::string md5_hash_hex(std::string const & input) {
-    std::string hash = md5_hash_string(input);
+inline std::string md5_hash_hex(const char *data, std::size_t len) {
+    std::string hash = md5_hash_string(data, len);
     std::string hex;
 
     for (size_t i = 0; i < hash.size(); i++) {

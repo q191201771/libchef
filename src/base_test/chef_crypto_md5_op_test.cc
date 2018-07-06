@@ -16,6 +16,7 @@ int main() {
 
   for (auto &iter : mapping) {
     assert(chef::crypto_md5_op::sum(iter.second) == iter.first);
+    assert(chef::crypto_md5_op::sum(iter.second.c_str(), iter.second.length()) == iter.first);
   }
 
   return 0;
