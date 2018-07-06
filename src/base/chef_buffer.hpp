@@ -7,7 +7,7 @@
  *   chef <191201771@qq.com>
  *     - initial release 2016-08-31
  *
- * @brief  FIFO的流式buffer，支持自动扩容、收缩，供生产和消费长度不固定的场景使用（例如tcp的读写buffer）。
+ * @brief    FIFO的流式buffer，支持自动扩容、收缩，供生产和消费长度不固定的场景使用（例如tcp的读写buffer）
  *
  */
 

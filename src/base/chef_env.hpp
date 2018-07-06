@@ -1,13 +1,15 @@
 /**
  * @file     chef_env.hpp
- * @deps     libboost or c++11
+ * @deps     c++11 or libboost
  * @platform linux/macos/xxx
  *
  * @author
  *   chef <191201771@qq.com>
  *     - initial release xxxx-xx-xx
  *
- * @brief  由于一些开发环境不能使用c++11，做一个boost和c++11的选择
+ * @brief
+ *   c++11和libboost功能相同部分的wrapper
+ *   通过增加一层接入层，使上层代码仅需通过一个宏开关就可以自由切换使用c++11或libboost
  *
  */
 

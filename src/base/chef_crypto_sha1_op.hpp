@@ -1,6 +1,6 @@
 /**
- * @file   crypto_sha1_op.hpp
- * @deps   nope
+ * @file     crypto_sha1_op.hpp
+ * @deps     nope
  * @platform linux/macos/xxx
  *
  * @author
@@ -9,8 +9,8 @@
  *     -initial release xxxx-xx-xx
  *
  * @brief
- *   sha1算法
- *   NOTICE: 实现部分拷贝自redis3.2.9中的sha1.h和sha1.c https://github.com/antirez/redis/releases/tag/3.2.9
+ *   - sha1加密
+ *   - @NOTICE 实现部分拷贝自redis3.2.9中的sha1.h和sha1.c https://github.com/antirez/redis/releases/tag/3.2.9
  *
  */
 

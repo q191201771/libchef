@@ -1,13 +1,13 @@
 /**
  * @file     chef_defer.hpp
- * @deps     c++11
+ * @deps     chef_env.hpp
  * @platform linux/macos/xxx
  *
  * @author
  *   chef <191201771@qq.com>
  *     - initial release xxxx-xx-xx
  *
- * @brief  类似golang defer，支持c goto清理等场景
+ * @brief    类似golang defer，支持c goto清理等场景
  *
  */
 
@@ -15,13 +15,13 @@
 #define _CHEF_BASE_DEFER_HPP_
 #pragma once
 
-#include <functional>
+#include "chef_env.hpp"
 
 namespace chef {
 
   class defer {
     public:
-      typedef std::function<void()> task;
+      typedef chef::function<void()> task;
 
     public:
       defer(const task &t=nullptr) : cancel_(false), t_(t) {}

@@ -8,8 +8,9 @@
  *     - initial release xxxx-xx-xx
  *
  * @brief
- *   - class noncopyable 继承这个类，禁用拷贝构造函数、赋值函数
- *   - class copyable 空接口，继承这个类起注释强调作用说明类是可拷贝的
+ *   - class noncopyable  继承这个类，禁用拷贝构造函数、赋值函数
+ *   - class copyable     空接口，继承这个类起注释强调作用说明类是可拷贝的
+ *   - class static_class 静态可继承这个类，禁用构造函数、拷贝构造函数、赋值函数
  *
  */
 

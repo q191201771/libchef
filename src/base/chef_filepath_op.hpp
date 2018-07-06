@@ -7,7 +7,7 @@
  *   chef <191201771@qq.com>
  *     - initial release xxxx-xx-xx
  *
- * @brief  文件、文件夹常用操作帮助函数集合
+ * @brief    文件、文件夹常用操作帮助函数集合
  *
  */
 
