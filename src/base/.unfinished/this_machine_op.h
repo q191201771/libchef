@@ -42,7 +42,7 @@ namespace chef {
       /**
        * 获取当前时刻网卡收发数据量，可在两个时间点调用相减得到带宽
        *
-       * @param interface 网卡名称 eg. eth0
+       * @param interface 网卡名称 e.g. eth0
        * @param in        传出参数，当前共收了多少字节
        * @param out       传出参数，当前共发了多少字节
        *
