@@ -11,6 +11,7 @@ echo '----------------------------------------'
 ./output/base_test/chef_filepath_op_test
 ./output/base_test/chef_hash_test
 ./output/base_test/chef_lru_test
+./output/base_test/chef_os_exec_op_test
 ./output/base_test/chef_stringify_stl_test
 ./output/base_test/chef_strings_op_test
 ./output/base_test/chef_task_thread_test

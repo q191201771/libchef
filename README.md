@@ -64,6 +64,10 @@ chef_noncopyable.hpp
  * @deps     nope
  * @brief    禁用拷贝构造等函数
 
+chef_os_exec_op.hpp
+ * @deps     nope
+ * @brief    执行shell命令
+
 chef_strings_op.hpp
  * @deps     nope
  * @brief    std::string常用操作帮助函数集合

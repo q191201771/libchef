@@ -36,6 +36,9 @@ prgs += env.Program('chef_hash_test', chef_hash_srcs, LIBS=platform_libs)
 chef_lru_srcs = ['chef_lru_test.cc']
 prgs += env.Program('chef_lru_test', chef_lru_srcs, LIBS=platform_libs)
 
+chef_os_exec_op_srcs = ['chef_os_exec_op_test.cc']
+prgs += env.Program('chef_os_exec_op_test', chef_os_exec_op_srcs, LIBS=platform_libs)
+
 chef_stringify_stl_srcs = ['chef_stringify_stl_test.cc']
 prgs += env.Program('chef_stringify_stl_test', chef_stringify_stl_srcs, LIBS=platform_libs)
 

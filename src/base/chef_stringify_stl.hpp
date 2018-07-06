@@ -46,6 +46,8 @@ std::string stringify_stl_one(const T &val
                               ,const std::string &delimiter_item_sep=","
                               ,const std::string &delimiter_whole_suffix="]"
 ) {
+  if (val.empty()) { return std::string(); }
+
   std::ostringstream ss;
   ss << delimiter_whole_prefix;
   typename T::const_iterator iter = val.begin();
@@ -70,6 +72,8 @@ std::string stringify_stl_two(const T &val
                              ,const std::string &delimiter_item_sep=","
                              ,const std::string &delimiter_whole_suffix="}"
 ) {
+  if (val.empty()) { return std::string(); }
+
   std::ostringstream ss;
   ss << delimiter_whole_prefix;
   typename T::const_iterator iter = val.begin();

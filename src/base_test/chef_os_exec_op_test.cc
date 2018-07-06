@@ -1,19 +1,9 @@
-#include "../base/os_exec_op.h"
+#include "../base/chef_os_exec_op.hpp"
+#include "../base/chef_stringify_stl.hpp"
 #include <ctime>
 #include <string>
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
-
-std::string printableResult(const std::vector<std::string> vec) {
-  std::string ret;
-  uint64_t num = vec.size();
-  for (uint64_t i = 0; i < num; i++) {
-    ret += "(";
-    ret += vec[i];
-    ret += ")\n";
-  }
-  return ret;
-}
 
 int main() {
   ENTER_TEST;
@@ -32,15 +22,16 @@ int main() {
   chef::os_exec_op::run_command(rm);
 
   std::vector<std::string> commands = {
-    //std::string("ps -ef"),
-    //std::string("ls /tmp"),
-    std::string("ls -lrt *_test")
+    std::string("ps -ef | grep test"),
+    std::string("ls /tmp")
   };
 
   uint64_t command_num = commands.size();
   for (uint64_t i = 0; i < command_num; i++) {
     std::vector<std::string> result = chef::os_exec_op::run_command(commands[i]);
-    printf("-----\ncommand: %s\noutput:\n%s-----\n", commands[i].c_str(), printableResult(result).c_str());
+    printf("-----\ncommand: %s\noutput:\n%s\n-----\n",
+           commands[i].c_str(),
+           chef::stringify_stl_vector(result, "[\n",    "  \"",   "\"",    ",\n",    "\n]").c_str());
   }
 
   return 0;
