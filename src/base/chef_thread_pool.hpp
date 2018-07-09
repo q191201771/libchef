@@ -47,10 +47,6 @@ namespace chef {
        */
       ~thread_pool();
 
-    private:
-      thread_pool(const thread_pool &);
-      thread_pool &operator=(const thread_pool &);
-
     public:
       /// 开启后台线程池，非阻塞函数
       void start();
@@ -64,6 +60,10 @@ namespace chef {
     private:
       void run_in_thread_(int index);
       task take_();
+
+    private:
+      thread_pool(const thread_pool &);
+      thread_pool &operator=(const thread_pool &);
 
     private:
       typedef std::vector<chef::shared_ptr<chef::thread> >             thread_vector;

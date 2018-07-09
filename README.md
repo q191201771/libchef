@@ -3,23 +3,13 @@
 [![Build Status](https://travis-ci.org/q191201771/starry-night.svg?branch=master)](https://travis-ci.org/q191201771/starry-night)
 [![License](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
 
-### 简介
-
-linux c++基础库
-
 * header only，易于接入，直接在你的代码中引入相应的头文件即可使用
 * 支持macos和linux两个平台
 * 部分c++11（具体见 [chef_env.hpp](https://github.com/q191201771/starry-night/blob/master/src/base/chef_env.hpp)）支持使用libboost替换，所以大部分模块兼容非c++11的低版本编译器
 
 ### 已完成模块
 
-注意，下表中**依赖**这一列的含义：
-
-```
-nope     无任何依赖
-chef_env 模块需要使用c++11或libboost
-c++11    必须依赖c++11
-```
+下表中**依赖**这一列：`nope`表示无任何依赖，`chef_env`表示需要使用c++11或libboost，`c++11`表示必须依赖c++11
 
 模块名称 | 依赖 | 功能描述 |
 ---------|------|----------|

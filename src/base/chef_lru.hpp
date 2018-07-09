@@ -31,10 +31,6 @@ namespace chef {
       Lru(std::size_t cap);
       ~Lru();
 
-    private:
-      Lru(const Lru&);
-      Lru &operator=(const Lru&);
-
     public:
       // @NOTICE function put 和 function get 操作都会更新元素热度，put 的 key 即使已经存在甚至对应的 value 相同也会更新热度
 
@@ -49,6 +45,10 @@ namespace chef {
 
       std::size_t size() const;
       std::size_t capacity() const;
+
+    private:
+      Lru(const Lru&);
+      Lru &operator=(const Lru&);
 
     private:
       typedef std::map<KeyT, typename List::iterator> Map;

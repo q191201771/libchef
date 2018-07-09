@@ -86,9 +86,12 @@ namespace chef {
       /// 注意，<len>应不大于readable_size函数的返回值
       void erase(uint64_t len);
 
-      /// 清空，注意：
-      /// 1. 并不会释放内部内存，只是将空间全部标记为空闲，内部申请的内存只有在析构时释放
-      /// 2. 如果capacity已经大于shrink阈值了，则收缩成init capacity大小
+      /**
+       * 清空，注意：
+       * 1. 并不会释放内部内存，只是将空间全部标记为空闲，内部申请的内存只有在析构时释放
+       * 2. 如果capacity已经大于shrink阈值了，则收缩成init capacity大小
+       *
+       */
       void clear();
 
       /// 已申请内存大小
@@ -117,12 +120,12 @@ namespace chef {
       friend class ut::buffer_test;
 
     private:
-      const uint64_t init_capacity_;
-      const uint64_t shrink_capacity_;
-      uint64_t       capacity_;
-      uint64_t       read_index_;
-      uint64_t       write_index_;
-      char          *data_;
+      const uint64_t  init_capacity_;
+      const uint64_t  shrink_capacity_;
+      uint64_t        capacity_;
+      uint64_t        read_index_;
+      uint64_t        write_index_;
+      char           *data_;
 
   }; // class buffer
 
@@ -134,6 +137,7 @@ namespace chef {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // @NOTICE 该分隔线以上部分为该模块的接口，分割线以下部分为对应的实现
+
 
 
 
