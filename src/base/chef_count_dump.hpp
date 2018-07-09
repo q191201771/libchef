@@ -40,22 +40,24 @@ namespace chef {
       multi_tag_counter(multi_tag_counter_type type) : type_(type) {}
       ~multi_tag_counter() {}
 
-    private:
-      multi_tag_counter(const multi_tag_counter &);
-      multi_tag_counter &operator=(const multi_tag_counter &);
-
     public:
-      // 添加tag会把count置0
-      // @NOTICE
-      //   如果是MULTI_TAG_COUNTER_ATOMIC,则在开始计数后不应该再调用操作tag的接口
-      //   如果是其他两种模式,可以直接使用计数接口,添加tag是非必须的
+      /**
+       * 添加tag会把count置0
+       * @NOTICE
+       *   如果是MULTI_TAG_COUNTER_ATOMIC,则在开始计数后不应该再调用操作tag的接口
+       *   如果是其他两种模式,可以直接使用计数接口,添加tag是非必须的
+       *
+       */
       void add_tag(const std::string &tag);
       void add_tags(const std::vector<std::string> &tags);
       void del_tag(const std::string &tag);
 
-      // @NOTICE
-      //   如果是MULTI_TAG_COUNTER_ATOMIC,则tag不存在时返回false
-      //   如果是其他两种模式,则永远返回true. count会先初始化为0再做函数调用对应的操作
+      /**
+       * @NOTICE
+       *   如果是MULTI_TAG_COUNTER_ATOMIC,则tag不存在时返回false
+       *   如果是其他两种模式,则永远返回true. count会先初始化为0再做函数调用对应的操作
+       *
+       */
       bool increment(const std::string &tag);
       bool decrement(const std::string &tag);
       bool add_count(const std::string &tag, int64_t num);
@@ -65,6 +67,10 @@ namespace chef {
       // 获取单个tag的计数,如果tag不存在则返回false
       bool get_tag_count(const std::string &tag, int64_t *num /* out */);
       std::map<std::string, int64_t> get_tags_count();
+
+    private:
+      multi_tag_counter(const multi_tag_counter &);
+      multi_tag_counter &operator=(const multi_tag_counter &);
 
     private:
       typedef std::map<std::string, int64_t> TAG2COUNT;
@@ -87,10 +93,8 @@ namespace chef {
         , filename_(filename)
         , exit_flag_(false)
       {}
+
       ~multi_tag_count_dumper();
-    private:
-      multi_tag_count_dumper(const multi_tag_count_dumper &);
-      multi_tag_count_dumper &operator=(const multi_tag_count_dumper &);
 
     public:
       void start();
@@ -99,6 +103,10 @@ namespace chef {
       void run_in_thread();
       void dump2disk();
       std::string styled_stringify();
+
+    private:
+      multi_tag_count_dumper(const multi_tag_count_dumper &);
+      multi_tag_count_dumper &operator=(const multi_tag_count_dumper &);
 
     private:
       multi_tag_counter              *mtc_;
@@ -129,8 +137,8 @@ namespace chef {
 
 namespace chef {
 
-  #define LOCK_IF_NEEDED(t, m) if (t == MULTI_TAG_COUNTER_MUTEX) m.lock();
-  #define UNLOCK_IF_NEEDED(t, m) if (t == MULTI_TAG_COUNTER_MUTEX) m.unlock();
+  #define LOCK_IF_NEEDED(t, m) { if ((t) == MULTI_TAG_COUNTER_MUTEX) m.lock(); }
+  #define UNLOCK_IF_NEEDED(t, m) { if ((t) == MULTI_TAG_COUNTER_MUTEX) m.unlock(); }
 
   inline void multi_tag_counter::add_tag(const std::string &tag) {
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {

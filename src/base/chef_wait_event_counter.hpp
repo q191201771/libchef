@@ -32,10 +32,6 @@ namespace chef {
       explicit wait_event_counter(int nc=1);
       ~wait_event_counter();
 
-    private:
-      wait_event_counter(const wait_event_counter &);
-      wait_event_counter operator=(const wait_event_counter &);
-
     public:
       /// notify调用发生在wait执行前或wait中，都有效~
       void notify();
@@ -61,6 +57,10 @@ namespace chef {
 
     private:
       bool check_();
+
+    private:
+      wait_event_counter(const wait_event_counter &);
+      wait_event_counter operator=(const wait_event_counter &);
 
     private:
       const int                need_count_;

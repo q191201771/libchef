@@ -30,9 +30,12 @@ namespace chef {
     public:
       typedef chef::function<void()> task;
 
-      /// @NOTICE 如果选择 RELEASE_MODE_DO_SHOULD_DONE 或 RELEASE_MODE_DO_ALL_DONE，
-      ///         内部依然会保证任务的执行线程体是task_thread内部开启的线程。
-      ///         析构函数会等待应该执行的异步任务执行完再返回。
+      /**
+       * @NOTICE 如果选择 RELEASE_MODE_DO_SHOULD_DONE 或 RELEASE_MODE_DO_ALL_DONE，
+       *         内部依然会保证任务的执行线程体是task_thread内部开启的线程。
+       *         析构函数会等待应该执行的异步任务执行完再返回。
+       *
+       */
       enum release_mode {
         RELEASE_MODE_ASAP,           /// 析构时，未执行的任务全部丢弃。
         RELEASE_MODE_DO_SHOULD_DONE, /// 析构时，执行需要执行的任务——实时任务和已到定时时间的延时任务，未到定时时间的延时任务不执行。
@@ -46,10 +49,6 @@ namespace chef {
        */
       explicit task_thread(const std::string &name=std::string(), release_mode rm=RELEASE_MODE_ASAP);
       ~task_thread();
-
-    private:
-      task_thread(const task_thread &);
-      task_thread &operator=(const task_thread &);
 
     public:
       /**
@@ -120,6 +119,10 @@ namespace chef {
        *
        */
        void execute_tasks_(std::multimap<uint64_t, task> &tasks);
+
+    private:
+      task_thread(const task_thread &);
+      task_thread &operator=(const task_thread &);
 
     private:
       std::string                    name_;

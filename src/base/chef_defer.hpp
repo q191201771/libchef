@@ -32,12 +32,12 @@ namespace chef {
         }
       }
 
+    public:
+      void cancel() { cancel_ = true; }
+
     private:
       defer(const defer &);
       defer &operator=(const defer &);
-
-    public:
-      void cancel() { cancel_ = true; }
 
     private:
       bool cancel_;
