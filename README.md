@@ -1,7 +1,8 @@
 # linux c++基础库
 
 [![Build Status](https://travis-ci.org/q191201771/starry-night.svg?branch=master)](https://travis-ci.org/q191201771/starry-night)
-[![License](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
+[![Release](https://img.shields.io/github/release/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/releases)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
 
 * header only，易于接入，直接在你的代码中引入相应的头文件即可使用
 * 支持macos和linux两个平台
