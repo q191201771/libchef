@@ -48,6 +48,7 @@ void add(code2count &cc, size_t code) {
 }
 
 void print(const std::string &name, const code2count &cc) {
+  (void)name;
   int max_count = 0;
   size_t max_count_code = -1;
   for (auto &item : cc) {
@@ -56,6 +57,7 @@ void print(const std::string &name, const code2count &cc) {
       max_count_code = item.first;
     }
   }
+  (void)max_count_code;
 
  //printf("-----%s-----\n", name.c_str());
  //printf("size: %lu\n", cc.size());

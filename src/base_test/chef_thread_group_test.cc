@@ -2,6 +2,9 @@
 #include "../base/chef_count_dump.hpp"
 #include <stdio.h>
 #include <unistd.h>
+#include <pthread.h>
+#include <sys/types.h>
+#include <sys/syscall.h>
 #include <iostream>
 #include <sstream>
 #include <atomic>
@@ -32,9 +35,8 @@ static inline int _threadid() {
   uint64_t tid64;
   pthread_threadid_np(NULL, &tid64);
   return static_cast<int>(tid64);
-#else
-  return 0;
 #endif
+  return 0;
 }
 
 std::mutex m;
@@ -43,7 +45,9 @@ chef::multi_tag_counter mtc(chef::multi_tag_counter::MULTI_TAG_COUNTER_MUTEX);
 chef::multi_tag_count_dumper mtcd(&mtc, 1000, 8, "chef_thread_group_test.dump");
 
 void func(int i, int index) {
-  int sum = 0;
+  (void)i;
+  (void)index;
+  //int sum = 0;
   //for (int j = 1; j < 1000; j++) {
   //  sum += j;
   //  for (int k = 1; k < 1000; k++) {
@@ -111,7 +115,7 @@ static void strategy_test(chef::thread_group::inner_dispatch_strategy strategy) 
     //std::cout << "-----" << std::endl;
   }
 
-  uint64_t b = now_();
+  //uint64_t b = now_();
   for (uint32_t j = 0; j < 10000; j++) {
     tg.add(std::bind(&func, j, 0));
   }
@@ -127,8 +131,8 @@ int main() {
 
   mtcd.start();
 
-  //init_test();
-  //add_with_index_test();
+  init_test();
+  add_with_index_test();
   //strategy_test(chef::thread_group::INNER_DISPATCH_STRATEGY_ROUND_ROBIN);
   //strategy_test(chef::thread_group::INNER_DISPATCH_STRATEGY_RANDOM);
   strategy_test(chef::thread_group::INNER_DISPATCH_STRATEGY_IDLE);
