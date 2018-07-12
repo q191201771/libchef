@@ -57,10 +57,10 @@ void print(const std::string &name, const code2count &cc) {
     }
   }
 
-  printf("-----%s-----\n", name.c_str());
-  printf("size: %lu\n", cc.size());
-  printf("max_count: %d max_hash_code: %lu\n", max_count, max_count_code);
-  printf("\n");
+ //printf("-----%s-----\n", name.c_str());
+ //printf("size: %lu\n", cc.size());
+ //printf("max_count: %d max_hash_code: %lu\n", max_count, max_count_code);
+ //printf("\n");
 }
 
 int main() {

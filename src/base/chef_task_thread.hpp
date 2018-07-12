@@ -8,8 +8,29 @@
  *     - initial release xxxx-xx-xx
  *
  * @brief
- *   开启一个线程，可以往里面添加异步任务（支持延时任务）
+ *   开启一个线程，可以往里面持续添加异步任务，任务串行执行，且执行顺序与添加顺序一致
+ *   支持添加延时任务
+ *
  *   任务可以是业务方的任意函数（通过bind/function实现）
+ *   例如
+ *   ```
+ *   void func1() {}
+ *
+ *   void func2(int a) {}
+ *
+ *   class Foo {
+ *   public:
+ *     void func3(int b) {}
+ *   };
+ *
+ *   chef::task_thread tt;
+ *   tt.start();
+ *   tt.add(chef::bind(&func1));
+ *   tt.add(chef::bind(&fun2, 10));
+ *   Foo foo;
+ *   tt.add(chef::bind(&Foo::func3, &foo, 20));
+ *   ```
+ *   注意，如果函数参数是指针类型，那么需确保在任务线程执行该任务前，指针指向内容依然有效
  *
  */
 
@@ -51,74 +72,42 @@ namespace chef {
       ~task_thread();
 
     public:
-      /**
-       * 开启线程
-       * 非阻塞函数
-       *
-       */
+      /// 开启后台线程池，非阻塞函数
       void start();
 
       /**
-       * 添加任务，任务按添加顺序执行。
+       * 添加异步任务，非阻塞函数
        *
-       * @param                 t 任务
-       * @param defferred_time_ms 可指定延时多少毫秒后执行，如果为0，则尽快执行，精度百毫秒级别。
+       * @param t 任务
+       * @param defferred_time_ms 如果为0，则按添加顺序尽快执行；如果不为0，则延时指定毫秒后执行，精度百毫秒级别。
        *
        */
       void add(const task &t, int defferred_time_ms=0);
 
-      /**
-       * @return 还未执行的任务数量
-       *
-       */
+      /// 返回还没执行完的任务数量
       uint64_t num_of_undone_task();
 
-      /**
-       * @return 线程名
-       *
-       */
+      /// 返回线程名
       std::string thread_name() const { return name_; }
 
     private:
-      /**
-       * 新建线程的执行体loop
-       *
-       */
+      /// 新建线程的执行体loop
       void run_in_thread_();
 
-      /**
-       * 收集已到定时时间该执行的延时任务
-       *
-       * @param tasks 传出参数 将达到定时时间的延时任务插入<tasks>尾部
-       *
-       */
+      /// 收集已到定时时间该执行的延时任务
       void append_expired_tasks_(std::deque<task> &tasks);
 
-      /**
-       * 获取当前时间，单位毫秒
-       *
-       */
+      /// 获取当前时间，单位毫秒
       uint64_t now_();
 
-      /**
-       * 等待线程结束
-       *
-       */
+      /// 等待线程结束
       void join_();
 
-      /**
-       * 执行<tasks>里的所有任务，并清空<tasks>
-       *
-       */
+      /// 执行<tasks>里的所有任务，并清空<tasks>
       void execute_tasks_(std::deque<task> &tasks);
 
-      /**
-       * @overload
-       *
-       * 执行<tasks>里的所有任务，并清空<tasks>
-       *
-       */
-       void execute_tasks_(std::multimap<uint64_t, task> &tasks);
+      /// @overload
+      void execute_tasks_(std::multimap<uint64_t, task> &tasks);
 
     private:
       task_thread(const task_thread &);
@@ -132,6 +121,7 @@ namespace chef {
       std::deque<task>               tasks_;
       std::multimap<uint64_t, task>  defferred_tasks_;
       chef::mutex                    mutex_;
+      chef::atomic<uint64_t>         num_of_undone_task_;
       chef::condition_variable       cond_;
       chef::wait_event_counter       runned_event_;
 
@@ -150,6 +140,7 @@ namespace chef {
 
 
 
+#include <stdio.h>
 #include <time.h>
 #include <sys/time.h>
 #ifdef __linux__
@@ -162,6 +153,7 @@ namespace chef {
     : name_(name)
     , release_mode_(rm)
     , exit_flag_(false)
+    , num_of_undone_task_(0)
   {
   }
 
@@ -182,6 +174,7 @@ namespace chef {
   }
 
   inline void task_thread::add(const task &t, int defferred_time_ms) {
+    num_of_undone_task_++;
     chef::lock_guard<chef::mutex> guard(mutex_);
     if (defferred_time_ms == 0) {
       tasks_.push_back(t);
@@ -192,8 +185,7 @@ namespace chef {
   }
 
   inline uint64_t task_thread::num_of_undone_task() {
-    chef::lock_guard<chef::mutex> guard(mutex_);
-    return tasks_.size() + defferred_tasks_.size();
+    return num_of_undone_task_.load();
   }
 
   inline void task_thread::run_in_thread_() {
@@ -214,10 +206,6 @@ namespace chef {
           if (!defferred_tasks_.empty()) {
               break;
           }
-          //chef::cv_status cs = cond_.wait_for(lock, chef::chrono::milliseconds(100));
-          //if (cs == chef::cv_status::timeout && !defferred_tasks_.empty()) {
-          //    break;
-          //}
         }
         /// 收集需要立即执行的任务
         if (!tasks_.empty()) {
@@ -255,7 +243,7 @@ namespace chef {
     }
 
     uint64_t now_ms = now_();
-//    auto iter = defferred_tasks_.begin();
+
     std::multimap<uint64_t, task>::iterator iter = defferred_tasks_.begin();
     for (; iter != defferred_tasks_.end(); iter++) {
       if (iter->first > now_ms) {
@@ -269,6 +257,7 @@ namespace chef {
   inline void task_thread::execute_tasks_(std::deque<task> &tasks) {
     for (; !tasks.empty(); ) {
       tasks.front()();
+      num_of_undone_task_--;
       tasks.pop_front();
     }
   }
@@ -278,6 +267,7 @@ namespace chef {
     std::multimap<uint64_t, task>::iterator iter = tasks.begin();
     for (; iter != tasks.end(); iter++) {
       iter->second();
+      num_of_undone_task_--;
     }
     tasks.clear();
   }

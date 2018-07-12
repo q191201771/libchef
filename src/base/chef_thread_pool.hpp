@@ -8,9 +8,8 @@
  *     - initial release xxxx-xx-xx
  *
  * @brief
- *   线程池，池中的空闲线程抢占式执行丢入其中的任务
- *   适用于丢入的任务不要求强顺序性执行的场景
- *   任务可以是业务方的任意函数（通过bind/function实现）
+ *   线程池，池中的空闲线程抢占式执行加入的任务
+ *   适用于任务不要求强顺序性执行的场景
  *
  */
 
@@ -54,7 +53,7 @@ namespace chef {
       /// 添加异步任务，非阻塞函数
       void add(const task &t);
 
-      /// 返回已添加还没来得及执行完的任务数量
+      /// 返回还没执行完的任务数量
       uint64_t num_of_undone_task();
 
     private:
@@ -69,6 +68,7 @@ namespace chef {
       typedef std::vector<chef::shared_ptr<chef::thread> >             thread_vector;
       typedef std::vector<chef::shared_ptr<chef::wait_event_counter> > wait_event_vector;
 
+    private:
       int                      num_of_thread_;
       std::string              thread_prefix_name_;
       bool                     exit_flag_;
@@ -76,6 +76,7 @@ namespace chef {
       wait_event_vector        thread_runned_events_;
       std::deque<task>         tasks_;
       chef::mutex              mutex_;
+      chef::atomic<uint64_t>   num_of_undone_task_;
       chef::condition_variable cond_;
   };
 
@@ -100,10 +101,11 @@ namespace chef {
 
 namespace chef {
 
-  inline thread_pool::thread_pool(int num_of_thread, const std::string &name)
+  inline thread_pool::thread_pool(int num_of_thread, const std::string &thread_prefix_name)
     : num_of_thread_(num_of_thread)
-    , thread_prefix_name_(name)
+    , thread_prefix_name_(thread_prefix_name)
     , exit_flag_(false)
+    , num_of_undone_task_(0)
   {
   }
 
@@ -124,14 +126,14 @@ namespace chef {
   }
 
   inline void thread_pool::add(const task &t) {
+    num_of_undone_task_++;
     chef::unique_lock<chef::mutex> lock(mutex_);
     tasks_.push_back(t);
     cond_.notify_one();
   }
 
   inline uint64_t thread_pool::num_of_undone_task() {
-    chef::lock_guard<chef::mutex> guard(mutex_);
-    return tasks_.size();
+    return num_of_undone_task_.load();
   }
 
   inline void thread_pool::run_in_thread_(int index) {
@@ -147,6 +149,7 @@ namespace chef {
       task t(take_());
       if (t) {
         t();
+        num_of_undone_task_--;
       }
     }
   }
