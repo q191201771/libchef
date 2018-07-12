@@ -26,8 +26,9 @@ chef_stringify_stl.hpp      | nope     | 字符串化stl容器 |
 chef_env.hpp                | chef_env | c++11和libboost功能相同部分的wrapper。通过增加一层接入层，使上层代码仅需通过一个宏开关就可以自由切换使用c++11或libboost |
 chef_defer.hpp              | chef_env | 类似golang defer，支持c goto清理等场景 |
 chef_wait_event_counter.hpp | chef_env | 阻塞等待1~N个事件发生。也可选择设置超时时间，超时后不再阻塞。使用者不用关心条件变量、锁等线程同步实现的细节 |
-chef_task_thread.hpp        | chef_env | 开启一个线程，可以往里面添加异步任务（支持延时任务）。任务可以是业务方的任意函数（通过bind/function实现） |
-chef_thread_pool.hpp        | chef_env | 线程池，池中的空闲线程抢占式执行丢入其中的任务。适用于丢入的任务不要求强顺序性执行的场景。任务可以是业务方的任意函数（通过bind/function实现） |
+chef_task_thread.hpp        | chef_env | 开启一个线程，可以往里面持续添加异步任务，任务串行执行，且执行顺序与添加顺序一致。支持添加延时任务。任务可以是业务方的任意函数（通过bind/function实现）。 |
+chef_thread_group.hpp       | chef_env | 线程池，添加异步任务时支持 指定线程号 和 池内自动调度 两种方式。指定线程号方式将任务按业务方自身需求分类打到固定线程中执行。池内自动调度方式支持round-robin轮转循环，随机，当前最空闲（即未完成任务数最少）线程三种方式。 |
+chef_thread_pool.hpp        | chef_env | 线程池，池中的空闲线程抢占式执行加入的任务。适用于任务不要求强顺序性执行的场景。 |
 chef_count_dump.hpp         | chef_env | 在各种线程模型下高效的对多个tag进行计数（打点）。并支持定时将计数落盘 |
 chef_hash.hpp               | c++11    | 利用变参模板和std::hash实现的万能哈希。可通过多种类型的多个变量组合生成哈希值 |
 

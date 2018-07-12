@@ -48,6 +48,9 @@ prgs += env.Program('chef_strings_op_test', chef_strings_op_srcs, LIBS=platform_
 chef_task_thread_srcs = ['chef_task_thread_test.cc']
 prgs += env.Program('chef_task_thread_test', chef_task_thread_srcs, LIBS=platform_libs)
 
+chef_thread_group_srcs = ['chef_thread_group_test.cc']
+prgs += env.Program('chef_thread_group_test', chef_thread_group_srcs, LIBS=platform_libs)
+
 chef_thread_pool_srcs = ['chef_thread_pool_test.cc']
 prgs += env.Program('chef_thread_pool_test', chef_thread_pool_srcs, LIBS=platform_libs)
 
