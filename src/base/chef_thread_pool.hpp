@@ -35,7 +35,7 @@ namespace chef {
        * @param thread_prefix_name 线程前缀名，linux平台下调用prctl设置线程名，下标从1开始。其他平台或`thread_prefix_name`为空则不设置~
        *
        */
-      explicit thread_pool(int num_of_thread, const std::string &thread_prefix_name=std::string());
+      explicit thread_pool(uint32_t num_of_thread, const std::string &thread_prefix_name=std::string());
 
       /**
        * -析构时会等待所有后台线程结束，即正在执行的任务需要执行完（肯定啦），未开始执行的任务就不执行了（出于速度释放资源考虑），
@@ -69,7 +69,7 @@ namespace chef {
       typedef std::vector<chef::shared_ptr<chef::wait_event_counter> > wait_event_vector;
 
     private:
-      int                      num_of_thread_;
+      uint32_t                 num_of_thread_;
       std::string              thread_prefix_name_;
       bool                     exit_flag_;
       thread_vector            threads_;
@@ -94,6 +94,7 @@ namespace chef {
 
 
 #include <stdio.h>
+#include <assert.h>
 
 #ifdef __linux__
 #include <sys/prctl.h>
@@ -101,12 +102,13 @@ namespace chef {
 
 namespace chef {
 
-  inline thread_pool::thread_pool(int num_of_thread, const std::string &thread_prefix_name)
+  inline thread_pool::thread_pool(uint32_t num_of_thread, const std::string &thread_prefix_name)
     : num_of_thread_(num_of_thread)
     , thread_prefix_name_(thread_prefix_name)
     , exit_flag_(false)
     , num_of_undone_task_(0)
   {
+    assert(num_of_thread > 0);
   }
 
   inline thread_pool::~thread_pool() {
