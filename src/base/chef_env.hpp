@@ -19,6 +19,12 @@
 
 // #define CHEF_USE_BOOST
 
+#ifndef CHEF_USE_BOOST
+#if (__cplusplus < 201103L)
+  #error("some of chef_env stuff deps on c++11 or boost, you should compile it with c++11 or define macro CHEF_USE_BOOST if you choose to use boost instead.")
+#endif
+#endif
+
 #ifdef CHEF_USE_BOOST
   #include <boost/thread.hpp>
   #include <boost/atomic.hpp>
