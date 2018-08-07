@@ -26,8 +26,8 @@
 #include <map>
 #include <unordered_set>
 #include <unordered_map>
-//#include <stack>
-//#include <queue>
+#include <stack>
+#include <queue>
 
 // one 默认分隔    "["      ""       ""      ","      "]"
 //     定制举例    "[\n"    "  \""   "\""    ",\n"    "\n]"
@@ -169,7 +169,67 @@ const std::string &delimiter_whole_prefix="{",const std::string &delimiter_key_p
     ) { return stringify_stl_two<std::unordered_multimap<K, T> >(val,
 delimiter_whole_prefix,delimiter_key_prefix,delimiter_key_suffix,delimiter_kv_sep,delimiter_value_prefix,delimiter_value_suffix,delimiter_item_sep,delimiter_whole_suffix); }
 
-};
+// deep copy
+// stack top print front
+template <typename T>
+std::string stringify_stl_stack(std::stack<T> val,
+const std::string &delimiter_whole_prefix="[",const std::string &delimiter_item_prefix="",const std::string &delimiter_item_suffix="",const std::string &delimiter_item_sep=",",const std::string &delimiter_whole_suffix="]"
+) {
+  if (val.empty()) { return std::string(); }
+
+  std::ostringstream ss;
+  ss << delimiter_whole_prefix;
+  for (; ; ) {
+    ss << delimiter_item_prefix << val.top() << delimiter_item_suffix;
+    val.pop();
+    if (val.empty()) { break; }
+    else { ss << delimiter_item_sep; }
+
+  }
+  ss << delimiter_whole_suffix;
+  return ss.str();
+}
+
+template <typename T>
+std::string stringify_stl_queue(std::queue<T> val,
+const std::string &delimiter_whole_prefix="[",const std::string &delimiter_item_prefix="",const std::string &delimiter_item_suffix="",const std::string &delimiter_item_sep=",",const std::string &delimiter_whole_suffix="]"
+) {
+  if (val.empty()) { return std::string(); }
+
+  std::ostringstream ss;
+  ss << delimiter_whole_prefix;
+  for (; ; ) {
+    ss << delimiter_item_prefix << val.front() << delimiter_item_suffix;
+    val.pop();
+    if (val.empty()) { break; }
+    else { ss << delimiter_item_sep; }
+
+  }
+  ss << delimiter_whole_suffix;
+  return ss.str();
+}
+
+template <typename T>
+std::string stringify_stl_priority_queue(std::priority_queue<T> val,
+const std::string &delimiter_whole_prefix="[",const std::string &delimiter_item_prefix="",const std::string &delimiter_item_suffix="",const std::string &delimiter_item_sep=",",const std::string &delimiter_whole_suffix="]"
+) {
+  if (val.empty()) { return std::string(); }
+
+  std::ostringstream ss;
+  ss << delimiter_whole_prefix;
+  for (; ; ) {
+    ss << delimiter_item_prefix << val.top() << delimiter_item_suffix;
+    val.pop();
+    if (val.empty()) { break; }
+    else { ss << delimiter_item_sep; }
+
+  }
+  ss << delimiter_whole_suffix;
+  return ss.str();
+}
+
+
+}; // namespace chef
 
 #endif
 

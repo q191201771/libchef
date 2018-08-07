@@ -19,6 +19,7 @@ int main() {
                                                     ",\n"    ,
                                                     "\n}"    );
     //std::cout << str << std::endl;
+    chef::stringify_stl_vector(vec);
     str = chef::stringify_stl_vector<int>(vec);
     assert(str == "[1,2,3]");
     str = chef::stringify_stl_vector<int>(vec,
@@ -45,6 +46,7 @@ int main() {
                                                       ",\n"    ,
                                                       "\n}"    );
     //std::cout << str << std::endl;
+    chef::stringify_stl_map(m);
     str = chef::stringify_stl_map<int, int>(m);
     assert(str == "{1:100,2:200,3:300}")
     str = chef::stringify_stl_map<int, int>(m,
@@ -128,6 +130,27 @@ int main() {
     m.insert(std::make_pair(2, 200));
     m.insert(std::make_pair(3, 300));
     //std::cout << chef::stringify_stl_unordered_multimap<int, int>(m) << std::endl;
+  }
+
+  {
+    std::stack<int> s;
+    s.push(1);s.push(2);s.push(3);s.push(5);
+    //std::cout << chef::stringify_stl_stack(s) << std::endl;
+    assert(s.size() == 4 && s.top() == 5);
+  }
+
+  {
+    std::queue<int> q;
+    q.push(1);q.push(2);q.push(3);q.push(5);q.pop();
+    //std::cout << chef::stringify_stl_queue(q) << std::endl;
+    assert(q.size() == 3 && q.front() == 2 && q.back() == 5);
+  }
+
+  {
+    std::priority_queue<int> q;
+    q.push(1);q.push(2);q.push(4);q.push(5);q.pop();
+    //std::cout << chef::stringify_stl_priority_queue(q) << std::endl;
+    assert(q.size() == 3 && q.top() == 4);
   }
 
   return 0;
