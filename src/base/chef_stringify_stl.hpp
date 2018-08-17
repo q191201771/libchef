@@ -7,7 +7,7 @@
  *   chef <191201771@qq.com>
  *     -initial release xxxx-xx-xx
  *
- * @brief    字符串化stl容器
+ * @brief    字符串化stl容器，支持多维嵌套容器
  *
  */
 
