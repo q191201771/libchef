@@ -12,23 +12,42 @@ int main() {
 
   {
     std::vector<int> vec = {1, 2, 3};
-    str = chef::stringify_stl_one<std::vector<int> >(vec,
-                                                    "{\n"    ,
-                                                    "  \""   ,
-                                                    "\""     ,
-                                                    ",\n"    ,
-                                                    "\n}"    );
+    str = chef::stringify_stl_one(vec,
+                                  "{\n"    ,
+                                  "  \""   ,
+                                  "\""     ,
+                                  ",\n"    ,
+                                  "\n}"    );
     //std::cout << str << std::endl;
-    chef::stringify_stl_vector(vec);
-    str = chef::stringify_stl_vector<int>(vec);
+
+    str = chef::stringify_stl(vec);
     assert(str == "[1,2,3]");
-    str = chef::stringify_stl_vector<int>(vec,
-                                          "{\n"    ,
-                                          "  \""   ,
-                                          "\""     ,
-                                          ",\n"    ,
-                                          "\n}"    );
+
+    str = chef::stringify_stl(vec,
+                              "{\n"    ,
+                              "  \""   ,
+                              "\""     ,
+                              ",\n"    ,
+                              "\n}"    );
     //std::cout << str << std::endl;
+  }
+
+  {
+    std::vector<uint32_t> vec = {1, 2, 3};
+    str = chef::stringify_stl(vec);
+    assert(str == "[1,2,3]");
+  }
+
+  {
+    std::vector<std::string> vec = {"1", "2", "3"};
+    str = chef::stringify_stl(vec);
+    assert(str == "[1,2,3]");
+  }
+
+  {
+    std::vector<std::vector<int> > vec = {{1,2,3}, {4,5,6}};
+    str = chef::stringify_stl(vec);
+    assert(str == "[[1,2,3],[4,5,6]]");
   }
 
   {
@@ -36,75 +55,67 @@ int main() {
     m[1] = 100;
     m[2] = 200;
     m[3] = 300;
-    str = chef::stringify_stl_two<std::map<int, int> >(m,
-                                                      "{\n"    ,
-                                                      "  \""   ,
-                                                      "\""     ,
-                                                      ": "     ,
-                                                      ""       ,
-                                                      ""       ,
-                                                      ",\n"    ,
-                                                      "\n}"    );
+    str = chef::stringify_stl(m,
+                              "{\n"    ,
+                              "  \""   ,
+                              "\""     ,
+                              ": "     ,
+                              ""       ,
+                              ""       ,
+                              ",\n"    ,
+                              "\n}"    );
     //std::cout << str << std::endl;
-    chef::stringify_stl_map(m);
-    str = chef::stringify_stl_map<int, int>(m);
+
+    str = chef::stringify_stl(m);
     assert(str == "{1:100,2:200,3:300}")
-    str = chef::stringify_stl_map<int, int>(m,
-                                            "{\n"    ,
-                                            "  \""   ,
-                                            "\""     ,
-                                            ": "     ,
-                                            ""       ,
-                                            ""       ,
-                                            ",\n"    ,
-                                            "\n}"    );
   }
 
   {
-    std::array<int, 3> arr = {1, 2, 3};
-    str = chef::stringify_stl_array<int, 3>(arr);
+    std::array<int, 3> arr = {{1, 2, 3}};
+    str = chef::stringify_stl(arr);
     assert(str == "[1,2,3]");
   }
 
   {
     std::deque<int> ct = {1, 2, 3};
-    str = chef::stringify_stl_deque<int>(ct);
+    str = chef::stringify_stl(ct);
     assert(str == "[1,2,3]");
   }
 
   {
     std::forward_list<int> ct = {1, 2, 3};
-    str = chef::stringify_stl_forward_list<int>(ct);
+    str = chef::stringify_stl(ct);
     assert(str == "[1,2,3]");
   }
 
   {
     std::list<int> ct = {1, 2, 3};
-    str = chef::stringify_stl_list<int>(ct);
+    str = chef::stringify_stl(ct);
     assert(str == "[1,2,3]");
   }
 
   {
     std::set<int> ct = {1, 2, 3};
-    str = chef::stringify_stl_set<int>(ct);
-    assert(str == "[1,2,3]")
+    str = chef::stringify_stl(ct);
+    assert(str == "[1,2,3]");
   }
 
   {
     std::unordered_set<int> ct = {1, 2, 3};
-    str = chef::stringify_stl_unordered_set<int>(ct);
-    //std::cout << chef::stringify_stl_unordered_set<int>(ct) << std::endl;
+    str = chef::stringify_stl(ct);
+    assert(str == "[1,2,3]" || str == "[1,3,2]" || str == "[2,1,3]" || str == "[2,3,1]" || str == "[3,1,2]" || str == "[3,2,1]");
   }
 
   {
     std::multiset<int> ct = {1, 1, 2, 3};
-    str = chef::stringify_stl_multiset<int>(ct);
+    str = chef::stringify_stl(ct);
     assert(str == "[1,1,2,3]");
   }
 
   {
     std::unordered_multiset<int> ct = {1, 2, 3};
-    //std::cout << chef::stringify_stl_unordered_multiset<int>(ct) << std::endl;
+    str = chef::stringify_stl(ct);
+    assert(str == "[1,2,3]" || str == "[1,3,2]" || str == "[2,1,3]" || str == "[2,3,1]" || str == "[3,1,2]" || str == "[3,2,1]");
   }
 
   {
@@ -112,7 +123,7 @@ int main() {
     m.insert(std::make_pair(1, 100));
     m.insert(std::make_pair(2, 200));
     m.insert(std::make_pair(3, 300));
-    str = chef::stringify_stl_multimap<int, int>(m);
+    str = chef::stringify_stl(m);
     assert(str == "{1:100,2:200,3:300}")
   }
 
@@ -120,36 +131,39 @@ int main() {
     std::unordered_map<int, int> m;
     m.insert(std::make_pair(1, 100));
     m.insert(std::make_pair(2, 200));
-    m.insert(std::make_pair(3, 300));
-    //std::cout << chef::stringify_stl_unordered_map<int, int>(m) << std::endl;
+    str = chef::stringify_stl(m);
+    assert(str == "{1:100,2:200}" || str == "{2:200,1:100}");
   }
 
   {
     std::unordered_multimap<int, int> m;
     m.insert(std::make_pair(1, 100));
     m.insert(std::make_pair(2, 200));
-    m.insert(std::make_pair(3, 300));
-    //std::cout << chef::stringify_stl_unordered_multimap<int, int>(m) << std::endl;
+    str = chef::stringify_stl(m);
+    assert(str == "{1:100,2:200}" || str == "{2:200,1:100}");
   }
 
   {
     std::stack<int> s;
     s.push(1);s.push(2);s.push(3);s.push(5);
-    //std::cout << chef::stringify_stl_stack(s) << std::endl;
+    str = chef::stringify_stl(s);
+    assert(str == "[5,3,2,1]");
     assert(s.size() == 4 && s.top() == 5);
   }
 
   {
     std::queue<int> q;
     q.push(1);q.push(2);q.push(3);q.push(5);q.pop();
-    //std::cout << chef::stringify_stl_queue(q) << std::endl;
+    str = chef::stringify_stl(q);
+    assert(str == "[2,3,5]");
     assert(q.size() == 3 && q.front() == 2 && q.back() == 5);
   }
 
   {
     std::priority_queue<int> q;
     q.push(1);q.push(2);q.push(4);q.push(5);q.pop();
-    //std::cout << chef::stringify_stl_priority_queue(q) << std::endl;
+    str = chef::stringify_stl(q);
+    assert(str == "[4,2,1]");
     assert(q.size() == 3 && q.top() == 4);
   }
 
