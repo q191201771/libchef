@@ -5,30 +5,44 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
+struct SelfType {
+  int a_;
+  int b_;
+
+  SelfType(int a, int b) : a_(a), b_(b) {  }
+};
+
+std::string stringify_stl_one_(const SelfType &st) {
+  std::ostringstream oss;
+  oss << "(" << st.a_ << "," << st.b_ << ")";
+  return oss.str();
+}
+
+static void test_self_stype() {
+  std::vector<SelfType> vec;
+  vec.push_back(SelfType(1,2));
+  vec.push_back(SelfType(3,4));
+  std::string str = chef::stringify_stl(vec);
+  assert(str == "[(1,2),(3,4)]");
+  //std::cout << str << std::endl;
+}
+
 int main() {
   ENTER_TEST;
+
+  test_self_stype();
 
   std::string str;
 
   {
     std::vector<int> vec = {1, 2, 3};
-    str = chef::stringify_stl_one(vec,
-                                  "{\n"    ,
-                                  "  \""   ,
-                                  "\""     ,
-                                  ",\n"    ,
-                                  "\n}"    );
+    str = chef::stringify_stl_one_(vec, chef::STRINGIFY_STL_STYLE_ONE_BEAUTY);
     //std::cout << str << std::endl;
 
     str = chef::stringify_stl(vec);
     assert(str == "[1,2,3]");
 
-    str = chef::stringify_stl(vec,
-                              "{\n"    ,
-                              "  \""   ,
-                              "\""     ,
-                              ",\n"    ,
-                              "\n}"    );
+    str = chef::stringify_stl(vec, chef::STRINGIFY_STL_STYLE_ONE_BEAUTY);
     //std::cout << str << std::endl;
   }
 
@@ -52,18 +66,8 @@ int main() {
 
   {
     std::map<int, int> m;
-    m[1] = 100;
-    m[2] = 200;
-    m[3] = 300;
-    str = chef::stringify_stl(m,
-                              "{\n"    ,
-                              "  \""   ,
-                              "\""     ,
-                              ": "     ,
-                              ""       ,
-                              ""       ,
-                              ",\n"    ,
-                              "\n}"    );
+    m[1] = 100; m[2] = 200; m[3] = 300;
+    str = chef::stringify_stl(m, chef::STRINGIFY_STL_STYLE_TWO_BEAUTY);
     //std::cout << str << std::endl;
 
     str = chef::stringify_stl(m);
