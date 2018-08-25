@@ -23,7 +23,7 @@ chef_crypto_md5_op.hpp      | nope     | md5加密 |
 chef_crypto_sha1_op.hpp     | nope     | sha1加密 |
 chef_encoding_base64_op.hpp | nope     | base64编码、解码 |
 chef_noncopyable.hpp        | nope     | 禁用拷贝构造等函数 |
-chef_stringify_stl.hpp      | nope     | 字符串化stl容器，支持多维嵌套容器 |
+chef_stringify_stl.hpp      | nope     |  字符串化stl容器。支持所有stl类型容器，支持多维嵌套容器，支持容器元素为自定义类型，支持自定义样式 |
 chef_env.hpp                | chef_env | c++11和libboost功能相同部分的wrapper。通过增加一层接入层，使上层代码仅需通过一个宏开关就可以自由切换使用c++11或libboost |
 chef_defer.hpp              | chef_env | 类似golang defer，支持c goto清理等场景 |
 chef_wait_event_counter.hpp | chef_env | 阻塞等待1~N个事件发生。也可选择设置超时时间，超时后不再阻塞。使用者不用关心条件变量、锁等线程同步实现的细节 |
