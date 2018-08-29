@@ -22,4 +22,6 @@ echo '----------------------------------------'
 
 #./output/base_test/chef_http_op_test
 #./output/base_test/chef_log_test
+
+rm -rf chef_thread_group_test.dump
 echo '----------------------------------------'

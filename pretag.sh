@@ -20,7 +20,7 @@ done
 
 #./ut.sh
 #git add .
-#git commit -m "pretag ${tag}"
+#git commit -m ":bookmark: pretag ${tag}"
 #git push
 #git tag ${tag}
 #git push --tags
