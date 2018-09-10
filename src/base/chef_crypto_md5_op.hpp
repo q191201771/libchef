@@ -1,5 +1,5 @@
 /**
- * @tag      v1.3.3
+ * @tag      v1.3.4
  * @file     chef_crypto_md5_op.hpp
  * @deps     nope
  * @platform linux | macos | xxx
