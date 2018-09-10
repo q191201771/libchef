@@ -2,7 +2,7 @@
  * @tag      v1.3.4
  * @file     chef_buffer.hpp
  * @deps     nope
- * @platform linux/macos/xxx
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>
@@ -10,10 +10,34 @@
  *
  * @brief    FIFO的流式buffer，支持自动扩容、收缩，供生产和消费长度不固定的场景使用（例如tcp的读写buffer）
  *
+     ```
+     // 声明对象
+     chef::buffer buf(4096, 1024 * 16);
+
+     // 写入方式一，如果内部空余空间不足，会自动扩容
+     buf.append("hello", 5);
+
+     // 写入方式二，先调用reserve确保内部空余空间足够，再直接操作写位置指针，最后手动后移新写位置。
+     // 提供方法二是为了便于与其他字符串函数配合，在某些场景下减少一次内存拷贝。例如：
+     buf.reserve(128);
+     int len = snprintf(buf.write_pos(), 128, "name=%s,age=%d.", "chef", 18);
+     buf.seek_write_pos(std::min(len, 128));
+
+     // 读取所有数据
+     len = buf.readable_size();
+     std::string str(buf.read_pos(), len);
+     buf.erase(len);
+     // 读取部分数据，业务方可能有这种消费场景，比如
+     // loop:
+     //   if send buf not empty and event active:
+     //     sent_len = tcp_send(fd, buf.read_pos(), buf.readable_size());
+     //     buf.erase(sent_len);
+     ```
+ *
  */
 
-#ifndef _CHEF_BASE_BUFFER_H_
-#define _CHEF_BASE_BUFFER_H_
+#ifndef _CHEF_BASE_BUFFER_HPP_
+#define _CHEF_BASE_BUFFER_HPP_
 #pragma once
 
 #include <stdint.h>
@@ -38,8 +62,8 @@ namespace chef {
        * chef::buffer buf(len, 2 * len);
        * buf.append(data, len);
        *
-       * @param data 初始化数据，内部做内存拷贝，不持有<data>指针内容
-       * @param len  长度
+       * @param data 初始化数据，内部做内存拷贝
+       * @param len  初始化数据长度
        *
        */
       buffer(const char *data, uint64_t len);
@@ -52,25 +76,22 @@ namespace chef {
       buffer &operator=(const buffer &b);
 
     public:
-      /** +++++++++++++++++++++++++++++++++++++++++++++++++++++
-       * 往buffer填充数据有两种方法：
-       * 方法一使用append函数，可填充任意大小数据，空余空间不足时自动扩容。
+      /**
+       * 追加数据，空余空间不足时自动扩容
+       *
+       * @param data 追加数据，内部做内存拷贝
+       * @param len  追加数据长度
        *
        */
-      void append(const char *buf, uint64_t len);
+      void append(const char *data, uint64_t len);
+
       /**
-       * 方法二直接操作write指针，写入前需确保内部空余空间够，且操作完后需手动移动write指针位置。
-       * 提供方法二是为了便于与其他字符串函数配合，在某些场景下减少一次内存拷贝。例如：
-       * buf.reserve(128);
-       * int len = snprintf(buf.write_pos(), 128, "name=%s,age=%d.", name, age);
-       * buf.seek_write_pos(min(len, 128));
-       *
        * @function reserve
        * @param    len     若内部空余空间小于<len>则会扩容新空间
        *
-       * @function write_pos 返回写入位置
+       * @function write_pos 返回写位置
        *
-       * @function seek_write_pos 往后挪动写入位置
+       * @function seek_write_pos 往后挪动写位置
        *
        */
       void reserve(uint64_t len);
@@ -78,7 +99,7 @@ namespace chef {
       void seek_write_pos(uint64_t len);
 
     public:
-      /** -----------------------------------------------------
+      /**
        * 读取buffer中的数据
        *
        */
@@ -199,9 +220,9 @@ namespace chef {
     return *this;
   }
 
-  inline void buffer::append(const char *buf, uint64_t len) {
+  inline void buffer::append(const char *data, uint64_t len) {
     reserve(len);
-    memcpy(data_ + write_index_, buf, len);
+    memcpy(data_ + write_index_, data, len);
     write_index_ += len;
   }
 
@@ -302,4 +323,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_BUFFER_H_
+#endif // _CHEF_BASE_BUFFER_HPP_

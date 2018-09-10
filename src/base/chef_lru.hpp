@@ -2,13 +2,32 @@
  * @tag      v1.3.4
  * @file     chef_lru.hpp
  * @deps     nope
- * @platform linux/macos/xxx
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>
  *     -initial release xxxx-xx-xx
  *
  * @brief    固定大小的LRU cache，支持插入，查询，以及获取全量列表
+ *
+     ```
+     chef::Lru<std::string, int> lru(3);
+     lru.put("chef", 1);
+     lru.put("yoko", 2);
+     lru.put("tom", 3);
+     lru.put("jerry", 4); // 超过容器大小，淘汰最老的`chef`
+     bool exist;
+     int v;
+     exist = lru.get("chef", &v);
+     //assert(!exist);
+     exist = lru.get("yoko", &v);
+     //assert(exist && v == 2);
+     lru.put("garfield", 5); // 超过容器大小，注意，由于`yoko`刚才读取时会更新热度，所以淘汰的是`tom`
+     exist = lru.get("yoko", &v);
+     //assert(exist && v == 2);
+     exist = lru.get("tom", &v);
+     //assert(!exist);
+     ```
  *
  */
 

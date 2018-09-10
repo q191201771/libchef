@@ -2,13 +2,31 @@
  * @tag      v1.3.4
  * @file     chef_defer.hpp
  * @deps     chef_env.hpp
- * @platform linux/macos/xxx
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>
  *     - initial release xxxx-xx-xx
  *
  * @brief    类似golang defer，支持c goto清理等场景
+ *
+     ```
+     void example() {
+       int *foo = NULL;
+       int *bar = new int(10);
+       chef::defer x([&foo, &bar]() {
+         if (foo != NULL) { delete foo; }
+         if (bar != NULL) { delete bar; }
+       });
+
+       //if (true) { return; } // return under some condition
+       if (true) { foo = new int(20); } // malloc under some condition
+       if (true) { delete bar; bar = NULL; } // even free under some condition...
+
+       // some op...
+       return;
+     }
+     ```
  *
  */
 

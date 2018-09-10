@@ -18,7 +18,6 @@ env.Append(CXXFLAGS  = ['-Wall', '-Wextra', '-Wunused-parameter', '-Woverloaded-
                         '-Wwrite-strings', '-Wcast-align'])
 #env.Append(CXXFLAGS  = ['-Werror'])
 #env.Append(CXXFLAGS  = ['-Wconversion',  '-Wold-style-cast'])
-env.Append(LINKFLAGS = ['-pthread', '-static-libstdc++'])
 env.Append(CPPPATH   = [])
 
 if env['PLATFORM'] == 'darwin':
@@ -28,6 +27,7 @@ if env['PLATFORM'] == 'darwin':
 else:
     platform_libs = ['pthread', 'rt']
     env.Append(CPPPATH = ['#third_party/linux/boost/include'])
+    env.Append(LINKFLAGS = ['-pthread', '-static-libstdc++'])
     boost_lib_path = '#third_party/linux/boost/lib/'
 
 Export('env')

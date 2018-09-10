@@ -3,8 +3,29 @@
 #include "./common/check_log.hpp"
 #include <string>
 
+static void example() {
+     chef::Lru<std::string, int> lru(3);
+     lru.put("chef", 1);
+     lru.put("yoko", 2);
+     lru.put("tom", 3);
+     lru.put("jerry", 4); // 超过容器大小，淘汰最老的`chef`
+     bool exist;
+     int v;
+     exist = lru.get("chef", &v);
+     assert(!exist);
+     exist = lru.get("yoko", &v);
+     assert(exist && v == 2);
+     lru.put("garfield", 5); // 超过容器大小，注意，由于`yoko`刚才读取时会更新热度，所以淘汰的是`tom`
+     exist = lru.get("yoko", &v);
+     assert(exist && v == 2);
+     exist = lru.get("tom", &v);
+     assert(!exist);
+}
+
 int main() {
   ENTER_TEST;
+
+  example();
 
   int v;
   chef::Lru<std::string, int>::List ll;

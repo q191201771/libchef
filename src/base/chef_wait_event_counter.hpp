@@ -2,15 +2,15 @@
  * @tag      v1.3.4
  * @file     chef_wait_event_counter.hpp
  * @deps     chef_env.hpp
- * @platform linux/macos/xxx
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>
  *     - initial release xxxx-xx-xx
  *
  * @brief
- *   阻塞等待1~N个事件发生
- *   也可选择设置超时时间，超时后不再阻塞
+ *   阻塞等待1~N次事件发生
+ *   也可选择设置超时时间，超时后不再阻塞等待
  *   使用者不用关心条件变量、锁等线程同步实现的细节
  *
  */
@@ -34,7 +34,7 @@ namespace chef {
       ~wait_event_counter();
 
     public:
-      /// notify调用发生在wait执行前或wait中，都有效~
+      /// 非阻塞，notify调用发生在wait执行前或wait中，都有效~
       void notify();
 
       /// 阻塞直到构造函数中指定的<need_count_>次notify已发生。

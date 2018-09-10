@@ -6,9 +6,10 @@
  *
  * @author
  *   chef <191201771@qq.com>
- *     -initial release xxxx-xx-xx
+ *     - initial release xxxx-xx-xx
  *
  * @brief    字符串化stl容器。支持所有stl类型容器，支持多维嵌套容器，支持容器元素为自定义类型，支持自定义样式
+ *
      1. 支持所有stl类型容器，接口简单只有一个函数，业务方传入容器变量即可使用
 
        ```
@@ -67,7 +68,6 @@
        //   "3"
        // ]
        ```
-
  *
  */
 

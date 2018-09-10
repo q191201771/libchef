@@ -10,12 +10,17 @@ void mtc_free_lock_or_mutex_test(chef::multi_tag_counter::multi_tag_counter_type
   std::map<std::string, int64_t> counters;
 
   chef::multi_tag_counter mtc(type);
+
+  //chef::multi_tag_count_dumper mtcd(&mtc, 100, 8, "mtcd1.txt", chef::multi_tag_count_dumper::MULTI_TAG_COUNT_DUMP_TYPE_APPEND);
+  //mtcd.start();
+
   for (int i = 0; i < 100; i++) {
     assert(mtc.increment("1st"));
   }
   for (int i = 0; i < 100; i++) {
     assert(mtc.add_count("2nd", i));
   }
+  //sleep(1);
   assert(mtc.set_count("3rd", 101));
   assert(mtc.get_tag_count("1st", &num));
   assert(num==100);
@@ -27,8 +32,6 @@ void mtc_free_lock_or_mutex_test(chef::multi_tag_counter::multi_tag_counter_type
   counters = mtc.get_tags_count();
   assert(counters.size() == 3 && counters["1st"] == 100 && counters["2nd"] == 4950 && counters["3rd"] == 101);
 
-  //chef::multi_tag_count_dumper mtcd(&mtc, 1000, 8, "mtcd1.txt");
-  //mtcd.start();
 }
 
 void mtc_atomic_test() {

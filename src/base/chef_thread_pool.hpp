@@ -2,7 +2,7 @@
  * @tag      v1.3.4
  * @file     chef_thread_pool.hpp
  * @deps     chef_env.hpp | chef_wait_event_counter.hpp
- * @platform linux/macos/xxx
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>
@@ -115,13 +115,13 @@ namespace chef {
   inline thread_pool::~thread_pool() {
     exit_flag_ = true;
     cond_.notify_all();
-    for (int i = 0; i < num_of_thread_; i++) {
+    for (uint32_t i = 0; i < num_of_thread_; i++) {
       threads_[i]->join();
     }
   }
 
   inline void thread_pool::start() {
-    for (int i = 0; i < num_of_thread_; i++) {
+    for (uint32_t i = 0; i < num_of_thread_; i++) {
       thread_runned_events_.push_back(chef::make_shared<chef::wait_event_counter>());
       threads_.push_back(chef::make_shared<chef::thread>(chef::bind(&thread_pool::run_in_thread_, this, i)));
       thread_runned_events_[i]->wait();

@@ -11,7 +11,7 @@
  * @brief
  *   提供两个类：
  *   - class multi_tag_counter 在各种线程模型及使用场景下高效的对多个tag进行计数（打点）
- *   - class multi_tag_count_dumper 支持定时将计数落盘，观察打点变化
+ *   - class multi_tag_count_dumper 支持定时将multi_tag_counter内部计数落盘，观察打点变化
  *
  */
 
@@ -21,8 +21,9 @@
 
 #include "chef_env.hpp"
 #include "chef_filepath_op.hpp"
-#include <stdio.h>
+#include <assert.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <map>
 #include <string>
 #include <vector>
@@ -87,13 +88,20 @@ namespace chef {
 
   class multi_tag_count_dumper {
     public:
-      multi_tag_count_dumper(multi_tag_counter *mtc, int interval_ms, uint32_t num_per_line, const std::string &filename)
+      enum multi_tag_count_dump_type {
+        MULTI_TAG_COUNT_DUMP_TYPE_OVERWRITE,
+        MULTI_TAG_COUNT_DUMP_TYPE_APPEND
+      };
+    public:
+      multi_tag_count_dumper(multi_tag_counter *mtc, int interval_ms, uint32_t num_per_line, const std::string &filename,
+                             multi_tag_count_dump_type type=MULTI_TAG_COUNT_DUMP_TYPE_OVERWRITE)
         : mtc_(mtc)
         , interval_ms_(interval_ms)
         , num_per_line_(num_per_line)
         , filename_(filename)
         , exit_flag_(false)
-      {}
+        , type_(type)
+      { assert(mtc); }
 
       ~multi_tag_count_dumper();
 
@@ -116,6 +124,7 @@ namespace chef {
       std::string                    filename_;
       chef::shared_ptr<chef::thread> thread_;
       bool                           exit_flag_;
+      multi_tag_count_dump_type      type_;
 
   }; // class multi_tag_count_dumper
 
@@ -132,7 +141,6 @@ namespace chef {
 
 
 
-#include <assert.h>
 #include <ctime>
 #include <sstream>
 
@@ -303,14 +311,19 @@ namespace chef {
     std::ostringstream ss;
 
     std::time_t now = std::time(NULL);
-    ss << "count dump - " << std::asctime(std::localtime(&now))
-       << "-------------------------------------\n\n";
+    ss << "------------------------------------------\n"
+       << "chef count dump - " << std::asctime(std::localtime(&now))
+       << "----\n\n"
+       << styled_stringify()
+       << "------------------------------------------\n";
 
-    ss << styled_stringify();
-
-    ss << "\n";
-    filepath_op::write_file(filename_+".tmp", ss.str());
-    filepath_op::rename(filename_+".tmp", filename_);
+    if (type_ == MULTI_TAG_COUNT_DUMP_TYPE_OVERWRITE) {
+      filepath_op::write_file(filename_+".tmp", ss.str());
+      filepath_op::rename(filename_+".tmp", filename_);
+    } else {
+      ss << "\n\n";
+      filepath_op::write_file(filename_, ss.str(), true);
+    }
   }
 
   inline std::string multi_tag_count_dumper::styled_stringify() {

@@ -2,7 +2,7 @@
  * @tag      v1.3.4
  * @file     chef_thread_group.hpp
  * @deps     chef_env.hpp | chef_task_thread.hpp
- * @platform linux/macos/xxx
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>

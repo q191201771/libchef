@@ -40,7 +40,7 @@ int main() {
   ENTER_TEST;
 
   example();
-  //bench();
+  bench();
 
   std::string res = chef::fmt_op::format("I am {}, and {} year old now!", "chef", 18);
   assert(res == "I am chef, and 18 year old now!");

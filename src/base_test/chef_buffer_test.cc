@@ -5,6 +5,30 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
+static void example() {
+  // 声明对象
+  chef::buffer buf(4096, 1024 * 16);
+
+  // 写入方式一，如果内部空余空间不足，会自动扩容
+  buf.append("hello", 5);
+
+  // 写入方式二，先调用reserve确保内部空余空间足够，再直接操作写位置指针，最后手动后移新写位置。
+  // 提供方法二是为了便于与其他字符串函数配合，在某些场景下减少一次内存拷贝。例如：
+  buf.reserve(128);
+  int len = snprintf(buf.write_pos(), 128, "name=%s,age=%d.", "chef", 18);
+  buf.seek_write_pos(std::min(len, 128));
+
+  // 读取所有数据
+  len = buf.readable_size();
+  std::string str(buf.read_pos(), len);
+  buf.erase(len);
+  // 读取部分数据，业务方可能有这种消费场景，比如
+  // loop:
+  //   if send buf not empty and event active:
+  //     sent_len = tcp_send(fd, buf.read_pos(), buf.readable_size());
+  //     buf.erase(sent_len);
+}
+
 namespace ut {
 
 class buffer_test {
@@ -182,6 +206,7 @@ class buffer_test {
 int main() {
   ENTER_TEST;
 
+  example();
   ut::buffer_test::test();
 
   return 0;

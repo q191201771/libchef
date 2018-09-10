@@ -4,8 +4,26 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
+static void example() {
+  int *foo = NULL;
+  int *bar = new int(10);
+  chef::defer x([&foo, &bar]() {
+    if (foo != NULL) { delete foo; }
+    if (bar != NULL) { delete bar; }
+  });
+
+  //if (true) { return; } // return under some condition
+  if (true) { foo = new int(20); } // malloc under some condition
+  if (true) { delete bar; bar = NULL; } // even free under some condition...
+
+  // some op...
+  return;
+}
+
 int main() {
   ENTER_TEST;
+
+  example();
 
   int a = 10;
   std::string str = "aaa";
