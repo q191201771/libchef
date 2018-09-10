@@ -2,6 +2,7 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 #include <iostream>
+#include <chrono>
 
 struct student {
   std::string name;
@@ -22,6 +23,7 @@ static void example() {
 }
 
 static void bench() {
+  return;
   int howmany = 1000000;
   using std::chrono::high_resolution_clock;
   auto start = high_resolution_clock::now();
