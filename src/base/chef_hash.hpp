@@ -1,5 +1,5 @@
 /**
- * @tag      v1.3.4
+ * @tag      v1.3.5
  * @file     chef_hash.hpp
  * @deps     c++11
  * @platform linux | macos | xxx
