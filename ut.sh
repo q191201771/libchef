@@ -9,6 +9,7 @@ echo '----------------------------------------'
 ./output/base_test/chef_defer_test
 ./output/base_test/chef_encoding_base64_op_test
 ./output/base_test/chef_filepath_op_test
+./output/base_test/chef_fmt_op_test
 ./output/base_test/chef_hash_test
 ./output/base_test/chef_lru_test
 ./output/base_test/chef_os_exec_op_test
