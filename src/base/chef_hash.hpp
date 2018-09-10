@@ -2,7 +2,7 @@
  * @tag      v1.3.4
  * @file     chef_hash.hpp
  * @deps     c++11
- * @platform linux/macos/xxx
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>
@@ -10,8 +10,25 @@
  *
  * @brief
  *   利用变参模板和std::hash实现的万能哈希
- *   可通过多种类型的多个变量组合生成哈希值
- *   按候捷老师课上讲的写的~
+ *   可通过多种类型的多个变量组合生成哈希值，使得哈希结果更均匀
+ *
+     ```
+     struct student {
+       public:
+         student(int id, const std::string &name, int age)
+           : id_(id)
+           , name_(name)
+           , age_(age)
+         {}
+
+         size_t hash_val() const { return chef::hash_val(id_, name_, age_); }
+
+       private:
+         int         id_;
+         std::string name_;
+         int         age_;
+     };
+     ```
  *
  */
 

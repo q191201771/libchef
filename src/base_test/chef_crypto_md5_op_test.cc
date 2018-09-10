@@ -4,8 +4,16 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
+static void example() {
+     std::string origin = "abcde";
+     std::string res = chef::crypto_md5_op::sum(origin);
+     assert(res == std::string("ab56b4d92b40713acc5af89985d4b786"));
+}
+
 int main() {
   ENTER_TEST;
+
+  example();
 
   std::map<std::string, std::string> mapping;
   mapping["d41d8cd98f00b204e9800998ecf8427e"] = "";

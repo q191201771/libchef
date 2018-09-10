@@ -17,19 +17,24 @@ struct student {
       , age_(age)
     {}
 
+    size_t hash_val() const { return chef::hash_val(id_, name_, age_); }
+
     int         id_;
     std::string name_;
     int         age_;
 };
 
 int random_age() {
-  return std::rand() % 100;
+  static const int NUM = 100;
+  //static const int NUM = 10 * 1000;
+  return std::rand() % (NUM);
 }
 
 std::string random_name() {
   std::string ret;
   char letters[] = "abcdefghijklmnopqrstuvwxyz";
   int length = std::rand() % 26 + 1;
+  //int length = 26;
   for (int i = 0; i < length; i++) {
     ret += letters[std::rand() % 26];
   }
@@ -49,7 +54,7 @@ void add(code2count &cc, size_t code) {
 
 void print(const std::string &name, const code2count &cc) {
   (void)name;
-  int max_count = 0;
+  int max_count = -1;
   size_t max_count_code = -1;
   for (auto &item : cc) {
     if (item.second > max_count) {
@@ -59,10 +64,10 @@ void print(const std::string &name, const code2count &cc) {
   }
   (void)max_count_code;
 
- //printf("-----%s-----\n", name.c_str());
- //printf("size: %lu\n", cc.size());
- //printf("max_count: %d max_hash_code: %lu\n", max_count, max_count_code);
- //printf("\n");
+ printf("-----%s-----\n", name.c_str());
+ printf("size: %lu\n", cc.size());
+ printf("max_count: %d max_hash_code: %lu\n", max_count, max_count_code);
+ printf("\n");
 }
 
 int main() {
@@ -86,17 +91,18 @@ int main() {
     size_t id_hash_code = std::hash<int>()(s->id_) % NUM;
     size_t name_hash_code = std::hash<std::string>()(s->name_) % NUM;
     size_t age_hash_code = std::hash<int>()(s->age_) % NUM;
-    size_t student_hash_code = chef::hash_val(s->id_, s->name_, s->age_) % NUM;
+    //size_t student_hash_code = chef::hash_val(s->id_, s->name_, s->age_) % NUM;
+    size_t student_hash_code = s->hash_val() % NUM;
     add(id_cc, id_hash_code);
     add(name_cc, name_hash_code);
     add(age_cc, age_hash_code);
     add(student_cc, student_hash_code);
   }
 
-  print("id", id_cc);
-  print("name", name_cc);
-  print("age", age_cc);
-  print("student", student_cc);
+  // print("id", id_cc);
+  // print("name", name_cc);
+  // print("age", age_cc);
+  // print("student", student_cc);
 
   return 0;
 }

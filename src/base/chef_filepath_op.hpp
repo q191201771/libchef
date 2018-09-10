@@ -2,7 +2,7 @@
  * @tag      v1.3.4
  * @file     chef_filepath_op.hpp
  * @deps     nope
- * @platform linux/macos/xxx
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>

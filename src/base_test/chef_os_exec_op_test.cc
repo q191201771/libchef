@@ -5,9 +5,7 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
-int main() {
-  ENTER_TEST;
-
+static void example() {
   std::time_t time = std::time(0);
   std::string filename = "/tmp/os_op_test." + std::to_string(time);
   std::string touch = "echo \"hello\nworld\" >> " + filename;
@@ -20,6 +18,12 @@ int main() {
   assert(cat_result[1] == "world");
   std::string rm = "rm " + filename;
   chef::os_exec_op::run_command(rm);
+}
+
+int main() {
+  ENTER_TEST;
+
+  example();
 
   std::vector<std::string> commands = {
     std::string("ps -ef | grep test"),

@@ -12,6 +12,14 @@
  *   - md5加密
  *   - @NOTICE copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
  *
+     ```
+     // 只需一个函数，传入需要md5编码的字符串，得到md5结果
+
+     std::string origin = "abcde";
+     std::string res = chef::crypto_md5_op::sum(origin);
+     // assert(res == std::string("ab56b4d92b40713acc5af89985d4b786"));
+     ```
+ *
  */
 
 #ifndef _CHEF_BASE_CRYPTO_MD5_OP_HPP_

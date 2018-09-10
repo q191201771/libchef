@@ -2,7 +2,7 @@
  * @tag      v1.3.4
  * @file     chef_crypto_sha1_op.hpp
  * @deps     nope
- * @platform linux/macos/xxx
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>
@@ -12,6 +12,14 @@
  * @brief
  *   - sha1加密
  *   - @NOTICE 实现部分拷贝自redis3.2.9中的sha1.h和sha1.c https://github.com/antirez/redis/releases/tag/3.2.9
+ *
+     ```
+     // 只需一个函数，传入需要sha1编码的字符串，得到sha1结果
+
+     std::string origin = "abcde";
+     std::string res = chef::crypto_sha1_op::sum(origin);
+     // assert(res == std::string("03de6c570bfe24bfc328ccd7ca46b76eadaf4334"));
+     ```
  *
  */
 

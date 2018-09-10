@@ -12,6 +12,14 @@
  *   - base64编码、解码
  *   - @NOTICE copy from https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
  *
+     ```
+     std::string origin = "foob";
+     std::string res = chef::encoding_base64_op(origin);
+     //assert(res == "Zm9vYg==");
+     origin = chef::encoding_base64_op::decode(res);
+     //assert(origin == "foob");
+     ```
+ *
  */
 
 #ifndef _CHEF_BASE_BASE64_H_

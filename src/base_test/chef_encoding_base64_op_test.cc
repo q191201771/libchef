@@ -3,8 +3,18 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
+static void example() {
+     std::string origin = "foob";
+     std::string res = chef::encoding_base64_op::encode(origin);
+     assert(res == "Zm9vYg==");
+     origin = chef::encoding_base64_op::decode(res);
+     assert(origin == "foob");
+}
+
 int main() {
   ENTER_TEST;
+
+  example();
 
   std::map<std::string, std::string> mapping;
   mapping["\x14\xfb\x9c\x03\xd9\x7e"] = "FPucA9l+";

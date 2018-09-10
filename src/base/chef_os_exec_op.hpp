@@ -8,7 +8,22 @@
  *   chef <191201771@qq.com>
  *     -initial release 2016-08-31
  *
- * @brief  执行shell命令
+ * @brief    执行shell命令
+ *
+     ```
+     std::time_t time = std::time(0);
+     std::string filename = "/tmp/os_op_test." + std::to_string(time);
+     std::string touch = "echo \"hello\nworld\" >> " + filename;
+     std::vector<std::string> touch_result = chef::os_exec_op::run_command(touch);
+     //assert(touch_result.size() == 0);
+     std::string cat = "cat " + filename;
+     std::vector<std::string> cat_result = chef::os_exec_op::run_command(cat);
+     //assert(cat_result.size() == 2);
+     //assert(cat_result[0] == "hello");
+     //assert(cat_result[1] == "world");
+     std::string rm = "rm " + filename;
+     chef::os_exec_op::run_command(rm);
+     ```
  *
  */
 

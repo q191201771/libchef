@@ -13,8 +13,16 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 
+static void example() {
+     std::string origin = "abcde";
+     std::string res = chef::crypto_sha1_op::sum(origin);
+     assert(res == std::string("03de6c570bfe24bfc328ccd7ca46b76eadaf4334"));
+}
+
 int main() {
   ENTER_TEST;
+
+  example();
 
   std::map<std::string, std::string> mapping;
 

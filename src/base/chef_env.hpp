@@ -2,7 +2,7 @@
  * @tag      v1.3.4
  * @file     chef_env.hpp
  * @deps     c++11 or libboost
- * @platform linux/macos/xxx
+ * @platform linux | macos | xxx
  *
  * @author
  *   chef <191201771@qq.com>

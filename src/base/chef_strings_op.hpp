@@ -2,7 +2,7 @@
  * @tag      v1.3.4
  * @file     chef_strings_op.hpp
  * @deps     nope
- * @platform linux/macos/windows
+ * @platform linux | macos | windows
  *
  * @author
  *   chef <191201771@qq.com>
