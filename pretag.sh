@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tag='v1.3.4'
+tag='v1.3.5'
 echo "New tag ${tag}"
 
 files=`ls src/base/*.hpp`
