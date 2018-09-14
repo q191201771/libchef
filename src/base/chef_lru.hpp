@@ -1,5 +1,5 @@
 /**
- * @tag      v1.3.5
+ * @tag      v1.3.6
  * @file     chef_lru.hpp
  * @deps     nope
  * @platform linux | macos | xxx

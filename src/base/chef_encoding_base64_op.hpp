@@ -1,5 +1,5 @@
 /**
- * @tag      v1.3.5
+ * @tag      v1.3.6
  * @file     chef_encoding_base64_op.hpp
  * @deps     nope
  * @platform linux | macos | xxx
