@@ -46,6 +46,8 @@ void parallel_test() {
   gtt.add(parallel_helper, 100);
   gtt.add(parallel_helper);
   we.wait();
+  usleep(1000 * 200);
+  // 正在执行的任务依然算是undone task.
   assert(gtt.num_of_undone_task() == 0);
   assert(count == 4);
 }
