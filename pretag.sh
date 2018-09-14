@@ -1,6 +1,6 @@
 #!/bin/bash
 
-tag='v1.3.5'
+tag='v1.3.6'
 echo "New tag ${tag}"
 
 files=`ls src/base/*.hpp`
@@ -18,9 +18,9 @@ do
   fi
 done
 
-#./ut.sh
-#git add .
-#git commit -m ":bookmark: pretag ${tag}"
-#git push
-#git tag ${tag}
-#git push --tags
+./ut.sh && \
+git add . && \
+git commit -m ":bookmark: pretag ${tag}" && \
+git push && \
+git tag ${tag} && \
+git push --tags
