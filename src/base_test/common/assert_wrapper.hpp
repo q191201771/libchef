@@ -20,7 +20,7 @@
 
 //#ifndef NDEBUG
 #undef assert
-#define assert(expr) if(!(expr)) { fprintf(stderr, "%s %s %d\n", #expr, __FILE__, __LINE__); };
+#define assert(expr) if(!(expr)) { fprintf(stderr, "%s %s %d\n", #expr, __FILE__, __LINE__); exit(-1); };
 //#endif
 
 #define PANIC(info) fprintf(stderr, "%s %s %d\n"), info, __FILE__, __LINE__); abort();

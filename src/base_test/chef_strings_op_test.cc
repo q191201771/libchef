@@ -565,16 +565,38 @@ void strings_replace_test() {
   std::string target;
   std::string replacement;
   assert(chef::strings_op::replace("", "aaa", "bbb") == "");
+  assert(chef::strings_op::replace_first("", "aaa", "bbb") == "");
+  assert(chef::strings_op::replace_last("", "aaa", "bbb") == "");
   assert(chef::strings_op::replace("aaa", "", "bbb") == "aaa");
+  assert(chef::strings_op::replace_first("aaa", "", "bbb") == "aaa");
+  assert(chef::strings_op::replace_last("aaa", "", "bbb") == "aaa");
   assert(chef::strings_op::replace("aba", "b", "") == "aa");
+  assert(chef::strings_op::replace_first("aba", "b", "") == "aa");
+  assert(chef::strings_op::replace_last("aba", "b", "") == "aa");
   assert(chef::strings_op::replace("aa", "aa", "c") == "c");
+  assert(chef::strings_op::replace_first("aa", "aa", "c") == "c");
+  assert(chef::strings_op::replace_last("aa", "aa", "c") == "c");
   assert(chef::strings_op::replace("aaa", "aa", "c") == "ca");
+  assert(chef::strings_op::replace_first("aaa", "aa", "c") == "ca");
+  assert(chef::strings_op::replace_last("aaa", "aa", "c") == "ac");
   assert(chef::strings_op::replace("aaaa", "aa", "c") == "cc");
+  assert(chef::strings_op::replace_first("aaaa", "aa", "c") == "caa");
+  assert(chef::strings_op::replace_last("aaaa", "aa", "c") == "aac");
   assert(chef::strings_op::replace("aaaa", "aaa", "c") == "ca");
+  assert(chef::strings_op::replace_first("aaaa", "aaa", "c") == "ca");
+  assert(chef::strings_op::replace_last("aaaa", "aaa", "c") == "ac");
   assert(chef::strings_op::replace("aaaaa", "aa", "c") == "cca");
+  assert(chef::strings_op::replace_first("aaaaa", "aa", "c") == "caaa");
+  assert(chef::strings_op::replace_last("aaaaa", "aa", "c") == "aaac");
   assert(chef::strings_op::replace("aaaaa", "aaa", "c") == "caa");
+  assert(chef::strings_op::replace_first("aaaaa", "aaa", "c") == "caa");
+  assert(chef::strings_op::replace_last("aaaaa", "aaa", "c") == "aac");
   assert(chef::strings_op::replace("aabacaada", "aa", "c") == "cbaccda");
+  assert(chef::strings_op::replace_first("aabacaada", "aa", "c") == "cbacaada");
+  assert(chef::strings_op::replace_last("aabacaada", "aa", "c") == "aabaccda");
   assert(chef::strings_op::replace("abacaadaa", "aa", "c") == "abaccdc");
+  assert(chef::strings_op::replace_first("abacaadaa", "aa", "c") == "abaccdaa");
+  assert(chef::strings_op::replace_last("abacaadaa", "aa", "c") == "abacaadc");
 }
 
 void strings_macro_test() {

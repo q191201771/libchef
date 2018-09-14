@@ -80,6 +80,12 @@ namespace chef {
       /// 把`s`中的`target`全部替换成`replacement`
       static std::string replace(const std::string &s, const std::string &target, const std::string &replacement);
 
+      /// 把`s`中的第一个`target`替换成`replacement`
+      static std::string replace_first(const std::string &s, const std::string &target, const std::string &replacement);
+
+      /// 把`s`中的最后一个`target`替换成`replacement`
+      static std::string replace_last(const std::string &s, const std::string &target, const std::string &replacement);
+
       /**
        * 用`sep`分割`s`
        *
@@ -270,6 +276,27 @@ namespace chef {
       ret.append(s.substr(l));
     }
     return ret;
+  }
+
+  inline std::string strings_op::replace_first(const std::string &s, const std::string &target, const std::string &replacement) {
+    if (s.empty() || target.empty()) { return s; }
+
+    std::string ret = s;
+    std::size_t pos = ret.find(target);
+    if (pos == std::string::npos) { return ret; }
+
+    return ret.replace(pos, target.length(), replacement.c_str());
+
+  }
+
+  inline std::string strings_op::replace_last(const std::string &s, const std::string &target, const std::string &replacement) {
+    if (s.empty() || target.empty()) { return s; }
+
+    std::string ret = s;
+    std::size_t pos = ret.rfind(target);
+    if (pos == std::string::npos) { return ret; }
+
+    return ret.replace(pos, target.length(), replacement.c_str());
   }
 
   inline std::vector<std::string> strings_op::split_any(const std::string &s, const std::string &charlist, bool keep_empty_strings) {
