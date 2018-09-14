@@ -1,2 +1,2 @@
 language: cpp
-script: scons
+script: ./ut.sh
