@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#
 tag='v1.3.6'
 echo "New tag ${tag}"
 
