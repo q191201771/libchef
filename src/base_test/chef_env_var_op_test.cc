@@ -2,6 +2,7 @@
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 #include <string>
+#include <ctime>
 
 static void example() {
      bool succ;
