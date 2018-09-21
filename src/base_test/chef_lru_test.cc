@@ -4,21 +4,21 @@
 #include <string>
 
 static void example() {
-     chef::Lru<std::string, int> lru(3);
-     lru.put("chef", 1);
-     lru.put("yoko", 2);
-     lru.put("tom", 3);
-     lru.put("jerry", 4); // 超过容器大小，淘汰最老的`chef`
+     chef::lru<std::string, int> c(3);
+     c.put("chef", 1);
+     c.put("yoko", 2);
+     c.put("tom", 3);
+     c.put("jerry", 4); // 超过容器大小，淘汰最老的`chef`
      bool exist;
      int v;
-     exist = lru.get("chef", &v);
+     exist = c.get("chef", &v);
      assert(!exist);
-     exist = lru.get("yoko", &v);
+     exist = c.get("yoko", &v);
      assert(exist && v == 2);
-     lru.put("garfield", 5); // 超过容器大小，注意，由于`yoko`刚才读取时会更新热度，所以淘汰的是`tom`
-     exist = lru.get("yoko", &v);
+     c.put("garfield", 5); // 超过容器大小，注意，由于`yoko`刚才读取时会更新热度，所以淘汰的是`tom`
+     exist = c.get("yoko", &v);
      assert(exist && v == 2);
-     exist = lru.get("tom", &v);
+     exist = c.get("tom", &v);
      assert(!exist);
 }
 
@@ -28,10 +28,10 @@ int main() {
   example();
 
   int v;
-  chef::Lru<std::string, int>::List ll;
-  chef::Lru<std::string, int>::List::iterator iter;
+  chef::lru<std::string, int>::List ll;
+  chef::lru<std::string, int>::List::iterator iter;
 
-  chef::Lru<std::string, int> lru(3);
+  chef::lru<std::string, int> lru(3);
 
   // empty 空
   assert(lru.get("notexist", &v) == false);

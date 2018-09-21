@@ -18,7 +18,8 @@ chef_buffer.hpp             | nope     | FIFO的流式buffer，支持自动扩�
 chef_filepath_op.hpp        | nope     | 文件、文件夹常用操作帮助函数集合 |
 chef_strings_op.hpp         | nope     | std::string常用操作帮助函数集合 |
 chef_lru.hpp                | nope     | 固定大小的LRU cache，支持插入，查询，以及获取全量列表 |
-chef_os_exec_op.hpp         | nope     | 执行shell命令 |
+chef_os_exec_op.hpp         | nope     | 开启子进程执行shell命令，并阻塞式等待结果 |
+chef_env_var_op.hpp         | nope     | 读写系统环境变量 |
 chef_crypto_md5_op.hpp      | nope     | md5加密 |
 chef_crypto_sha1_op.hpp     | nope     | sha1加密 |
 chef_encoding_base64_op.hpp | nope     | base64编码、解码 |

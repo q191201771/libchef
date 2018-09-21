@@ -20,6 +20,7 @@ echo '----------------------------------------' && \
 ./output/base_test/chef_thread_pool_test && \
 ./output/base_test/chef_wait_event_test && \
 ./output/base_test/chef_wait_event_counter_test && \
+./output/base_test/chef_env_var_op_test && \
 rm -rf chef_thread_group_test.dump && \
 rm -rf not_exist && \
 echo '----------------------------------------'
