@@ -63,6 +63,9 @@ prgs += env.Program('chef_wait_event_counter_test', chef_wait_event_counter_srcs
 chef_fmt_op_srcs = ['chef_fmt_op_test.cc']
 prgs += env.Program('chef_fmt_op_test', chef_fmt_op_srcs, LIBS=platform_libs)
 
+chef_env_var_op_srcs = ['chef_env_var_op_test.cc']
+prgs += env.Program('chef_env_var_op_test', chef_env_var_op_srcs, LIBS=platform_libs)
+
 # -----deps third party-----
 
 #chef_http_op_srcs = ['dup.cc', 'chef_http_op_test.cc']

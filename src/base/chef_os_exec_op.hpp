@@ -8,21 +8,42 @@
  *   chef <191201771@qq.com>
  *     -initial release 2016-08-31
  *
- * @brief    执行shell命令
+ * @brief    开启子进程执行shell命令，并阻塞式等待结果
  *
      ```
-     std::time_t time = std::time(0);
-     std::string filename = "/tmp/os_op_test." + std::to_string(time);
-     std::string touch = "echo \"hello\nworld\" >> " + filename;
-     std::vector<std::string> touch_result = chef::os_exec_op::run_command(touch);
-     //assert(touch_result.size() == 0);
-     std::string cat = "cat " + filename;
-     std::vector<std::string> cat_result = chef::os_exec_op::run_command(cat);
-     //assert(cat_result.size() == 2);
-     //assert(cat_result[0] == "hello");
-     //assert(cat_result[1] == "world");
-     std::string rm = "rm " + filename;
-     chef::os_exec_op::run_command(rm);
+     bool succ;
+     int exit_status;
+     std::string filename = std::string("/tmp/os_op_test_") + std::to_string(std::time(0));
+
+     // 使用echo命令创建一个随机名称的文件并写入两行内容
+     std::string cmd_touch = std::string("echo \"hello\nworld\" >> ") + filename;
+     std::vector<std::string> output_touch;
+     succ = chef::os_exec_op::run_command(cmd_touch, &output_touch, &exit_status);
+     assert(succ && output_touch.empty() && exit_status == 0);
+
+     // 使用cat命令获取文件内容
+     std::string cmd_cat = "cat " + filename;
+     std::vector<std::string> output_cat;
+     succ = chef::os_exec_op::run_command(cmd_cat, &output_cat, &exit_status);
+     assert(succ && output_cat.size() == 2 && output_cat[0] == "hello" && output_cat[1] == "world" && exit_status == 0);
+
+     // 使用rm命令删除文件
+     std::string cmd_rm = "rm " + filename;
+     std::vector<std::string> output_rm;
+     succ = chef::os_exec_op::run_command(cmd_rm, &output_rm, &exit_status);
+     assert(succ && output_rm.empty() && exit_status == 0);
+
+     // 测试不存在的命令
+     std::string cmd_not_exist = std::string("/tmp/cmd_not_exist_") + std::to_string(std::time(0));
+     std::vector<std::string> output_cmd_not_exist;
+     succ = chef::os_exec_op::run_command(cmd_not_exist, &output_cmd_not_exist, &exit_status);
+     assert(succ && output_cmd_not_exist.empty() && exit_status != 0);
+
+     // 测试删除不存在的文件
+     std::string cmd_rm_not_exist = std::string("rm /tmp/file_not_exist_") + std::to_string(std::time(0));
+     std::vector<std::string> output_cmd_rm_not_exist;
+     succ = chef::os_exec_op::run_command(cmd_rm_not_exist, &output_cmd_rm_not_exist, &exit_status);
+     assert(succ && output_cmd_not_exist.empty() && exit_status != 0);
      ```
  *
  */
@@ -39,10 +60,15 @@ namespace chef {
   class os_exec_op {
     public:
       /**
-       * 执行shell命令，返回包含每行执行结果的数组
+       * 开启子进程执行shell命令，并阻塞式等待结果
        *
+       * @param cmd 需执行的命令
+       * @param[output] output_lines 命令执行完后的标准输出结果，以行为单位存储
+       * @param[output] exit_status 命令执行完后的退出状态码
+       *
+       * @return 命令执行返回true，错误返回false
        */
-      static std::vector<std::string> run_command(const std::string &cmd);
+      static bool run_command(const std::string &cmd, std::vector<std::string> *output_lines, int *exit_status);
 
     private:
       os_exec_op();
@@ -69,28 +95,24 @@ namespace chef {
 
 namespace chef {
 
-  inline std::vector<std::string> os_exec_op::run_command(const std::string &cmd) {
-    std::vector<std::string> result;
-
+  inline bool os_exec_op::run_command(const std::string &cmd, std::vector<std::string> *output_lines, int *exit_status) {
     FILE *fp = popen(cmd.c_str(), "r");
-    if (fp == NULL) {
-      fprintf(stderr, "popen(\"%s\") fail.\n", cmd.c_str());
-      return result;
-    }
+    if (!fp) { return false; }
 
-    const int MAX_LEN = 8192;
+    static const int MAX_LEN = 16384;
     char line[MAX_LEN] = {0};
     for (; fgets(line, MAX_LEN, fp); ) {
       size_t rend = strlen(line) - 1;
-      if (line[rend] == '\n') {
-        line[rend] = '\0';
-      }
-      result.push_back(line);
+      if (line[rend] == '\n') { line[rend] = '\0'; }
+
+      if (output_lines) { output_lines->push_back(line); }
     }
+    int es = pclose(fp);
+    if (es == -1) { return false; }
 
-    pclose(fp);
+    if (exit_status) { *exit_status = es; }
 
-    return result;
+    return true;
   }
 
 } // namespace chef

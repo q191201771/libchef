@@ -16,6 +16,7 @@
 
 #include <string>
 #include <stdio.h>
+#include <iostream>
 
 namespace chef {
 

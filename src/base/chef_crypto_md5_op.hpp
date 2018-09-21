@@ -275,7 +275,8 @@ inline static void md5_process(md5_state_t *pms, md5_byte_t const * data /*[64]*
          */
         if (!((data - (md5_byte_t const *)0) & 3)) {
         /* data are properly aligned */
-        X = (md5_word_t const *)data;
+        //X = (md5_word_t const *)data;
+        X = reinterpret_cast<md5_word_t const *>(data);
         } else {
         /* not aligned */
         std::memcpy(chef_md5_xbuf, data, 64);

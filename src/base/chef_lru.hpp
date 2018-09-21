@@ -11,21 +11,21 @@
  * @brief    固定大小的LRU cache，支持插入，查询，以及获取全量列表
  *
      ```
-     chef::Lru<std::string, int> lru(3);
-     lru.put("chef", 1);
-     lru.put("yoko", 2);
-     lru.put("tom", 3);
-     lru.put("jerry", 4); // 超过容器大小，淘汰最老的`chef`
+     chef::lru<std::string, int> c(3);
+     c.put("chef", 1);
+     c.put("yoko", 2);
+     c.put("tom", 3);
+     c.put("jerry", 4); // 超过容器大小，淘汰最老的`chef`
      bool exist;
      int v;
-     exist = lru.get("chef", &v);
+     exist = c.get("chef", &v);
      //assert(!exist);
-     exist = lru.get("yoko", &v);
+     exist = c.get("yoko", &v);
      //assert(exist && v == 2);
-     lru.put("garfield", 5); // 超过容器大小，注意，由于`yoko`刚才读取时会更新热度，所以淘汰的是`tom`
-     exist = lru.get("yoko", &v);
+     c.put("garfield", 5); // 超过容器大小，注意，由于`yoko`刚才读取时会更新热度，所以淘汰的是`tom`
+     exist = c.get("yoko", &v);
      //assert(exist && v == 2);
-     exist = lru.get("tom", &v);
+     exist = c.get("tom", &v);
      //assert(!exist);
      ```
  *
@@ -41,15 +41,15 @@
 namespace chef {
 
   template <typename KeyT, typename ValueT>
-  class Lru {
+  class lru {
     public:
       typedef std::pair<KeyT, ValueT> KvPair;
       typedef std::list<KvPair> List;
 
     public:
       // @param cap 容器大小
-      Lru(std::size_t cap);
-      ~Lru();
+      lru(std::size_t cap);
+      ~lru();
 
     public:
       // @NOTICE function put 和 function get 操作都会更新元素热度，put 的 key 即使已经存在甚至对应的 value 相同也会更新热度
@@ -67,8 +67,8 @@ namespace chef {
       std::size_t capacity() const;
 
     private:
-      Lru(const Lru&);
-      Lru &operator=(const Lru&);
+      lru(const lru&);
+      lru &operator=(const lru&);
 
     private:
       typedef std::map<KeyT, typename List::iterator> Map;
@@ -95,13 +95,13 @@ namespace chef {
 namespace chef {
 
 template <typename KeyT, typename ValueT>
-Lru<KeyT, ValueT>::Lru(std::size_t cap) : capacity_(cap) {}
+lru<KeyT, ValueT>::lru(std::size_t cap) : capacity_(cap) {}
 
 template <typename KeyT, typename ValueT>
-Lru<KeyT, ValueT>::~Lru() { list_.clear(); map_.clear(); }
+lru<KeyT, ValueT>::~lru() { list_.clear(); map_.clear(); }
 
 template <typename KeyT, typename ValueT>
-bool Lru<KeyT, ValueT>::put(KeyT k, ValueT v) {
+bool lru<KeyT, ValueT>::put(KeyT k, ValueT v) {
   bool not_exist = true;
   typename Map::iterator iter = map_.find(k);
   if (iter != map_.end()) {
@@ -122,7 +122,7 @@ bool Lru<KeyT, ValueT>::put(KeyT k, ValueT v) {
 }
 
 template <typename KeyT, typename ValueT>
-bool Lru<KeyT, ValueT>::get(KeyT k, ValueT *v) {
+bool lru<KeyT, ValueT>::get(KeyT k, ValueT *v) {
   typename Map::iterator iter = map_.find(k);
   if (iter == map_.end()) {
     return false;
@@ -136,17 +136,17 @@ bool Lru<KeyT, ValueT>::get(KeyT k, ValueT *v) {
 }
 
 template <typename KeyT, typename ValueT>
-std::size_t Lru<KeyT, ValueT>::size() const {
+std::size_t lru<KeyT, ValueT>::size() const {
   return list_.size();
 }
 
 template <typename KeyT, typename ValueT>
-std::size_t Lru<KeyT, ValueT>::capacity() const {
+std::size_t lru<KeyT, ValueT>::capacity() const {
   return capacity_;
 }
 
 template <typename KeyT, typename ValueT>
-typename Lru<KeyT, ValueT>::List Lru<KeyT, ValueT>::get_list() {
+typename lru<KeyT, ValueT>::List lru<KeyT, ValueT>::get_list() {
   return list_;
 }
 
