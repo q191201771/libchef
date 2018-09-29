@@ -19,7 +19,6 @@
  *     支持round-robin轮转循环，随机，当前最空闲（即未完成任务数最少）线程三种方式。
  *     适用于任务不要求强顺序性执行的场景。
  *
- *
  */
 
 #ifndef _CHEF_BASE_THREAD_GROUP_H_
