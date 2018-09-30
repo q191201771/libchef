@@ -1,5 +1,5 @@
 /**
- * @tag      v1.4.7
+ * @tag      v1.4.8
  * @file     chef_strings_op.hpp
  * @deps     nope
  * @platform linux | macos | windows
