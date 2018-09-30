@@ -45,9 +45,9 @@ namespace chef {
       };
       static bool obtain_mem_info(mem_info *mi);
 
-      // func exe_filepath e.g. /home/chef/starry-night/build/base_test/stuff_test
-      // func exe_path     e.g. /home/chef/starry-night/build/base_test/
-      // func exe_name     e.g. stuff_test
+      // func exe_filepath e.g. /home/travis/build/q191201771/starry-night/output/chef_base_test/chef_this_process_op_test
+      // func exe_path     e.g. /home/travis/build/q191201771/starry-night/output/chef_base_test/
+      // func exe_name     e.g. chef_this_process_op_test
       static std::string exe_filepath();
       static std::string exe_path();
       static std::string exe_name();
