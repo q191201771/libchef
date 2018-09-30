@@ -18,6 +18,7 @@ echo '----------------------------------------' && \
 ./output/chef_base_test/chef_strings_op_test && \
 ./output/chef_base_test/chef_task_thread_test && \
 ./output/chef_base_test/chef_this_machine_op_test && \
+./output/chef_base_test/chef_this_process_op_test && \
 ./output/chef_base_test/chef_thread_group_test && \
 ./output/chef_base_test/chef_thread_pool_test && \
 ./output/chef_base_test/chef_wait_event_test && \
