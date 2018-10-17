@@ -152,4 +152,4 @@ typename lru<KeyT, ValueT>::List lru<KeyT, ValueT>::get_list() {
 
 } // namespace chef
 
-#endif
+#endif // _CHEF_BASE_LRU_HPP_

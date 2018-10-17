@@ -48,8 +48,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_OS_EXEC_OP_H_
-#define _CHEF_BASE_OS_EXEC_OP_H_
+#ifndef _CHEF_BASE_OS_EXEC_OP_HPP_
+#define _CHEF_BASE_OS_EXEC_OP_HPP_
 #pragma once
 
 #include <string>
@@ -117,4 +117,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_OS_EXEC_OP_H_
+#endif // _CHEF_BASE_OS_EXEC_OP_HPP_

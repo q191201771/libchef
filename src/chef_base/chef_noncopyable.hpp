@@ -15,8 +15,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_NONCOPYABLE_H_
-#define _CHEF_BASE_NONCOPYABLE_H_
+#ifndef _CHEF_BASE_NONCOPYABLE_HPP_
+#define _CHEF_BASE_NONCOPYABLE_HPP_
 #pragma once
 
 namespace chef {
@@ -46,4 +46,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_NONCOPYABLE_H_
+#endif // _CHEF_BASE_NONCOPYABLE_HPP_

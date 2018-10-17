@@ -12,8 +12,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_THIS_PROCESS_OP_H_
-#define _CHEF_BASE_THIS_PROCESS_OP_H_
+#ifndef _CHEF_BASE_THIS_PROCESS_OP_HPP_
+#define _CHEF_BASE_THIS_PROCESS_OP_HPP_
 #pragma once
 
 #include <string>
@@ -289,4 +289,4 @@ namespace inner {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_THIS_PROC_OP_H_
+#endif // _CHEF_BASE_THIS_PROCESS_OP_HPP_

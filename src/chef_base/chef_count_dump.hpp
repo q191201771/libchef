@@ -15,8 +15,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_COUNT_DUMP_H_
-#define _CHEF_BASE_COUNT_DUMP_H_
+#ifndef _CHEF_BASE_COUNT_DUMP_HPP_
+#define _CHEF_BASE_COUNT_DUMP_HPP_
 #pragma once
 
 #include "chef_env.hpp"
@@ -350,4 +350,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_COUNT_DUMP_H_
+#endif // _CHEF_BASE_COUNT_DUMP_HPP_

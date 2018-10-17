@@ -22,8 +22,9 @@
  *
  */
 
-#ifndef _CHEF_BASE_BASE64_H_
-#define _CHEF_BASE_BASE64_H_
+#ifndef _CHEF_BASE_BASE64_HPP_
+#define _CHEF_BASE_BASE64_HPP_
+#pragma once
 
 #include <string>
 
@@ -262,4 +263,4 @@ static inline std::string base64_decode(unsigned char const * input, size_t len)
 } /// namespace inner
 } /// namespace chef
 
-#endif /// _CHEF_BASE_BASE64_H_
+#endif /// _CHEF_BASE_BASE64_HPP_

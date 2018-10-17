@@ -12,8 +12,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_STRINGS_H_
-#define _CHEF_BASE_STRINGS_H_
+#ifndef _CHEF_BASE_STRINGS_HPP_
+#define _CHEF_BASE_STRINGS_HPP_
 #pragma once
 
 #include <sstream>
@@ -473,4 +473,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_STRINGS_H_
+#endif // _CHEF_BASE_STRINGS_HPP_

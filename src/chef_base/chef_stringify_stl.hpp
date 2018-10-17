@@ -294,5 +294,5 @@ std::string stringify_stl(std::priority_queue<T> val,
 
 }; // namespace chef
 
-#endif
+#endif // _CHEF_BASE_STRINGIFY_STL_HPP_
 
