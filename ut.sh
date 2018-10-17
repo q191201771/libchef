@@ -14,6 +14,7 @@ echo '----------------------------------------' && \
 ./output/chef_base_test/chef_hash_test && \
 ./output/chef_base_test/chef_lru_test && \
 ./output/chef_base_test/chef_os_exec_op_test && \
+./output/chef_base_test/chef_snippet_test && \
 ./output/chef_base_test/chef_stringify_stl_test && \
 ./output/chef_base_test/chef_strings_op_test && \
 ./output/chef_base_test/chef_task_thread_test && \
@@ -27,7 +28,7 @@ echo '----------------------------------------' && \
 rm -rf chef_thread_group_test.dump && \
 rm -rf not_exist && \
 echo '----------------------------------------'
-echo 'all unit test done. :)'
+echo 'all unit test succ. :)'
 
 #./output/base_test/chef_http_op_test
 #./output/base_test/chef_log_test

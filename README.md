@@ -26,6 +26,7 @@ chef_count_dump.hpp         | chef_env | 在各种线程模型下高效的对多
 chef_buffer.hpp             | nope     | FIFO的流式buffer，支持自动扩容、收缩，供生产和消费长度不固定的场景使用（例如tcp的读写buffer） |
 chef_strings_op.hpp         | nope     | std::string常用操作帮助函数集合 |
 chef_stringify_stl.hpp      | nope     | 字符串化stl容器。支持所有stl类型容器，支持多维嵌套容器，支持容器元素为自定义类型，支持自定义样式 |
+chef_snippet.hpp            | nope     | 用宏减少一些手写重复代码。比如你有一个结构体，里面有各种类型的各种名称的成员变量，有可能有锁或无锁。你不再需要手写这些变量的声明、set、get函数等一堆代码 |
 chef_weight_selector.hpp    | nope     | 往容器中添加带有权重的元素，根据权重轮询（Weight Round-Robin）返回容器中的元素 |
 chef_lru.hpp                | nope     | 固定大小的LRU cache，支持插入，查询，以及获取全量列表 |
 chef_os_exec_op.hpp         | nope     | 开启子进程执行shell命令，并阻塞式等待结果 |
