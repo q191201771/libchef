@@ -23,8 +23,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_CRYPTO_SHA1_OP_
-#define _CHEF_BASE_CRYPTO_SHA1_OP_
+#ifndef _CHEF_BASE_CRYPTO_SHA1_OP_HPP_
+#define _CHEF_BASE_CRYPTO_SHA1_OP_HPP_
 #pragma once
 
 #include <string>
@@ -316,4 +316,4 @@ inline void SHA1Final(unsigned char digest[20], SHA1_CTX* context)
 
 } /// namespace chef
 
-#endif
+#endif // _CHEF_BASE_CRYPTO_SHA1_OP_HPP_

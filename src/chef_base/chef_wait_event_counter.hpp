@@ -15,8 +15,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_WAIT_EVENT_COUNTER_H_
-#define _CHEF_BASE_WAIT_EVENT_COUNTER_H_
+#ifndef _CHEF_BASE_WAIT_EVENT_COUNTER_HPP_
+#define _CHEF_BASE_WAIT_EVENT_COUNTER_HPP_
 #pragma once
 
 #include "chef_env.hpp"
@@ -125,4 +125,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_WAIT_EVENT_COUNTER_H_
+#endif // _CHEF_BASE_WAIT_EVENT_COUNTER_HPP_

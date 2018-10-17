@@ -23,9 +23,11 @@ echo '----------------------------------------' && \
 ./output/chef_base_test/chef_thread_pool_test && \
 ./output/chef_base_test/chef_wait_event_test && \
 ./output/chef_base_test/chef_wait_event_counter_test && \
+./output/chef_base_test/chef_weight_selector_test && \
 rm -rf chef_thread_group_test.dump && \
 rm -rf not_exist && \
 echo '----------------------------------------'
+echo 'all unit test done. :)'
 
 #./output/base_test/chef_http_op_test
 #./output/base_test/chef_log_test

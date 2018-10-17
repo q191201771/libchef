@@ -21,8 +21,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_THREAD_GROUP_H_
-#define _CHEF_BASE_THREAD_GROUP_H_
+#ifndef _CHEF_BASE_THREAD_GROUP_HPP_
+#define _CHEF_BASE_THREAD_GROUP_HPP_
 #pragma once
 
 #include "chef_env.hpp"
@@ -159,4 +159,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif
+#endif // _CHEF_BASE_THREAD_GROUP_HPP_

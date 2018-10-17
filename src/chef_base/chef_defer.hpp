@@ -66,4 +66,4 @@ namespace chef {
 
 }; // namespace chef
 
-#endif
+#endif // _CHEF_BASE_DEFER_HPP_

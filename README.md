@@ -18,16 +18,17 @@ chef_fmt_op.hpp             | c++11    | 方便的生成格式化字符串，类
 chef_hash.hpp               | c++11    | 利用变参模板和std::hash实现的万能哈希。可通过多种类型的多个变量组合生成哈希值 |
 chef_buffer.hpp             | nope     | FIFO的流式buffer，支持自动扩容、收缩，供生产和消费长度不固定的场景使用（例如tcp的读写buffer） |
 chef_strings_op.hpp         | nope     | std::string常用操作帮助函数集合 |
-chef_lru.hpp                | nope     | 固定大小的LRU cache，支持插入，查询，以及获取全量列表 |
 chef_stringify_stl.hpp      | nope     | 字符串化stl容器。支持所有stl类型容器，支持多维嵌套容器，支持容器元素为自定义类型，支持自定义样式 |
-chef_this_machine_op.hpp    | nope     | 获取机器维度的信息，比如CPU，内存，带宽，开机时间等 |
-chef_this_process_op.hpp    | nope     | 获取当前进程维度的信息，比如进程启动时间，当前线程数，分页大小，内存占用，可执行文件路径，进程号，用户号，用户名，编译时间git版本等 |
+chef_lru.hpp                | nope     | 固定大小的LRU cache，支持插入，查询，以及获取全量列表 |
+chef_weight_selector.hpp    | nope     | 往容器中添加带有权重的元素，根据权重轮询（Weight Round-Robin）返回容器中的元素 |
 chef_os_exec_op.hpp         | nope     | 开启子进程执行shell命令，并阻塞式等待结果 |
 chef_filepath_op.hpp        | nope     | 文件、文件夹常用操作帮助函数集合 |
-chef_env_var_op.hpp         | nope     | 读写系统环境变量 |
+chef_this_machine_op.hpp    | nope     | 获取机器维度的信息，比如CPU，内存，带宽，开机时间等 |
+chef_this_process_op.hpp    | nope     | 获取当前进程维度的信息，比如进程启动时间，当前线程数，分页大小，内存占用，可执行文件路径，进程号，用户号，用户名，编译时间git版本等 |
 chef_crypto_md5_op.hpp      | nope     | md5加密 |
 chef_crypto_sha1_op.hpp     | nope     | sha1加密 |
 chef_encoding_base64_op.hpp | nope     | base64编码、解码 |
+chef_env_var_op.hpp         | nope     | 读写系统环境变量 |
 chef_noncopyable.hpp        | nope     | 禁用拷贝构造等函数 |
 chef_env.hpp                | chef_env | c++11和libboost功能相同部分的wrapper。通过增加一层接入层，使上层代码仅需通过一个宏开关就可以自由切换使用c++11或libboost |
 chef_defer.hpp              | chef_env | 类似golang defer，支持c goto清理等场景 |
@@ -48,22 +49,25 @@ src/chef_base/chef_encoding_base64_op.hpp https://github.com/zaphoyd/websocketpp
 ### 项目文件树
 
 ```
-/src/                         ......代码根目录
-  chef_base/                  ......基础库代码
-    [chef_xxx.hpp ...]        ......header only的接口文件，业务方直接包含头文件即可使用，每个头文件头部都有简单的功能说明。
-    .unfinished/              ......等待被整理的代码
-    .wrapper/                 ......一些对第三方代码的封装，由于目前starry-night定位于header only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
-      chef_http_op.hpp[_impl] ......对libcurl的封装，同步阻塞式完成http get/post
-      chef_log.hpp[_impl]     ......对libboost log的封装，近乎零配置，快速使用
-      compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
-  chef_base_test/             ......基础库测试代码
-/third_party/                 ......第三方依赖库
-.gitignore                    ......
-.travis.yml                   ......
-LINCENSE                      ......
-README.md                     ......
-SConstruct                    ......scons编译文件
-ut.sh                         ......执行测试代码脚本
+/src/                          ......代码根目录
+  /chef_base/                  ......基础库代码
+    /[chef_xxx.hpp ...]        ......header only的接口文件，业务方直接包含头文件即可使用，每个头文件头部都有简单的功能说明。
+    /.unfinished/              ......等待被整理的代码
+      ...
+    /.wrapper/                 ......一些对第三方代码的封装，由于目前starry-night定位于header only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
+      /chef_http_op.hpp[_impl] ......对libcurl的封装，同步阻塞式完成http get/post
+      /chef_log.hpp[_impl]     ......对libboost log的封装，近乎零配置，快速使用
+      /compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
+  /chef_base_test/             ......基础库测试代码
+    ...
+/third_party/                  ......第三方依赖库
+  ...
+.gitignore                     ......
+.travis.yml                    ......
+LINCENSE                       ......
+README.md                      ......
+SConstruct                     ......scons编译文件
+ut.sh                          ......执行测试代码脚本
 ```
 
 ### 我的环境

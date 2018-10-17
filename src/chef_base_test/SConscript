@@ -72,6 +72,9 @@ prgs += env.Program('chef_this_machine_op_test', chef_this_machine_op_srcs, LIBS
 chef_this_process_op_srcs = ['chef_this_process_op_test.cc']
 prgs += env.Program('chef_this_process_op_test', chef_this_process_op_srcs, LIBS=platform_libs)
 
+chef_weight_selector_srcs = ['chef_weight_selector_test.cc']
+prgs += env.Program('chef_weight_selector_test', chef_weight_selector_srcs, LIBS=platform_libs)
+
 # -----deps third party-----
 
 #chef_http_op_srcs = ['dup.cc', 'chef_http_op_test.cc']

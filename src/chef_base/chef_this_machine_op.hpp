@@ -12,8 +12,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_THIS_MACHINE_OP_H_
-#define _CHEF_BASE_THIS_MACHINE_OP_H_
+#ifndef _CHEF_BASE_THIS_MACHINE_OP_HPP_
+#define _CHEF_BASE_THIS_MACHINE_OP_HPP_
 #pragma once
 
 #include <set>
@@ -63,8 +63,6 @@ namespace chef {
   };
 
 } // namespace chef
-
-#endif // _CHEF_BASE_THIS_MACHINE_OP_H_
 
 
 
@@ -347,3 +345,6 @@ namespace chef {
 } // namespace chef
 
 #endif // __MACH__
+
+
+#endif // _CHEF_BASE_THIS_MACHINE_OP_HPP_

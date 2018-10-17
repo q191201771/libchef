@@ -35,8 +35,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_TASK_THREAD_H_
-#define _CHEF_BASE_TASK_THREAD_H_
+#ifndef _CHEF_BASE_TASK_THREAD_HPP_
+#define _CHEF_BASE_TASK_THREAD_HPP_
 #pragma once
 
 #include "chef_env.hpp"
@@ -290,4 +290,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_TASK_THREAD_H_
+#endif // _CHEF_BASE_TASK_THREAD_HPP_

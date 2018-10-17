@@ -100,4 +100,4 @@ inline bool env_var_op::unsetenv(const std::string &k) {
 
 } // namespace chef
 
-#endif
+#endif // _CHEF_BASE_ENV_VAR_OP_HPP_
