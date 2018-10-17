@@ -27,7 +27,7 @@ echo '----------------------------------------' && \
 ./output/chef_base_test/chef_weight_selector_test && \
 rm -rf chef_thread_group_test.dump && \
 rm -rf not_exist && \
-echo '----------------------------------------'
+echo '----------------------------------------' && \
 echo 'all unit test succ. :)'
 
 #./output/base_test/chef_http_op_test
