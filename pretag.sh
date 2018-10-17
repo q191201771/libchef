@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-tag='v1.4.9'
+tag='v1.4.10'
 echo "New tag ${tag}"
 
 files=`ls src/chef_base/*.hpp`
