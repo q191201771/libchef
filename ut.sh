@@ -3,6 +3,7 @@ scons -c && \
 scons -j8 mode=debug && \
 echo '----------------------------------------' && \
 ./output/chef_base_test/chef_buffer_test && \
+./output/chef_base_test/chef_consistent_hash_test && \
 ./output/chef_base_test/chef_count_dump_test && \
 ./output/chef_base_test/chef_crypto_md5_op_test && \
 ./output/chef_base_test/chef_crypto_sha1_op_test && \

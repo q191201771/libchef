@@ -16,6 +16,7 @@
 ---------|------|----------|
 chef_fmt_op.hpp             | c++11    | 方便的生成格式化字符串，类似于sprintf，格式符由`%d` `%s`等等简化成统一的`{}` |
 chef_hash.hpp               | c++11    | 利用变参模板和std::hash实现的万能哈希。可通过多种类型的多个变量组合生成哈希值 |
+chef_consistent_hash.hpp    | c++11    | 一致性哈希 |
 chef_env.hpp                | chef_env | c++11和libboost功能相同部分的wrapper。通过增加一层接入层，使上层代码仅需通过一个宏开关就可以自由切换使用c++11或libboost |
 chef_defer.hpp              | chef_env | 类似golang defer，支持c goto清理等场景 |
 chef_wait_event_counter.hpp | chef_env | 阻塞等待1~N个事件发生。也可选择设置超时时间，超时后不再阻塞。使用者不用关心条件变量、锁等线程同步实现的细节（例如事件发送与接收的时顺，原子计数，虚假唤醒等） |
