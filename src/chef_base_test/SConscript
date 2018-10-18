@@ -78,6 +78,9 @@ prgs += env.Program('chef_weight_selector_test', chef_weight_selector_srcs, LIBS
 chef_snippet_srcs = ['chef_snippet_test.cc']
 prgs += env.Program('chef_snippet_test', chef_snippet_srcs, LIBS=platform_libs)
 
+chef_consistent_hash_srcs = ['chef_consistent_hash_test.cc']
+prgs += env.Program('chef_consistent_hash_test', chef_consistent_hash_srcs, LIBS=platform_libs)
+
 # -----deps third party-----
 
 #chef_http_op_srcs = ['dup.cc', 'chef_http_op_test.cc']
