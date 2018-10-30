@@ -9,7 +9,7 @@
 
 欢迎watch、star、fork，下面是我的微信二维码（微信账号： q191201771），欢迎交流
 
-![微信二维码](https://github.com/q191201771/starry-night/blob/master/img/wechat_chef.jpg)
+![微信二维码](https://github.com/q191201771/starry-night/blob/master/img/wechat_chef.jpeg?raw=true)
 
 ### 已完成模块说明
 
