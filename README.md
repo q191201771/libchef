@@ -6,17 +6,21 @@
 
 * header only，易于接入，直接在你的代码中引入相应的头文件即可使用
 * 支持macos和linux两个平台
-* 部分c++11（具体见 [chef_env.hpp](https://github.com/q191201771/starry-night/blob/master/src/base/chef_env.hpp)）支持使用libboost替换，所以大部分模块兼容非c++11的低版本编译器
 
 ### 已完成模块
 
-下表中**依赖**这一列：`nope`表示无任何依赖，`chef_env`表示需要使用c++11或libboost，`c++11`表示必须依赖c++11
+下表中**依赖**这一列：
+
+* `nope`表示无任何依赖
+* `chef_env`表示需要使用c++11或libboost(即低版本编译器可使用libboost做兼容，具体见 [chef_env.hpp](https://github.com/q191201771/starry-night/blob/master/src/base/chef_env.hpp))，
+* `c++11`表示必须依赖c++11
 
 模块名称 | 依赖 | 功能描述 |
 ---------|------|----------|
 chef_fmt_op.hpp             | c++11    | 方便的生成格式化字符串，类似于sprintf，格式符由`%d` `%s`等等简化成统一的`{}` |
 chef_hash.hpp               | c++11    | 利用变参模板和std::hash实现的万能哈希。可通过多种类型的多个变量组合生成哈希值 |
 chef_consistent_hash.hpp    | c++11    | 一致性哈希 |
+chef_skiplist.hpp           | c++11    | 跳表 |
 chef_env.hpp                | chef_env | c++11和libboost功能相同部分的wrapper。通过增加一层接入层，使上层代码仅需通过一个宏开关就可以自由切换使用c++11或libboost |
 chef_defer.hpp              | chef_env | 类似golang defer，支持c goto清理等场景 |
 chef_wait_event_counter.hpp | chef_env | 阻塞等待1~N个事件发生。也可选择设置超时时间，超时后不再阻塞。使用者不用关心条件变量、锁等线程同步实现的细节（例如事件发送与接收的时顺，原子计数，虚假唤醒等） |
