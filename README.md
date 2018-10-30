@@ -4,10 +4,14 @@
 [![Release](https://img.shields.io/github/release/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/releases)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
 
-* header only，易于接入，直接在你的代码中引入相应的头文件即可使用
+* header only，易于接入，非全家桶类型，直接在你的代码中引入需要模块的头文件即可使用
 * 支持macos和linux两个平台
 
-### 已完成模块
+欢迎watch、star、fork，下面是我的微信二维码（微信账号： q191201771），欢迎交流
+
+![微信二维码](https://github.com/q191201771/starry-night/blob/master/img/wechat_chef.jpg)
+
+### 已完成模块说明
 
 基本上一个hpp为一个模块，所有模块可分为以下几大类：
 
