@@ -7,10 +7,6 @@
 * header only，易于接入，非全家桶类型，直接在你的代码中引入需要模块的头文件即可使用
 * 支持macos和linux两个平台
 
-欢迎watch、star、fork，下面是我的微信二维码（微信账号： q191201771），欢迎交流
-
-![微信二维码](https://github.com/q191201771/starry-night/blob/master/img/wechat_chef.jpeg?raw=true)
-
 ### 已完成模块说明
 
 基本上一个hpp为一个模块，所有模块可分为以下几大类：
@@ -66,6 +62,28 @@ src/chef_base/chef_crypto_sha1_op.hpp     https://github.com/antirez/redis/relea
 src/chef_base/chef_encoding_base64_op.hpp https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
 ```
 
+### 我的环境
+
+```
+gcc version 4.9.2 20150212 (Red Hat 4.9.2-6) (GCC)
+gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
+
+OS X EI Capitan 10.11.6 Apple LLVM version 8.0.0 (clang-800.0.42.1)
+```
+
+### 编译
+
+```
+# linux和macos，需要先安装scons编译工具，然后运行scons即可
+$scons
+```
+
+### 其他
+
+欢迎watch、star、fork，下面是我的微信二维码（微信账号： q191201771），欢迎交流
+
+![微信二维码](https://github.com/q191201771/starry-night/blob/master/img/wechat_chef.jpeg?raw=true)
+
 ### 项目文件树
 
 ```
@@ -88,21 +106,5 @@ LINCENSE                       ......
 README.md                      ......
 SConstruct                     ......scons编译文件
 ut.sh                          ......执行测试代码脚本
-```
-
-### 我的环境
-
-```
-gcc version 4.9.2 20150212 (Red Hat 4.9.2-6) (GCC)
-gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
-
-OS X EI Capitan 10.11.6 Apple LLVM version 8.0.0 (clang-800.0.42.1)
-```
-
-### 编译
-
-```
-# linux和macos，需要先安装scons编译工具，然后运行scons即可
-$scons
 ```
 
