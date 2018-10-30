@@ -81,6 +81,9 @@ prgs += env.Program('chef_snippet_test', chef_snippet_srcs, LIBS=platform_libs)
 chef_consistent_hash_srcs = ['chef_consistent_hash_test.cc']
 prgs += env.Program('chef_consistent_hash_test', chef_consistent_hash_srcs, LIBS=platform_libs)
 
+chef_consistent_hash_srcs = ['chef_skiplist_test.cc']
+prgs += env.Program('chef_skiplist_test', chef_consistent_hash_srcs, LIBS=platform_libs)
+
 # -----deps third party-----
 
 #chef_http_op_srcs = ['dup.cc', 'chef_http_op_test.cc']
