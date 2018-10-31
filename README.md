@@ -73,9 +73,14 @@ OS X EI Capitan 10.11.6 Apple LLVM version 8.0.0 (clang-800.0.42.1)
 
 ### 编译
 
+在macos和linux下均支持编译工具scons或者cmake
+
 ```
-# linux和macos，需要先安装scons编译工具，然后运行scons即可
-$scons
+# 使用scons编译
+export CHEF_BUILD_TOOL=scons && export CHEF_BUILD_TYPE=release && ./build.sh
+# 使用cmake编译
+export CHEF_BUILD_TOOL=cmake && export CHEF_BUILD_TYPE=release && ./build.sh
+# CHEF_BUILD_TYPE=debug则编译debug版本
 ```
 
 ### 其他
@@ -87,6 +92,8 @@ $scons
 ### 项目文件树
 
 ```
+/img/                          ......图片目录
+/output/                       ......编译输出文件目录
 /src/                          ......代码根目录
   /chef_base/                  ......基础库代码
     /[chef_xxx.hpp ...]        ......header only的接口文件，业务方直接包含头文件即可使用，每个头文件头部都有简单的功能说明。
@@ -98,13 +105,18 @@ $scons
       /compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
   /chef_base_test/             ......基础库测试代码
     ...
-/third_party/                  ......第三方依赖库，目前没有
+/third_party/                  ......第三方依赖库，目前无第三方依赖
   ...
 .gitignore                     ......
 .travis.yml                    ......
+build.sh                       ......编译脚本
+clean.sh                       ......清除脚本
+CMakeLists.txt                 ......cmake编译脚本
 LINCENSE                       ......
-README.md                      ......
-SConstruct                     ......scons编译文件
+pretag.sh                      ......打git tag脚本
+SConstruct                     ......scons编译脚本
 ut.sh                          ......执行测试代码脚本
+README.md                      ......
+SECRET.md                      ......
 ```
 
