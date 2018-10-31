@@ -4,6 +4,7 @@ project(starry-night C CXX)
 
 set(CMAKE_CXX_FLAGS
   "-g \
+  -pthread \
   -std=c++0x \
   -pipe \
   -fPIC \
@@ -25,7 +26,7 @@ if(APPLE)
 elseif(UNIX)
   message(STATUS "os: UNIX")
   set(COMMON_LIBS pthread rt)
-  set(CMAKE_CXX_FLAGS "-pthread ${CMAKE_CXX_FLAGS}")
+  set(CMAKE_EXE_LINKER_FLAGS "-pthread -static-libstdc++")
 endif()
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
