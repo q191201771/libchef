@@ -19,12 +19,14 @@ set(CMAKE_CXX_FLAGS
 set(CMAKE_CXX_FLAGS_DEBUG "-O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 
-if (DARWIN)
+if(APPLE)
+  message(STATUS "os: APPLE")
   set(COMMON_LIBS pthread)
-elseif (LINUX)
+elseif(UNIX)
+  message(STATUS "os: UNIX")
   set(COMMON_LIBS pthread rt)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-ENDIF ()
+endif()
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
