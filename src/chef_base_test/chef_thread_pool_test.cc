@@ -54,9 +54,13 @@ void dctor_test() {
 int main() {
   ENTER_TEST;
 
+  std::cout << "CHEFERASEME " << __LINE__ << std::endl;
   add_before_start_test();
+  std::cout << "CHEFERASEME " << __LINE__ << std::endl;
   normal_test(1);
+  std::cout << "CHEFERASEME " << __LINE__ << std::endl;
   normal_test(16);
+  std::cout << "CHEFERASEME " << __LINE__ << std::endl;
   dctor_test();
 
   return 0;
