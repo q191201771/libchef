@@ -34,5 +34,5 @@ Export('env')
 Export('platform_libs')
 Export('boost_lib_path')
 
-SConscript('src/chef_base/SConscript', variant_dir='output/chef_base', duplicate=0)
-SConscript('src/chef_base_test/SConscript', variant_dir='output/chef_base_test', duplicate=0)
+SConscript('src/chef_base/SConscript', variant_dir='output/lib', duplicate=0)
+SConscript('src/chef_base_test/SConscript', variant_dir='output/bin/', duplicate=0)

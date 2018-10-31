@@ -247,19 +247,19 @@ namespace chef {
 
     unsigned long page_size;
     res = host_page_size(ht, &page_size);
-    if (res != KERN_SUCCESS) { return false; }
+    if (res != KERN_SUCCESS) { std::cerr << "host_page_size() failed.res:" << res << std::endl; return false; }
 
     struct host_basic_info hostinfo;
     count = HOST_BASIC_INFO_COUNT;
     res = host_info(ht, HOST_BASIC_INFO, reinterpret_cast<host_info_t>(&hostinfo), &count);
-    if (res != KERN_SUCCESS) { return false; }
+    if (res != KERN_SUCCESS) { std::cerr << "host_info() failed.res:" << res << std::endl; return false; }
 
     mi->total_kb = hostinfo.max_mem / 1024;
 
     vm_statistics_data_t vm_info;
     count = HOST_VM_INFO_COUNT;
     res = host_statistics(ht, HOST_VM_INFO, reinterpret_cast<host_info_t>(&vm_info), &count);
-    if (res != KERN_SUCCESS) { return false; }
+    if (res != KERN_SUCCESS) { std::cerr << "host_statistics() failed.res:" << res << std::endl; return false; }
 
     mi->used_kb = (vm_info.active_count + vm_info.inactive_count + vm_info.wire_count) * page_size / 1024;
     mi->free_kb = (vm_info.free_count) * page_size / 1024;

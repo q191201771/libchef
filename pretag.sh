@@ -1,6 +1,8 @@
 #!/bin/bash
 
-#
+set -x
+
+# modme
 tag='v1.4.12'
 echo "New tag ${tag}"
 
