@@ -25,7 +25,7 @@ if(APPLE)
 elseif(UNIX)
   message(STATUS "os: UNIX")
   set(COMMON_LIBS pthread rt)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+  set(CMAKE_CXX_FLAGS "-pthread ${CMAKE_CXX_FLAGS}")
 endif()
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
