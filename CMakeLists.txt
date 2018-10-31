@@ -20,7 +20,9 @@ set(CMAKE_CXX_FLAGS_DEBUG "-O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 
 if (DARWIN)
+  set(COMMON_LIBS pthread)
 elseif (LINUX)
+  set(COMMON_LIBS pthread rt)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 ENDIF ()
 
