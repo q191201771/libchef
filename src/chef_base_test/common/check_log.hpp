@@ -22,7 +22,7 @@ namespace chef {
 
   class check_log {
     public:
-      check_log(const std::string &name) : name_(name) {
+      explicit check_log(const std::string &name) : name_(name) {
         printf("\033[22;31mCheck %s.\n\033[0m", name.c_str());
       }
       ~check_log() {

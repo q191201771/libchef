@@ -68,6 +68,7 @@ int main() {
     std::map<int, int> m;
     m[1] = 100; m[2] = 200; m[3] = 300;
     str = chef::stringify_stl(m, chef::STRINGIFY_STL_STYLE_TWO_BEAUTY);
+    (void)str;
     //std::cout << str << std::endl;
 
     str = chef::stringify_stl(m);

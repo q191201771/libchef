@@ -389,7 +389,7 @@ namespace chef {
   }
 
   inline std::string filepath_op::read_file(const std::string &filename) {
-    int64_t size = get_file_size(filename.c_str());
+    int64_t size = get_file_size(filename);
     if (size <= 0) {
       return std::string();
     }

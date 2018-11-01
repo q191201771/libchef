@@ -90,7 +90,7 @@ void release_mode_test() {
 
 class foo {
 public:
-  foo(int val) : a_(val) {}
+  explicit foo(int val) : a_(val) {}
   void set_a(int val) { a_ = val; }
   int a() const { return a_; }
 private:

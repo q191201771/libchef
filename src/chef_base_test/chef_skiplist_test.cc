@@ -130,14 +130,14 @@ static void benchmark() {
   int64_t slc = 0;
   t = tickkk();
   auto iter = gm.rbegin();
-  for (; iter != gm.rend(); iter++) {
+  for (; iter != gm.rend(); ++iter) {
     mc += iter->first;
   }
   md = tickkk() - t;
 
   t = tickkk();
   auto iter2 = gsl.rbegin();
-  for (; iter2 != gsl.rend(); iter2++) {
+  for (; iter2 != gsl.rend(); ++iter2) {
     slc += iter2->first;
   }
   sld = tickkk() - t;
@@ -151,13 +151,13 @@ static void benchmark() {
     int64_t mc = 0;
     int64_t slc = 0;
     t = tickkk();
-    for (auto iter = vec2.begin(); iter != vec2.end(); iter++) {
+    for (auto iter = vec2.begin(); iter != vec2.end(); ++iter) {
       mc += gm.erase(*iter);
     }
     md = tickkk() - t;
 
     t = tickkk();
-    for (auto iter = vec2.begin(); iter != vec2.end(); iter++) {
+    for (auto iter = vec2.begin(); iter != vec2.end(); ++iter) {
       slc += gsl.erase(*iter);
     }
     sld = tickkk() - t;
@@ -312,7 +312,7 @@ int main() {
   // 测试正序迭代遍历
   std::cout << "Testing iterate...\n";
   sl.clear(); sl[1] = 10; sl[2] = 20; sl[3] = 30;
-  for (iter = sl.begin(); iter != sl.end(); iter++) {
+  for (iter = sl.begin(); iter != sl.end(); ++iter) {
     iter->second++;
     std::cout << iter->first << " " << iter->second << std::endl;
   }
@@ -322,7 +322,7 @@ int main() {
   //}
   // 测试反序迭代遍历
   std::cout << "Testing reverse iterate...\n";
-  for (riter = sl.rbegin(); riter != sl.rend(); riter++) {
+  for (riter = sl.rbegin(); riter != sl.rend(); ++riter) {
     std::cout << riter->first << " " << riter->second << std::endl;
   }
   //for (criter = sl.crbegin(); criter != sl.crend(); criter++) {

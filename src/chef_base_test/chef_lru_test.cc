@@ -69,7 +69,7 @@ int main() {
   assert(ll.size() == 2);
   iter = ll.begin();
   assert(iter->first == "yoko" && iter->second == 100);
-  iter++;
+  ++iter;
   assert(iter->first == "chef" && iter->second == 60);
 
   // get yoko 获取第二个元素
