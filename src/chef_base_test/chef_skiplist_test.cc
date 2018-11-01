@@ -31,12 +31,12 @@ chef::skiplist<int, int> gsl;
 
 static void reset() {
   gm.clear();
-  for (int i = 0; i < NUM; i++) {
+  for (int i = 0; i < NUM; ++i) {
     gm.insert(std::make_pair(vec[i], i));
   }
 
   gsl.clear();
-  for (int i = 0; i < NUM; i++) {
+  for (int i = 0; i < NUM; ++i) {
     gsl.insert(std::make_pair(vec[i], i));
   }
 }
@@ -50,11 +50,11 @@ static void benchmark() {
   chef::this_process_op::mem_info mi;
   chef::this_process_op::mem_info mi2;
 
-  for (int i = 0; i < NUM; i++) {
+  for (int i = 0; i < NUM; ++i) {
     vec.push_back(rg() % NUM);
   }
 
-  for (int i = 0; i < NUM; i++) {
+  for (int i = 0; i < NUM; ++i) {
     vec2.push_back(rg() % (NUM));
   }
 
@@ -62,7 +62,7 @@ static void benchmark() {
   bres = chef::this_process_op::obtain_mem_info(&mi);
   assert(bres);
   t = tickkk();
-  for (int i = 0; i < NUM; i++) {
+  for (int i = 0; i < NUM; ++i) {
     gm.insert(std::make_pair(vec[i], i));
   }
   md = tickkk() - t;
@@ -73,7 +73,7 @@ static void benchmark() {
   bres = chef::this_process_op::obtain_mem_info(&mi);
   assert(bres);
   t = tickkk();
-  for (int i = 0; i < NUM; i++) {
+  for (int i = 0; i < NUM; ++i) {
     gsl.insert(std::make_pair(vec[i], i));
   }
   sld = tickkk() - t;
@@ -108,14 +108,14 @@ static void benchmark() {
   int64_t slc = 0;
   t = tickkk();
   auto iter = gm.begin();
-  for (; iter != gm.end(); iter++) {
+  for (; iter != gm.end(); ++iter) {
     mc += iter->first;
   }
   md = tickkk() - t;
 
   t = tickkk();
   auto iter2 = gsl.begin();
-  for (; iter2 != gsl.end(); iter2++) {
+  for (; iter2 != gsl.end(); ++iter2) {
     slc += iter2->first;
   }
   sld = tickkk() - t;
@@ -173,13 +173,13 @@ static void benchmark() {
     int64_t mc = 0;
     int64_t slc = 0;
     t = tickkk();
-    for (auto iter = vec2.begin(); iter != vec2.end(); iter++) {
+    for (auto iter = vec2.begin(); iter != vec2.end(); ++iter) {
       mc += gm[*iter];
     }
     md = tickkk() - t;
 
     t = tickkk();
-    for (auto iter = vec2.begin(); iter != vec2.end(); iter++) {
+    for (auto iter = vec2.begin(); iter != vec2.end(); ++iter) {
       slc += gsl[*iter];
     }
     sld = tickkk() - t;
@@ -224,14 +224,14 @@ static void benchmark() {
     int64_t mc = 0;
     int64_t slc = 0;
     t = tickkk();
-    for (auto iter = vec2.begin(); iter != vec2.end(); iter++) {
-      if (gm.find(*iter) != gm.end()) { mc++; }
+    for (auto iter = vec2.begin(); iter != vec2.end(); ++iter) {
+      if (gm.find(*iter) != gm.end()) { ++mc; }
     }
     md = tickkk() - t;
 
     t = tickkk();
-    for (auto iter = vec2.begin(); iter != vec2.end(); iter++) {
-      if (gsl.find(*iter) != gsl.end()) { slc++; }
+    for (auto iter = vec2.begin(); iter != vec2.end(); ++iter) {
+      if (gsl.find(*iter) != gsl.end()) { ++slc; }
     }
     sld = tickkk() - t;
 
@@ -251,14 +251,14 @@ static void benchmark() {
     int64_t mc = 0;
     int64_t slc = 0;
     t = tickkk();
-    for (auto iter = vec2.begin(); iter != vec2.end(); iter++) {
-      if (gm.equal_range(*iter).second != gm.end()) { mc++; }
+    for (auto iter = vec2.begin(); iter != vec2.end(); ++iter) {
+      if (gm.equal_range(*iter).second != gm.end()) { ++mc; }
     }
     md = tickkk() - t;
 
     t = tickkk();
-    for (auto iter = vec2.begin(); iter != vec2.end(); iter++) {
-      if (gsl.equal_range(*iter).second != gsl.end()) { slc++; }
+    for (auto iter = vec2.begin(); iter != vec2.end(); ++iter) {
+      if (gsl.equal_range(*iter).second != gsl.end()) { ++slc; }
     }
     sld = tickkk() - t;
 
@@ -313,7 +313,7 @@ int main() {
   std::cout << "Testing iterate...\n";
   sl.clear(); sl[1] = 10; sl[2] = 20; sl[3] = 30;
   for (iter = sl.begin(); iter != sl.end(); ++iter) {
-    iter->second++;
+    ++iter->second;
     std::cout << iter->first << " " << iter->second << std::endl;
   }
   //for (citer = sl.cbegin(); citer != sl.cend(); citer++) {

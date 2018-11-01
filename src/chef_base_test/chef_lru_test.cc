@@ -79,7 +79,7 @@ int main() {
   assert(ll.size() == 2);
   iter = ll.begin();
   assert(iter->first == "yoko" && iter->second == 100);
-  iter++;
+  ++iter;
   assert(iter->first == "chef" && iter->second == 60);
 
   // get chef 获取第一个元素，注意，此时热度会受影响
@@ -89,7 +89,7 @@ int main() {
   assert(ll.size() == 2);
   iter = ll.begin();
   assert(iter->first == "chef" && iter->second == 60);
-  iter++;
+  ++iter;
   assert(iter->first == "yoko" && iter->second == 100);
 
   // put coco 插入第三个元素
@@ -99,9 +99,9 @@ int main() {
   assert(ll.size() == 3);
   iter = ll.begin();
   assert(iter->first == "coco" && iter->second == 33);
-  iter++;
+  ++iter;
   assert(iter->first == "chef" && iter->second == 60);
-  iter++;
+  ++iter;
   assert(iter->first == "yoko" && iter->second == 100);
 
   // put dad 插入第四个元素
@@ -111,9 +111,9 @@ int main() {
   assert(ll.size() == 3);
   iter = ll.begin();
   assert(iter->first == "dad" && iter->second == 44);
-  iter++;
+  ++iter;
   assert(iter->first == "coco" && iter->second == 33);
-  iter++;
+  ++iter;
   assert(iter->first == "chef" && iter->second == 60);
 
   // put coco 插入已存在元素
@@ -123,9 +123,9 @@ int main() {
   assert(ll.size() == 3);
   iter = ll.begin();
   assert(iter->first == "coco" && iter->second == 1000);
-  iter++;
+  ++iter;
   assert(iter->first == "dad" && iter->second == 44);
-  iter++;
+  ++iter;
   assert(iter->first == "chef" && iter->second == 60);
 
   // put chef 插入已存在元素，并且value值也相同
@@ -135,9 +135,9 @@ int main() {
   assert(ll.size() == 3);
   iter = ll.begin();
   assert(iter->first == "dad" && iter->second == 44);
-  iter++;
+  ++iter;
   assert(iter->first == "coco" && iter->second == 1000);
-  iter++;
+  ++iter;
   assert(iter->first == "chef" && iter->second == 60);
 
   return 0;

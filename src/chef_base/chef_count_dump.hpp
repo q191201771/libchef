@@ -332,7 +332,7 @@ namespace chef {
     std::ostringstream ss;
     std::map<std::string, int64_t>::iterator iter = tag2count.begin();
     uint32_t count = 1;
-    for (; iter != tag2count.end(); iter++, count++) {
+    for (; iter != tag2count.end(); ++iter, ++count) {
       ss << iter->first << ": " << iter->second;
       if ((count % num_per_line_ == 0) ||
           (count == tag2count.size())

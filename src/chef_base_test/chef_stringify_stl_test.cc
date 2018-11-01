@@ -37,12 +37,14 @@ int main() {
   {
     std::vector<int> vec = {1, 2, 3};
     str = chef::stringify_stl_one_(vec, chef::STRINGIFY_STL_STYLE_ONE_BEAUTY);
+    (void)str;
     //std::cout << str << std::endl;
 
     str = chef::stringify_stl(vec);
     assert(str == "[1,2,3]");
 
     str = chef::stringify_stl(vec, chef::STRINGIFY_STL_STYLE_ONE_BEAUTY);
+    (void)str;
     //std::cout << str << std::endl;
   }
 

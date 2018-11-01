@@ -23,7 +23,6 @@ static void example() {
 }
 
 static void bench() {
-  return;
   int howmany = 1000000;
   using std::chrono::high_resolution_clock;
   auto start = high_resolution_clock::now();
@@ -40,7 +39,9 @@ int main() {
   ENTER_TEST;
 
   example();
+#if 0
   bench();
+#endif
 
   std::string res = chef::fmt_op::format("I am {}, and {} year old now!", "chef", 18);
   assert(res == "I am chef, and 18 year old now!");
