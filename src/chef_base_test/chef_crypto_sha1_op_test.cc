@@ -51,7 +51,7 @@ int main() {
   mapping["6627d6904d71420b0bf3886ab629623538689f45"] = "How can you write a big system without C++?  -Paul Glick";
 
   std::map<std::string, std::string>::iterator iter = mapping.begin();
-  for (; iter != mapping.end(); iter++) {
+  for (; iter != mapping.end(); ++iter) {
     assert(chef::crypto_sha1_op::sum(iter->second) == iter->first);
     assert(chef::crypto_sha1_op::sum(iter->second.c_str(), iter->second.length()) == iter->first);
   }

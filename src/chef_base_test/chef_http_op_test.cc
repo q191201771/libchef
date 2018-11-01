@@ -24,12 +24,12 @@ int main() {
     printf("ret:%d,code:%d\n", ret, resp.code_);
     printf("headers:------\n");
     std::map<std::string, std::string>::iterator iter = resp.headers_.begin();
-    for (; iter != resp.headers_.end(); iter++) {
+    for (; iter != resp.headers_.end(); ++iter) {
       printf("[%s]:[%s]\n", iter->first.c_str(), iter->second.c_str());
     }
     printf("cookies:------\n");
     std::map<std::string, chef::http_op::response_cookie>::iterator iter2 = resp.cookies_.begin();
-    for (; iter2 != resp.cookies_.end(); iter2++) {
+    for (; iter2 != resp.cookies_.end(); ++iter2) {
       printf("[%s]:[%s]\n", iter2->first.c_str(), iter2->second.stringify().c_str());
     }
     printf("body:-----\n%lu\n", resp.content_.length());
