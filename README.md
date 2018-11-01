@@ -1,17 +1,17 @@
 # linux c++ 基础库
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff1659c0c9b544fba4eab876900b2421)](https://app.codacy.com/app/q191201771/starry-night?utm_source=github.com&utm_medium=referral&utm_content=q191201771/starry-night&utm_campaign=Badge_Grade_Dashboard)
-[![Build Status](https://travis-ci.org/q191201771/starry-night.svg?branch=master)](https://travis-ci.org/q191201771/starry-night)
+[![platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20-green.svg)](https://github.com/q191201771/starry-night)
 [![Release](https://img.shields.io/github/release/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/releases)
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/q191201771/starry-night.svg?branch=master)](https://travis-ci.org/q191201771/starry-night)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff1659c0c9b544fba4eab876900b2421)](https://app.codacy.com/app/q191201771/starry-night?utm_source=github.com&utm_medium=referral&utm_content=q191201771/starry-night&utm_campaign=Badge_Grade_Dashboard)
 ![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/q191201771/starry-night/pulls)
-[![GitHub pull request check state](https://img.shields.io/github/status/s/pulls/q191201771/starry-night/1.svg)](https://github.com/q191201771/starry-night/pulls)
-[![platform](https://img.shields.io/badge/platform-linux64%20%7C%20macos%20-green.svg)](https://github.com/q191201771/starry-night)
-[![GitHub language count](https://img.shields.io/github/languages/count/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night)
-[![GitHub top language](https://img.shields.io/github/languages/top/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
 [![GitHub commit activity the past week, 4 weeks, year](https://img.shields.io/github/commit-activity/y/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/graphs/commit-activity)
 [![GitHub last commit](https://img.shields.io/github/last-commit/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/graphs/commit-activity)
+[![GitHub language count](https://img.shields.io/github/languages/count/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night)
+[![GitHub top language](https://img.shields.io/github/languages/top/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/q191201771/starry-night/pulls)
+[![GitHub pull request check state](https://img.shields.io/github/status/s/pulls/q191201771/starry-night/1.svg)](https://github.com/q191201771/starry-night/pulls)
 
 header only，易于接入，非全家桶类型，需要使用哪个模块只需要包含那个模块的头文件即可直接使用。
 
