@@ -208,7 +208,7 @@ namespace inner {
     std::istringstream iss(output_lines.back());
     iss >> dummy >> dummy >> dummy >> dummy >> numstr;
     std::size_t pos = numstr.find("/");
-    if (pos != std::string::npos) { numstr.substr(0, pos+1); }
+    if (pos != std::string::npos) { numstr = numstr.substr(0, pos+1); }
 
     int32_t num = atoi(numstr.c_str());
     return num > 0 ? num : -1;
