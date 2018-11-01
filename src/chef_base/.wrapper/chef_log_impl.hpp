@@ -68,7 +68,7 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(global_logger_src,
         bin_name.assign(buf, len);
         std::size_t pos = bin_name.find_last_of('/');
         if (pos != std::string::npos) {
-          bin_name.substr(0, pos+1);
+          bin_name = bin_name.substr(pos+1);
         }
       }
       char pid_buf[16] = {0};
