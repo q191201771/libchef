@@ -54,7 +54,7 @@ int main() {
   // 打印所有节点对应的哈希计数
   std::cout << "-----Init hash result-----" << std::endl;
   std::map<std::string, int>::iterator iter = counts.begin();
-  for (; iter != counts.end(); iter++) {
+  for (; iter != counts.end(); ++iter) {
     std::cout << iter->first << " " << iter->second << std::endl;
   }
   std::cout << "--------------------------" << std::endl;
@@ -84,7 +84,7 @@ int main() {
   // 打印所有节点哈希结果
   std::cout << "-----After del, hash result-----" << std::endl;
   std::map<std::string, int>::iterator iter2 = counts2.begin();
-  for (; iter2 != counts2.end(); iter2++) {
+  for (; iter2 != counts2.end(); ++iter2) {
     std::cout << iter2->first << " " << iter2->second << std::endl;
   }
   std::cout << "--------------------------------" << std::endl;
@@ -126,7 +126,7 @@ int main() {
   // 打印所有节点哈希结果
   std::cout << "-----After Add, hash result-----" << std::endl;
   std::map<std::string, int>::iterator iter3 = counts3.begin();
-  for (; iter3 != counts3.end(); iter3++) {
+  for (; iter3 != counts3.end(); ++iter3) {
     std::cout << iter3->first << " " << iter3->second << std::endl;
   }
   std::cout << "--------------------------------" << std::endl;

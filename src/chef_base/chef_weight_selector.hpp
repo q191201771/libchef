@@ -119,7 +119,7 @@ bool weight_selector<T>::choice_one(T &item) {
   int64_t current_max = -0xFFFFFFF;
   typename item2weight_t::iterator iter_current_max;
   typename item2weight_t::iterator iter_current = item2weight_current_.begin();
-  for (; iter_current != item2weight_current_.end(); iter_current++) {
+  for (; iter_current != item2weight_current_.end(); ++iter_current) {
     if (iter_current->second > current_max && item2weight_initial_[iter_current->first] > 0) {
       current_max = iter_current->second;
       iter_current_max = iter_current;
@@ -132,7 +132,7 @@ bool weight_selector<T>::choice_one(T &item) {
   iter_current_max->second -= total_weight_;
 
   iter_current = item2weight_current_.begin();
-  for (; iter_current != item2weight_current_.end(); iter_current++) {
+  for (; iter_current != item2weight_current_.end(); ++iter_current) {
     iter_current->second += item2weight_initial_[iter_current->first];
   }
 

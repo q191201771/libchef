@@ -278,16 +278,10 @@ namespace chef {
       }
 
     private:
-      void insert_range_(iterator b, iterator e) {
-        for (auto iter = b; iter != e; iter++) {
-          this->insert(std::make_pair(iter->first, iter->second));
-        }
-      }
-
       void insert_range_effective_(iterator b, iterator e) {
         iterator pos;
         std::vector<node *> cache;
-        for (iterator iter = b; iter != e; iter++) {
+        for (iterator iter = b; iter != e; ++iter) {
           pos = find_(iter->first, pos.node_, nullptr, &cache);
           if (pos == end()) { pos = insert_(*iter, cache); }
         }
@@ -300,7 +294,7 @@ namespace chef {
     friend class skiplist; \
   public: \
     T() = default; \
-    T(node *n) : node_(n) {} \
+    explicit T(node *n) : node_(n) {} \
     T(const T &other) { node_ = other.node_; } \
     T &operator=(const T &other) { \
       node_ = other.node_; \
@@ -430,7 +424,7 @@ namespace chef {
         std::cout << "-----" << std::endl;
         chef::skiplist<int, int>::iterator iter;
         iter = begin();
-        for (; iter != end(); iter++) {
+        for (; iter != end(); ++iter) {
           std::cout << "(" << iter->first << "," << iter->second << ") ";
         }
         std::cout << std::endl

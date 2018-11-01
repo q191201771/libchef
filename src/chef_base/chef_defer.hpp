@@ -43,7 +43,7 @@ namespace chef {
       typedef chef::function<void()> task;
 
     public:
-      defer(const task &t=nullptr) : cancel_(false), t_(t) {}
+      explicit defer(const task &t=nullptr) : cancel_(false), t_(t) {}
 
       ~defer() {
         if (!cancel_ && t_) {

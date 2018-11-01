@@ -241,7 +241,7 @@ namespace chef {
 
   inline std::string strings_op::to_lower(const std::string &s) {
     std::string ret;
-    for (std::string::const_iterator c = s.begin(); c != s.end(); c++) {
+    for (std::string::const_iterator c = s.begin(); c != s.end(); ++c) {
       ret += static_cast<char>(std::tolower(*c));
     }
     return ret;
@@ -249,7 +249,7 @@ namespace chef {
 
   inline std::string strings_op::to_upper(const std::string &s) {
     std::string ret;
-    for (std::string::const_iterator c = s.begin(); c != s.end(); c++) {
+    for (std::string::const_iterator c = s.begin(); c != s.end(); ++c) {
       ret += static_cast<char>(std::toupper(*c));
     }
     return ret;

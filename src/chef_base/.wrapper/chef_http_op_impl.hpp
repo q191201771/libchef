@@ -57,7 +57,7 @@ namespace inner {
     curl_slist *request_header_list = NULL;
     if (headers != NULL && !headers->empty()) {
       std::map<std::string, std::string>::const_iterator request_headers_iter = headers->begin();
-      for (; request_headers_iter != headers->end(); request_headers_iter++) {
+      for (; request_headers_iter != headers->end(); ++request_headers_iter) {
         std::string request_header_line = request_headers_iter->first + ": " + request_headers_iter->second;
         request_header_list = curl_slist_append(request_header_list, request_header_line.c_str());
       }
@@ -67,7 +67,7 @@ namespace inner {
     std::string request_cookies_buf;
     if (cookies != NULL && !cookies->empty()) {
       std::map<std::string, std::string>::const_iterator request_cookies_iter = cookies->begin();
-      for (; request_cookies_iter != cookies->end(); request_cookies_iter++) {
+      for (; request_cookies_iter != cookies->end(); ++request_cookies_iter) {
         request_cookies_buf += request_cookies_iter->first + ":" + request_cookies_iter->second + ";";
       }
     }
@@ -153,7 +153,7 @@ namespace inner {
     /// 处理返回的headers
     std::vector<std::string> header_pairs = strings_op::splitlines(resp_headers_buf, false);
     std::vector<std::string>::iterator iter = header_pairs.begin();
-    for (; iter != header_pairs.end(); iter++) {
+    for (; iter != header_pairs.end(); ++iter) {
       std::string &head_item = *iter;
       std::size_t split_pos = head_item.find(":");
       if (split_pos == std::string::npos) {

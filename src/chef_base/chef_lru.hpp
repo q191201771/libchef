@@ -48,7 +48,7 @@ namespace chef {
 
     public:
       // @param cap 容器大小
-      lru(std::size_t cap);
+      explicit lru(std::size_t cap);
       ~lru();
 
     public:

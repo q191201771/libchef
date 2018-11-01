@@ -185,7 +185,7 @@ std::string stringify_stl_two_(const T &val, const stringify_stl_two_style &styl
     ss << style.delimiter_key_prefix_ << stringify_stl_one_(iter->first) << style.delimiter_key_suffix_
        << style.delimiter_kv_sep_
        << style.delimiter_value_prefix_ << stringify_stl_one_(iter->second) << style.delimiter_value_suffix_;
-    iter++;
+    ++iter;
     if (iter == val.end()) { break; }
     else { ss << style.delimiter_item_sep_; }
 

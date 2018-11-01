@@ -6,7 +6,7 @@ set -x
 tag='v1.4.12'
 echo "New tag ${tag}"
 
-files=`ls src/chef_base/*.hpp`
+files=$(ls src/chef_base/*.hpp)
 for file in $files
 do
   echo $file

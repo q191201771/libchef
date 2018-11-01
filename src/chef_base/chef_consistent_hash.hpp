@@ -96,7 +96,7 @@ namespace chef {
 
     hash_result_t hv = std::hash<T>()(key);
     typename std::map<hash_result_t, T>::iterator iter = pos2node_.begin();
-    for (; iter != pos2node_.end(); iter++) {
+    for (; iter != pos2node_.end(); ++iter) {
       if (hv < iter->first) {
         node = iter->second;
         return true;

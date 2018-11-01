@@ -6,7 +6,7 @@ set -x
 CHEF_BUILD_TOOL=${CHEF_BUILD_TOOL:-cmake}   # option: "cmake" "scons"
 CHEF_BUILD_TYPE=${CHEF_BUILD_TYPE:-release} # option: "release" "debug"
 
-ROOT_DIR=`pwd`
+ROOT_DIR=$(pwd)
 
 if [[ ${CHEF_BUILD_TOOL} == 'scons' ]]; then
     scons mode=$CHEF_BUILD_TYPE -j8

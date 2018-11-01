@@ -39,7 +39,7 @@ namespace chef {
       };
 
     public:
-      multi_tag_counter(multi_tag_counter_type type) : type_(type) {}
+      explicit multi_tag_counter(multi_tag_counter_type type) : type_(type) {}
       ~multi_tag_counter() {}
 
     public:
@@ -161,7 +161,7 @@ namespace chef {
 
   inline void multi_tag_counter::add_tags(const std::vector<std::string> &tags) {
     std::vector<std::string>::const_iterator iter = tags.begin();
-    for (; iter != tags.end(); iter++) {
+    for (; iter != tags.end(); ++iter) {
       add_tag(*iter);
     }
   }
@@ -276,7 +276,7 @@ namespace chef {
     TAG2COUNT ret;
     if (type_ == MULTI_TAG_COUNTER_ATOMIC) {
       TAG2ATOMIC_COUNT::iterator iter = tag2atomic_count_.begin();
-      for (; iter != tag2atomic_count_.end(); iter++) {
+      for (; iter != tag2atomic_count_.end(); ++iter) {
         ret[iter->first] = iter->second;
       }
       return ret;

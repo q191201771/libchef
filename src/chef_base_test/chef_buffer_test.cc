@@ -22,6 +22,7 @@ static void example() {
   len = buf.readable_size();
   std::string str(buf.read_pos(), len);
   buf.erase(len);
+  (void)str;
   // 读取部分数据，业务方可能有这种消费场景，比如
   // loop:
   //   if send buf not empty and event active:
