@@ -1,5 +1,6 @@
 # linux c++基础库
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff1659c0c9b544fba4eab876900b2421)](https://app.codacy.com/app/q191201771/starry-night?utm_source=github.com&utm_medium=referral&utm_content=q191201771/starry-night&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/q191201771/starry-night.svg?branch=master)](https://travis-ci.org/q191201771/starry-night)
 [![Release](https://img.shields.io/github/release/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/releases)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
