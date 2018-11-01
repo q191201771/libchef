@@ -6,7 +6,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff1659c0c9b544fba4eab876900b2421)](https://app.codacy.com/app/q191201771/starry-night?utm_source=github.com&utm_medium=referral&utm_content=q191201771/starry-night&utm_campaign=Badge_Grade_Dashboard)
 ![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
-<!-- [![GitHub commit activity the past week, 4 weeks, year](https://img.shields.io/github/commit-activity/y/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/graphs/commit-activity) -->
 [![GitHub last commit](https://img.shields.io/github/last-commit/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/graphs/commit-activity)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/q191201771/starry-night.svg)
 ![GitHub language count](https://img.shields.io/github/languages/count/q191201771/starry-night.svg)
