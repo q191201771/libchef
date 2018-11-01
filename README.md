@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/q191201771/starry-night.svg?branch=master)](https://travis-ci.org/q191201771/starry-night)
 [![Release](https://img.shields.io/github/release/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/releases)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
+![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)
 
 * header only，易于接入，非全家桶类型，直接在你的代码中引入需要模块的头文件即可使用
 * 支持macos和linux两个平台
