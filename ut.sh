@@ -28,6 +28,7 @@ echo '----------------------------------------' && \
 ./output/bin/chef_wait_event_test && \
 ./output/bin/chef_wait_event_counter_test && \
 ./output/bin/chef_weight_selector_test && \
+./output/bin/chef_daemon_op_test && \
 rm -rf chef_thread_group_test.dump && \
 rm -rf not_exist && \
 echo '----------------------------------------' && \
