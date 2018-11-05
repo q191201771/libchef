@@ -1,5 +1,5 @@
 /**
- * @tag      v1.4.12
+ * @tag      v1.5.12
  * @file     chef_weight_selector.hpp
  * @deps     nope
  * @platform linux | macos | xxx
