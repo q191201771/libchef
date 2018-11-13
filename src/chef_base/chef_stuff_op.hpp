@@ -53,8 +53,8 @@ namespace chef {
        */
       static std::string get_host_by_name(const char *domain);
 
-      // 获取当前unix时间戳，单位毫秒
-      static uint64_t now_unix_timestamp_msec();
+      // 获取当前时间点，单位毫秒，一般用于计算两个时间点间的间隔用
+      static uint64_t tick_msec();
 
       // 获取线程号
       static int gettid();
@@ -150,9 +150,10 @@ inline std::string stuff_op::get_host_by_name(const char *domain) {
   return std::string(result);
 }
 
-inline uint64_t stuff_op::now_unix_timestamp_msec() {
+inline uint64_t stuff_op::tick_msec() {
   struct timespec ts;
 #if defined(CLOCK_REALTIME) && !defined(__MACH__)
+#pragma message("Has defined CLOCK_REALTIME and not __MACH__.")
   clock_gettime(CLOCK_MONOTONIC, &ts);
 #else
   {

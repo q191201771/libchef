@@ -53,12 +53,12 @@ int main() {
 
   example();
 
-  std::cout << "now unix timestamp msec:" << chef::stuff_op::now_unix_timestamp_msec() << std::endl;
+  std::cout << "tick msec:" << chef::stuff_op::tick_msec() << std::endl;
   std::cout << "tid:" << chef::stuff_op::gettid() << std::endl;
   chef::stuff_op::set_thread_name("yokothd");
 
   readable_bytes_test();
   get_host_by_name_test();
-  std::cout << "now unix timestamp msec:" << chef::stuff_op::now_unix_timestamp_msec() << std::endl;
+  std::cout << "tick msec:" << chef::stuff_op::tick_msec() << std::endl;
   return 0;
 }
