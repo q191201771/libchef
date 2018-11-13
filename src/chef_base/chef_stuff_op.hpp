@@ -1,0 +1,167 @@
+/**
+ * @tag      v1.5.12
+ * @file     chef_stuff_op.hpp
+ * @deps     nope
+ * @platform linux | macos | xxx
+ *
+ * @author
+ *   chef <191201771@qq.com>
+ *     -initial release xxxx-xx-xx
+ *
+ * @brief    一些暂时没归类的功能代码片段
+ *
+ */
+
+#ifndef _CHEF_BASE_STUFF_OP_H_
+#define _CHEF_BASE_STUFF_OP_H_
+#pragma once
+
+#include <string>
+
+namespace chef {
+
+  class stuff_op {
+    public:
+      /**
+       * 将以字节为单位的数字转换为带大小单位的可读性字符串
+       *
+       * @param n bytes
+       *
+       * @return
+       *   e.g.
+       *   readable_bytes(768) = "768.0B"
+       *   readable_bytes(10000) = "9.8K"
+       *   readable_bytes(100001221) = "95.4M"
+       *
+       */
+      static std::string readable_bytes(uint64_t n);
+
+      /**
+       * 获取域名对应的ip
+       *
+       * @param domain 域名
+       *
+       * @return ip
+       *   成功例子：
+       *     "www.baidu.com"
+       *     "localhost"
+       *     "58.96.168.38"
+       *   失败例子：
+       *     "not exist"
+       *     "http://www.baidu.com"
+       *
+       */
+      static std::string get_host_by_name(const char *domain);
+
+      // 获取当前unix时间戳，单位毫秒
+      static uint64_t now_unix_timestamp_msec();
+
+      // 获取线程号
+      static int gettid();
+
+      /**
+       * 设置线程名（对应top命令Threads中的COMMAND列）
+       * @NOTICE 只在linux平台生效
+       *
+       */
+      static void set_thread_name(const char *name);
+
+  };
+
+} // namespace chef
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// @NOTICE 该分隔线以上部分为该模块的接口，分割线以下部分为对应的实现
+
+
+
+
+
+#include <netdb.h>
+#include <pthread.h>
+#include <time.h>
+#include <unistd.h>
+#include <sys/syscall.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <string>
+
+namespace chef {
+
+inline int stuff_op::gettid() {
+  static __thread int tid = 0;
+  if (tid != 0) { return tid; }
+
+#if defined(__linux__)
+  return static_cast<int>(syscall(SYS_gettid));
+#elif defined(__MACH__)
+  uint64_t tid64;
+  pthread_threadid_np(NULL, &tid64);
+  return static_cast<int>(tid64);
+#else
+  return 0;
+#endif
+}
+
+inline void stuff_op::set_thread_name(const char *name) {
+#if defined(__linux__)
+  ::prctl(PR_SET_NAME, name);
+#else
+  (void)name;
+#endif
+}
+
+inline std::string stuff_op::readable_bytes(uint64_t n) {
+  char UNITS[] = {'B', 'K', 'M', 'G', 'T', 'P', 'E'}; // 'Z' 'Y'
+  int index = 0;
+  for (; n >> (index*10); index++) {
+    if (index == 6) { /// can't do n >> 70
+      ++index;
+      break;
+    }
+  }
+  index = index > 0 ? index - 1 : index;
+  char buf[128] = {0};
+  snprintf(buf, 127, "%.1f%c",
+    static_cast<float>(n) / static_cast<float>(index ? (1UL << (index*10)) : 1),
+    UNITS[index]
+  );
+  return std::string(buf);
+}
+
+inline std::string stuff_op::get_host_by_name(const char *domain) {
+  struct hostent *ht = ::gethostbyname(domain);
+  if (ht == NULL || ht->h_length <= 0) { return std::string(); }
+
+  char result[64] = {0};
+  snprintf(result, 63, "%hhu.%hhu.%hhu.%hhu",
+    static_cast<uint8_t>(ht->h_addr_list[0][0]),
+    static_cast<uint8_t>(ht->h_addr_list[0][1]),
+    static_cast<uint8_t>(ht->h_addr_list[0][2]),
+    static_cast<uint8_t>(ht->h_addr_list[0][3])
+  );
+  return std::string(result);
+}
+
+inline uint64_t stuff_op::now_unix_timestamp_msec() {
+  struct timespec ts;
+#if defined(CLOCK_REALTIME) && !defined(__MACH__)
+  clock_gettime(CLOCK_MONOTONIC, &ts);
+#else
+  {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    ts.tv_sec = tv.tv_sec;
+    ts.tv_nsec = tv.tv_usec * 1000;
+  }
+#endif
+  return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
+}
+
+}
+
+#endif
