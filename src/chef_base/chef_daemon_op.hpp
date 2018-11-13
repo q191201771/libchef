@@ -63,7 +63,7 @@ namespace chef {
 
 namespace chef {
 
-  int daemon_op::exist(const char *pidfile) {
+  inline int daemon_op::exist(const char *pidfile) {
     int fp = open(pidfile, O_RDONLY, 0);
     if (fp == -1) { return -1; }
 
@@ -81,7 +81,7 @@ namespace chef {
     return pid;
   }
 
-  int daemon_op::write(const char *pidfile) {
+  inline int daemon_op::write(const char *pidfile) {
     int fp = open(pidfile, O_WRONLY | O_CREAT | O_TRUNC, 0600);
     if (fp == -1) { return -1; }
 
@@ -98,7 +98,7 @@ namespace chef {
     return pid;
   }
 
-  int daemon_op::start(const char *pidfile) {
+  inline int daemon_op::start(const char *pidfile) {
     int pid = exist(pidfile);
     if (pid > 0) { exit(1); }
 

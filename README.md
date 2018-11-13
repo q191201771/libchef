@@ -12,9 +12,9 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/q191201771/starry-night.svg)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/q191201771/starry-night/pulls)
 
-header only，易于接入，非全家桶类型，基本上一个hpp一个模块，需要使用哪个模块只需要包含那个模块的头文件即可直接使用。
+支持linux和macos双平台。header only，易于接入。基本上一个hpp一个模块，需要使用哪个模块提供的功能只需要包含那个模块的头文件即可直接使用。（目标是像机器猫的万能口袋一样，什么都有，需要什么掏什么，不相互捆绑，非全家桶类型）
 
-### 已完成模块说明
+## 已完成模块说明
 
 下表中**分类**这一列（只是在README文档中做的功能上的逻辑划分，代码层面和使用上没有分类和区别）：
 
@@ -28,7 +28,7 @@ header only，易于接入，非全家桶类型，基本上一个hpp一个模块
 下表中**依赖**这一列：
 
 * `nope`表示无任何依赖
-* `chef_env`表示需要使用c++11或libboost(即低版本编译器可使用libboost做兼容，具体见 [chef_env.hpp](https://github.com/q191201771/starry-night/blob/master/src/base/chef_env.hpp))
+* `chef_env`表示需要使用c++11或libboost(即低版本编译器可使用libboost做兼容，具体见 [chef_env.hpp](https://github.com/q191201771/starry-night/blob/master/src/chef_base/chef_env.hpp))
 * `c++11`表示必须依赖c++11
 
 
@@ -52,16 +52,18 @@ SS | chef_os_exec_op.hpp      | nope | 开启子进程执行shell命令，并阻
 SS | chef_this_machine_op.hpp | nope | 获取机器维度的信息，比如CPU，内存，带宽，开机时间等 |
 SS | chef_this_process_op.hpp | nope | 获取当前进程维度的信息，比如进程启动时间，当前线程数，分页大小，内存占用，可执行文件路径，进程号，用户号，用户名，编译时间git版本等 |
 SS | chef_filepath_op.hpp     | nope | 文件、文件夹常用操作帮助函数集合 |
+SS | chef_daemon_op.hpp       | nope | 守护进程 |
 SS | chef_env_var_op.hpp      | nope | 读写系统环境变量 |
 PH | chef_defer.hpp       | chef_env | 类似golang defer，支持c goto清理等场景 |
 PH | chef_count_dump.hpp  | chef_env | 在各种线程模型下高效的对多个tag进行计数（打点）。并支持定时将计数落盘 |
 PH | chef_snippet.hpp     | nope     | 用宏减少一些手写重复代码。比如你有一个结构体，里面有各种类型的各种名称的成员变量，有可能有锁或无锁。你不再需要手写这些变量的声明、set、get函数等一堆代码 |
 PH | chef_noncopyable.hpp | nope     | 禁用拷贝构造等函数 |
+PH | chef_stuff_op.hpp    | nope     | 一些暂时没归类的功能代码片段 |
 CE | chef_crypto_md5_op.hpp      | nope | md5加密 |
 CE | chef_crypto_sha1_op.hpp     | nope | sha1加密 |
 CE | chef_encoding_base64_op.hpp | nope | base64编码、解码 |
 
-### 声明，内部实现拷贝自第三方工程的代码
+## 声明，内部实现拷贝自第三方工程的代码
 
 ```
 src/chef_base/chef_crypto_md5_op.hpp      https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
@@ -69,7 +71,7 @@ src/chef_base/chef_crypto_sha1_op.hpp     https://github.com/antirez/redis/relea
 src/chef_base/chef_encoding_base64_op.hpp https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
 ```
 
-### 我的环境
+## 我的环境
 
 ```
 gcc version 4.9.2 20150212 (Red Hat 4.9.2-6) (GCC)
@@ -78,7 +80,7 @@ gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
 OS X EI Capitan 10.11.6 Apple LLVM version 8.0.0 (clang-800.0.42.1)
 ```
 
-### 编译
+## 编译
 
 在macos和linux下均支持编译工具scons或者cmake
 
@@ -90,27 +92,27 @@ export CHEF_BUILD_TOOL=cmake && export CHEF_BUILD_TYPE=release && ./build.sh
 # CHEF_BUILD_TYPE=debug则编译debug版本
 ```
 
-### 其他
+## 其他
 
 欢迎watch、star、fork，下面是我的微信二维码（微信账号： q191201771），欢迎交流
 
 ![微信二维码](https://github.com/q191201771/starry-night/blob/master/img/wechat_chef.jpeg?raw=true)
 
-### 项目文件树
+## 项目文件树
 
 ```
-/img/                          ......图片目录
-/output/                       ......编译输出文件目录
-/src/                          ......代码根目录
-  /chef_base/                  ......基础库代码
-    /[chef_xxx.hpp ...]        ......header only的接口文件，业务方直接包含头文件即可使用，每个头文件头部都有简单的功能说明。
-    /.unfinished/              ......等待被整理的代码
-      ...
-    /.wrapper/                 ......一些对第三方代码的封装，由于目前starry-night定位于header only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
-      /chef_http_op.hpp[_impl] ......对libcurl的封装，同步阻塞式完成http get/post
-      /chef_log.hpp[_impl]     ......对libboost log的封装，近乎零配置，快速使用
-      /compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
-  /chef_base_test/             ......基础库测试代码
+/img/                            ......图片目录
+/output/                         ......编译输出文件目录
+/src/                            ......代码根目录
+  /chef_base/                    ......基础库代码目录
+    /[chef_xxx.hpp ...]          ......核心功能代码模块
+    /.invisible/                 ......暂时不对外可见的代码
+      /.wrapper/                 ......一些对第三方代码的封装，由于目前starry-night定位于header only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
+        /chef_http_op.hpp[_impl] ......对libcurl的封装，同步阻塞式完成http get/post
+        /chef_log.hpp[_impl]     ......对libboost log的封装，近乎零配置，快速使用
+        /compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
+      /.deprecated/              ......已废弃的代码
+  /chef_base_test/               ......基础库测试代码
     ...
 /third_party/                  ......第三方依赖库，目前无第三方依赖
   ...
