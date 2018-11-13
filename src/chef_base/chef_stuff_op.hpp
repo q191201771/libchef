@@ -89,6 +89,9 @@ namespace chef {
 #include <sys/time.h>
 #include <sys/types.h>
 #include <string>
+#if defined(__linux__)
+#include <sys/prctl.h>
+#endif
 
 namespace chef {
 
