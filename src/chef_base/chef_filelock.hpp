@@ -70,6 +70,7 @@ namespace chef {
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 
 namespace chef {
