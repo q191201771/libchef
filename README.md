@@ -1,4 +1,4 @@
-# linux c++ 基础库
+# Starry Night - linux c++ 基础库
 
 ![platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20-green.svg)
 [![Release](https://img.shields.io/github/release/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/releases)
@@ -12,7 +12,8 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/q191201771/starry-night.svg)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/q191201771/starry-night/pulls)
 
-支持linux和macos双平台。header only，易于接入。基本上一个hpp一个模块，需要使用哪个模块提供的功能只需要包含那个模块的头文件即可直接使用。（目标是像机器猫的万能口袋一样，什么都有，需要什么掏什么，不相互捆绑，非全家桶类型）
+header only，易于接入。基本上一个hpp一个模块，需要使用哪个模块提供的功能只需要包含那个模块的头文件即可直接使用。（目标是像机器猫的万能口袋一样，什么都有，需要什么掏什么，不相互捆绑，非全家桶类型）。
+支持linux和macos双平台。
 
 ## 已完成模块说明
 
@@ -20,6 +21,7 @@
 
 * `DSAA`: Data Structure And Algorithm（数据结构和算法）
 * `MT`: Multi-Thread（多线程相关）
+* `IPC`: Inter-Process Communication（多进程相关）
 * `SO`: String Operator（字符串操作）
 * `SS`: System Stuff（系统编程相关）
 * `PH`: Project Helper（工程相关）
@@ -45,6 +47,7 @@ MT | chef_wait_event_counter.hpp | chef_env | 阻塞等待1~N个事件发生。�
 MT | chef_task_thread.hpp        | chef_env | 开启一个线程，可以往里面持续添加异步任务，任务串行执行，且执行顺序与添加顺序一致。支持添加延时任务。任务可以是业务方的任意函数（通过bind/function实现）。 |
 MT | chef_thread_pool.hpp        | chef_env | 线程池，池中的空闲线程抢占式执行加入的任务。适用于任务不要求强顺序性执行的场景。 |
 MT | chef_thread_group.hpp       | chef_env | 线程池，添加异步任务时支持 指定线程号 和 池内自动调度 两种方式。指定线程号方式将任务按业务方自身需求分类打到固定线程中执行。池内自动调度方式支持round-robin轮转循环，随机，当前最空闲（即未完成任务数最少）线程三种方式。 |
+IP | chef_filelock.hpp | nope | 文件锁，可用于多进程间（无亲缘关系的进程间也可以）的互斥锁，并且是进程崩溃安全的（即进程退出时会自动释放持有的文件锁）。 |
 SO | chef_fmt_op.hpp        | c++11 | 方便的生成格式化字符串，类似于sprintf，格式符由`%d` `%s`等等简化成统一的`{}` |
 SO | chef_stringify_stl.hpp | nope  | 字符串化stl容器。支持所有stl类型容器，支持多维嵌套容器，支持容器元素为自定义类型，支持自定义样式 |
 SO | chef_strings_op.hpp    | nope  | std::string常用操作帮助函数集合 |
@@ -101,8 +104,6 @@ export CHEF_BUILD_TOOL=cmake && export CHEF_BUILD_TYPE=release && ./build.sh
 ## 项目文件树
 
 ```
-/img/                            ......图片目录
-/output/                         ......编译输出文件目录
 /src/                            ......代码根目录
   /chef_base/                    ......基础库代码目录
     /[chef_xxx.hpp ...]          ......核心功能代码模块
@@ -113,19 +114,19 @@ export CHEF_BUILD_TOOL=cmake && export CHEF_BUILD_TYPE=release && ./build.sh
         /compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
       /.deprecated/              ......已废弃的代码
   /chef_base_test/               ......基础库测试代码
-    ...
-/third_party/                  ......第三方依赖库，目前无第三方依赖
-  ...
-.gitignore                     ......
-.travis.yml                    ......
-build.sh                       ......编译脚本
-clean.sh                       ......清除脚本
-CMakeLists.txt                 ......cmake编译脚本
-LINCENSE                       ......
-pretag.sh                      ......打git tag脚本
-SConstruct                     ......scons编译脚本
-ut.sh                          ......执行测试代码脚本
-README.md                      ......
-SECRET.md                      ......
+/img/                            ......图片目录
+/output/                         ......编译输出文件目录
+/third_party/                    ......第三方依赖库，目前无第三方依赖
+.gitignore                       ......
+.travis.yml                      ......
+build.sh                         ......编译脚本
+clean.sh                         ......清除脚本
+CMakeLists.txt                   ......cmake编译脚本
+LINCENSE                         ......
+pretag.sh                        ......打git tag脚本
+SConstruct                       ......scons编译脚本
+ut.sh                            ......执行测试代码脚本
+README.md                        ......
+SECRET.md                        ......
 ```
 
