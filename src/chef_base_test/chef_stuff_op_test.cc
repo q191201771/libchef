@@ -60,5 +60,13 @@ int main() {
   readable_bytes_test();
   get_host_by_name_test();
   std::cout << "tick msec:" << chef::stuff_op::tick_msec() << std::endl;
+
+  std::string hex;
+  hex = chef::stuff_op::bytes_to_hex((const uint8_t *)"aA", 2);
+  hex = chef::stuff_op::bytes_to_hex((const uint8_t *)"aA12345", 7);
+  //hex = chef::stuff_op::bytes_to_hex((const uint8_t *)"aA123456", 8);
+  //hex = chef::stuff_op::bytes_to_hex((const uint8_t *)"aA1234567", 9);
+  std::cout << hex << std::endl;
+
   return 0;
 }

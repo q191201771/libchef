@@ -79,3 +79,5 @@ target_link_libraries(chef_daemon_op_test ${COMMON_LIBS})
 add_executable(chef_stuff_op_test chef_stuff_op_test.cc)
 target_link_libraries(chef_stuff_op_test ${COMMON_LIBS})
 
+add_executable(chef_filelock_test chef_filelock_test.cc)
+target_link_libraries(chef_filelock_test ${COMMON_LIBS})

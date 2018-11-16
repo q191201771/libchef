@@ -12,8 +12,8 @@
  *
  */
 
-#ifndef _CHEF_BASE_DAEMON_OP_H_
-#define _CHEF_BASE_DAEMON_OP_H_
+#ifndef _CHEF_BASE_DAEMON_OP_HPP_
+#define _CHEF_BASE_DAEMON_OP_HPP_
 #pragma once
 
 namespace chef {
