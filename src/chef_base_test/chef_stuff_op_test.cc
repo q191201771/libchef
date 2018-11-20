@@ -53,6 +53,7 @@ int main() {
 
   example();
 
+  std::cout << "unix timestamp msec:" << chef::stuff_op::unix_timestamp_msec() << std::endl;
   std::cout << "tick msec:" << chef::stuff_op::tick_msec() << std::endl;
   std::cout << "tid:" << chef::stuff_op::gettid() << std::endl;
   chef::stuff_op::set_thread_name("yokothd");
@@ -60,6 +61,7 @@ int main() {
   readable_bytes_test();
   get_host_by_name_test();
   std::cout << "tick msec:" << chef::stuff_op::tick_msec() << std::endl;
+  std::cout << "unix timestamp msec:" << chef::stuff_op::unix_timestamp_msec() << std::endl;
 
   std::string hex;
   hex = chef::stuff_op::bytes_to_hex((const uint8_t *)"aA", 2);

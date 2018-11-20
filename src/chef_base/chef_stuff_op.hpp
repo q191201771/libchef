@@ -59,6 +59,8 @@ namespace chef {
       // 获取当前时间点，单位毫秒，一般用于计算两个时间点间的间隔用
       static uint64_t tick_msec();
 
+      static uint64_t unix_timestamp_msec();
+
       // 获取线程号
       static int gettid();
 
@@ -169,6 +171,12 @@ inline uint64_t stuff_op::tick_msec() {
   }
 #endif
   return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
+}
+
+inline uint64_t stuff_op::unix_timestamp_msec() {
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 
 inline std::string stuff_op::bytes_to_hex(const uint8_t *buf, std::size_t len, std::size_t num_per_line) {

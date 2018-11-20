@@ -1,4 +1,4 @@
-# Starry Night - linux c++ 基础库
+# Starry Night - linux c++ basic lib
 
 ![platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20-green.svg)
 [![Release](https://img.shields.io/github/release/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/releases)
@@ -47,7 +47,7 @@ MT | chef_wait_event_counter.hpp | chef_env | 阻塞等待1~N个事件发生。�
 MT | chef_task_thread.hpp        | chef_env | 开启一个线程，可以往里面持续添加异步任务，任务串行执行，且执行顺序与添加顺序一致。支持添加延时任务。任务可以是业务方的任意函数（通过bind/function实现）。 |
 MT | chef_thread_pool.hpp        | chef_env | 线程池，池中的空闲线程抢占式执行加入的任务。适用于任务不要求强顺序性执行的场景。 |
 MT | chef_thread_group.hpp       | chef_env | 线程池，添加异步任务时支持 指定线程号 和 池内自动调度 两种方式。指定线程号方式将任务按业务方自身需求分类打到固定线程中执行。池内自动调度方式支持round-robin轮转循环，随机，当前最空闲（即未完成任务数最少）线程三种方式。 |
-IP | chef_filelock.hpp | nope | 文件锁，可用于多进程间（无亲缘关系的进程间也可以）的互斥锁，并且是进程崩溃安全的（即进程退出时会自动释放持有的文件锁）。 |
+IPC | chef_filelock.hpp | nope | 文件锁，可用于多进程间（无亲缘关系的进程间也可以）的互斥锁，并且是进程崩溃安全的（即进程退出时会自动释放持有的文件锁）。 |
 SO | chef_fmt_op.hpp        | c++11 | 方便的生成格式化字符串，类似于sprintf，格式符由`%d` `%s`等等简化成统一的`{}` |
 SO | chef_stringify_stl.hpp | nope  | 字符串化stl容器。支持所有stl类型容器，支持多维嵌套容器，支持容器元素为自定义类型，支持自定义样式 |
 SO | chef_strings_op.hpp    | nope  | std::string常用操作帮助函数集合 |
@@ -59,7 +59,7 @@ SS | chef_daemon_op.hpp       | nope | 守护进程 |
 SS | chef_env_var_op.hpp      | nope | 读写系统环境变量 |
 PH | chef_defer.hpp       | chef_env | 类似golang defer，支持c goto清理等场景 |
 PH | chef_count_dump.hpp  | chef_env | 在各种线程模型下高效的对多个tag进行计数（打点）。并支持定时将计数落盘 |
-PH | chef_snippet.hpp     | nope     | 用宏减少一些手写重复代码。比如你有一个结构体，里面有各种类型的各种名称的成员变量，有可能有锁或无锁。你不再需要手写这些变量的声明、set、get函数等一堆代码 |
+PH | chef_snippet.hpp     | c++11    | 用宏减少一些手写重复代码。比如你有一个结构体，里面有各种类型的各种名称的成员变量，有可能有锁或无锁。你不再需要手写这些变量的声明、set、get函数等一堆代码 |
 PH | chef_noncopyable.hpp | nope     | 禁用拷贝构造等函数 |
 PH | chef_stuff_op.hpp    | nope     | 一些暂时没归类的功能代码片段 |
 CE | chef_crypto_md5_op.hpp      | nope | md5加密 |
