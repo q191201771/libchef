@@ -1,7 +1,7 @@
 /**
  * @tag      v1.5.14
  * @file     chef_snippet.hpp
- * @deps     nope
+ * @deps     c++11
  * @platform linux | macos | xxx
  *
  * @author
@@ -16,6 +16,9 @@
        CHEF_PROPERTY(std::string, name);
        CHEF_PROPERTY(int, age);
 
+       // 附带初始化值
+       CHEF_PROPERTY_WITH_INIT_VALUE(int, num_of_child, 128);
+
        // 我们用std中的mutex来保证score和money的读写是带锁保护的，你也可以选择其他lock_guard类型的锁使用，比如boost，但使用方需在包含该模块之前包含boost相应的头文件
        // 此处score和money共用了一把锁m，使用方也可以根据业务情况自由选择锁粒度
        CHEF_PROPERTY_STD_LOCK(m);
@@ -28,7 +31,7 @@
      f.set_age(18);
      f.set_score(88.8);
      f.set_money(500 * 10000);
-     std::cout << f.name() << " " << f.age() << " " << f.score() << " " << f.money() << std::endl;
+     std::cout << f.name() << " " << f.age() << " " << f.score() << " " << f.money() << " " << f.num_of_child() << std::endl;
      ```
  *
  */
@@ -50,6 +53,14 @@
     void set_##name(Type v) { name##_ = v; } \
   private: \
     Type name##_;
+
+// 带初始化值的数据成员
+#define CHEF_PROPERTY_WITH_INIT_VALUE(Type, name, value) \
+  public: \
+    Type name() const { return name##_; } \
+    void set_##name(Type v) { name##_ = v; } \
+  private: \
+    Type name##_ = value;
 
 // 锁数据成员
 #define CHEF_PROPERTY_LOCK(LockType, lockName) \
