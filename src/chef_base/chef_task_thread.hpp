@@ -59,9 +59,9 @@ namespace chef {
        *
        */
       enum release_mode {
-        RELEASE_MODE_ASAP,           /// 析构时，未执行的任务全部丢弃。
-        RELEASE_MODE_DO_SHOULD_DONE, /// 析构时，执行需要执行的任务——实时任务和已到定时时间的延时任务，未到定时时间的延时任务不执行。
-        RELEASE_MODE_DO_ALL_DONE,    /// 析构时，执行所有任务——实时任务和所有延时任务，未到定时时间的延时任务也会提前执行。
+        RELEASE_MODE_ASAP,           /// 停止时，未执行的任务全部丢弃。
+        RELEASE_MODE_DO_SHOULD_DONE, /// 停止时，执行需要执行的任务——实时任务和已到定时时间的延时任务，未到定时时间的延时任务不执行。
+        RELEASE_MODE_DO_ALL_DONE,    /// 停止时，执行所有任务——实时任务和所有延时任务，未到定时时间的延时任务也会提前执行。
       };
 
     public:
@@ -73,7 +73,7 @@ namespace chef {
       ~task_thread();
 
     public:
-      /// 开启后台线程池，非阻塞函数
+      /// 开启后台线程，非阻塞函数
       void start();
 
       /**
@@ -84,6 +84,9 @@ namespace chef {
        *
        */
       void add(const task &t, int defferred_time_ms=0);
+
+      /// 关闭后台线程，并阻塞等待线程结束
+      void stop_and_join();
 
       /// 返回还没执行完的任务数量
       uint64_t num_of_undone_task();
@@ -101,9 +104,6 @@ namespace chef {
       /// 获取当前时间，单位毫秒
       uint64_t now_();
 
-      /// 等待线程结束
-      void join_();
-
       /// 执行<tasks>里的所有任务，并清空<tasks>
       void execute_tasks_(std::deque<task> &tasks);
 
@@ -117,7 +117,7 @@ namespace chef {
     private:
       std::string                    name_;
       release_mode                   release_mode_;
-      bool                           exit_flag_;
+      chef::atomic<bool>             exit_flag_;
       chef::shared_ptr<chef::thread> thread_;
       std::deque<task>               tasks_;
       std::multimap<uint64_t, task>  defferred_tasks_;
@@ -159,8 +159,7 @@ namespace chef {
   }
 
   inline task_thread::~task_thread() {
-    exit_flag_ = true;
-    join_();
+    stop_and_join();
   }
 
   inline void task_thread::start() {
@@ -168,9 +167,11 @@ namespace chef {
     runned_event_.wait();
   }
 
-  inline void task_thread::join_() {
+  inline void task_thread::stop_and_join() {
+    exit_flag_ = true;
     if (thread_) {
       thread_->join();
+      thread_.reset();
     }
   }
 
