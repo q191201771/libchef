@@ -31,4 +31,5 @@ endif()
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
-add_subdirectory(src/chef_base_test)
+include_directories(include)
+add_subdirectory(test/chef_base_test)
