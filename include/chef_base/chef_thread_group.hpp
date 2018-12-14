@@ -1,5 +1,5 @@
 /**
- * @tag      v1.6.16
+ * @tag      v1.7.16
  * @file     chef_thread_group.hpp
  * @deps     chef_env.hpp | chef_task_thread.hpp
  * @platform linux | macos | xxx

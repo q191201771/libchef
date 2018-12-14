@@ -1,5 +1,5 @@
 /**
- * @tag      v1.6.16
+ * @tag      v1.7.16
  * @file     chef_this_machine_op.hpp
  * @deps     chef_filepath_op.hpp
  * @platform linux | macos | xxx
