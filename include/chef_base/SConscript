@@ -1,8 +1,0 @@
-Import('env')
-
-env = env.Clone()
-
-objs = []
-#objs += env.Object(Glob('*.cc'))
-
-Return('objs')
