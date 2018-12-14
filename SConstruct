@@ -18,21 +18,21 @@ env.Append(CXXFLAGS  = ['-Wall', '-Wextra', '-Wunused-parameter', '-Woverloaded-
                         '-Wwrite-strings', '-Wcast-align'])
 #env.Append(CXXFLAGS  = ['-Werror'])
 #env.Append(CXXFLAGS  = ['-Wconversion',  '-Wold-style-cast'])
-env.Append(CPPPATH   = [])
+env.Append(CPPPATH   = ['#include'])
 
 if env['PLATFORM'] == 'darwin':
     platform_libs = ['pthread']
-    env.Append(CPPPATH = ['#third_party/macos/boost/include'])
-    boost_lib_path = '#third_party/macos/boost/lib/'
+    #env.Append(CPPPATH = ['#third_party/macos/boost/include'])
+    #boost_lib_path = '#third_party/macos/boost/lib/'
 else:
     platform_libs = ['pthread', 'rt']
-    env.Append(CPPPATH = ['#third_party/linux/boost/include'])
+    #env.Append(CPPPATH = ['#third_party/linux/boost/include'])
+    #boost_lib_path = '#third_party/linux/boost/lib/'
     env.Append(LINKFLAGS = ['-pthread', '-static-libstdc++'])
-    boost_lib_path = '#third_party/linux/boost/lib/'
 
 Export('env')
 Export('platform_libs')
-Export('boost_lib_path')
+#Export('boost_lib_path')
 
-SConscript('src/chef_base/SConscript', variant_dir='output/lib', duplicate=0)
-SConscript('src/chef_base_test/SConscript', variant_dir='output/bin/', duplicate=0)
+SConscript('include/chef_base/SConscript', variant_dir='output/lib', duplicate=0)
+SConscript('test/chef_base_test/SConscript', variant_dir='output/bin/', duplicate=0)

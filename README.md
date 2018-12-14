@@ -1,4 +1,4 @@
-# Starry Night - linux c++ basic lib
+# Starry Night - linux c++ basic library
 
 ![platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20-green.svg)
 [![Release](https://img.shields.io/github/release/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/releases)
@@ -12,7 +12,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/q191201771/starry-night.svg)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/q191201771/starry-night/pulls)
 
-header only，易于接入。基本上一个hpp一个模块，需要使用哪个模块提供的功能只需要包含那个模块的头文件即可直接使用。（目标是像机器猫的万能口袋一样，什么都有，需要什么掏什么，不相互捆绑，非全家桶类型）。
+header-only，易于接入。基本上一个hpp一个模块，需要使用哪个模块提供的功能只需要包含那个模块的头文件即可直接使用，不需要对库单独编译和链接。（目标是像机器猫的万能口袋一样，什么都有，需要什么掏什么，不相互捆绑，非全家桶类型）。
 支持linux和macos双平台。
 
 ## 已完成模块说明
@@ -104,16 +104,17 @@ export CHEF_BUILD_TOOL=cmake && export CHEF_BUILD_TYPE=release && ./build.sh
 ## 项目文件树
 
 ```
-/src/                            ......代码根目录
-  /chef_base/                    ......基础库代码目录
+/include/                        ......starry-night库代码目录
+  /chef_base/                    ......
     /[chef_xxx.hpp ...]          ......核心功能代码模块
     /.invisible/                 ......暂时不对外可见的代码
-      /.wrapper/                 ......一些对第三方代码的封装，由于目前starry-night定位于header only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
+      /.wrapper/                 ......一些对第三方代码的封装，由于目前starry-night定位于header-only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
         /chef_http_op.hpp[_impl] ......对libcurl的封装，同步阻塞式完成http get/post
         /chef_log.hpp[_impl]     ......对libboost log的封装，近乎零配置，快速使用
         /compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
       /.deprecated/              ......已废弃的代码
-  /chef_base_test/               ......基础库测试代码
+/ut/                             ......基础库测试代码
+  /chef_base_test/               ......
 /img/                            ......图片目录
 /output/                         ......编译输出文件目录
 /third_party/                    ......第三方依赖库，目前无第三方依赖
