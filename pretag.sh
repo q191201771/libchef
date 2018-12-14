@@ -3,10 +3,10 @@
 set -x
 
 # modme
-tag='v1.5.17'
+tag='v1.6.16'
 echo "New tag ${tag}"
 
-files=$(ls src/chef_base/*.hpp)
+files=$(ls include/chef_base/*.hpp)
 for file in $files
 do
   echo $file
