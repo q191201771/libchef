@@ -113,7 +113,7 @@ export CHEF_BUILD_TOOL=cmake && export CHEF_BUILD_TYPE=release && ./build.sh
         /chef_log.hpp[_impl]     ......对libboost log的封装，近乎零配置，快速使用
         /compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
       /.deprecated/              ......已废弃的代码
-/ut/                             ......基础库测试代码
+/test/                           ......基础库测试代码
   /chef_base_test/               ......
 /img/                            ......图片目录
 /output/                         ......编译输出文件目录
