@@ -21,6 +21,7 @@ do
   fi
 done
 
+# TODO nothing push but retag.
 ./ut.sh && \
 git add . && \
 git commit -m ":bookmark: pretag ${tag}" && \
