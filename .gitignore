@@ -3,9 +3,9 @@
 *.gch
 /output
 /logs
-/src/.root
-/src/.ycm_extra_conf.py
-/src/chef_base/release/
-/src/chef_base/.dump/
+.root
+.ycm_extra_conf.py
+/include/chef_base/release/
+/include/chef_base/.dump/
 /chef_thread_group_test.dump
 secret.md
