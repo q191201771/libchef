@@ -60,6 +60,9 @@ namespace chef {
 
       // 开机至今运行时间，单位秒，失败返回-1
       static int64_t up_duration_seconds();
+
+      // 主机名，失败返回空字符串
+      static std::string host_name();
   };
 
 } // namespace chef
@@ -340,6 +343,12 @@ namespace chef {
 
     if_freenameindex(ifnis);
     return true;
+  }
+
+  inline std::string this_machine_op::host_name() {
+    char buf[256] = {0};
+    int iret = gethostname(buf, 255);
+    return iret != -1 ? std::string(buf) : std::string();
   }
 
 } // namespace chef

@@ -9,14 +9,17 @@ int main() {
   ENTER_TEST;
 
   bool res;
-  int32_t noacc               = chef::this_machine_op::num_of_available_cpu_cores();
+  int32_t noacc = chef::this_machine_op::num_of_available_cpu_cores();
+
   chef::this_machine_op::mem_info mi;
   res = chef::this_machine_op::obtain_mem_info(&mi);
   assert(res);
+
   int64_t boot_timestamp      = chef::this_machine_op::boot_timestamp();
   int64_t up_duration_seconds = chef::this_machine_op::up_duration_seconds();
   assert(boot_timestamp != -1);
   assert(up_duration_seconds != -1);
+
   uint64_t in_bytes = 0;
   uint64_t out_bytes = 0;
   std::set<std::string> interfaces;
@@ -31,6 +34,8 @@ int main() {
 #endif
   assert(res);
 
+  std::string hn = chef::this_machine_op::host_name();
+
   printf("num_of_available_cpu_cores: %d\n", noacc);
   printf("mem_total_kb: %d\n", mi.total_kb);
   printf("mem_free_kb: %d\n", mi.free_kb);
@@ -42,6 +47,7 @@ int main() {
   printf("out_bytes: %" PRIu64 "\n", out_bytes);
   printf("boot_timestamp: %" PRId64 "\n", boot_timestamp);
   printf("up_duration_seconds: %" PRId64 "\n", up_duration_seconds);
+  printf("hostname: %s\n", hn.c_str());
 
   assert(noacc > 0);
   assert(mi.total_kb > 0);
