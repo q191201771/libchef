@@ -69,9 +69,9 @@ CE | chef_encoding_base64_op.hpp | nope | base64编码、解码 |
 ## 声明，内部实现拷贝自第三方工程的代码
 
 ```
-src/chef_base/chef_crypto_md5_op.hpp      https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
-src/chef_base/chef_crypto_sha1_op.hpp     https://github.com/antirez/redis/releases/tag/3.2.9 中src/sha1.h和src/sha1.c
-src/chef_base/chef_encoding_base64_op.hpp https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
+include/chef_base/chef_crypto_md5_op.hpp      https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
+include/chef_base/chef_crypto_sha1_op.hpp     https://github.com/antirez/redis/releases/tag/3.2.9 中src/sha1.h和src/sha1.c
+include/chef_base/chef_encoding_base64_op.hpp https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
 ```
 
 ## 我的环境
