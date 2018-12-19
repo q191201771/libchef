@@ -78,15 +78,32 @@ namespace chef {
 
 
 
+#include <unistd.h>
+#include <net/if.h>
+#include <netinet/in.h>
+
+// @NOTICE 这个模块里很多函数linux和macos的实现差异比较大，实现一样的放前面，不一样按平台区分放后面
+namespace chef {
+
+  inline int32_t this_machine_op::num_of_available_cpu_cores() {
+    //return ::get_nprocs();
+    return sysconf(_SC_NPROCESSORS_CONF);
+  }
+
+  inline std::string this_machine_op::host_name() {
+    char buf[256] = {0};
+    int iret = gethostname(buf, 255);
+    return iret != -1 ? std::string(buf) : std::string();
+  }
+
+} // namespace chef
+
 #ifdef __linux__
 //#if 1
 #include <ctime>
 #include <cstdlib>
 #include <cstring>
 #include <sstream>
-#include <unistd.h>
-#include <net/if.h>
-#include <netinet/in.h>
 #include <sys/ioctl.h>
 
 namespace chef {
@@ -148,10 +165,6 @@ namespace chef {
     }
 
   } // namespace inner
-
-  inline int32_t this_machine_op::num_of_available_cpu_cores() {
-    return sysconf(_SC_NPROCESSORS_CONF);
-  }
 
   inline bool this_machine_op::obtain_mem_info(mem_info *mi) {
     if (!mi) { return false; }
@@ -221,24 +234,15 @@ namespace chef {
 #ifdef __MACH__
 //#if 0
 #include <iostream>
-#include <unistd.h>
 #include <mach/mach_host.h>
 #include <mach/mach_init.h>
-#include <net/if.h>
 #include <net/if_types.h>
 #include <net/route.h>
-#include <netinet/in.h>
 #include <sys/sysctl.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 
-
 namespace chef {
-
-  inline int32_t this_machine_op::num_of_available_cpu_cores() {
-    //return ::get_nprocs();
-    return sysconf(_SC_NPROCESSORS_CONF);
-  }
 
   inline bool this_machine_op::obtain_mem_info(mem_info *mi) {
     if (!mi) { return false; }
@@ -343,12 +347,6 @@ namespace chef {
 
     if_freenameindex(ifnis);
     return true;
-  }
-
-  inline std::string this_machine_op::host_name() {
-    char buf[256] = {0};
-    int iret = gethostname(buf, 255);
-    return iret != -1 ? std::string(buf) : std::string();
   }
 
 } // namespace chef
