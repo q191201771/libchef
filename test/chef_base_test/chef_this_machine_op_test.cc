@@ -1,7 +1,7 @@
 #include "chef_base/chef_this_machine_op.hpp"
 #include "chef_base/chef_stringify_stl.hpp"
 #include <stdio.h>
-#include <inttypes.h>
+#include <cinttypes>
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 

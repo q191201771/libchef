@@ -1,4 +1,5 @@
 #include "chef_base/chef_strings_op.hpp"
+#include "chef_base/chef_stuff_op.hpp"
 #include <stdio.h>
 #include <stdint.h>
 #include <string>
@@ -29,7 +30,7 @@ struct string_pair_2_bool {
   }
 };
 
-void strings_compare_test() {
+static void strings_compare_test() {
   /// @NOTICE
   /// std::string_op::compare返回值为 0 || > 0 || < 0，而不是 0 || 1 || -1
   /// 所以比较的时候转换下
@@ -65,7 +66,7 @@ void strings_compare_test() {
   }
 }
 
-void strings_contains_test() {
+static void strings_contains_test() {
   std::vector<string_pair_2_bool> vec;
   vec.push_back(string_pair_2_bool("abc", "bc", true));
   vec.push_back(string_pair_2_bool("abc", "bcd", false));
@@ -76,7 +77,7 @@ void strings_contains_test() {
   }
 }
 
-void strings_contains_any_test() {
+static void strings_contains_any_test() {
   std::vector<string_pair_2_bool> vec;
   vec.push_back(string_pair_2_bool("", "", false));
   vec.push_back(string_pair_2_bool("", "a", false));
@@ -95,7 +96,7 @@ void strings_contains_any_test() {
   }
 }
 
-void strings_contains_all_test() {
+static void strings_contains_all_test() {
   std::vector<string_pair_2_bool> vec;
   vec.push_back(string_pair_2_bool("", "", false));
   vec.push_back(string_pair_2_bool("", "a", false));
@@ -119,7 +120,7 @@ void strings_contains_all_test() {
   }
 }
 
-void strings_has_prifex_test() {
+static void strings_has_prifex_test() {
   std::vector<string_pair_2_bool> vec;
   vec.push_back(string_pair_2_bool("abc", "bc", false));
   vec.push_back(string_pair_2_bool("abc", "bcd", false));
@@ -133,7 +134,7 @@ void strings_has_prifex_test() {
   }
 }
 
-void strings_has_suffix_test() {
+static void strings_has_suffix_test() {
   std::vector<string_pair_2_bool> vec;
   vec.push_back(string_pair_2_bool("abc", "ab", false));
   vec.push_back(string_pair_2_bool("abc", "bcd", false));
@@ -147,7 +148,7 @@ void strings_has_suffix_test() {
   }
 }
 
-void strings_count_test() {
+static void strings_count_test() {
   std::vector<string_pair_2_int> vec;
   vec.push_back(string_pair_2_int("", "", 1));
   vec.push_back(string_pair_2_int("", "notempty", 0));
@@ -165,7 +166,7 @@ void strings_count_test() {
   }
 }
 
-void strings_to_lower_test() {
+static void strings_to_lower_test() {
   assert(chef::strings_op::to_lower("") == "");
   assert(chef::strings_op::to_lower("1") == "1");
   assert(chef::strings_op::to_lower("a") == "a");
@@ -176,19 +177,18 @@ void strings_to_lower_test() {
   assert(chef::strings_op::to_lower("!aAbbAc~") == "!aabbac~");
 }
 
-void strings_to_upper_test() {
-  assert(chef::strings_op::to_lower("") == "");
-  assert(chef::strings_op::to_lower("1") == "1");
-  assert(chef::strings_op::to_lower("a") == "A");
-  assert(chef::strings_op::to_lower("a1") == "A1");
-  assert(chef::strings_op::to_lower("A") == "A");
-  assert(chef::strings_op::to_lower("aA") == "AA");
-  assert(chef::strings_op::to_lower("aAbbAc") == "AABBAC");
-  assert(chef::strings_op::to_lower("!aAb&bAc~") == "!aab&bac~");
+static void strings_to_upper_test() {
+  assert(chef::strings_op::to_upper("") == "");
+  assert(chef::strings_op::to_upper("1") == "1");
+  assert(chef::strings_op::to_upper("a") == "A");
+  assert(chef::strings_op::to_upper("a1") == "A1");
+  assert(chef::strings_op::to_upper("A") == "A");
+  assert(chef::strings_op::to_upper("aA") == "AA");
+  assert(chef::strings_op::to_upper("aAbbAc") == "AABBAC");
+  assert(chef::strings_op::to_upper("!aAb&bAc~") == "!AAB&BAC~");
 }
 
-
-void strings_join_test() {
+static void strings_join_test() {
   std::string delimiter = "---";
   std::vector<std::string> array;
   assert(chef::strings_op::join(array, delimiter) == std::string());
@@ -202,7 +202,7 @@ void strings_join_test() {
   assert(chef::strings_op::join(array, delimiter) == std::string("---test---hello---world"));
 }
 
-void strings_split_any_test() {
+static void strings_split_any_test() {
   std::vector<std::string> res;
 
   assert(chef::strings_op::split_any("", "-*").empty());
@@ -265,7 +265,7 @@ void strings_split_any_test() {
   assert(res[2] == "ddd=b");
 }
 
-void strings_split_by_chars_test() {
+static void strings_split_by_chars_test() {
   std::vector<std::string> res;
 
   assert(chef::strings_op::split(std::string(), "-").empty());
@@ -335,7 +335,7 @@ void strings_split_by_chars_test() {
   assert(res.size() == 0);
 }
 
-void strings_split_by_char_test() {
+static void strings_split_by_char_test() {
   std::vector<std::string> res;
 
   assert(chef::strings_op::split(std::string(), '-').empty());
@@ -404,7 +404,7 @@ void strings_split_by_char_test() {
   assert(res.size() == 0);
 }
 
-void strings_trim_left_test() {
+static void strings_trim_left_test() {
   std::vector<std::vector<std::string> > vec = {
     {"", "", ""},
     {"a", "", "a"},
@@ -427,7 +427,7 @@ void strings_trim_left_test() {
   assert(chef::strings_op::trim_left(" \taa b  \t") == "aa b  \t");
 }
 
-void strings_trim_right_test() {
+static void strings_trim_right_test() {
   std::vector<std::vector<std::string> > vec = {
     {"", "", ""},
     {"a", "", "a"},
@@ -450,7 +450,7 @@ void strings_trim_right_test() {
   assert(chef::strings_op::trim_right(" \taa b  \t") == " \taa b");
 }
 
-void strings_trim_prefix_test() {
+static void strings_trim_prefix_test() {
   std::vector<std::vector<std::string> > vec = {
     {"", "", ""},
     {"a", "", "a"},
@@ -476,7 +476,7 @@ void strings_trim_prefix_test() {
   }
 }
 
-void strings_trim_suffix_test() {
+static void strings_trim_suffix_test() {
   std::vector<std::vector<std::string> > vec = {
     {"", "", ""},
     {"a", "", "a"},
@@ -504,7 +504,7 @@ void strings_trim_suffix_test() {
   }
 }
 
-void strings_splitlines_test() {
+static void strings_splitlines_test() {
   std::vector<std::string> lines;
   lines = chef::strings_op::splitlines("", true);
   assert(lines.size() == 0);
@@ -530,7 +530,7 @@ void strings_splitlines_test() {
   assert(lines.size() == 4 && lines[0] == "ab c\n" && lines[1] == "\n" && lines[2] == "de fg\r" && lines[3] == "kl\r\n");
 }
 
-void strings_to_string_test() {
+static void strings_to_string_test() {
   int a                = 1;
   float b              = 2.3f;
   double c             = 3.4;
@@ -560,7 +560,7 @@ void strings_to_string_test() {
   assert(chef::strings_op::to_string(m) == "11");
 }
 
-void strings_replace_test() {
+static void strings_replace_test() {
   std::string s;
   std::string target;
   std::string replacement;
@@ -599,8 +599,119 @@ void strings_replace_test() {
   assert(chef::strings_op::replace_last("abacaadaa", "aa", "c") == "abacaadc");
 }
 
-void strings_macro_test() {
+static void strings_macro_test() {
   assert(chef::SPC== ' ');
+}
+
+static void strings_text_flow_wrap_test() {
+
+std::map<std::string, std::string> m{
+  {"", ""},
+  {"aaa", "aaa"},
+  {"abcd", "abcd"},
+  {"aaabb", "aaab\nb"},
+  {"aaabbbcc", "aaab\nbbcc"},
+  {"aaabbbccd", "aaab\nbbcc\nd"},
+
+{
+"\n"
+""
+,
+"\n"
+""
+},
+
+{
+"\n"
+"aaa"
+,
+"\n"
+"aaa"
+},
+
+{
+"aa\n"
+"a"
+,
+"aa\n"
+"a"
+},
+
+{
+"aaa\n"
+""
+,
+"aaa\n"
+""
+},
+
+{
+"abcd\n"
+""
+,
+"abcd\n"
+""
+},
+
+{
+"aaab\n"
+"b"
+,
+"aaab\n"
+"b"
+},
+
+{
+"aaab\n"
+"cdefgh"
+,
+"aaab\n"
+"cdef\n"
+"gh"
+},
+
+};
+
+  std::map<std::string, std::string>::iterator iter = m.begin();
+  for (; iter != m.end(); iter++) {
+    //std::string res = chef::strings_op::text_flow_wrap(iter->first, 4);
+    //std::cout << "CHEFERASEME length:" << res.length() << "\n"
+    //          << chef::stuff_op::bytes_to_hex((const uint8_t *)res.c_str(), res.length()) << "\n"
+    //          << res << "\n";
+    assert(chef::strings_op::text_flow_wrap(iter->first, 4) == iter->second);
+  }
+
+std::string eg_k =
+"hello,\n"
+"my name is chef,nice to meet u.\n"
+"The elements of the C language library are also included as a subset of the C++ Standard library.\n"
+"thx."
+;
+std::string eg_v =
+"hello,\n"
+"my name is chef,\n"
+"nice to meet u.\n"
+"The elements of \n"
+"the C language l\n"
+"ibrary are also \n"
+"included as a su\n"
+"bset of the C++ \n"
+"Standard library\n"
+".\n"
+"thx."
+;
+
+  std::string res = chef::strings_op::text_flow_wrap(eg_k, 16);
+  std::cout << "CHEFERASEME length:" << res.length() << "\n"
+  //          << chef::stuff_op::bytes_to_hex((const uint8_t *)res.c_str(), res.length()) << "\n"
+            << res << "\n"
+            ;
+  std::cout
+  //          << chef::stuff_op::bytes_to_hex((const uint8_t *)eg_v.c_str(), eg_v.length()) << "\n"
+            << eg_v << "\n"
+            ;
+  assert(res == eg_v);
+
 }
 
 int main() {
@@ -614,6 +725,7 @@ int main() {
   strings_has_suffix_test();
   strings_count_test();
   strings_to_lower_test();
+  strings_to_upper_test();
   strings_join_test();
   strings_split_by_char_test();
   strings_split_by_chars_test();
@@ -626,6 +738,7 @@ int main() {
   strings_replace_test();
   strings_split_any_test();
   strings_macro_test();
+  strings_text_flow_wrap_test();
 
   return 0;
 }

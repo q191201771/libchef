@@ -137,6 +137,30 @@ namespace chef {
           return ss.str();
       }
 
+      // 将过长的行按固定宽度限制换行
+      // 比如 width 设置为16，那么以下文本
+      //
+      // hello,
+      // my name is chef,nice to meet u.
+      // The elements of the C language library are also included as a subset of the C++ Standard library.
+      // thx.
+      //
+      // 将被转换成
+      //
+      // hello,
+      // my name is chef,
+      // nice to meet u.
+      // The elements of
+      // the C language l
+      // ibrary are also
+      // included as a su
+      // bset of the C++
+      // Standard library
+      // .
+      // thx.
+      //
+      static std::string text_flow_wrap(const std::string &src, std::size_t width, const std::string &eol="\n");
+
     private:
       strings_op();
       strings_op(const strings_op &);
@@ -469,6 +493,37 @@ namespace chef {
 
   inline std::string strings_op::trim_suffix(const std::string &s, const std::string &suffix) {
     return has_suffix(s, suffix) ? s.substr(0, s.length() - suffix.length()) : s;
+  }
+
+  inline std::string strings_op::text_flow_wrap(const std::string &src, std::size_t width, const std::string &eol) {
+    std::string ret;
+    std::vector<std::string> lines = split(src, eol, true);
+    std::vector<std::string>::iterator iter = lines.begin();
+    bool first = true;
+    for (; iter != lines.end(); iter++) {
+      if (iter->length() > width) {
+        std::size_t start = 0;
+        std::size_t len = iter->length();
+        for (; len > width; ) {
+          if (first) { first = false; } else { ret += eol; }
+
+          ret += iter->substr(start, width);
+          len -= width;
+          start += width;
+        }
+        if (len != 0) {
+          if (first) { first = false; } else { ret += eol; }
+
+          ret += iter->substr(start, width);
+        }
+      } else {
+        if (first) { first = false; } else { ret += eol; }
+
+        ret += *iter;
+      }
+    }
+
+    return ret;
   }
 
 } // namespace chef
