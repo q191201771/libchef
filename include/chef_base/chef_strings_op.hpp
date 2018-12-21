@@ -1,5 +1,5 @@
 /**
- * @tag      v1.7.16
+ * @tag      v1.7.17
  * @file     chef_strings_op.hpp
  * @deps     nope
  * @platform linux | macos | windows
@@ -137,7 +137,7 @@ namespace chef {
           return ss.str();
       }
 
-      // 将过长的行按固定宽度限制换行
+      // 将文本中过长的行按固定宽度限制换行
       // 比如 width 设置为16，那么以下文本
       //
       // hello,

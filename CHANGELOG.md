@@ -2,6 +2,16 @@
 
 版本规则：首位不变保持1，第二位增加表示在前一个版本的基础上有bugfix或不兼容性修改，第三位增加表示有兼容性修改或新增或其他。
 
+`v1.7.17` `~`
+
+* bugfix：无
+* 不兼容性修改：无
+* 兼容性修改：无
+* 新增：函数 chef::this_machina_op::host_name -> 获取主机名
+* 新增：函数 chef::strings_op::text_flow_wrap -> 将文本中过长的行按固定宽度限制换行
+* 其他：包含 inttypes.h 的地方修改为 cinttypes
+* 其他：增加 CHANGELOG.md 文件用于记录每次发release版本时的具体修改内容
+
 `v1.7.16` `~`
 
     bugfix：无

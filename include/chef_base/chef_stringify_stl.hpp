@@ -1,5 +1,5 @@
 /**
- * @tag      v1.7.16
+ * @tag      v1.7.17
  * @file     chef_stringify_stl.hpp
  * @deps     nope
  * @platform linux/macos/xxx
