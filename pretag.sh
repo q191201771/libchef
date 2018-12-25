@@ -11,13 +11,13 @@ for file in $files
 do
   echo $file
 
-  grep -n '* @tag      v' $file | grep '2:'
+  grep -n '* @tag      v' $file | grep '3:'
   if [ $? -ne 0 ];then
     echo "Tag not found. append new tag ${tag}..."
-    gsed -i "2i\ * @tag      ${tag}" $file
+    gsed -i "3i\ * @tag      ${tag}" $file
   else
     echo "Tag already exist. modify to ${tag}..."
-    gsed -i "2c\ * @tag      ${tag}" $file
+    gsed -i "3c\ * @tag      ${tag}" $file
   fi
 done
 
