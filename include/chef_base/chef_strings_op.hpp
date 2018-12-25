@@ -9,7 +9,7 @@
  *   chef <191201771@qq.com>
  *     - initial release xxxx-xx-xx
  *
- * @brief    std::string常用操作帮助函数集合
+ * @brief    字符串常用操作帮助函数集合
  *
  */
 
@@ -39,54 +39,6 @@ namespace chef {
 
   class strings_op {
     public:
-      /// @return   0 或 >0 或 <0
-      static int compare(const std::string &a, const std::string &b);
-
-      /// `s`是否包含子串`target`
-      static bool contains(const std::string &s, const std::string &target);
-
-      /// `s`中是否包含`charlist`中的一个或多个字符
-      static bool contains_any(const std::string &s, const std::string &charlist);
-
-      /// `s`中是否包含`charlist`中的所有字符
-      static bool contains_all(const std::string &s, const std::string &charlist);
-
-      /// `s`是否以`prefix`开头
-      static bool has_prefix(const std::string &s, const std::string &prefix);
-
-      /// `s`是否以`suffix`结束
-      static bool has_suffix(const std::string &s, const std::string &suffix);
-
-      /// `s`中包含多少个`target`
-      static int count(const std::string &s, const std::string &target);
-
-      /// 转小写
-      static std::string to_lower(const std::string &s);
-
-      /// 转大写
-      static std::string to_upper(const std::string &s);
-
-      /// 从`s`头部开始，移除`charlist`中的字符，直到遇到不属于`charlist`的字符停止
-      static std::string trim_left(const std::string &s, const std::string &charlist=WHITESPACE);
-
-      /// 从`s`尾部开始，移除`charlist`中的字符，直到遇到不属于`charlist`的字符停止
-      static std::string trim_right(const std::string &s, const std::string &charlist=WHITESPACE);
-
-      /// 如果`s`以`prefix`开头，则移除`prefix`
-      static std::string trim_prefix(const std::string &s, const std::string &prefix);
-
-      /// 如果`s`以`suffix`结束，则移除`suffix`
-      static std::string trim_suffix(const std::string &s, const std::string &suffix);
-
-      /// 把`s`中的`target`全部替换成`replacement`
-      static std::string replace(const std::string &s, const std::string &target, const std::string &replacement);
-
-      /// 把`s`中的第一个`target`替换成`replacement`
-      static std::string replace_first(const std::string &s, const std::string &target, const std::string &replacement);
-
-      /// 把`s`中的最后一个`target`替换成`replacement`
-      static std::string replace_last(const std::string &s, const std::string &target, const std::string &replacement);
-
       /**
        * 用`sep`分割`s`
        *
@@ -130,6 +82,33 @@ namespace chef {
       /// 把字符串数组`ss`用连接符`sep`连接起来，返回连接后的字符串
       static std::string join(const std::vector<std::string> &ss, const std::string &sep);
 
+      /// `s`是否以`prefix`开头
+      static bool has_prefix(const std::string &s, const std::string &prefix);
+
+      /// `s`是否以`suffix`结束
+      static bool has_suffix(const std::string &s, const std::string &suffix);
+
+      /// 从`s`头部开始，移除`charlist`中的字符，直到遇到不属于`charlist`的字符停止
+      static std::string trim_left(const std::string &s, const std::string &charlist=WHITESPACE);
+
+      /// 从`s`尾部开始，移除`charlist`中的字符，直到遇到不属于`charlist`的字符停止
+      static std::string trim_right(const std::string &s, const std::string &charlist=WHITESPACE);
+
+      /// 如果`s`以`prefix`开头，则移除`prefix`
+      static std::string trim_prefix(const std::string &s, const std::string &prefix);
+
+      /// 如果`s`以`suffix`结束，则移除`suffix`
+      static std::string trim_suffix(const std::string &s, const std::string &suffix);
+
+      /// 把`s`中的`target`全部替换成`replacement`
+      static std::string replace(const std::string &s, const std::string &target, const std::string &replacement);
+
+      /// 把`s`中的第一个`target`替换成`replacement`
+      static std::string replace_first(const std::string &s, const std::string &target, const std::string &replacement);
+
+      /// 把`s`中的最后一个`target`替换成`replacement`
+      static std::string replace_last(const std::string &s, const std::string &target, const std::string &replacement);
+
       ///
       template <class T>
       static std::string to_string(const T &t) {
@@ -161,6 +140,33 @@ namespace chef {
       // thx.
       //
       static std::string text_flow_wrap(const std::string &src, std::size_t width, const std::string &eol="\n");
+
+      // 类似于c字符串格式化函数snprintf，但不需要对结果的长度做预估，输出结果为std::string类型
+      // 举例：
+      //   std::string result = string_printf("(%d)(%s)(%.2f)", 18, "chef", 3.45);
+      //   // result -> "(18)(chef)(3.45)"
+      static std::string string_printf(const char *fmt, ...);
+
+      /// @return   0 或 >0 或 <0
+      static int compare(const std::string &a, const std::string &b);
+
+      /// `s`是否包含子串`target`
+      static bool contains(const std::string &s, const std::string &target);
+
+      /// `s`中是否包含`charlist`中的一个或多个字符
+      static bool contains_any(const std::string &s, const std::string &charlist);
+
+      /// `s`中是否包含`charlist`中的所有字符
+      static bool contains_all(const std::string &s, const std::string &charlist);
+
+      /// `s`中包含多少个`target`
+      static int count(const std::string &s, const std::string &target);
+
+      /// 转小写
+      static std::string to_lower(const std::string &s);
+
+      /// 转大写
+      static std::string to_upper(const std::string &s);
 
     private:
       strings_op();
@@ -525,6 +531,39 @@ namespace chef {
     }
 
     return ret;
+  }
+
+  inline std::string strings_op::string_printf(const char *fmt, ...) {
+    std::string result;
+    va_list args;
+    int fmt_len;
+    int default_buf_len = 1024;
+    char default_buf[1024] = {0};
+
+    va_start(args, fmt);
+    fmt_len = vsnprintf(default_buf, default_buf_len, fmt, args);
+    va_end(args);
+
+    if (fmt_len < 0) {
+      // error
+      return result;
+    } else if (fmt_len >= 0 && fmt_len < default_buf_len) {
+      // perfect
+      result.assign(default_buf, fmt_len);
+      return result;
+    }
+
+    // not enough
+    char *buf = new char[fmt_len+1];
+    va_start(args, fmt);
+    fmt_len = vsnprintf(buf, fmt_len+1, fmt, args);
+    va_end(args);
+
+    if (fmt_len > 0) {
+      result.assign(buf, fmt_len);
+    }
+    delete []buf;
+    return result;
   }
 
 } // namespace chef

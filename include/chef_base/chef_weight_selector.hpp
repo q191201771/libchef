@@ -71,6 +71,10 @@ namespace chef {
       uint32_t      total_weight_;
       item2weight_t item2weight_initial_;
       item2weight_t item2weight_current_;
+
+    private:
+      weight_selector(const weight_selector &);
+      weight_selector &operator=(const weight_selector &);
   };
 
 } // namespace chef

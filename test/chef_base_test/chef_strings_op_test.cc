@@ -714,6 +714,17 @@ std::string eg_v =
 
 }
 
+static void strings_string_printf_test() {
+  std::string str;
+  str = chef::strings_op::string_printf("%s", "aaa");
+  assert(str == "aaa" && str.length() == 3);
+  str = chef::strings_op::string_printf("(%d)(%s)", 12, "123");
+  assert(str == "(12)(123)" && str.length() == 9);
+  str = chef::strings_op::string_printf("(%d)(%s)(%.2f)", 18, "chef", 3.45);
+  //printf("result: %s %lu\n", str.c_str(), str.length());
+  assert(str == "(18)(chef)(3.45)" && str.length() == 16);
+}
+
 int main() {
   ENTER_TEST;
 
@@ -739,6 +750,7 @@ int main() {
   strings_split_any_test();
   strings_macro_test();
   strings_text_flow_wrap_test();
+  strings_string_printf_test();
 
   return 0;
 }

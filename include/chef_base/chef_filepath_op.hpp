@@ -25,21 +25,14 @@ namespace chef {
 
   class filepath_op {
     public:
-      /**
-       * @return
-       *    0 存在，文件或文件夹都可
-       *   -1 不存在
-       *
-       */
+      // @return 0 存在，文件或文件夹都可    -1 不存在
       static int exist(const std::string &name);
 
-      /**
-       * @return
-       *    0 存在，且为文件夹
-       *   -1 不存在，或不是文件夹
-       *
-       */
+      // @return 0 存在，且为文件夹    -1 不存在，或不是文件夹
       static int is_dir(const std::string &pathname);
+
+      // @return 0 是绝对路径格式（以`/`字符开头）    -1 不是绝对路径
+      static int is_abs_path(const std::string &name);
 
       /**
        * @param pathname             需要查询的文件夹
@@ -49,7 +42,7 @@ namespace chef {
        *
        * @return  0 成功 -1 失败 `pathname`不可遍历
        *
-       * @NOTICE 只访问第一层目录，不会递归访问子目录下的内容
+       * @NOTICE 只访问第一层目录，如果需要访问子目录下的内容，需要业务方自行递归
        *
        */
       static int walk_dir(const std::string &pathname,
@@ -57,12 +50,7 @@ namespace chef {
                           std::vector<std::string> &child_files /*out*/,
                           bool with_pathname_prefix=true);
 
-      /**
-       * @return
-       *    0 创建成功，或创建前已经存在
-       *   -1 失败
-       *
-       */
+      // @return 0 创建成功，或创建前已经存在    -1 失败
       static int mkdir_recursive(const std::string &pathname);
 
       /**
@@ -206,6 +194,10 @@ namespace chef {
       return -1;
     }
     return S_ISDIR(st.st_mode) ? 0 : -1;
+  }
+
+  inline int filepath_op::is_abs_path(const std::string &name) {
+    return !name.empty() && (name[0] == '/');
   }
 
   inline int filepath_op::walk_dir(const std::string &pathname,

@@ -12,7 +12,7 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/q191201771/starry-night.svg)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/q191201771/starry-night/pulls)
 
-header-only，易于接入。基本上一个hpp一个模块，需要使用哪个模块提供的功能只需要包含那个模块的头文件即可直接使用，不需要对库单独编译和链接。（目标是像机器猫的万能口袋一样，什么都有，需要什么掏什么，不相互捆绑，非全家桶类型）。
+header-only，易于接入。尽可能一个hpp一个模块，需要使用哪个模块提供的功能只需要包含那个模块的头文件即可直接使用，不需要对库单独编译和链接。（目标是像机器猫的万能口袋一样，什么都有，需要什么掏什么，不强制相互捆绑，非全家桶类型）。
 支持linux和macos双平台。
 
 ## 已完成模块说明
@@ -50,7 +50,7 @@ MT | chef_thread_group.hpp       | chef_env | 线程池，添加异步任务时�
 IPC | chef_filelock.hpp | nope | 文件锁，可用于多进程间（无亲缘关系的进程间也可以）的互斥锁，并且是进程崩溃安全的（即进程退出时会自动释放持有的文件锁）。 |
 SO | chef_fmt_op.hpp        | c++11 | 方便的生成格式化字符串，类似于sprintf，格式符由`%d` `%s`等等简化成统一的`{}` |
 SO | chef_stringify_stl.hpp | nope  | 字符串化stl容器。支持所有stl类型容器，支持多维嵌套容器，支持容器元素为自定义类型，支持自定义样式 |
-SO | chef_strings_op.hpp    | nope  | std::string常用操作帮助函数集合 |
+SO | chef_strings_op.hpp    | nope | 字符串常用操作帮助函数集合 |
 SS | chef_os_exec_op.hpp      | nope | 开启子进程执行shell命令，并阻塞式等待结果 |
 SS | chef_this_machine_op.hpp | nope | 获取机器维度的信息，比如CPU，内存，带宽，开机时间等 |
 SS | chef_this_process_op.hpp | nope | 获取当前进程维度的信息，比如进程启动时间，当前线程数，分页大小，内存占用，可执行文件路径，进程号，用户号，用户名，编译时间git版本等 |

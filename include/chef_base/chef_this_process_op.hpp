@@ -65,6 +65,11 @@ namespace chef {
       // 通过 -DCHEF_VERSION=20170322212416_516ffc1 传入
       // 如果读取不到返回"unknown"
       static std::string version();
+
+    private:
+      this_process_op();
+      this_process_op(this_process_op &);
+      this_process_op &operator=(this_process_op &);
   };
 
 } // namespace chef

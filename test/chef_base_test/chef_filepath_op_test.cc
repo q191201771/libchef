@@ -14,6 +14,12 @@ static std::string rand_string() {
   return std::to_string(std::rand());
 }
 
+void is_abs_path_test() {
+  assert(!chef::filepath_op::is_abs_path(""));
+  assert(!chef::filepath_op::is_abs_path("a"));
+  assert(chef::filepath_op::is_abs_path("/a"));
+}
+
 void exist_test() {
   assert(chef::filepath_op::exist("/tmp") == 0);
   std::string filename = std::string("/tmp/exist_test.") + rand_string();
@@ -157,6 +163,7 @@ int main(){
   ENTER_TEST;
 
   std::srand(static_cast<unsigned int>(std::time(0)));
+  is_abs_path_test();
   join_test();
   exist_test();
   is_dir_test();

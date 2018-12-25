@@ -40,6 +40,12 @@ namespace chef {
        *
        */
       static int write(const char *pidfile);
+
+    private:
+      daemon_op();
+      daemon_op(const daemon_op &);
+      daemon_op &operator=(const daemon_op &);
+
   };
 
 } // namespace chef

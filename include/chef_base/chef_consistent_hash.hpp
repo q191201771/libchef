@@ -48,6 +48,12 @@ namespace chef {
       std::set<T>                nodes_;
       std::map<hash_result_t, T> pos2node_;
 
+    public:
+      consistent_hash() {}
+    private:
+      consistent_hash(const consistent_hash &);
+      consistent_hash &operator=(const consistent_hash &);
+
   }; // class consistent_hash
 
 } // namespace chef

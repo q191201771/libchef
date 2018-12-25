@@ -75,6 +75,11 @@ namespace chef {
       std::size_t pos = fmt.find("{}");
       if (pos != std::string::npos) { fmt.replace(pos, 2, oss.str()); }
     }
+
+  private:
+    fmt_op();
+    fmt_op(fmt_op &);
+    fmt_op &operator=(fmt_op &);
   };
 
 } // namespace chef
