@@ -64,6 +64,11 @@ namespace chef {
 
       // 主机名，失败返回空字符串
       static std::string host_name();
+
+    private:
+      this_machine_op();
+      this_machine_op(this_machine_op &);
+      this_machine_op &operator=(this_machine_op &);
   };
 
 } // namespace chef

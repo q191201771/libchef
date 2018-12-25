@@ -52,6 +52,11 @@ namespace chef {
     private:
       std::string filename_;
       int         fd_;
+
+    private:
+      filelock(const filelock &);
+      filelock &operator=(const filelock &);
+
   }; // class filelock
 
 } // namespace chef

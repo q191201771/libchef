@@ -74,6 +74,10 @@ namespace chef {
 
       static int read_be_int(const uint8_t *data, uint32_t n);
 
+    private:
+      stuff_op();
+      stuff_op(stuff_op &);
+      stuff_op &operator=(stuff_op &);
   };
 
 } // namespace chef
