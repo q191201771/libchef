@@ -1,5 +1,5 @@
 /**
- * @git      https://github.com/q191201771/starry-night
+ * @license  this file is part of starry-night library. more info see https://github.com/q191201771/starry-night
  * @tag      v1.7.17
  * @file     chef_crypto_sha1_op.hpp
  * @deps     nope
