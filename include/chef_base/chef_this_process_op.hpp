@@ -1,5 +1,5 @@
 /**
- * @license  this file is part of starry-night library. more info see https://github.com/q191201771/starry-night
+ * @license  this file is a part of libchef. more info see https://github.com/q191201771/libchef
  * @tag      v1.8.17
  * @file     chef_this_process_op.hpp
  * @deps     chef_filepath_op.hpp | chef_os_exec_op.hpp
@@ -46,8 +46,8 @@ namespace chef {
       };
       static bool obtain_mem_info(mem_info *mi);
 
-      // func exe_filepath e.g. /home/travis/build/q191201771/starry-night/output/chef_base_test/chef_this_process_op_test
-      // func exe_path     e.g. /home/travis/build/q191201771/starry-night/output/chef_base_test/
+      // func exe_filepath e.g. /home/travis/build/q191201771/libchef/output/chef_base_test/chef_this_process_op_test
+      // func exe_path     e.g. /home/travis/build/q191201771/libchef/output/chef_base_test/
       // func exe_name     e.g. chef_this_process_op_test
       static std::string exe_filepath();
       static std::string exe_path();
