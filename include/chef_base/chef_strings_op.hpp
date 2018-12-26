@@ -27,15 +27,16 @@ namespace chef {
   static const char TAB = '\t';
   static const char CR  = '\r';
   static const char LF  = '\n';
-  static const std::string DIGITS      = "0123456789";
-  static const std::string OCTDIGITS   = "01234567";
-  static const std::string HEXDIGITS   = "0123456789abcdefABCDEF";
-  static const std::string LETTERS     = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  static const std::string LOWERCASE   = "abcdefghijklmnopqrstuvwxyz";
-  static const std::string UPPERCASE   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  static const std::string PUNCTUATION = "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~";
-  static const std::string WHITESPACE  = " \t\n\r\x0b\x0c";
-  static const std::string PRINTABLE   = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c";
+  static const std::string DIGITS          = "0123456789";
+  static const std::string OCTDIGITS       = "01234567";
+  static const std::string HEXDIGITS_UPPER = "0123456789ABCDEF";
+  static const std::string HEXDIGITS       = "0123456789abcdefABCDEF";
+  static const std::string LETTERS         = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  static const std::string LOWERCASE       = "abcdefghijklmnopqrstuvwxyz";
+  static const std::string UPPERCASE       = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  static const std::string PUNCTUATION     = "!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~";
+  static const std::string WHITESPACE      = " \t\n\r\x0b\x0c";
+  static const std::string PRINTABLE       = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \t\n\r\x0b\x0c";
 
   class strings_op {
     public:
@@ -146,6 +147,12 @@ namespace chef {
       //   std::string result = string_printf("(%d)(%s)(%.2f)", 18, "chef", 3.45);
       //   // result -> "(18)(chef)(3.45)"
       static std::string string_printf(const char *fmt, ...);
+
+      //
+      static std::string url_encode(const std::string &s);
+
+      // @NOTICE 如果输入不是合法的url编码格式的字符串，则返回空字符串
+      static std::string url_decode(const std::string &s);
 
       /// @return   0 或 >0 或 <0
       static int compare(const std::string &a, const std::string &b);
@@ -564,6 +571,63 @@ namespace chef {
       result.assign(buf, fmt_len);
     }
     delete []buf;
+    return result;
+  }
+
+  inline std::string strings_op::url_encode(const std::string &s) {
+    if (s.empty()) { return s; }
+
+    std::string result;
+    result.reserve(s.length());
+    for (std::size_t i = 0; i < s.length(); i++) {
+      const char &ch = s[i];
+      if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9') ||
+          ch == '-' || ch == '_' || ch == '.' || ch == '~')
+      {
+        result += ch;
+      } else if (ch == ' ') {
+        result += '+';
+      } else {
+        result += '%';
+        result += HEXDIGITS_UPPER[ch>>4];
+        result += HEXDIGITS_UPPER[ch&15];
+      }
+    }
+    return result;
+  }
+
+  static char unhex(char ch) {
+    if (ch >= '0' && ch <= '9') {
+      return ch - '0';
+    } else if (ch >= 'a' && ch <= 'z') {
+      return ch - 'a' + 10;
+    } else if (ch >= 'A' && ch <= 'Z') {
+      return ch - 'A' + 10;
+    }
+    return 0;
+  }
+
+  inline std::string strings_op::url_decode(const std::string &s) {
+    if (s.empty()) { return s; }
+
+    std::string result;
+    result.reserve(s.length());
+    for (std::size_t i = 0; i < s.length();) {
+      const char &ch = s[i];
+      if (ch == '%') {
+        if (i+2 >= s.length() || HEXDIGITS.find(s[i+1]) == std::string::npos || HEXDIGITS.find(s[i+2]) == std::string::npos) {
+          return std::string();
+        }
+        result += ((unhex(s[i+1]) << 4) | unhex(s[i+2]));
+        i += 3;
+      } else if (ch == '+') {
+        result += ' ';
+        i++;
+      } else {
+        result += ch;
+        i++;
+      }
+    }
     return result;
   }
 
