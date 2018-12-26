@@ -729,6 +729,45 @@ static void strings_string_printf_test() {
   assert(memcmp(longBuf, str.c_str(), 4095) == 0 && str.length() == 4095);
 }
 
+static void strings_url_encode_decode() {
+  std::map<std::string, std::string> m;
+  m[""] = "";
+  m["abc"] = "abc";
+  m["one two"] = "one+two";
+  m["10%"] = "10%25";
+  //m[" ?&=#+%!<>#\"{}|\\^[]`☺\t:/@$'()*,;"] = "+%3F%26%3D%23%2B%25%21%3C%3E%23%22%7B%7D%7C%5C%5E%5B%5D%60%E2%98%BA%09%3A%2F%40%24%27%28%29%2A%2C%3B";
+  std::map<std::string, std::string>::iterator iter = m.begin();
+  for (; iter != m.end(); iter++) {
+    std::string result = chef::strings_op::url_encode(iter->first);
+    //printf("-----\n%s\n%s\n%s\n", iter->first.c_str(),  iter->second.c_str(), result.c_str());
+    assert(iter->second == result);
+
+    std::string decoded = chef::strings_op::url_decode(result);
+    //printf("%s\n", decoded.c_str());
+    assert(decoded == iter->first);
+  }
+  {
+    m.clear();
+    m["1%41"] = "1A";
+    m["1%41%42%43"] = "1ABC";
+    m["%4a"] = "J";
+    m["%6F"] = "o";
+    m["%"] = "";
+    m["%a"] = "";
+    m["%1"] = "";
+    m["123%45%6"] = "";
+    m["%zzzzz"] = "";
+    m["a+b"] = "a b";
+    m["a%20b"] = "a b";
+    iter = m.begin();
+    for (; iter != m.end(); iter++) {
+      std::string result = chef::strings_op::url_decode(iter->first);
+      //printf("-----\n%s\n%s\n%s\n", iter->first.c_str(),  iter->second.c_str(), result.c_str());
+      assert(iter->second == result);
+    }
+  }
+}
+
 int main() {
   ENTER_TEST;
 
@@ -755,6 +794,7 @@ int main() {
   strings_macro_test();
   strings_text_flow_wrap_test();
   strings_string_printf_test();
+  strings_url_encode_decode();
 
   return 0;
 }
