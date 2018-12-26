@@ -1,4 +1,4 @@
-对应release版本(https://github.com/q191201771/starry-night/releases)
+对应release版本(https://github.com/q191201771/libchef/releases)
 
 版本规则：首位不变保持1，第二位增加表示在前一个版本的基础上有bugfix或不兼容性修改，第三位增加表示有兼容性修改或新增或其他。
 

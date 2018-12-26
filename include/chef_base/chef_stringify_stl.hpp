@@ -1,5 +1,5 @@
 /**
- * @license  this file is part of starry-night library. more info see https://github.com/q191201771/starry-night
+ * @license  this file is a part of libchef. more info see https://github.com/q191201771/libchef
  * @tag      v1.8.17
  * @file     chef_stringify_stl.hpp
  * @deps     nope

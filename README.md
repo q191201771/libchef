@@ -1,16 +1,16 @@
-# Starry Night - linux c++ basic library
+# libchef - linux c++ header-only basic library
 
 ![platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20-green.svg)
-[![Release](https://img.shields.io/github/release/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/releases)
-[![Build Status](https://travis-ci.org/q191201771/starry-night.svg?branch=master)](https://travis-ci.org/q191201771/starry-night)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff1659c0c9b544fba4eab876900b2421)](https://app.codacy.com/app/q191201771/starry-night?utm_source=github.com&utm_medium=referral&utm_content=q191201771/starry-night&utm_campaign=Badge_Grade_Dashboard)
+[![Release](https://img.shields.io/github/release/q191201771/libchef.svg)](https://github.com/q191201771/libchef/releases)
+[![Build Status](https://travis-ci.org/q191201771/libchef.svg?branch=master)](https://travis-ci.org/q191201771/libchef)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff1659c0c9b544fba4eab876900b2421)](https://app.codacy.com/app/q191201771/libchef?utm_source=github.com&utm_medium=referral&utm_content=q191201771/libchef&utm_campaign=Badge_Grade_Dashboard)
 ![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/q191201771/starry-night/blob/master/LICENSE)
-[![GitHub last commit](https://img.shields.io/github/last-commit/q191201771/starry-night.svg)](https://github.com/q191201771/starry-night/graphs/commit-activity)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/q191201771/starry-night.svg)
-![GitHub language count](https://img.shields.io/github/languages/count/q191201771/starry-night.svg)
-![GitHub top language](https://img.shields.io/github/languages/top/q191201771/starry-night.svg)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/q191201771/starry-night/pulls)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/q191201771/libchef/blob/master/LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/q191201771/libchef.svg)](https://github.com/q191201771/libchef/graphs/commit-activity)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/q191201771/libchef.svg)
+![GitHub language count](https://img.shields.io/github/languages/count/q191201771/libchef.svg)
+![GitHub top language](https://img.shields.io/github/languages/top/q191201771/libchef.svg)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/q191201771/libchef/pulls)
 
 header-only，易于接入。尽可能一个hpp一个模块，需要使用哪个模块提供的功能只需要包含那个模块的头文件即可直接使用，不需要对库单独编译和链接。（目标是像机器猫的万能口袋一样，什么都有，需要什么掏什么，不强制相互捆绑，非全家桶类型）。
 支持linux和macos双平台。
@@ -30,7 +30,7 @@ header-only，易于接入。尽可能一个hpp一个模块，需要使用哪个
 下表中**依赖**这一列：
 
 * `nope`表示无任何依赖
-* `chef_env`表示需要使用c++11或libboost(即低版本编译器可使用libboost做兼容，具体见 [chef_env.hpp](https://github.com/q191201771/starry-night/blob/master/include/chef_base/chef_env.hpp))
+* `chef_env`表示需要使用c++11或libboost(即低版本编译器可使用libboost做兼容，具体见 [chef_env.hpp](https://github.com/q191201771/libchef/blob/master/include/chef_base/chef_env.hpp))
 * `c++11`表示必须依赖c++11
 
 
@@ -99,16 +99,16 @@ export CHEF_BUILD_TOOL=cmake && export CHEF_BUILD_TYPE=release && ./build.sh
 
 欢迎watch、star、fork，下面是我的微信二维码（微信账号： q191201771），欢迎交流
 
-![微信二维码](https://github.com/q191201771/starry-night/blob/master/img/wechat_chef.jpeg?raw=true)
+![微信二维码](https://github.com/q191201771/libchef/blob/master/img/wechat_chef.jpeg?raw=true)
 
 ## 项目文件树
 
 ```
-/include/                        ......starry-night库代码目录
+/include/                        ......libchef库代码目录
   /chef_base/                    ......
     /[chef_xxx.hpp ...]          ......核心功能代码模块
     /.invisible/                 ......暂时不对外可见的代码
-      /.wrapper/                 ......一些对第三方代码的封装，由于目前starry-night定位于header-only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
+      /.wrapper/                 ......一些对第三方代码的封装，由于目前libchef定位于header-only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
         /chef_http_op.hpp[_impl] ......对libcurl的封装，同步阻塞式完成http get/post
         /chef_log.hpp[_impl]     ......对libboost log的封装，近乎零配置，快速使用
         /compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装

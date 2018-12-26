@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(starry-night C CXX)
+project(libchef C CXX)
 
 set(CMAKE_CXX_FLAGS
   "-g \
