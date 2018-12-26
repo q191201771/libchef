@@ -721,8 +721,12 @@ static void strings_string_printf_test() {
   str = chef::strings_op::string_printf("(%d)(%s)", 12, "123");
   assert(str == "(12)(123)" && str.length() == 9);
   str = chef::strings_op::string_printf("(%d)(%s)(%.2f)", 18, "chef", 3.45);
-  //printf("result: %s %lu\n", str.c_str(), str.length());
   assert(str == "(18)(chef)(3.45)" && str.length() == 16);
+  char longBuf[4096] = {0};
+  memset(longBuf, 'x', 4095);
+  str = chef::strings_op::string_printf("%s", longBuf);
+  printf("result: %s %lu\n", str.c_str(), str.length());
+  assert(memcmp(longBuf, str.c_str(), 4095) == 0 && str.length() == 4095);
 }
 
 int main() {
