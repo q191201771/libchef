@@ -1,5 +1,5 @@
 /**
- * @git      https://github.com/q191201771/starry-night
+ * @license  this file is part of starry-night library. more info see https://github.com/q191201771/starry-night
  * @tag      v1.7.17
  * @file     chef_thread_pool.hpp
  * @deps     chef_env.hpp | chef_wait_event_counter.hpp
