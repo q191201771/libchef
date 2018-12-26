@@ -2,6 +2,16 @@
 
 版本规则：首位不变保持1，第二位增加表示在前一个版本的基础上有bugfix或不兼容性修改，第三位增加表示有兼容性修改或新增或其他。
 
+`v1.8.17` `~`
+
+* bugfix：无
+* 不兼容性修改：大部分类禁用拷贝构造函数和赋值函数
+* 兼容性修改：无
+* 新增：函数 chef::strings_op::string_printf -> 类似于c字符串格式化函数snprintf，但不需要对结果的长度做预估，输出结果为std::string类型
+* 新增：函数 chef::strings_op::url_encode 和 chef::strings_op::url_decode -> url编码、解码
+* 新增：函数 chef::filepath_op::is_abs_path -> 判断路径是否为绝对路径格式（以`/`字符开头）
+* 其他：所有源码文件头部说明加入@license字段，内容包含工程的github地址
+
 `v1.7.17` `~`
 
 * bugfix：无

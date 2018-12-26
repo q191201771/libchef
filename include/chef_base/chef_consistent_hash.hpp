@@ -1,6 +1,6 @@
 /**
  * @license  this file is part of starry-night library. more info see https://github.com/q191201771/starry-night
- * @tag      v1.7.17
+ * @tag      v1.8.17
  * @file     chef_consistent_hash.hpp
  * @deps     c++11
  * @platform linux | macos | xxx
