@@ -1,4 +1,4 @@
-# libchef - linux c++ header-only basic library
+# libchef - c++ header-only basic library
 
 ![platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20-green.svg)
 [![Release](https://img.shields.io/github/release/q191201771/libchef.svg)](https://github.com/q191201771/libchef/releases)
@@ -104,30 +104,31 @@ export CHEF_BUILD_TOOL=cmake && export CHEF_BUILD_TYPE=release && ./build.sh
 ## 项目文件树
 
 ```
-/include/                        ......libchef库代码目录
-  /chef_base/                    ......
-    /[chef_xxx.hpp ...]          ......核心功能代码模块
-    /.invisible/                 ......暂时不对外可见的代码
-      /.wrapper/                 ......一些对第三方代码的封装，由于目前libchef定位于header-only且不依赖第三方，所以暂时隐藏这部分内容，不直接提供给业务方使用
-        /chef_http_op.hpp[_impl] ......对libcurl的封装，同步阻塞式完成http get/post
-        /chef_log.hpp[_impl]     ......对libboost log的封装，近乎零配置，快速使用
-        /compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
-      /.deprecated/              ......已废弃的代码
-/test/                           ......基础库测试代码
-  /chef_base_test/               ......
-/img/                            ......图片目录
-/output/                         ......编译输出文件目录
-/third_party/                    ......第三方依赖库，目前无第三方依赖
-.gitignore                       ......
-.travis.yml                      ......
-build.sh                         ......编译脚本
-clean.sh                         ......清除脚本
-CMakeLists.txt                   ......cmake编译脚本
-LINCENSE                         ......
-pretag.sh                        ......打git tag脚本
-SConstruct                       ......scons编译脚本
-ut.sh                            ......执行测试代码脚本
-README.md                        ......
-SECRET.md                        ......
+libchef/                                    ......github根目录
+|-- include/                                ......libchef库代码目录
+    |-- chef_base/                          ......
+        |-- [chef_xxx.hpp ...]              ......核心功能代码模块
+        |-- .invisible/                     ......暂时不对外可见的代码
+            |-- .wrapper/                   ......一些对第三方代码的封装，由于目前libchef定位于header-only且不依赖第三方，所以暂时隐藏这部分内容，不提供给业务方使用
+                |-- chef_http_op.hpp[_impl] ......对libcurl的封装，同步阻塞式完成http get/post
+                |-- chef_log.hpp[_impl]     ......对libboost log的封装，近乎零配置，快速使用
+                |-- compress_zlib_op.h[.cc] ......对zlib压缩、解压缩操作的封装
+            |-- .deprecated/                ......已废弃的代码
+|-- test/                                   ......基础库测试代码
+    |-- chef_base_test/                     ......
+|-- img/                                    ......图片目录
+|-- output/                                 ......编译输出文件目录
+|-- third_party/                            ......第三方依赖库，目前无第三方依赖
+|-- .gitignore                              ......
+|-- .travis.yml                             ......
+|-- build.sh                                ......编译脚本
+|-- clean.sh                                ......清除脚本
+|-- CMakeLists.txt                          ......cmake编译脚本
+|-- LINCENSE                                ......
+|-- pretag.sh                               ......打git tag脚本
+|-- SConstruct                              ......scons编译脚本
+|-- ut.sh                                   ......执行测试代码脚本
+|-- README.md                               ......
+|-- SECRET.md                               ......
 ```
 
