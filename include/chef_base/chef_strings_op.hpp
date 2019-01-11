@@ -44,6 +44,7 @@ namespace chef {
        * 用`sep`分割`s`
        *
        * @param keep_empty_strings 分割后的字符串数组，如果有元素为空，是否保留这个元素
+       * @param split_once 如果为true，那么最多分割一次
        *
        * @return 分割后的字符串数组
        *
@@ -56,7 +57,7 @@ namespace chef {
        *   更多case见strings_op_test.cc
        *
        */
-      static std::vector<std::string> split(const std::string &s, char sep, bool keep_empty_strings=true);
+      static std::vector<std::string> split(const std::string &s, char sep, bool keep_empty_strings=true, bool split_once=false);
 
       /**
        * 允许分隔符是字符串
@@ -399,25 +400,45 @@ namespace chef {
     return ret;
   }
 
-  inline std::vector<std::string> strings_op::split(const std::string &s, char sep, bool keep_empty_strings) {
-	if (s.empty()) {
-	  return std::vector<std::string>();
-	}
+  inline std::vector<std::string> strings_op::split(const std::string &s, char sep, bool keep_empty_strings, bool split_once) {
+    if (s.empty()) { return std::vector<std::string>(); }
+
     std::vector<std::string> ret;
+
+    if (split_once) {
+      std::size_t pos = s.find(sep);
+      if (pos == std::string::npos) {
+        ret.push_back(s);
+        return ret;
+      } else if (pos == 0) {
+        if (keep_empty_strings) { ret.push_back(std::string()); }
+
+        ret.push_back(s.substr(1));
+        return ret;
+      } else if (pos == (s.length()-1)) {
+        ret.push_back(s.substr(0, s.length()-1));
+        if (keep_empty_strings) { ret.push_back(std::string()); }
+
+        return ret;
+      }
+
+      ret.push_back(s.substr(0, pos));
+      ret.push_back(s.substr(pos+1));
+      return ret;
+    }
+
     std::stringstream ss(s);
     std::string item;
     for (; std::getline(ss, item, sep); ) {
-      if (!keep_empty_strings && item.empty()) {
-        continue;
-      }
+      if (!keep_empty_strings && item.empty()) { continue; }
+
       ret.push_back(item);
     }
 
     /// 如果最后一个字符是分隔符，那么后面需不需要append一个空item呢？
     /// std::getline的行为是不append，我认为要，所以处理一下~
-    if (keep_empty_strings && *s.rbegin() == sep) {
-      ret.push_back(std::string());
-    }
+    if (keep_empty_strings && *s.rbegin() == sep) { ret.push_back(std::string()); }
+
     return ret;
   }
 

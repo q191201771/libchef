@@ -31,6 +31,8 @@ echo '----------------------------------------' && \
 ./output/bin/chef_daemon_op_test && \
 ./output/bin/chef_stuff_op_test && \
 ./output/bin/chef_filelock_test && \
+./output/bin/chef_crypto_sha256_op_test && \
+./output/bin/chef_crypto_hmac_sha256_test && \
 rm -rf chef_thread_group_test.dump && \
 rm -rf not_exist && \
 echo '----------------------------------------' && \

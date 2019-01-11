@@ -2,10 +2,10 @@ import os, sys, commands
 
 env = Environment(ENV=os.environ)
 
-mode = ARGUMENTS.get('mode', 'release')
-if mode == 'debug':
+mode = ARGUMENTS.get('mode', 'Release')
+if mode == 'Debug':
     env.Append(CXXFLAGS = ['-O0'])
-elif mode == 'release':
+elif mode == 'Release':
     env.Append(CXXFLAGS = ['-O2', '-DNDEBUG'])
 else:
     print('Argument mode fatal,only support debug or release.')
