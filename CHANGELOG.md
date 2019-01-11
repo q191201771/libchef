@@ -2,6 +2,17 @@
 
 版本规则：首位不变保持1，第二位增加表示在前一个版本的基础上有bugfix或不兼容性修改，第三位增加表示有兼容性修改或新增或其他。
 
+`v1.9.17` `~`
+
+* bugfix：macos平台下，函数 chef::this_process_op::user_name 和 chef::this_process_op::boot_timestamp 修改实现
+* 不兼容性修改：类 chef::buffer 更名为 chef::basic_buffer，并且变成了模板类，新增两个模板参数表示数据类型和数据长度类型
+* 兼容性修改：函数 chef::strings_op::split 新增参数 split_once，为 true 表示只分割一次，参数默认值为false
+* 新增：文件 chef_crypto_sha256_op.hpp，用于 sha256 加密
+* 新增：文件 chef_crypto_hmac_sha256.hpp，用于 hmac sha256 加密
+* 其他：工程名由 starry-night 修改为 libchef
+* 其他：README.md 中的文件目录树格式
+* 其他：CMake 最小版本依赖由 3.0 变为 2.8
+
 `v1.8.17` `~`
 
 * bugfix：无

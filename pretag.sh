@@ -3,7 +3,7 @@
 set -x
 
 # modme
-tag='v1.8.17'
+tag='v1.9.17'
 echo "New tag ${tag}"
 
 files=$(ls include/chef_base/*.hpp)
