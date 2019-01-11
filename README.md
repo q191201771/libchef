@@ -70,7 +70,9 @@ CE | chef_encoding_base64_op.hpp | nope | base64编码、解码 |
 
 ```
 include/chef_base/chef_crypto_md5_op.hpp      https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/common/md5.hpp
-include/chef_base/chef_crypto_sha1_op.hpp     https://github.com/antirez/redis/releases/tag/3.2.9 中src/sha1.h和src/sha1.c
+include/chef_base/chef_crypto_sha1_op.hpp     https://github.com/antirez/redis/blob/unstable/src/sha1.h[.c]
+include/chef/base/chef_crypto_sha256_op.hpp   https://github.com/lyokato/cpp-cryptlite/blob/master/include/cryptlite/sha256.h
+include/chef/base/chef_crypto_hmac_sha256.hpp https://github.com/lyokato/cpp-cryptlite/blob/master/include/cryptlite/hmac.h
 include/chef_base/chef_encoding_base64_op.hpp https://github.com/zaphoyd/websocketpp/blob/master/websocketpp/base64/base64.hpp
 ```
 
@@ -89,10 +91,10 @@ OS X EI Capitan 10.11.6 Apple LLVM version 8.0.0 (clang-800.0.42.1)
 
 ```
 # 使用scons编译
-export CHEF_BUILD_TOOL=scons && export CHEF_BUILD_TYPE=release && ./build.sh
+export CHEF_BUILD_TOOL=scons && export CHEF_BUILD_TYPE=Release && ./build.sh
 # 使用cmake编译
-export CHEF_BUILD_TOOL=cmake && export CHEF_BUILD_TYPE=release && ./build.sh
-# CHEF_BUILD_TYPE=debug则编译debug版本
+export CHEF_BUILD_TOOL=cmake && export CHEF_BUILD_TYPE=Release && ./build.sh
+# CHEF_BUILD_TYPE=Debug则编译debug版本
 ```
 
 ## 其他

@@ -168,19 +168,14 @@ namespace inner {
   }
 
   inline std::string this_process_op::user_name() {
-    int64_t bufsize = ::sysconf(_SC_GETPW_R_SIZE_MAX);
-    if (bufsize == -1) {
-      bufsize = 8192;
-    }
-    char *buf = new char[bufsize];
+    int bufsize = 256;
+    char buf[256] = {0};
     struct passwd pwd;
     struct passwd *result = NULL;
     if (getpwuid_r(::getuid(), &pwd, buf, bufsize, &result) != 0 || result == NULL) {
-      delete []buf;
       return std::string();
     }
-    delete []buf;
-    return pwd.pw_name;
+    return std::string(pwd.pw_name);
   }
 
   inline int64_t this_process_op::boot_timestamp() {
@@ -227,10 +222,9 @@ namespace inner {
     return chef::filepath_op::read_link("/proc/self/exe", 256);
 #endif
 #ifdef __MACH__
-    char path[1024];
+    char path[1024] = {0};
     unsigned size = 1024;
     _NSGetExecutablePath(path, &size);
-    path[size] = '\0';
     return std::string(path);
 #endif
     return std::string();
@@ -243,7 +237,7 @@ namespace inner {
     std::size_t pos = filepath.find_last_of('/');
     if (pos == std::string::npos) { return std::string(); }
 
-    return std::string(filepath, 0, pos + 1);
+    return filepath.substr(0, pos);
   }
 
   inline std::string this_process_op::exe_name() {

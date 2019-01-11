@@ -34,7 +34,7 @@ namespace chef {
 
   class crypto_sha1_op {
     public:
-      static void sum(unsigned char *in_data, size_t in_data_len, unsigned char digest[20] /*out*/);
+      static void sum(unsigned char *in_data, std::size_t in_data_len, unsigned char digest[20] /*out*/);
 
       /**
        * @return 对`data`执行sha1编码后得到的20字节，每个字节用16进制表示（2字节）拼接成的字符串
@@ -58,7 +58,6 @@ namespace chef {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // @NOTICE 该分隔线以上部分为该模块的接口，分割线以下部分为对应的实现
-
 
 
 

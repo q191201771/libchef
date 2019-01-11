@@ -13,7 +13,7 @@
  *
      ```
      // 声明对象
-     chef::buffer buf(4096, 1024 * 16);
+     chef::basic_buffer<char> buf(4096, 1024 * 16);
 
      // 写入方式一，如果内部空余空间不足，会自动扩容
      buf.append("hello", 5);
@@ -41,13 +41,19 @@
 #define _CHEF_BASE_BUFFER_HPP_
 #pragma once
 
-#include <stdint.h>
+#include <cinttypes>
+#include <cstddef>
 
 namespace ut { class buffer_test; }
 
 namespace chef {
 
-  class buffer {
+  template <typename DataType, typename LenType>
+  class basic_buffer;
+  typedef basic_buffer<uint8_t, std::size_t> buffer;
+
+  template <typename DataType=uint8_t, typename LenType=std::size_t>
+  class basic_buffer {
     public:
       /**
        * @param init_capacity   初始化大小，后续不够时内部会自动扩容，两倍增长
@@ -55,26 +61,26 @@ namespace chef {
        *                        恢复成<init_capacity>
        *
        */
-      explicit buffer(uint64_t init_capacity=16384, uint64_t shrink_capacity=1048576);
+      explicit basic_buffer(LenType init_capacity=16384, LenType shrink_capacity=1048576);
 
       /**
-       * chef::buffer(data, len);
+       * chef::basic_buffer(data, len);
        * 等价于
-       * chef::buffer buf(len, 2 * len);
+       * chef::basic_buffer buf(len, 2 * len);
        * buf.append(data, len);
        *
        * @param data 初始化数据，内部做内存拷贝
        * @param len  初始化数据长度
        *
        */
-      buffer(const char *data, uint64_t len);
+      basic_buffer(const DataType *data, LenType len);
 
       /// 析构，释放内部内存
-      ~buffer();
+      ~basic_buffer();
 
       /// 拷贝构造以及赋值函数，内部执行深拷贝
-      buffer(const buffer &b);
-      buffer &operator=(const buffer &b);
+      basic_buffer(const basic_buffer &b);
+      basic_buffer &operator=(const basic_buffer &b);
 
     public:
       /**
@@ -84,7 +90,7 @@ namespace chef {
        * @param len  追加数据长度
        *
        */
-      void append(const char *data, uint64_t len);
+      void append(const DataType *data, LenType len);
 
       /**
        * @function reserve
@@ -95,19 +101,19 @@ namespace chef {
        * @function seek_write_pos 往后挪动写位置
        *
        */
-      void reserve(uint64_t len);
-      char *write_pos() const;
-      void seek_write_pos(uint64_t len);
+      void reserve(LenType len);
+      DataType *write_pos() const;
+      void seek_write_pos(LenType len);
 
     public:
       /**
        * 读取buffer中的数据
        *
        */
-      char *read_pos() const;
-      uint64_t readable_size() const;
+      DataType *read_pos() const;
+      LenType readable_size() const;
       /// 注意，<len>应不大于readable_size函数的返回值
-      void erase(uint64_t len);
+      void erase(LenType len);
 
       /**
        * 清空，注意：
@@ -118,17 +124,17 @@ namespace chef {
       void clear();
 
       /// 已申请内存大小
-      uint64_t capacity() const { return capacity_; }
+      LenType capacity() const { return capacity_; }
 
     public:
       /**
        * @return 找到返回key位置，失败返回NULL
        *
        */
-      char *find(const char *key, int len) const;
-      char *find(char c) const;
-      char *find_crlf() const;
-      char *find_eol() const;
+      DataType *find(const DataType *key, LenType len) const;
+      DataType *find(DataType c) const;
+      DataType *find_crlf() const;
+      DataType *find_eol() const;
 
       /**
        * 删除 '空格' '\f' '\r' '\n' '\t' '\v'
@@ -136,21 +142,21 @@ namespace chef {
        * @return 返回操作后的读取位置
        *
        */
-      char *trim_left();
-      char *trim_right();
+      DataType *trim_left();
+      DataType *trim_right();
 
     public:
       friend class ut::buffer_test;
 
     private:
-      const uint64_t  init_capacity_;
-      const uint64_t  shrink_capacity_;
-      uint64_t        capacity_;
-      uint64_t        read_index_;
-      uint64_t        write_index_;
-      char           *data_;
+      const LenType  init_capacity_;
+      const LenType  shrink_capacity_;
+      LenType        capacity_;
+      LenType        read_index_;
+      LenType        write_index_;
+      DataType      *data_;
 
-  }; // class buffer
+  }; // class basic_buffer
 
 } // namespace chef
 
@@ -175,44 +181,49 @@ namespace chef {
 
 namespace chef {
 
-  inline buffer::buffer(uint64_t init_capacity, uint64_t shrink_capacity)
+  template <typename DataType, typename LenType>
+  inline basic_buffer<DataType, LenType>::basic_buffer(LenType init_capacity, LenType shrink_capacity)
     : init_capacity_(init_capacity)
     , shrink_capacity_(shrink_capacity)
     , capacity_(init_capacity)
     , read_index_(0)
     , write_index_(0)
   {
-    data_ = new char[init_capacity];
+    data_ = new DataType[init_capacity];
   }
 
-  inline buffer::buffer(const char *data, uint64_t len)
+  template <typename DataType, typename LenType>
+  inline basic_buffer<DataType, LenType>::basic_buffer(const DataType *data, LenType len)
     : init_capacity_(len)
     , shrink_capacity_(len * 2)
     , capacity_(len)
     , read_index_(0)
     , write_index_(0)
   {
-    data_ = new char[capacity_];
+    data_ = new DataType[capacity_];
     append(data, len);
   }
 
-  inline buffer::~buffer() {
+  template <typename DataType, typename LenType>
+  inline basic_buffer<DataType, LenType>::~basic_buffer() {
     delete []data_;
     data_ = NULL;
   }
 
-  inline buffer::buffer(const buffer &b)
+  template <typename DataType, typename LenType>
+  inline basic_buffer<DataType, LenType>::basic_buffer(const basic_buffer<DataType, LenType> &b)
     : init_capacity_(b.init_capacity_)
     , shrink_capacity_(b.shrink_capacity_)
     , capacity_(b.capacity_)
     , read_index_(0)
     , write_index_(0)
   {
-    data_ = new char[capacity_];
+    data_ = new DataType[capacity_];
     append(b.read_pos(), b.readable_size());
   }
 
-  inline buffer &buffer::operator=(const chef::buffer &b) {
+  template <typename DataType, typename LenType>
+  inline basic_buffer<DataType, LenType> &basic_buffer<DataType, LenType>::operator=(const chef::basic_buffer<DataType, LenType> &b) {
     if (this != &b) {
       read_index_ = 0;
       write_index_ = 0;
@@ -221,21 +232,23 @@ namespace chef {
     return *this;
   }
 
-  inline void buffer::append(const char *data, uint64_t len) {
+  template <typename DataType, typename LenType>
+  inline void basic_buffer<DataType, LenType>::append(const DataType *data, LenType len) {
     reserve(len);
     memcpy(data_ + write_index_, data, len);
     write_index_ += len;
   }
 
-  inline void buffer::reserve(uint64_t len) {
+  template <typename DataType, typename LenType>
+  inline void basic_buffer<DataType, LenType>::reserve(LenType len) {
     if (capacity_ - write_index_ >= len) {
       return;
     } else if (capacity_ - write_index_ + read_index_ >= len) {
       memmove(data_, data_ + read_index_, write_index_ - read_index_);
     } else {
-      uint64_t need_len = write_index_ - read_index_ + len;
+      LenType need_len = write_index_ - read_index_ + len;
       for (; capacity_ < need_len; capacity_ <<= 1);
-      char *new_buf = new char[capacity_];
+      DataType *new_buf = new DataType[capacity_];
       memcpy(new_buf, data_ + read_index_, write_index_ - read_index_);
       delete []data_;
       data_ = new_buf;
@@ -244,15 +257,17 @@ namespace chef {
     read_index_ = 0;
   }
 
-  inline char *buffer::write_pos() const { return data_ + write_index_; }
+  template <typename DataType, typename LenType>
+  inline DataType *basic_buffer<DataType, LenType>::write_pos() const { return data_ + write_index_; }
 
-  inline void buffer::erase(uint64_t len) {
+  template <typename DataType, typename LenType>
+  inline void basic_buffer<DataType, LenType>::erase(LenType len) {
     assert(write_index_ - read_index_ >= len);
     read_index_ += len;
     if (write_index_ - read_index_ < init_capacity_ &&
         capacity_ > shrink_capacity_)
     {
-      char *new_data = new char[init_capacity_];
+      DataType *new_data = new DataType[init_capacity_];
       memcpy(new_data, data_ + read_index_, write_index_ - read_index_);
       write_index_ -= read_index_;
       read_index_ = 0;
@@ -262,49 +277,57 @@ namespace chef {
     }
   }
 
-  inline void buffer::clear() {
+  template <typename DataType, typename LenType>
+  inline void basic_buffer<DataType, LenType>::clear() {
     read_index_ = write_index_ = 0;
     if (capacity_ > shrink_capacity_) {
       capacity_ = init_capacity_;
       delete []data_;
-      data_ = new char[capacity_];
+      data_ = new DataType[capacity_];
     }
   }
 
-  inline void buffer::seek_write_pos(uint64_t len) {
+  template <typename DataType, typename LenType>
+  inline void basic_buffer<DataType, LenType>::seek_write_pos(LenType len) {
     assert(capacity_ - write_index_ >= len);
     write_index_ += len;
   }
 
+  template <typename DataType, typename LenType>
+  inline DataType *basic_buffer<DataType, LenType>::read_pos() const { return data_ + read_index_; }
 
-  inline char *buffer::read_pos() const { return data_ + read_index_; }
+  template <typename DataType, typename LenType>
+  inline LenType basic_buffer<DataType, LenType>::readable_size() const { return write_index_ - read_index_; }
 
-  inline uint64_t buffer::readable_size() const { return write_index_ - read_index_; }
-
-  inline char *buffer::find(const char *key, int len) const {
+  template <typename DataType, typename LenType>
+  inline DataType *basic_buffer<DataType, LenType>::find(const DataType *key, LenType len) const {
     if (readable_size() == 0) {
       return NULL;
     }
-    char *pos = std::search(read_pos(), write_pos(), const_cast<char *>(key),
-      const_cast<char *>(key) + len
+    DataType *pos = std::search(read_pos(), write_pos(), const_cast<DataType *>(key),
+      const_cast<DataType *>(key) + len
     );
     return pos == data_ + write_index_ ? NULL : pos;
   }
 
-  inline char *buffer::find(char c) const {
+  template <typename DataType, typename LenType>
+  inline DataType *basic_buffer<DataType, LenType>::find(DataType c) const {
     if (readable_size() == 0) {
       return NULL;
     }
-    return static_cast<char *>(memchr(read_pos(), c, readable_size()));
+    return static_cast<DataType *>(memchr(read_pos(), c, readable_size()));
   }
 
-  inline char *buffer::find_crlf() const { return find("\r\n", 2); }
+  template <typename DataType, typename LenType>
+  inline DataType *basic_buffer<DataType, LenType>::find_crlf() const { return find((const DataType *)"\r\n", 2); }
 
-  inline char *buffer::find_eol() const { return find('\n'); }
+  template <typename DataType, typename LenType>
+  inline DataType *basic_buffer<DataType, LenType>::find_eol() const { return find('\n'); }
 
-  inline char *buffer::trim_left() {
+  template <typename DataType, typename LenType>
+  inline DataType *basic_buffer<DataType, LenType>::trim_left() {
     for (; write_index_ != read_index_; ++read_index_) {
-      char ch = *(data_ + read_index_);
+      DataType ch = *(data_ + read_index_);
       if (!std::isspace(ch)) {
         break;
       }
@@ -312,9 +335,10 @@ namespace chef {
     return read_pos();
   }
 
-  inline char * buffer::trim_right() {
+  template <typename DataType, typename LenType>
+  inline DataType *basic_buffer<DataType, LenType>::trim_right() {
     for (; write_index_ != read_index_; --write_index_) {
-      char ch = *(data_ + write_index_ - 1);
+      DataType ch = *(data_ + write_index_ - 1);
       if (!std::isspace(ch)) {
         break;
       }

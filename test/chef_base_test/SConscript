@@ -93,6 +93,12 @@ prgs += env.Program('chef_stuff_op_test', chef_stuff_op_srcs, LIBS=platform_libs
 chef_filelock_srcs = ['chef_filelock_test.cc']
 prgs += env.Program('chef_filelock_test', chef_filelock_srcs, LIBS=platform_libs)
 
+chef_crypto_sha256_op_srcs = ['chef_crypto_sha256_op_test.cc']
+prgs += env.Program('chef_crypto_sha256_op_test', chef_crypto_sha256_op_srcs, LIBS=platform_libs)
+
+chef_crypto_hmac_sha256_srcs = ['chef_crypto_hmac_sha256_test.cc']
+prgs += env.Program('chef_crypto_hmac_sha256_test', chef_crypto_hmac_sha256_srcs, LIBS=platform_libs)
+
 # -----deps third party-----
 
 #chef_http_op_srcs = ['dup.cc', 'chef_http_op_test.cc']
