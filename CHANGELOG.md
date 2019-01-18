@@ -2,6 +2,16 @@
 
 版本规则：首位不变保持1，第二位增加表示在前一个版本的基础上有bugfix或不兼容性修改，第三位增加表示有兼容性修改或新增或其他。
 
+`v1.10.17` `~`
+
+* bugfix：无
+* 不兼容性修改：chef::stuff_op::bytes_to_hex 新增参数with_ascii，如果为true，则在序列化二进制流的同时也序列化出可显示的字符串流，默认值为true
+* 兼容性修改：新增函数 chef::basic_buffer<>::seek_write_pos_rollback，写入位置可前移用于消除回退部分已写入未读取的内容
+* 兼容性修改：部分类禁用的拷贝构造函数的参数加上const修饰
+* 新增：无
+* 其他：无
+
+
 `v1.9.17` `~`
 
 * bugfix：macos平台下，函数 chef::this_process_op::user_name 和 chef::this_process_op::boot_timestamp 修改实现

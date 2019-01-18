@@ -1,6 +1,6 @@
 /**
  * @license  this file is a part of libchef. more info see https://github.com/q191201771/libchef
- * @tag      v1.9.17
+ * @tag      v1.10.17
  * @file     chef_strings_op.hpp
  * @deps     nope
  * @platform linux | macos | windows
