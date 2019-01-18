@@ -1,4 +1,5 @@
 #include "chef_base/chef_stuff_op.hpp"
+#include "chef_base/chef_strings_op.hpp"
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
 #include <vector>
@@ -63,12 +64,25 @@ int main() {
   std::cout << "tick msec:" << chef::stuff_op::tick_msec() << std::endl;
   std::cout << "unix timestamp msec:" << chef::stuff_op::unix_timestamp_msec() << std::endl;
 
+  char *buf;
+  static const char BUF[] = "1234567890abcdefghijklmn";
+  //buf = BUF;
+  //buf = chef::PRINTABLE.c_str();
+  uint8_t buf2[256];
+  for (std::size_t i = 0; i < 255; i++) {
+    buf2[i] = i;
+  }
+  buf = (char *)buf2;
+
   std::string hex;
-  hex = chef::stuff_op::bytes_to_hex((const uint8_t *)"aA", 2);
-  hex = chef::stuff_op::bytes_to_hex((const uint8_t *)"aA12345", 7);
-  //hex = chef::stuff_op::bytes_to_hex((const uint8_t *)"aA123456", 8);
-  //hex = chef::stuff_op::bytes_to_hex((const uint8_t *)"aA1234567", 9);
-  std::cout << hex << std::endl;
+  for (std::size_t i = 0; i < 2; i++) {
+    //for (std::size_t j = strlen(buf)-1; j < strlen(buf); j++) {
+    for (std::size_t j = 255; j < 256; j++) {
+      std::cout << "-----\n";
+      hex = chef::stuff_op::bytes_to_hex((const uint8_t *)buf, j+1, 16, i % 2);
+      std::cout << hex;
+    }
+  }
 
   return 0;
 }

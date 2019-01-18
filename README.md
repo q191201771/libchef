@@ -62,9 +62,11 @@ PH | chef_count_dump.hpp  | chef_env | 在各种线程模型下高效的对多�
 PH | chef_snippet.hpp     | c++11    | 用宏减少一些手写重复代码。比如你有一个结构体，里面有各种类型的各种名称的成员变量，有可能有锁或无锁。你不再需要手写这些变量的声明、set、get函数等一堆代码 |
 PH | chef_noncopyable.hpp | nope     | 禁用拷贝构造等函数 |
 PH | chef_stuff_op.hpp    | nope     | 一些暂时没归类的功能代码片段 |
-CE | chef_crypto_md5_op.hpp      | nope | md5加密 |
-CE | chef_crypto_sha1_op.hpp     | nope | sha1加密 |
-CE | chef_encoding_base64_op.hpp | nope | base64编码、解码 |
+CE | chef_crypto_md5_op.hpp        | nope | md5加密 |
+CE | chef_crypto_sha1_op.hpp       | nope | sha1加密 |
+CE | chef_crypto_sha256_op.hpp     | nope | sha256加密 |
+CE | chef_crypto_hmac_sha256.hpp   | nope | hmac sha256加密 |
+CE | chef_encoding_base64_op.hpp   | nope | base64编码、解码 |
 
 ## 声明，内部实现拷贝自第三方工程的代码
 

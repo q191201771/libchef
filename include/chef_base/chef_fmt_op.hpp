@@ -78,8 +78,8 @@ namespace chef {
 
   private:
     fmt_op();
-    fmt_op(fmt_op &);
-    fmt_op &operator=(fmt_op &);
+    fmt_op(const fmt_op &);
+    fmt_op &operator=(const fmt_op &);
   };
 
 } // namespace chef

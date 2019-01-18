@@ -52,6 +52,7 @@ namespace chef {
   class basic_buffer;
   typedef basic_buffer<uint8_t, std::size_t> buffer;
 
+  // NOTICE basic buffer类中所有LenType类型变量都应该为非负数，这里提供出模板类型是为了方便业务方在某些时候不用写类型转换，，
   template <typename DataType=uint8_t, typename LenType=std::size_t>
   class basic_buffer {
     public:
@@ -104,6 +105,9 @@ namespace chef {
       void reserve(LenType len);
       DataType *write_pos() const;
       void seek_write_pos(LenType len);
+
+      // 将写位置往前移动，丢弃尾部部分数据
+      void seek_write_pos_rollback(LenType len);
 
     public:
       /**
@@ -291,6 +295,13 @@ namespace chef {
   inline void basic_buffer<DataType, LenType>::seek_write_pos(LenType len) {
     assert(capacity_ - write_index_ >= len);
     write_index_ += len;
+  }
+
+  template <typename DataType, typename LenType>
+  inline void basic_buffer<DataType, LenType>::seek_write_pos_rollback(LenType len) {
+    assert(write_index_ - read_index_ >= len);
+    write_index_ -= len;
+    // may be shrink here.
   }
 
   template <typename DataType, typename LenType>

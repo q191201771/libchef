@@ -59,26 +59,26 @@ static void benchmark() {
   }
 
   /// 插入
-  bres = chef::this_process_op::obtain_mem_info(&mi);
-  assert(bres);
+  //bres = chef::this_process_op::obtain_mem_info(&mi);
+  //assert(bres);
   t = tickkk();
   for (int i = 0; i < NUM; ++i) {
     gm.insert(std::make_pair(vec[i], i));
   }
   md = tickkk() - t;
-  bres = chef::this_process_op::obtain_mem_info(&mi2);
-  assert(bres);
+  //bres = chef::this_process_op::obtain_mem_info(&mi2);
+  //assert(bres);
   std::cout << "map res_kbytes diff:" << mi2.res_kbytes - mi.res_kbytes << std::endl;
 
-  bres = chef::this_process_op::obtain_mem_info(&mi);
-  assert(bres);
+  //bres = chef::this_process_op::obtain_mem_info(&mi);
+  //assert(bres);
   t = tickkk();
   for (int i = 0; i < NUM; ++i) {
     gsl.insert(std::make_pair(vec[i], i));
   }
   sld = tickkk() - t;
-  bres = chef::this_process_op::obtain_mem_info(&mi2);
-  assert(bres);
+  //bres = chef::this_process_op::obtain_mem_info(&mi2);
+  //assert(bres);
   std::cout << "skiplist res_kbytes diff:" << mi2.res_kbytes - mi.res_kbytes << std::endl;
 
   std::cout << "orig vector size:" << vec.size() << " map size:" << gm.size() << " skiplist size:" << gsl.size() << std::endl;

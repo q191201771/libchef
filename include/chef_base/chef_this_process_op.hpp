@@ -68,8 +68,8 @@ namespace chef {
 
     private:
       this_process_op();
-      this_process_op(this_process_op &);
-      this_process_op &operator=(this_process_op &);
+      this_process_op(const this_process_op &);
+      this_process_op &operator=(const this_process_op &);
   };
 
 } // namespace chef
