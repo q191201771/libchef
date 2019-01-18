@@ -67,8 +67,8 @@ namespace chef {
 
     private:
       this_machine_op();
-      this_machine_op(this_machine_op &);
-      this_machine_op &operator=(this_machine_op &);
+      this_machine_op(const this_machine_op &);
+      this_machine_op &operator=(const this_machine_op &);
   };
 
 } // namespace chef

@@ -35,7 +35,7 @@
 
 #include <map>
 #include <stdint.h>
-#include "chef_stringify_stl.hpp"
+//#include "chef_stringify_stl.hpp"
 
 namespace chef {
 

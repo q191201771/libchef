@@ -41,7 +41,7 @@ namespace chef {
     private:
       static_class();
       static_class(const static_class &);
-      const static_class &operator=(const static_class &);
+      static_class &operator=(const static_class &);
 
   };
 

@@ -38,7 +38,7 @@ namespace chef {
       static std::string readable_bytes(uint64_t n);
 
       // 将字节流逐个序列化为16进制FF格式，空格分开，<num_per_line>换行，可用于debug显示
-      static std::string bytes_to_hex(const uint8_t *buf, std::size_t len, std::size_t num_per_line=8);
+      static std::string bytes_to_hex(const uint8_t *buf, std::size_t len, std::size_t num_per_line=8, bool with_ascii=true);
 
       /**
        * 获取域名对应的ip
@@ -76,8 +76,8 @@ namespace chef {
 
     private:
       stuff_op();
-      stuff_op(stuff_op &);
-      stuff_op &operator=(stuff_op &);
+      stuff_op(const stuff_op &);
+      stuff_op &operator=(const stuff_op &);
   };
 
 } // namespace chef
@@ -187,15 +187,43 @@ inline uint64_t stuff_op::unix_timestamp_msec() {
   return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 
-inline std::string stuff_op::bytes_to_hex(const uint8_t *buf, std::size_t len, std::size_t num_per_line) {
+inline std::string stuff_op::bytes_to_hex(const uint8_t *buf, std::size_t len, std::size_t num_per_line, bool with_ascii) {
   if (!buf || len == 0 || num_per_line == 0) { return std::string(); }
 
+  static const std::string PRINTABLE_ASCII = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ ";
+
+  std::size_t num_of_line = len / num_per_line;
+  if (len % num_per_line) { num_of_line++; }
+
   std::ostringstream oss;
-  for (std::size_t i = 0; i < len; i++) {
-    oss << std::right << std::setw(3) << std::hex << static_cast<int>(buf[i]);
-    if ((i+1) % num_per_line == 0) { oss << '\n'; }
+  for (std::size_t i = 0; i < num_of_line; i++) {
+    std::size_t item = (len % num_per_line) && (i == num_of_line-1) ? (len % num_per_line) : num_per_line;
+    std::ostringstream line_oss;
+    for (std::size_t j = 0; j < item; j++) {
+      if (j != 0) { line_oss << ' '; }
+
+      line_oss << std::setfill('0') << std::setw(2) << std::hex << static_cast<int>(buf[i * num_per_line + j]);
+    }
+
+    if ( (len % num_per_line) && (i == num_of_line-1) && with_ascii ) {
+      oss << std::left << std::setw(num_per_line * 2 + num_per_line - 1) << line_oss.str();
+    } else {
+      oss << line_oss.str();
+    }
+
+    if (with_ascii) {
+      oss << "    ";
+      for (std::size_t j = 0; j < item; j++) {
+        if (PRINTABLE_ASCII.find(buf[i*num_per_line + j]) !=std::string::npos) {
+          oss << buf[i*num_per_line + j];
+        } else {
+          oss << '.';
+        }
+      }
+    }
+
+    if (i != num_of_line) { oss << '\n'; }
   }
-  if (len % num_per_line != 0) { oss << '\n'; }
 
   return oss.str();
 }
