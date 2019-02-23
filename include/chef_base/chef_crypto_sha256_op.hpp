@@ -28,6 +28,10 @@
 #pragma once
 
 #include <string>
+#include <cassert>
+#include <sstream>
+#include <iomanip>
+#include <cinttypes>
 
 namespace chef {
 
@@ -62,13 +66,8 @@ namespace chef {
 
 
 
-#include <string>
-#include <cassert>
-#include <sstream>
-#include <iomanip>
 //#include <cryptlite/base64.h>
 //#include <boost/cstdint.hpp>
-#include <inttypes.h>
 
 namespace chef {
 

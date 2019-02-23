@@ -72,7 +72,7 @@ namespace chef {
        */
       static void set_thread_name(const char *name);
 
-      static int read_be_int(const uint8_t *data, uint32_t n);
+      //static int read_be_int(const uint8_t *data, uint32_t n);
 
     private:
       stuff_op();
@@ -228,13 +228,13 @@ inline std::string stuff_op::bytes_to_hex(const uint8_t *buf, std::size_t len, s
   return oss.str();
 }
 
-inline int stuff_op::read_be_int(const uint8_t *data, uint32_t n) {
-  assert(n <= 4);
-  int val(0);
-  for (unsigned int i = 0; i < n; ++i) { val |= static_cast<int>(data[i]) << ((n-1-i) * 8); }
-
-  return val;
-}
+//inline int stuff_op::read_be_int(const uint8_t *data, uint32_t n) {
+//  assert(n <= 4);
+//  int val(0);
+//  for (unsigned int i = 0; i < n; ++i) { val |= static_cast<int>(data[i]) << ((n-1-i) * 8); }
+//
+//  return val;
+//}
 
 }
 
