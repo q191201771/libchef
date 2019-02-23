@@ -1,6 +1,7 @@
 #include "chef_base/chef_be_le_op.hpp"
 #include "./common/assert_wrapper.hpp"
 #include "./common/check_log.hpp"
+#include <arpa/inet.h>
 
 int main() {
   ENTER_TEST;

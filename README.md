@@ -38,17 +38,21 @@ header-only，易于接入。尽可能一个hpp一个模块，需要使用哪个
 -----|---------|------|----------|
 SO   | chef_strings_op.hpp           | nope     | 字符串常用操作帮助函数集合 |
 DSAA | chef_buffer.hpp               | nope     | FIFO的流式buffer，支持自动扩容、收缩，供生产和消费长度不固定的场景使用（例如tcp的读写buffer） |
-*    | chef_be_le_op.hpp             | nope     | 读写大小端二进制流 |
+~    | chef_be_le_op.hpp             | nope     | 读写大小端二进制流 |
 MT   | chef_env.hpp                  | chef_env | c++11和libboost功能相同部分的wrapper。通过增加一层接入层，使上层代码仅需通过一个宏开关就可以自由切换使用c++11或libboost |
 MT   | chef_wait_event_counter.hpp   | chef_env | 阻塞等待1~N个事件发生。也可选择设置超时时间，超时后不再阻塞。使用者不用关心条件变量、锁等线程同步实现的细节（例如事件发送与接收的时顺，原子计数，虚假唤醒等） |
 MT   | chef_task_thread.hpp          | chef_env | 开启一个线程，可以往里面持续添加异步任务，任务串行执行，且执行顺序与添加顺序一致。支持添加延时任务。任务可以是业务方的任意函数（通过bind/function实现）。 |
 MT   | chef_thread_pool.hpp          | chef_env | 线程池，池中的空闲线程抢占式执行加入的任务。适用于任务不要求强顺序性执行的场景。 |
 MT   | chef_thread_group.hpp         | chef_env | 线程池，添加异步任务时支持 指定线程号 和 池内自动调度 两种方式。指定线程号方式将任务按业务方自身需求分类打到固定线程中执行。池内自动调度方式支持round-robin轮转循环，随机，当前最空闲（即未完成任务数最少）线程三种方式。 |
+SS   | chef_filepath_op.hpp          | nope | 文件、文件夹常用操作帮助函数集合 |
 PH   | chef_snippet.hpp              | c++11    | 用宏减少一些手写重复代码。比如你有一个结构体，里面有各种类型的各种名称的成员变量，有可能有锁或无锁。你不再需要手写这些变量的声明、set、get函数等一堆代码 |
 SO   | chef_stringify_stl.hpp        | nope     | 字符串化stl容器。支持所有stl类型容器，支持多维嵌套容器，支持容器元素为自定义类型，支持自定义样式 |
 PH   | chef_stuff_op.hpp             | nope     | 一些暂时没归类的功能代码片段 |
 CE   | chef_crypto_sha256_op.hpp     | nope     | sha256加密 |
 CE   | chef_crypto_hmac_sha256.hpp   | nope     | hmac sha256加密 |
+CE   | chef_crypto_md5_op.hpp        | nope     | md5加密 |
+CE   | chef_crypto_sha1_op.hpp       | nope     | sha1加密 |
+CE   | chef_encoding_base64_op.hpp   | nope     | base64编码、解码 |
 DSAA | chef_consistent_hash.hpp | c++11 | 一致性哈希 |
 DSAA | chef_skiplist.hpp        | c++11 | 跳表 |
 DSAA | chef_lru.hpp             | nope  | 固定大小的LRU cache，支持插入，查询，以及获取全量列表 |
@@ -59,15 +63,11 @@ SO | chef_fmt_op.hpp        | c++11 | 方便的生成格式化字符串，类似
 SS | chef_os_exec_op.hpp      | nope | 开启子进程执行shell命令，并阻塞式等待结果 |
 SS | chef_this_machine_op.hpp | nope | 获取机器维度的信息，比如CPU，内存，带宽，开机时间等 |
 SS | chef_this_process_op.hpp | nope | 获取当前进程维度的信息，比如进程启动时间，当前线程数，分页大小，内存占用，可执行文件路径，进程号，用户号，用户名，编译时间git版本等 |
-SS | chef_filepath_op.hpp     | nope | 文件、文件夹常用操作帮助函数集合 |
 SS | chef_daemon_op.hpp       | nope | 守护进程 |
 SS | chef_env_var_op.hpp      | nope | 读写系统环境变量 |
 PH | chef_defer.hpp       | chef_env | 类似golang defer，支持c goto清理等场景 |
 PH | chef_count_dump.hpp  | chef_env | 在各种线程模型下高效的对多个tag进行计数（打点）。并支持定时将计数落盘 |
 PH | chef_noncopyable.hpp | nope     | 禁用拷贝构造等函数 |
-CE | chef_crypto_md5_op.hpp        | nope | md5加密 |
-CE | chef_crypto_sha1_op.hpp       | nope | sha1加密 |
-CE | chef_encoding_base64_op.hpp   | nope | base64编码、解码 |
 
 ## 声明，内部实现拷贝自第三方工程的代码
 
