@@ -141,7 +141,7 @@ class sha256 {
 
   static std::string hash_hex(const std::string& s)
   {
-    int i;
+    unsigned int i;
     uint8_t digest[HASH_SIZE];
     std::ostringstream oss;
     oss << std::hex << std::setfill('0');
@@ -286,14 +286,14 @@ class sha256 {
   }
 
 private:
-  uint32_t intermediate_hash_[HASH_SIZE/4];
+  bool computed_;
+  bool corrupted_;
   uint32_t length_low_;
   uint32_t length_high_;
   //boost::int_least16_t message_block_index_;
-  int16_t message_block_index_;
+  unsigned int message_block_index_;
+  uint32_t intermediate_hash_[HASH_SIZE/4];
   uint8_t message_block_[BLOCK_SIZE];
-  bool computed_;
-  bool corrupted_;
 
   void pad_message(uint8_t pad_byte)
   {
@@ -323,7 +323,7 @@ private:
 
   void finalize(uint8_t pad_byte)
   {
-    int i;
+    unsigned int i;
     pad_message(pad_byte);
     for (i = 0; i < BLOCK_SIZE; ++i)
         message_block_[i] = 0;

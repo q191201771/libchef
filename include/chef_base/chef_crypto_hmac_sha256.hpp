@@ -205,7 +205,7 @@ public:
 
         assert(key);
 
-        if (key_len > BLOCK_SIZE) {
+        if (key_len > static_cast<int>(BLOCK_SIZE)) {
             T sha;
             sha.input(key, key_len);
             sha.result(tempkey);
@@ -218,13 +218,13 @@ public:
             k_opad_[i] = key[i] ^ 0x5c;
         }
 
-        for (; i < BLOCK_SIZE; i++) {
+        for (; i < static_cast<int>(BLOCK_SIZE); i++) {
             k_ipad[i]  = 0x36;
             k_opad_[i] = 0x5c;
         }
 
         hasher_.reset();
-        hasher_.input(k_ipad, BLOCK_SIZE);
+        hasher_.input(k_ipad, static_cast<int>(BLOCK_SIZE));
     }
 
     inline void input(const std::string& text) {
