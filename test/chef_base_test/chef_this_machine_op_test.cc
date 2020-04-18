@@ -58,8 +58,8 @@ int main() {
 #endif
   assert(mi.used_kb > 0);
   assert(!interfaces.empty());
-  assert(in_bytes > 0);
-  assert(out_bytes > 0);
+  //assert(in_bytes > 0);
+  //assert(out_bytes > 0);
   assert(boot_timestamp > 0);
   assert(up_duration_seconds > 0);
 
