@@ -32,7 +32,7 @@ int main() {
 #else
   res = chef::this_machine_op::net_interface_bytes("en0", &in_bytes, &out_bytes);
 #endif
-  assert(res);
+  //assert(res);
 
   std::string hn = chef::this_machine_op::host_name();
 
