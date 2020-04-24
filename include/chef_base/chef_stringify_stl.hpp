@@ -147,12 +147,14 @@ static const stringify_stl_one_style STRINGIFY_STL_STYLE_ONE_BEAUTY("[\n",    " 
 static const stringify_stl_two_style STRINGIFY_STL_STYLE_TWO_DEFAULT("{",       "",        "",      ":",     "",    "",    ",",      "}");
 static const stringify_stl_two_style STRINGIFY_STL_STYLE_TWO_BEAUTY("{\n",      "  \"",    "\"",    ": ",    "",    "",    ",\n",    "\n}");
 
-std::string stringify_stl_one_(int val) { return std::to_string(val); }
-std::string stringify_stl_one_(long val) { return std::to_string(val); }
-std::string stringify_stl_one_(long long val) { return std::to_string(val); }
-std::string stringify_stl_one_(unsigned val) { return std::to_string(val); }
-std::string stringify_stl_one_(unsigned long val) { return std::to_string(val); }
-std::string stringify_stl_one_(unsigned long long val)  { return std::to_string(val); }
+std::string stringify_stl_one_(uint8_t val) { return std::to_string(val); }
+std::string stringify_stl_one_(uint16_t val) { return std::to_string(val); }
+std::string stringify_stl_one_(uint32_t val) { return std::to_string(val); }
+std::string stringify_stl_one_(uint64_t val) { return std::to_string(val); }
+std::string stringify_stl_one_(int8_t val) { return std::to_string(val); }
+std::string stringify_stl_one_(int16_t val) { return std::to_string(val); }
+std::string stringify_stl_one_(int32_t val) { return std::to_string(val); }
+std::string stringify_stl_one_(int64_t val) { return std::to_string(val); }
 std::string stringify_stl_one_(float val) { return std::to_string(val); }
 std::string stringify_stl_one_(double val) { return std::to_string(val); }
 std::string stringify_stl_one_(long double val) { return std::to_string(val); }
