@@ -34,6 +34,7 @@ echo '----------------------------------------' && \
 ./output/bin/chef_crypto_sha256_op_test && \
 ./output/bin/chef_crypto_hmac_sha256_test && \
 ./output/bin/chef_be_le_op_test && \
+./output/bin/chef_debug_mutex_test && \
 rm -rf chef_thread_group_test.dump && \
 rm -rf not_exist && \
 echo '----------------------------------------' && \

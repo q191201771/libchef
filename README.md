@@ -68,6 +68,7 @@ SS | chef_env_var_op.hpp      | nope | 读写系统环境变量 |
 PH | chef_defer.hpp       | chef_env | 类似golang defer，支持c goto清理等场景 |
 PH | chef_count_dump.hpp  | chef_env | 在各种线程模型下高效的对多个tag进行计数（打点）。并支持定时将计数落盘 |
 PH | chef_noncopyable.hpp | nope     | 禁用拷贝构造等函数 |
+PH | chef_debug_mutex.hpp | chef_env | 定位mutex互斥锁的问题 |
 
 ## 声明，内部实现拷贝自第三方工程的代码
 

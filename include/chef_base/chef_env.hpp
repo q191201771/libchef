@@ -48,6 +48,7 @@
 namespace chef {
   using chef_env_keeper::thread;
   using chef_env_keeper::mutex;
+  using chef_env_keeper::recursive_mutex;
   using chef_env_keeper::lock_guard;
   using chef_env_keeper::unique_lock;
   using chef_env_keeper::condition_variable;

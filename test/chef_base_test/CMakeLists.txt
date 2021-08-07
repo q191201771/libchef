@@ -90,3 +90,6 @@ target_link_libraries(chef_crypto_hmac_sha256_test ${COMMON_LIBS})
 
 add_executable(chef_be_le_op_test chef_be_le_op_test.cc)
 target_link_libraries(chef_be_le_op_test ${COMMON_LIBS})
+
+add_executable(chef_debug_mutex_test chef_debug_mutex_test.cc)
+target_link_libraries(chef_debug_mutex_test ${COMMON_LIBS})
