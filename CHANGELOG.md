@@ -1,6 +1,13 @@
-对应release版本(https://github.com/q191201771/libchef/releases)
+### v1.11.0 (2021/08/07)
 
-版本规则：首位不变保持1，第二位增加表示在前一个版本的基础上有bugfix或不兼容性修改，第三位增加表示有兼容性修改或新增或其他。
+- [feat] 新增class be_le_op，处理大小端转换
+- [refactor] 删除func chef::stuff_op::read_be_int
+- [refactor] 修复编译警告，chef_crypto_hmac_sha256和chef_crypto_sha256_op
+- [fix] 函数stringify_stl_one_支持所有整型
+- [chore] 修复linux的编译问题
+- [test] CI不检查chef::this_machine_op::net_interface_bytes的结果
+
+---
 
 `v1.10.17` `~`
 
