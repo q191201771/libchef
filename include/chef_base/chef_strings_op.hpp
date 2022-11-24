@@ -1,20 +1,11 @@
-/**
- * @license  this file is a part of libchef. more info see https://github.com/q191201771/libchef
- * @tag      v1.10.17
- * @file     chef_strings_op.hpp
- * @deps     nope
- * @platform linux | macos | windows
- *
- * @author
- *   chef <191201771@qq.com>
- *     - initial release xxxx-xx-xx
- *
- * @brief    字符串常用操作帮助函数集合
- *
- */
+// Copyright 2022, Yoko.  All rights reserved.
+//
+// Author: Yoko (191201771@qq.com)
 
-#ifndef _CHEF_BASE_STRINGS_HPP_
-#define _CHEF_BASE_STRINGS_HPP_
+// 字符串常用操作帮助函数集合
+
+#ifndef CHEF_BASE_STRINGS_HPP_
+#define CHEF_BASE_STRINGS_HPP_
 #pragma once
 
 #include <sstream>
@@ -60,7 +51,8 @@ namespace chef {
       static std::vector<std::string> split(const std::string &s, char sep, bool keep_empty_strings=true, bool split_once=false);
 
       /**
-       * 允许分隔符是字符串
+       * 与上面函数不同的是，这里的`sep`分隔符的类型是字符串而非字符。
+       *
        * like s='ab--cd' and sep='--' -> ['ab', 'cd']
        *
        */
@@ -80,6 +72,23 @@ namespace chef {
        *
        */
       static std::vector<std::string> splitlines(const std::string &s, bool keep_ends=false);
+
+      // cut
+      //
+      // 用`sep`分割`s`，前后两部分分别存入`before`和`after`。
+      //
+      // 查找的是`sep`在`s`中第一个出现的位置。
+      //
+      // `sep`不包含在`before`和`after`中。
+      //
+      // `before`或`after`为nullptr时，则不接收对应的结果。
+      //
+      // @return 如果存在`sep`，返回true。如果不存在，则返回false，此时`before`==`s`，`after`则为空
+      //
+      static bool cut(const std::string &s, const std::string &sep, std::string *before, std::string *after);
+
+      // cut_last 与上面`cut`函数不同的是，查找的是`sep`在`s`中最后一个出现的位置。
+      static bool cut_last(const std::string &s, const std::string &sep, std::string *before, std::string *after);
 
       /// 把字符串数组`ss`用连接符`sep`连接起来，返回连接后的字符串
       static std::string join(const std::vector<std::string> &ss, const std::string &sep);
@@ -472,6 +481,36 @@ namespace chef {
         ret.push_back(s.substr(l, r-l));
     }
     return ret;
+  }
+
+  inline bool strings_op::cut(const std::string &s, const std::string &sep, std::string *before, std::string *after) {
+    auto pos = s.find(sep);
+    if (pos == std::string::npos) {
+      if (before) { *before = s; }
+      if (after) { *after = ""; }
+
+      return false;
+    }
+
+    if (before) { *before = s.substr(0, pos); }
+    if (after) { *after = s.substr(pos+sep.size()); }
+
+    return true;
+  }
+
+  inline bool strings_op::cut_last(const std::string &s, const std::string &sep, std::string *before, std::string *after) {
+    auto pos = s.rfind(sep);
+    if (pos == std::string::npos) {
+      if (before) { *before = s; }
+      if (after) { *after = ""; }
+
+      return false;
+    }
+
+    if (before) { *before = s.substr(0, pos); }
+    if (after) { *after = s.substr(pos+sep.size()); }
+
+    return true;
   }
 
   inline std::string strings_op::join(const std::vector<std::string> &ss, const std::string &sep) {
