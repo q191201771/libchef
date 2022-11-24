@@ -1,3 +1,7 @@
+### v1.11.1 (2022/11)
+
+- [feat] chef_strings_op: 新增函数strings_op::cut和cut_last
+
 ### v1.11.0 (2021/08/07)
 
 - [feat] 新增class be_le_op，处理大小端转换
