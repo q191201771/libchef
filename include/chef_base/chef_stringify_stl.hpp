@@ -1,79 +1,70 @@
-/**
- * @license  this file is a part of libchef. more info see https://github.com/q191201771/libchef
- * @tag      v1.10.17
- * @file     chef_stringify_stl.hpp
- * @deps     nope
- * @platform linux/macos/xxx
- *
- * @author
- *   chef <191201771@qq.com>
- *     - initial release xxxx-xx-xx
- *
- * @brief    字符串化stl容器。支持所有stl类型容器，支持多维嵌套容器，支持容器元素为自定义类型，支持自定义样式
- *
-     1. 支持所有stl类型容器，接口简单只有一个函数，业务方传入容器变量即可使用
+// Copyright 2022, Yoko.  All rights reserved.
+//
+// Author: Yoko (191201771@qq.com)
 
-       ```
-       std::vector<int> vec({1,2,3});
-       std::string str = chef::stringify_stl(vec);
-       // "[1,2,3]"
+// 字符串化stl容器。支持所有stl类型容器，支持多维嵌套容器，支持容器元素为自定义类型，支持自定义样式
+//
+// 1. 支持所有stl类型容器，接口简单只有一个函数，业务方传入容器变量即可使用
+//
+//    ```
+//    std::vector<int> vec({1,2,3});
+//    std::string str = chef::stringify_stl(vec);
+//    // "[1,2,3]"
+//
+//    std::map<int, int> m;
+//    m[1] = 100; m[2] = 200; m[3] = 300;
+//    str = chef::stringify_stl(m);
+//    // "{1:100,2:200,3:300}"
+//    ```
+//
+// 2. 支持多维嵌套容器
+//
+//   ```
+//   std::vector<std::vector<int> > vec = {{1,2,3}, {4,5,6}};
+//   str = chef::stringify_stl(vec);
+//   // "[[1,2,3],[4,5,6]]"
+//   ```
+//
+// 3. 支持容器元素为自定义类型
+//
+//   ```
+//   struct SelfType {
+//     int a_;
+//     int b_;
+//
+//     SelfType(int a, int b) : a_(a), b_(b) {  }
+//   };
+//
+//   // @NOTICE 业务方自己实现自定义类型转换成string的函数
+//   std::string stringify_stl_one_(const SelfType &st) {
+//     std::ostringstream oss;
+//     oss << "(" << st.a_ << "," << st.b_ << ")";
+//     return oss.str();
+//   }
+//
+//   std::vector<SelfType> vec;
+//   vec.push_back(SelfType(1,2));
+//   vec.push_back(SelfType(3,4));
+//   std::string str = chef::stringify_stl(vec);
+//   // "[(1,2),(3,4)]"
+//   ```
+//
+//  4. 支持自定义样式
+//
+//    ```
+//    // 自定义样式举例
+//    // chef::STRINGIFY_STL_STYLE_ONE_BEAUTY 是我提供的一个默认带缩进换行的样式，业务方可以自己构造一个
+//    // stringify_stl_one_style 类型的变量实现更高定制化的样式
+//    std::string str = chef::stringify_stl(vec, chef::STRINGIFY_STL_STYLE_ONE_BEAUTY);
+//    // [
+//    //   "1",
+//    //   "2",
+//    //   "3"
+//    // ]
+//    ```
 
-       std::map<int, int> m;
-       m[1] = 100; m[2] = 200; m[3] = 300;
-       str = chef::stringify_stl(m);
-       // "{1:100,2:200,3:300}"
-       ```
-
-    2. 支持多维嵌套容器
-
-      ```
-      std::vector<std::vector<int> > vec = {{1,2,3}, {4,5,6}};
-      str = chef::stringify_stl(vec);
-      // "[[1,2,3],[4,5,6]]"
-      ```
-
-    3. 支持容器元素为自定义类型
-
-      ```
-      struct SelfType {
-        int a_;
-        int b_;
-
-        SelfType(int a, int b) : a_(a), b_(b) {  }
-      };
-
-      // @NOTICE 业务方自己实现自定义类型转换成string的函数
-      std::string stringify_stl_one_(const SelfType &st) {
-        std::ostringstream oss;
-        oss << "(" << st.a_ << "," << st.b_ << ")";
-        return oss.str();
-      }
-
-      std::vector<SelfType> vec;
-      vec.push_back(SelfType(1,2));
-      vec.push_back(SelfType(3,4));
-      std::string str = chef::stringify_stl(vec);
-      // "[(1,2),(3,4)]"
-      ```
-
-     4. 支持自定义样式
-
-       ```
-       // 自定义样式举例
-       // chef::STRINGIFY_STL_STYLE_ONE_BEAUTY 是我提供的一个默认带缩进换行的样式，业务方可以自己构造一个
-       // stringify_stl_one_style 类型的变量实现更高定制化的样式
-       std::string str = chef::stringify_stl(vec, chef::STRINGIFY_STL_STYLE_ONE_BEAUTY);
-       // [
-       //   "1",
-       //   "2",
-       //   "3"
-       // ]
-       ```
- *
- */
-
-#ifndef _CHEF_BASE_STRINGIFY_STL_HPP_
-#define _CHEF_BASE_STRINGIFY_STL_HPP_
+#ifndef CHEF_BASE_STRINGIFY_STL_HPP_
+#define CHEF_BASE_STRINGIFY_STL_HPP_
 #pragma once
 
 #include <string>
@@ -147,18 +138,18 @@ static const stringify_stl_one_style STRINGIFY_STL_STYLE_ONE_BEAUTY("[\n",    " 
 static const stringify_stl_two_style STRINGIFY_STL_STYLE_TWO_DEFAULT("{",       "",        "",      ":",     "",    "",    ",",      "}");
 static const stringify_stl_two_style STRINGIFY_STL_STYLE_TWO_BEAUTY("{\n",      "  \"",    "\"",    ": ",    "",    "",    ",\n",    "\n}");
 
-std::string stringify_stl_one_(uint8_t val) { return std::to_string(val); }
-std::string stringify_stl_one_(uint16_t val) { return std::to_string(val); }
-std::string stringify_stl_one_(uint32_t val) { return std::to_string(val); }
-std::string stringify_stl_one_(uint64_t val) { return std::to_string(val); }
-std::string stringify_stl_one_(int8_t val) { return std::to_string(val); }
-std::string stringify_stl_one_(int16_t val) { return std::to_string(val); }
-std::string stringify_stl_one_(int32_t val) { return std::to_string(val); }
-std::string stringify_stl_one_(int64_t val) { return std::to_string(val); }
-std::string stringify_stl_one_(float val) { return std::to_string(val); }
-std::string stringify_stl_one_(double val) { return std::to_string(val); }
-std::string stringify_stl_one_(long double val) { return std::to_string(val); }
-std::string stringify_stl_one_(const std::string &s) { return s; }
+inline std::string stringify_stl_one_(uint8_t val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(uint16_t val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(uint32_t val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(uint64_t val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(int8_t val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(int16_t val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(int32_t val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(int64_t val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(float val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(double val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(long double val) { return std::to_string(val); }
+inline std::string stringify_stl_one_(const std::string &s) { return s; }
 
 template <typename T>
 std::string stringify_stl_one_(const T &val, const stringify_stl_one_style &style=STRINGIFY_STL_STYLE_ONE_DEFAULT) {
