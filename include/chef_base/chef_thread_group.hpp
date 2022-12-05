@@ -1,29 +1,19 @@
-/**
- * @license  this file is a part of libchef. more info see https://github.com/q191201771/libchef
- * @tag      v1.10.17
- * @file     chef_thread_group.hpp
- * @deps     chef_env.hpp | chef_task_thread.hpp
- * @platform linux | macos | xxx
- *
- * @author
- *   chef <191201771@qq.com>
- *     - initial release xxxx-xx-xx
- *
- * @brief
- *   线程池，添加异步任务时支持 指定线程号 和 池内自动调度 两种方式。
- *   指定线程号方式
- *     将任务按业务方自身需求分类打到固定线程中执行。
- *     适用于同类任务要求顺序执行的场景，
- *     且由于同类任务串行执行，业务方可以少一些锁。
- *     任务映射成唯一index的方法放在业务放自己实现，业务方可根据自身业务（比如user id）或者使用chef::hash（见chef_hash.hpp）。
- *   池内自动调度方式
- *     支持round-robin轮转循环，随机，当前最空闲（即未完成任务数最少）线程三种方式。
- *     适用于任务不要求强顺序性执行的场景。
- *
- */
+// Copyright 2022, Yoko.  All rights reserved.
+//
+// Author: Yoko (191201771@qq.com)
 
-#ifndef _CHEF_BASE_THREAD_GROUP_HPP_
-#define _CHEF_BASE_THREAD_GROUP_HPP_
+// 线程池，添加异步任务时支持 指定线程号 和 池内自动调度 两种方式。
+// 指定线程号方式
+//   将任务按业务方自身需求分类打到固定线程中执行。
+//   适用于同类任务要求顺序执行的场景，
+//   且由于同类任务串行执行，业务方可以少一些锁。
+//   任务映射成唯一index的方法放在业务放自己实现，业务方可根据自身业务（比如user id）或者使用chef::hash（见chef_hash.hpp）。
+// 池内自动调度方式
+//   支持round-robin轮转循环，随机，当前最空闲（即未完成任务数最少）线程三种方式。
+//   适用于任务不要求强顺序性执行的场景。
+
+#ifndef CHEF_BASE_THREAD_GROUP_HPP_
+#define CHEF_BASE_THREAD_GROUP_HPP_
 #pragma once
 
 #include "chef_env.hpp"
@@ -160,4 +150,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_THREAD_GROUP_HPP_
+#endif // CHEF_BASE_THREAD_GROUP_HPP_

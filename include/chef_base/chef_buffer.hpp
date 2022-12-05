@@ -1,44 +1,35 @@
-/**
- * @license  this file is a part of libchef. more info see https://github.com/q191201771/libchef
- * @tag      v1.10.17
- * @file     chef_buffer.hpp
- * @deps     nope
- * @platform linux | macos | xxx
- *
- * @author
- *   chef <191201771@qq.com>
- *     - initial release 2016-08-31
- *
- * @brief    FIFO的流式buffer，支持自动扩容、收缩，供生产和消费长度不固定的场景使用（例如tcp的读写buffer）
- *
-     ```
-     // 声明对象
-     chef::basic_buffer<char> buf(4096, 1024 * 16);
+// Copyright 2022, Yoko.  All rights reserved.
+//
+// Author: Yoko (191201771@qq.com)
 
-     // 写入方式一，如果内部空余空间不足，会自动扩容
-     buf.append("hello", 5);
+// FIFO的流式buffer，支持自动扩容、收缩，供生产和消费长度不固定的场景使用（例如tcp的读写buffer）
+//
+// ```
+// // 声明对象
+// chef::basic_buffer<char> buf(4096, 1024 * 16);
+//
+// // 写入方式一，如果内部空余空间不足，会自动扩容
+// buf.append("hello", 5);
+//
+// // 写入方式二，先调用reserve确保内部空余空间足够，再直接操作写位置指针，最后手动后移新写位置。
+// // 提供方法二是为了便于与其他字符串函数配合，在某些场景下减少一次内存拷贝。例如：
+// buf.reserve(128);
+// int len = snprintf(buf.write_pos(), 128, "name=%s,age=%d.", "chef", 18);
+// buf.seek_write_pos(std::min(len, 128));
+//
+// // 读取所有数据
+// len = buf.readable_size();
+// std::string str(buf.read_pos(), len);
+// buf.erase(len);
+// // 读取部分数据，业务方可能有这种消费场景，比如
+// // loop:
+// //   if send buf not empty and event active:
+// //     sent_len = tcp_send(fd, buf.read_pos(), buf.readable_size());
+// //     buf.erase(sent_len);
+// ```
 
-     // 写入方式二，先调用reserve确保内部空余空间足够，再直接操作写位置指针，最后手动后移新写位置。
-     // 提供方法二是为了便于与其他字符串函数配合，在某些场景下减少一次内存拷贝。例如：
-     buf.reserve(128);
-     int len = snprintf(buf.write_pos(), 128, "name=%s,age=%d.", "chef", 18);
-     buf.seek_write_pos(std::min(len, 128));
-
-     // 读取所有数据
-     len = buf.readable_size();
-     std::string str(buf.read_pos(), len);
-     buf.erase(len);
-     // 读取部分数据，业务方可能有这种消费场景，比如
-     // loop:
-     //   if send buf not empty and event active:
-     //     sent_len = tcp_send(fd, buf.read_pos(), buf.readable_size());
-     //     buf.erase(sent_len);
-     ```
- *
- */
-
-#ifndef _CHEF_BASE_BUFFER_HPP_
-#define _CHEF_BASE_BUFFER_HPP_
+#ifndef CHEF_BASE_BUFFER_HPP_
+#define CHEF_BASE_BUFFER_HPP_
 #pragma once
 
 #include <cinttypes>
@@ -359,4 +350,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_BUFFER_HPP_
+#endif // CHEF_BASE_BUFFER_HPP_

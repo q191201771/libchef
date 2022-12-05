@@ -1,22 +1,12 @@
-/**
- * @license  this file is a part of libchef. more info see https://github.com/q191201771/libchef
- * @tag      v1.10.17
- * @file     chef_env.hpp
- * @deps     c++11 or libboost
- * @platform linux | macos | xxx
- *
- * @author
- *   chef <191201771@qq.com>
- *     - initial release xxxx-xx-xx
- *
- * @brief
- *   c++11和libboost功能相同部分的wrapper
- *   通过增加一层接入层，使上层代码仅需通过一个宏开关就可以自由切换使用c++11或libboost
- *
- */
+// Copyright 2022, Yoko.  All rights reserved.
+//
+// Author: Yoko (191201771@qq.com)
 
-#ifndef _CHEF_BASE_ENV_HPP_
-#define _CHEF_BASE_ENV_HPP_
+// c++11和libboost功能相同部分的wrapper
+// 通过增加一层接入层，使上层代码仅需通过一个宏开关就可以自由切换使用c++11或libboost
+
+#ifndef CHEF_BASE_ENV_HPP_
+#define CHEF_BASE_ENV_HPP_
 #pragma once
 
 // #define CHEF_USE_BOOST
@@ -68,4 +58,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif /// _CHEF_BASE_ENV_HPP_
+#endif /// CHEF_BASE_ENV_HPP_

@@ -1,43 +1,33 @@
-/**
- * @license  this file is a part of libchef. more info see https://github.com/q191201771/libchef
- * @tag      v1.10.17
- * @file     chef_task_thread.h
- * @deps     chef_env.hpp | chef_wait_event_counter.hpp
- * @platform linux | macos | xxx
- *
- * @author
- *   chef <191201771@qq.com>
- *     - initial release xxxx-xx-xx
- *
- * @brief
- *   开启一个线程，可以往里面持续添加异步任务，任务串行执行，且执行顺序与添加顺序一致
- *   支持添加延时任务
- *
- *   任务可以是业务方的任意函数（通过bind/function实现）
- *   例如
- *   ```
- *   void func1() {}
- *
- *   void func2(int a) {}
- *
- *   class Foo {
- *   public:
- *     void func3(int b) {}
- *   };
- *
- *   chef::task_thread tt;
- *   tt.start();
- *   tt.add(chef::bind(&func1));
- *   tt.add(chef::bind(&fun2, 10));
- *   Foo foo;
- *   tt.add(chef::bind(&Foo::func3, &foo, 20));
- *   ```
- *   注意，如果函数参数是指针类型，那么需确保在任务线程执行该任务前，指针指向内容依然有效
- *
- */
+// Copyright 2022, Yoko.  All rights reserved.
+//
+// Author: Yoko (191201771@qq.com)
 
-#ifndef _CHEF_BASE_TASK_THREAD_HPP_
-#define _CHEF_BASE_TASK_THREAD_HPP_
+// 开启一个线程，可以往里面持续添加异步任务，任务串行执行，且执行顺序与添加顺序一致
+// 支持添加延时任务
+//
+// 任务可以是业务方的任意函数（通过bind/function实现）
+// 例如
+// ```
+// void func1() {}
+//
+// void func2(int a) {}
+//
+// class Foo {
+// public:
+//   void func3(int b) {}
+// };
+//
+// chef::task_thread tt;
+// tt.start();
+// tt.add(chef::bind(&func1));
+// tt.add(chef::bind(&fun2, 10));
+// Foo foo;
+// tt.add(chef::bind(&Foo::func3, &foo, 20));
+// ```
+// 注意，如果函数参数是指针类型，那么需确保在任务线程执行该任务前，指针指向内容依然有效
+
+#ifndef CHEF_BASE_TASK_THREAD_HPP_
+#define CHEF_BASE_TASK_THREAD_HPP_
 #pragma once
 
 #include "chef_env.hpp"
@@ -292,4 +282,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_TASK_THREAD_HPP_
+#endif // CHEF_BASE_TASK_THREAD_HPP_

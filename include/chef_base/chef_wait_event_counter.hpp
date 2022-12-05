@@ -1,23 +1,13 @@
-/**
- * @license  this file is a part of libchef. more info see https://github.com/q191201771/libchef
- * @tag      v1.10.17
- * @file     chef_wait_event_counter.hpp
- * @deps     chef_env.hpp
- * @platform linux | macos | xxx
- *
- * @author
- *   chef <191201771@qq.com>
- *     - initial release xxxx-xx-xx
- *
- * @brief
- *   阻塞等待1~N次事件发生
- *   也可选择设置超时时间，超时后不再阻塞等待
- *   使用者不用关心条件变量、锁等线程同步实现的细节（例如事件发送与接收的时序，原子计数，虚假唤醒等）
- *
- */
+// Copyright 2022, Yoko.  All rights reserved.
+//
+// Author: Yoko (191201771@qq.com)
 
-#ifndef _CHEF_BASE_WAIT_EVENT_COUNTER_HPP_
-#define _CHEF_BASE_WAIT_EVENT_COUNTER_HPP_
+// 阻塞等待1~N次事件发生
+// 也可选择设置超时时间，超时后不再阻塞等待
+// 使用者不用关心条件变量、锁等线程同步实现的细节（例如事件发送与接收的时序，原子计数，虚假唤醒等）
+
+#ifndef CHEF_BASE_WAIT_EVENT_COUNTER_HPP_
+#define CHEF_BASE_WAIT_EVENT_COUNTER_HPP_
 #pragma once
 
 #include "chef_env.hpp"
@@ -126,4 +116,4 @@ namespace chef {
 
 } // namespace chef
 
-#endif // _CHEF_BASE_WAIT_EVENT_COUNTER_HPP_
+#endif // CHEF_BASE_WAIT_EVENT_COUNTER_HPP_
