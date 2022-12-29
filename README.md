@@ -1,9 +1,7 @@
 # libchef - c++ header-only basic library
 
-![platform](https://img.shields.io/badge/platform-linux%20%7C%20macos%20-green.svg)
 [![Release](https://img.shields.io/github/release/q191201771/libchef.svg)](https://github.com/q191201771/libchef/releases)
 [![Build Status](https://travis-ci.org/q191201771/libchef.svg?branch=master)](https://travis-ci.org/q191201771/libchef)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff1659c0c9b544fba4eab876900b2421)](https://app.codacy.com/app/q191201771/libchef?utm_source=github.com&utm_medium=referral&utm_content=q191201771/libchef&utm_campaign=Badge_Grade_Dashboard)
 ![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/q191201771/libchef/blob/master/LICENSE)
 [![GitHub last commit](https://img.shields.io/github/last-commit/q191201771/libchef.svg)](https://github.com/q191201771/libchef/graphs/commit-activity)
@@ -11,9 +9,12 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/q191201771/libchef.svg)
 ![GitHub top language](https://img.shields.io/github/languages/top/q191201771/libchef.svg)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/q191201771/libchef/pulls)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff1659c0c9b544fba4eab876900b2421)](https://app.codacy.com/app/q191201771/libchef?utm_source=github.com&utm_medium=referral&utm_content=q191201771/libchef&utm_campaign=Badge_Grade_Dashboard)
 
 header-only，易于接入。尽可能一个hpp一个模块，需要使用哪个模块提供的功能只需要包含那个模块的头文件即可直接使用，不需要对库单独编译和链接。（目标是像机器猫的万能口袋一样，什么都有，需要什么掏什么，不强制相互捆绑，非全家桶类型）。
 支持linux和macos双平台。
+
+尽可能支持linux/macos/windows/android/ios
 
 ## 已完成模块说明
 
