@@ -618,6 +618,7 @@ static void strings_replace_test() {
   std::string s;
   std::string target;
   std::string replacement;
+
   assert(chef::strings_op::replace("", "aaa", "bbb") == "");
   assert(chef::strings_op::replace_first("", "aaa", "bbb") == "");
   assert(chef::strings_op::replace_last("", "aaa", "bbb") == "");
@@ -822,6 +823,75 @@ static void strings_url_encode_decode() {
   }
 }
 
+static void strings_cut_test() {
+  std::string before;
+  std::string after;
+  bool found;
+
+  struct cutTests {
+    std::string s;
+    std::string sep;
+
+    std::string before;
+    std::string after;
+    bool found;
+  };
+
+  std::vector<cutTests> ct = {
+          {"abc", "b", "a", "c", true},
+          {"abc", "a", "", "bc", true},
+          {"abc", "c", "ab", "", true},
+          {"abc", "abc", "", "", true},
+          {"abc", "", "", "abc", true},
+          {"abc", "d", "abc", "", false},
+          {"", "d", "", "", false},
+          {"", "", "", "", true},
+
+          {"abcb", "b", "a", "cb", true},
+  };
+
+  for (int i = 0; i < ct.size(); i++) {
+    found = chef::strings_op::cut(ct[i].s, ct[i].sep, &before, &after);
+
+//    printf("%d: %s, %s, %d, %d\n", i, before.c_str(), ct[i].before.c_str(), found, ct[i].found);
+    assert(before == ct[i].before);
+    assert(after == ct[i].after);
+    assert(found == ct[i].found);
+
+    found = chef::strings_op::cut(ct[i].s, ct[i].sep, nullptr, &after);
+    found = chef::strings_op::cut(ct[i].s, ct[i].sep, &before, nullptr);
+    found = chef::strings_op::cut(ct[i].s, ct[i].sep, nullptr, nullptr);
+  }
+
+  // 下面是cut_last的测试
+
+  ct = {
+          {"abc", "b", "a", "c", true},
+          {"abc", "a", "", "bc", true},
+          {"abc", "c", "ab", "", true},
+          {"abc", "abc", "", "", true},
+          {"abc", "", "", "abc", true},
+          {"abc", "d", "abc", "", false},
+          {"", "d", "", "", false},
+          {"", "", "", "", true},
+
+          {"abcb", "b", "abc", "", true},
+  };
+
+  for (int i = 0; i < ct.size(); i++) {
+    found = chef::strings_op::cut_last(ct[i].s, ct[i].sep, &before, &after);
+
+//    printf("%d: %s, %s, %d, %d\n", i, before.c_str(), ct[i].before.c_str(), found, ct[i].found);
+    assert(before == ct[i].before);
+    assert(after == ct[i].after);
+    assert(found == ct[i].found);
+
+    found = chef::strings_op::cut_last(ct[i].s, ct[i].sep, nullptr, &after);
+    found = chef::strings_op::cut_last(ct[i].s, ct[i].sep, &before, nullptr);
+    found = chef::strings_op::cut_last(ct[i].s, ct[i].sep, nullptr, nullptr);
+  }
+}
+
 int main() {
   ENTER_TEST;
 
@@ -849,6 +919,7 @@ int main() {
   strings_text_flow_wrap_test();
   strings_string_printf_test();
   strings_url_encode_decode();
+  strings_cut_test();
 
   return 0;
 }

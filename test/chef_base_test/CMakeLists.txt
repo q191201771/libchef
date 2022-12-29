@@ -93,3 +93,12 @@ target_link_libraries(chef_be_le_op_test ${COMMON_LIBS})
 
 add_executable(chef_debug_mutex_test chef_debug_mutex_test.cc)
 target_link_libraries(chef_debug_mutex_test ${COMMON_LIBS})
+
+add_executable(chef_debug_counter_test chef_debug_counter_test.cc)
+target_link_libraries(chef_debug_counter_test ${COMMON_LIBS})
+
+add_executable(chef_url_test chef_url_test.cc)
+target_link_libraries(chef_url_test ${COMMON_LIBS})
+
+add_executable(chef_sync_once_test chef_sync_once_test.cc)
+target_link_libraries(chef_sync_once_test ${COMMON_LIBS})
