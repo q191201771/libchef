@@ -12,7 +12,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ff1659c0c9b544fba4eab876900b2421)](https://app.codacy.com/app/q191201771/libchef?utm_source=github.com&utm_medium=referral&utm_content=q191201771/libchef&utm_campaign=Badge_Grade_Dashboard)
 
 header-only，易于接入。尽可能一个hpp一个模块，需要使用哪个模块提供的功能只需要包含那个模块的头文件即可直接使用，不需要对库单独编译和链接。（目标是像机器猫的万能口袋一样，什么都有，需要什么掏什么，不强制相互捆绑，非全家桶类型）。
-支持linux和macos双平台。
 
 尽可能支持linux/macos/windows/android/ios
 
