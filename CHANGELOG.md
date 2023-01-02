@@ -1,3 +1,11 @@
+### v1.11.2 (2023/01)
+
+- [feat] url: 新增类，解析url字符串
+- [feat] debug_counter: 新增类，用于调试对象是否正常释放的计时器
+- [feat] sync_once: 新增类，用于执行有且仅有一次的任务
+- [fix] stringify_stl: 将部分函数inline来避免重定义编译错误
+- [test] 增加strings_op, debug_counter, sync_once, url的单元测试
+
 ### v1.11.1 (2022/11)
 
 - [feat] chef_strings_op: 新增函数strings_op::cut和cut_last
